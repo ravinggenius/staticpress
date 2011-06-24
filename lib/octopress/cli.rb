@@ -35,8 +35,6 @@ Help message goes here
     end
 
     def self.run
-      puts ARGV
-
       cli = new
       command = (ARGV.first || :help).to_sym
 
