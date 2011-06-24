@@ -1,3 +1,4 @@
+require 'fileutils'
 require 'pathname'
 
 require 'octopress'
@@ -10,10 +11,16 @@ Help message goes here
       MESSAGE
     end
 
-    def new(destination, name = destination)
-      source = Octopress.root + 'lib' + 'skeleton'
-      blog_name = Pathname.new(name).expand_path.basename.split('_').map(&:capitalize).join(' ')
-      FileUtils.cp_r source, Pathname.new(destination).expand_path
+    def new(destination, name)
+      dest = Pathname.new(destination).expand_path
+
+      blog_name = if name.to_s.empty?
+        dest.basename.to_s.split('_').map(&:capitalize).join(' ')
+      else
+        name
+      end
+
+      FileUtils.cp_r((Octopress.root + 'skeleton').children, dest)
     end
 
     def fork_plugin
