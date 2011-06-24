@@ -38,7 +38,7 @@ Help message goes here
       puts ARGV
 
       cli = new
-      command = ARGV.first.to_sym
+      command = (ARGV.first || :help).to_sym
 
       case command
       when :new
