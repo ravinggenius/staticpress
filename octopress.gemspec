@@ -22,6 +22,7 @@ Gem::Specification.new do |s|
     '/home/thomas/Code/___/certificates/gem-public_cert.pem'
   ]
 
+  s.add_dependency 'cmdparse'
   s.add_dependency 'compass'
   s.add_dependency 'haml'
   s.add_dependency 'jekyll'
