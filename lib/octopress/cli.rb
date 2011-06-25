@@ -36,12 +36,11 @@ Help message goes here
 
     def create(content_type, title)
       content_types = Octopress::ContentType.types
-
       type = content_type.to_sym
 
       if content_types.keys.include? type
-        filename = content_types[type] % filename_options
-        copy_skeleton type, Octopress.root + "#{filename}.markdown"
+        filename = content_types[type] % filename_options(title)
+        copy_skeleton type, blog_path + 'content' + "#{filename}.markdown"
       else
         raise Octopress::Error, 'Unknown content type'
       end

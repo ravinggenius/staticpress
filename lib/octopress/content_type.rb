@@ -1,16 +1,12 @@
 module Octopress
   class ContentType
     def self.inherited(type_class)
-      @types ||= {}
-      @types[type_class.key] = type_class.pattern
-    end
-
-    def self.key
-      name.to_sym
+      @types ||= []
+      @types << type_class
     end
 
     def self.types
-      @types
+      Hash[@types.map(&:key).zip(@types.map(&:pattern))]
     end
   end
 end
