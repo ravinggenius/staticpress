@@ -24,6 +24,9 @@ Help message goes here
       FileUtils.cp_r((Octopress.root + 'skeleton').children, dest)
     end
 
+    def post(title)
+    end
+
     def fork_plugin
     end
 
