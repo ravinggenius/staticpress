@@ -7,7 +7,7 @@ require 'octopress/error'
 require 'octopress/helpers'
 require 'octopress/version'
 
-(Octopress.root + 'content_types').children.each do |child|
+(Octopress.root + 'octopress' + 'content_types').children.each do |child|
   require child
 end
 
