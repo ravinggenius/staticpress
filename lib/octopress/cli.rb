@@ -84,7 +84,7 @@ Help message goes here
     end
 
     def copy_skeleton(name, destination)
-      FileUtils.cp_r((Octopress.root + 'skeleton' + name.to_s).children, destination)
+      FileUtils.cp_r((Octopress.root + 'skeletons' + name.to_s).children, destination)
     end
   end
 end

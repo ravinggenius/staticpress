@@ -1,4 +1,4 @@
-* copies lib/skeleton to <path-to-blog>
+* copies lib/skeletons/new to <path-to-blog>
 * this should edit the blog's config.yml to include [name-of-blog] (prompt for [name-of-blog] if blank)
 $ octopress new <path-to-blog> [name-of-blog]
 $ cd <path-to-blog>
