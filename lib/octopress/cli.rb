@@ -21,7 +21,7 @@ Help message goes here
         name
       end
 
-      FileUtils.cp_r((Octopress.root + 'skeleton' + 'new').children, dest)
+      copy_skeleton :new, dest
     end
 
     def post(title)
@@ -61,6 +61,10 @@ Help message goes here
 
     def blog_path
       Pathname.new('.').expand_path
+    end
+
+    def copy_skeleton(name, destination)
+      FileUtils.cp_r((Octopress.root + 'skeleton' + name.to_s).children, destination)
     end
   end
 end
