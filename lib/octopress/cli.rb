@@ -13,7 +13,7 @@ end
 
 module Octopress
   class CLI
-    extend Helpers
+    include Helpers
 
     def help
       puts <<-MESSAGE
