@@ -34,6 +34,12 @@ Help message goes here
       copy_skeleton :new, dest
     end
 
+    # content types are a bit messy to deal with. using classes to represent each content type
+    # allows for future custom behavior to be added per type relatively easily. however this
+    # introduces more issues when adding custom types
+    # alternatively a content type could be based simply on the files (including directories)
+    # within user-configurable directories. this would allow simple discovery of new types, but
+    # would require the file name patter for each type to be stored in the config
     def create(content_type, title)
       content_types = Octopress::ContentType.types
       type = content_type.to_sym
