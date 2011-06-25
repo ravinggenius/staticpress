@@ -21,7 +21,7 @@ Help message goes here
         name
       end
 
-      FileUtils.cp_r((Octopress.root + 'skeleton').children, dest)
+      FileUtils.cp_r((Octopress.root + 'skeleton' + 'new').children, dest)
     end
 
     def post(title)
