@@ -2,11 +2,19 @@ require 'fileutils'
 require 'pathname'
 
 require 'octopress'
+require 'octopress/content_type'
 require 'octopress/error'
+require 'octopress/helpers'
 require 'octopress/version'
+
+(Octopress.root + 'content_types').children.each do |child|
+  require child
+end
 
 module Octopress
   class CLI
+    extend Helpers
+
     def help
       puts <<-MESSAGE
 Help message goes here
@@ -26,7 +34,17 @@ Help message goes here
       copy_skeleton :new, dest
     end
 
-    def post(title)
+    def create(content_type, title)
+      content_types = Octopress::ContentType.types
+
+      type = content_type.to_sym
+
+      if content_types.keys.include? type
+        filename = content_types[type] % filename_options
+        copy_skeleton type, Octopress.root + "#{filename}.markdown"
+      else
+        raise Octopress::Error, 'Unknown content type'
+      end
     end
 
     def fork_plugin
