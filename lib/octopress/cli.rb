@@ -45,13 +45,8 @@ Help message goes here
       cli = new
       command = (ARGV.first || :help).to_sym
 
-      case command
-      when :new
-        cli.new ARGV[1], ARGV[2]
-      when :fork_plugin, :fork_theme
-        cli.send command, ARGV[1]
-      when :serve, :package, :deploy, :version
-        cli.send command
+      if cli.respond_to? command
+        cli.send command, *ARGV[1..-1]
       else
         cli.help
       end
