@@ -2,6 +2,7 @@ require 'fileutils'
 require 'pathname'
 
 require 'octopress'
+require 'octopress/error'
 require 'octopress/version'
 
 module Octopress
