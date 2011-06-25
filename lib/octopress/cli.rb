@@ -2,6 +2,7 @@ require 'fileutils'
 require 'pathname'
 
 require 'octopress'
+require 'octopress/version'
 
 module Octopress
   class CLI
@@ -39,6 +40,7 @@ Help message goes here
     end
 
     def version
+      puts "Octopress #{Octopress::Version}"
     end
 
     def self.run
