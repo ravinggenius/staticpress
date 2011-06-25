@@ -15,6 +15,7 @@ Help message goes here
     def new(destination, name = nil)
       dest = Pathname.new(destination).expand_path
 
+      # TODO do something with blog_name
       blog_name = if name.to_s.empty?
         dest.basename.to_s.split('_').map(&:capitalize).join(' ')
       else
