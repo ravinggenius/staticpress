@@ -11,7 +11,7 @@ Help message goes here
       MESSAGE
     end
 
-    def new(destination, name)
+    def new(destination, name = nil)
       dest = Pathname.new(destination).expand_path
 
       blog_name = if name.to_s.empty?
