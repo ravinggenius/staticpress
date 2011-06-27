@@ -2,6 +2,7 @@ require 'fileutils'
 require 'pathname'
 
 require 'octopress'
+require 'octopress/configuration'
 require 'octopress/content_type'
 require 'octopress/error'
 require 'octopress/helpers'
@@ -24,14 +25,17 @@ Help message goes here
     def new(destination, name = nil)
       dest = Pathname.new(destination).expand_path
 
-      # TODO do something with blog_name
-      blog_name = if name.to_s.empty?
+      copy_skeleton :new, dest
+
+      config = Octopress::Configuration.load
+
+      config.title = if name.to_s.empty?
         dest.basename.to_s.split('_').map(&:capitalize).join(' ')
       else
         name
       end
 
-      copy_skeleton :new, dest
+      config.save
     end
 
     # content types are a bit messy to deal with. using classes to represent each content type
