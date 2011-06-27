@@ -46,7 +46,7 @@ Help message goes here
 
       if content_types.keys.include? type
         filename = content_types[type] % filename_options(title)
-        copy_skeleton type, blog_path + 'content' + "#{filename}.markdown"
+        copy_skeleton type, Octopress.blog_path + 'content' + "#{filename}.markdown"
       else
         raise Octopress::Error, 'Unknown content type'
       end
@@ -83,10 +83,6 @@ Help message goes here
     end
 
     protected
-
-    def blog_path
-      Pathname.new('.').expand_path
-    end
 
     def copy_skeleton(name, destination)
       source = Octopress.root + 'skeletons' + name.to_s
