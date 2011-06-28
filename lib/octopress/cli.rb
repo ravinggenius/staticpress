@@ -18,7 +18,39 @@ module Octopress
 
     def help
       puts <<-MESSAGE
-Help message goes here
+USAGE: octopress <command> <required-argument> [option-argument]
+
+COMMANDS:
+
+help
+  show this message
+
+new <path-to-blog> [name-of-blog]
+  copies lib/skeletons/new to <path-to-blog>
+  this should edit the blog's config.yml to include [name-of-blog] (prompt for [name-of-blog] if blank)
+
+create <content-type> <title>
+  create a new piece of content
+
+fork_plugin <plugin-name>
+  copies <plugin-name> into <path-to-blog>/plugins/
+
+fork_theme [theme-name]
+  setting the theme is done in the main config file, this command is optional and
+  just copies the theme's file into <path-to-blog>/themes/[theme-name] for customizations
+  if [theme-name] is blank, default to the currently configured theme
+
+serve
+  turn on local server for development
+
+package
+  prepare blog for deployment
+
+deploy
+  deploy blog
+
+version
+  display version
       MESSAGE
     end
 
