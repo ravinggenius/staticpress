@@ -57,10 +57,10 @@ Help message goes here
       end
     end
 
-    def fork_plugin
+    def fork_plugin(name)
     end
 
-    def fork_theme
+    def fork_theme(name = nil)
     end
 
     def serve
