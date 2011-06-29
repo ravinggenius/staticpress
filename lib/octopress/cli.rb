@@ -26,9 +26,8 @@ help
   show this message
 
 new <path-to-blog> [name-of-blog]
-  creates a new blog in <path-to-blog>
-  <path-to-blog> does not have to exist, but if it does you will not be warned
-  before files get overwritten
+  creates a new blog in <path-to-blog>. <path-to-blog> will be created if it
+  does not exist, and files will be overwritten if they do exist
 
 create <content-type> <title>
   create a new piece of content
@@ -37,9 +36,8 @@ fork_plugin <plugin-name>
   copies <plugin-name> into <path-to-blog>/plugins/
 
 fork_theme [theme-name]
-  setting the theme is done in the main config file, this command is optional
-  and just copies the theme's file into <path-to-blog>/themes/[theme-name] for
-  customizations if [theme-name] is blank, default to the currently configured
+  copies [theme-name]'s files into <path-to-blog>/themes/[theme-name] for
+  customizations. if [theme-name] is blank, copies the currently configured
   theme
 
 serve
