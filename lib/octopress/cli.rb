@@ -76,7 +76,7 @@ version
     #
     # alternatively a content type could be based simply on the files (including directories)
     # within user-configurable directory(ies). this would allow simple discovery of new types, but
-    # would require the file name patter for each type to be stored in the config
+    # would require the file name pattern for each type to be stored in the config
     def create(content_type, title)
       content_types = Octopress::ContentType.types
       type = content_type.to_sym
