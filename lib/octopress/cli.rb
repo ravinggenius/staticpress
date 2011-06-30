@@ -32,8 +32,9 @@ new <path-to-blog> [name-of-blog]
 create <content-type> <title>
   create a new piece of content
 
-fork_plugin <plugin-name>
-  copies <plugin-name> into <path-to-blog>/plugins/
+fork_plugin <plugin-name> [new-plugin-name]
+  copies <plugin-name> into <path-to-blog>/plugins/. if [new-plugin-name] is
+  given, rename plugin
 
 fork_theme [theme-name]
   copies [theme-name]'s files into <path-to-blog>/themes/[theme-name] for
@@ -89,7 +90,7 @@ version
       end
     end
 
-    def fork_plugin(name)
+    def fork_plugin(name, new_name = nil)
     end
 
     def fork_theme(name = nil)
