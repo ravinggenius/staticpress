@@ -3,14 +3,10 @@ require 'pathname'
 
 require 'octopress'
 require 'octopress/configuration'
-require 'octopress/content_type'
+require 'octopress/content_types'
 require 'octopress/error'
 require 'octopress/helpers'
 require 'octopress/version'
-
-(Octopress.root + 'octopress' + 'content_types').children.each do |child|
-  require child
-end
 
 module Octopress
   class CLI
@@ -58,7 +54,8 @@ version
     def new(destination, name = nil)
       dest = Pathname.new(destination).expand_path
 
-      copy_skeleton :new, dest
+      FileUtils.mkdir_p dest
+      FileUtils.cp_r((Octopress.root + 'skeleton').children, dest)
 
       config = Octopress::Configuration.load
 
@@ -71,20 +68,21 @@ version
       config.save
     end
 
-    # content types are a bit messy to deal with. using classes to represent each content type
-    # allows for future custom behavior to be added per type relatively easily. however this
-    # introduces more issues when adding custom types (how to register new types?)
-    #
-    # alternatively a content type could be based simply on the files (including directories)
-    # within user-configurable directory(ies). this would allow simple discovery of new types, but
+    # a content type could be based simply on the files (including directories) within
+    # user-configurable directory(ies). this would allow simple discovery of new types, but
     # would require the file name pattern for each type to be stored in the config
     def create(content_type, title)
-      content_types = Octopress::ContentType.types
+      content_types = Octopress::ContentTypes.all
       type = content_type.to_sym
 
-      if content_types.keys.include? type
+      if content_types.include? type
         filename = content_types[type] % filename_options(title)
-        copy_skeleton type, Octopress.blog_path + 'content' + "#{filename}.markdown"
+
+        source = Octopress.root + 'content_types' + type.to_s
+        destination = Octopress.blog_path + 'content' + "#{filename}.markdown"
+
+        FileUtils.mkdir_p destination.dirname
+        FileUtils.cp(source, destination)
       else
         raise Octopress::Error, 'Unknown content type'
       end
@@ -117,20 +115,6 @@ version
         cli.send command, *ARGV[1..-1]
       else
         cli.help
-      end
-    end
-
-    protected
-
-    def copy_skeleton(name, destination)
-      source = Octopress.root + 'skeletons' + name.to_s
-
-      if source.directory?
-        FileUtils.mkdir_p destination
-        FileUtils.cp_r(source.children, destination)
-      else
-        FileUtils.mkdir_p destination.dirname
-        FileUtils.cp(source, destination)
       end
     end
   end
