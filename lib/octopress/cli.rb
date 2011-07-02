@@ -85,6 +85,13 @@ version
     end
 
     def fork_plugin(name, new_name = nil)
+      source_name = name.end_with?('.rb') ? name : "#{name}.rb"
+      source = Octopress.root + 'octopress' + 'plugins' + source_name
+
+      destination_name = new_name ? (new_name.end_with?('.rb') ? new_name : "#{new_name}.rb") : source_name
+      destination = Octopress.blog_path + 'plugins' + destination_name
+
+      FileUtils.cp source, destination
     end
 
     def fork_theme(name = nil)
