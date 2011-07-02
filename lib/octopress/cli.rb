@@ -91,6 +91,7 @@ version
       destination_name = new_name ? (new_name.end_with?('.rb') ? new_name : "#{new_name}.rb") : source_name
       destination = Octopress.blog_path + 'plugins' + destination_name
 
+      FileUtils.mkdir_p destination.dirname
       FileUtils.cp source, destination
     end
 
