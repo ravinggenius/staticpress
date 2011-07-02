@@ -12,7 +12,7 @@ module Octopress
     end
 
     def self.load
-      new(CONFIG_FILE.file? ? YAML.load_file(CONFIG_FILE) : {})
+      @config ||= new(CONFIG_FILE.file? ? YAML.load_file(CONFIG_FILE) : {})
     end
   end
 end

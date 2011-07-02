@@ -118,7 +118,7 @@ version
     protected
 
     def config
-      @config ||= Octopress::Configuration.load
+      Octopress::Configuration.load
     end
   end
 end
