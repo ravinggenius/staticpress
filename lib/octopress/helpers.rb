@@ -1,5 +1,11 @@
+require 'octopress/configuration'
+
 module Octopress
   module Helpers
+    def config
+      Octopress::Configuration.load
+    end
+
     def filename_options(title)
       t = Time.now.utc
       name = title.gsub(/ /, '-').downcase

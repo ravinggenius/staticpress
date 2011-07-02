@@ -2,7 +2,6 @@ require 'fileutils'
 require 'pathname'
 
 require 'octopress'
-require 'octopress/configuration'
 require 'octopress/content_types'
 require 'octopress/error'
 require 'octopress/helpers'
@@ -113,12 +112,6 @@ version
       else
         cli.help
       end
-    end
-
-    protected
-
-    def config
-      Octopress::Configuration.load
     end
   end
 end
