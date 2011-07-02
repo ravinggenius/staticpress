@@ -57,8 +57,6 @@ version
       FileUtils.mkdir_p dest
       FileUtils.cp_r((Octopress.root + 'skeleton').children, dest)
 
-      config = Octopress::Configuration.load
-
       config.title = if name.to_s.empty?
         dest.basename.to_s.split('_').map(&:capitalize).join(' ')
       else
@@ -116,6 +114,12 @@ version
       else
         cli.help
       end
+    end
+
+    protected
+
+    def config
+      @config ||= Octopress::Configuration.load
     end
   end
 end
