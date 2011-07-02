@@ -66,15 +66,14 @@ version
       config.save
     end
 
-    # a content type could be based simply on the files (including directories) within
-    # user-configurable directory(ies). this would allow simple discovery of new types, but
-    # would require the file name pattern for each type to be stored in the config
+    # TODO allow custom content types
+    # each content type would require an entry in config.yml
     def create(content_type, title)
       content_types = Octopress::ContentTypes.all
       type = content_type.to_sym
 
       if content_types.include? type
-        filename = content_types[type] % filename_options(title)
+        filename = config.send("content_type_#{type}") % filename_options(title)
 
         source = Octopress.root + 'content_types' + type.to_s
         destination = Octopress.blog_path + 'content' + "#{filename}.markdown"
