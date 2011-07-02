@@ -11,7 +11,7 @@ module Octopress
       CONFIG_FILE.open('w') { |f| YAML.dump(instance_variable_get('@table'), f) }
     end
 
-    def self.load
+    def self.instance
       @config ||= new(CONFIG_FILE.file? ? YAML.load_file(CONFIG_FILE) : {})
     end
   end

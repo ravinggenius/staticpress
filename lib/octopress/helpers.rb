@@ -3,7 +3,7 @@ require 'octopress/configuration'
 module Octopress
   module Helpers
     def config
-      Octopress::Configuration.load
+      Octopress::Configuration.instance
     end
 
     def filename_options(title)
