@@ -26,5 +26,10 @@ Gem::Specification.new do |s|
   s.add_dependency 'compass'
   s.add_dependency 'haml'
   s.add_dependency 'jekyll'
+  s.add_dependency 'rack'
+  s.add_dependency 'rb-fsevent'
+  s.add_dependency 'rdiscount'
+  s.add_dependency 'RedCloth'
+  s.add_dependency 'rubypants'
   s.add_dependency 'sass'
 end
