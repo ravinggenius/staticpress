@@ -16,6 +16,7 @@ title: My Octopress Blog
 :recent_posts: 5
 :simple_search: http://google.com/search
 :email:
+:theme: classic
 :content_type_page: %{name}
 :content_type_post: %{date}-%{name}
 :twitter_user:
