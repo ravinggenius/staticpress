@@ -96,6 +96,11 @@ version
     end
 
     def fork_theme(name = nil)
+      source = Octopress.root + 'themes' + name
+      destination = Octopress.blog_path + 'themes' + name
+
+      FileUtils.mkdir_p destination
+      FileUtils.cp_r source.children, destination
     end
 
     def serve
