@@ -37,11 +37,11 @@ fork_theme [theme-name]
   customizations. if [theme-name] is blank, copies the currently configured
   theme
 
-serve
-  turn on local server for development
-
 build
   prepare blog for deployment
+
+serve
+  turn on local server for development
 
 deploy
   deploy blog
@@ -105,10 +105,10 @@ version
       FileUtils.cp_r source.children, destination
     end
 
-    def serve
+    def build
     end
 
-    def build
+    def serve
     end
 
     def deploy
