@@ -2,7 +2,11 @@ require 'pathname'
 
 module Octopress
   def self.blog_path
-    Pathname.new('.').expand_path
+    Pathname.new(@path || '.').expand_path
+  end
+
+  def self.blog_path=(path)
+    @path = path
   end
 
   def self.root
