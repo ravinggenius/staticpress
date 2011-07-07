@@ -8,7 +8,7 @@ module Octopress
     CONFIG_FILE = Octopress.blog_path + 'config.yml'
 
     def save
-      CONFIG_FILE.open('w') { |f| YAML.dump(instance_variable_get('@table'), f) }
+      CONFIG_FILE.open('w') { |f| YAML.dump(@table, f) }
     end
 
     def self.instance
