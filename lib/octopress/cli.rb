@@ -56,13 +56,13 @@ version
     end
 
     def new(destination, name = nil)
-      dest = Pathname.new(destination).expand_path
+      Octopress.blog_path = destination
 
-      FileUtils.mkdir_p dest
-      FileUtils.cp_r((Octopress.root + 'skeleton').children, dest)
+      FileUtils.mkdir_p Octopress.blog_path
+      FileUtils.cp_r((Octopress.root + 'skeleton').children, Octopress.blog_path)
 
       config.title = if name.to_s.empty?
-        dest.basename.to_s.split('_').map(&:capitalize).join(' ')
+        Octopress.blog_path.basename.to_s.split('_').map(&:capitalize).join(' ')
       else
         name
       end
