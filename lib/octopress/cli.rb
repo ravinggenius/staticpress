@@ -47,7 +47,7 @@ push
   push blog to configured server
 
 deploy
-  deploy blog
+  build blog and push in one step
 
 version
   display version
