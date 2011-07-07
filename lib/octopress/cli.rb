@@ -118,6 +118,8 @@ version
     end
 
     def deploy
+      build
+      push
     end
 
     def version
