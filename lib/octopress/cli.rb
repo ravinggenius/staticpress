@@ -43,6 +43,9 @@ build
 serve
   turn on local server for development
 
+push
+  push blog to configured server
+
 deploy
   deploy blog
 
@@ -109,6 +112,9 @@ version
     end
 
     def serve
+    end
+
+    def push
     end
 
     def deploy
