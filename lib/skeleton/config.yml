@@ -1,5 +1,6 @@
 ---
 :source: content
+:plugins_paths:
 :destination: public
 :code_dir: downloads/code
 :port: 4000

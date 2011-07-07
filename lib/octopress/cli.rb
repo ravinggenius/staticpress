@@ -5,6 +5,7 @@ require 'octopress'
 require 'octopress/content_types'
 require 'octopress/error'
 require 'octopress/helpers'
+require 'octopress/plugin'
 require 'octopress/version'
 
 module Octopress
@@ -89,11 +90,10 @@ version
     end
 
     def fork_plugin(name, new_name = nil)
-      source_name = name.end_with?('.rb') ? name : "#{name}.rb"
-      source = Octopress.root + 'octopress' + 'plugins' + source_name
+      source = Octopress::Plugin.find name
 
-      destination_name = new_name ? (new_name.end_with?('.rb') ? new_name : "#{new_name}.rb") : source_name
-      destination = Octopress.blog_path + 'plugins' + destination_name
+      destination_name = new_name ? (new_name.end_with?('.rb') ? new_name : "#{new_name}.rb") : source.basename
+      destination = Octopress.blog_path + (config.plugins_path || 'plugins') + destination_name
 
       FileUtils.mkdir_p destination.dirname
       FileUtils.cp source, destination
