@@ -1,6 +1,6 @@
-require 'octopress/plugin'
+require 'octopress/plugins/base'
 
 module Octopress::Plugins
-  class CustomFilters < Octopress::Plugin
+  class CustomFilters < Octopress::Plugins::Base
   end
 end

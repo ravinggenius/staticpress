@@ -1,6 +1,6 @@
-require 'octopress/plugin'
+require 'octopress/plugins/base'
 
 module Octopress::Plugins
-  class Iterator < Octopress::Plugin
+  class Iterator < Octopress::Plugins::Base
   end
 end

@@ -1,6 +1,6 @@
-require 'octopress/plugin'
+require 'octopress/plugins/base'
 
 module Octopress::Plugins
-  class Category < Octopress::Plugin
+  class Category < Octopress::Plugins::Base
   end
 end

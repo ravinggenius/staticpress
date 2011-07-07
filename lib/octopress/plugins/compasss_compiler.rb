@@ -1,6 +1,6 @@
-require 'octopress/plugin'
+require 'octopress/plugins/base'
 
 module Octopress::Plugins
-  class CompassCompiler < Octopress::Plugin
+  class CompassCompiler < Octopress::Plugins::Base
   end
 end

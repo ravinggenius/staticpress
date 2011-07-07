@@ -1,6 +1,6 @@
-require 'octopress/plugin'
+require 'octopress/plugins/base'
 
 module Octopress::Plugins
-  class Haml < Octopress::Plugin
+  class Haml < Octopress::Plugins::Base
   end
 end

@@ -1,6 +1,6 @@
-require 'octopress/plugin'
+require 'octopress/plugins/base'
 
 module Octopress::Plugins
-  class Titlecase < Octopress::Plugin
+  class Titlecase < Octopress::Plugins::Base
   end
 end

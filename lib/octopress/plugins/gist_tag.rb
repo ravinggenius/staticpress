@@ -1,6 +1,6 @@
-require 'octopress/plugin'
+require 'octopress/plugins/base'
 
 module Octopress::Plugins
-  class GistTag < Octopress::Plugin
+  class GistTag < Octopress::Plugins::Base
   end
 end

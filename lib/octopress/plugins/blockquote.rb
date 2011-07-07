@@ -1,6 +1,6 @@
-require 'octopress/plugin'
+require 'octopress/plugins/base'
 
 module Octopress::Plugins
-  class Blockquote < Octopress::Plugin
+  class Blockquote < Octopress::Plugins::Base
   end
 end

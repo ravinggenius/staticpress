@@ -1,6 +1,6 @@
-require 'octopress/plugin'
+require 'octopress/plugins/base'
 
 module Octopress::Plugins
-  class PygmentsCachePatch < Octopress::Plugin
+  class PygmentsCachePatch < Octopress::Plugins::Base
   end
 end
