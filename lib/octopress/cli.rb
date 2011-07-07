@@ -11,6 +11,7 @@ module Octopress
   class CLI
     include Helpers
 
+    # TODO allow for more detailed help for each command
     def help
       puts <<-MESSAGE
 USAGE: octopress <command> <required-argument> [option-argument]
