@@ -9,7 +9,7 @@ require 'octopress/version'
 
 module Octopress
   class CLI
-    include Helpers
+    include Octopress::Helpers
 
     # TODO allow for more detailed help for each command
     def help
