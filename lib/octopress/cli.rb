@@ -39,7 +39,7 @@ fork_theme [theme-name]
 serve
   turn on local server for development
 
-package
+build
   prepare blog for deployment
 
 deploy
@@ -107,7 +107,7 @@ version
     def serve
     end
 
-    def package
+    def build
     end
 
     def deploy
