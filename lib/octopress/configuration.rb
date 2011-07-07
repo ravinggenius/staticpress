@@ -5,14 +5,13 @@ require 'octopress'
 
 module Octopress
   class Configuration < OpenStruct
-    CONFIG_FILE = Octopress.blog_path + 'config.yml'
 
     def save
-      CONFIG_FILE.open('w') { |f| YAML.dump(@table, f) }
+      (Octopress.blog_path + 'config.yml').open('w') { |f| YAML.dump(@table, f) }
     end
 
     def self.instance
-      @config ||= new(CONFIG_FILE.file? ? YAML.load_file(CONFIG_FILE) : {})
+      @config ||= new(YAML.load_file(Octopress.blog_path + 'config.yml'))
     end
   end
 end
