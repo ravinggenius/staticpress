@@ -8,7 +8,7 @@ module Octopress
 
     def self.activate
       config.plugins.each do |plugin_name|
-        require find(plugin_name)
+        require find(plugin_name).to_s
       end
     end
 
