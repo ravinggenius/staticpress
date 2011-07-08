@@ -17,7 +17,7 @@ module Octopress
       if file_name.file?
         template = Tilt.new file_name.to_s
         body = template.render
-        [ 200, {}, [ body ] ]
+        [ 200, { 'Content-Type' => 'text/html' }, [ body ] ]
       else
         [ 404, {}, [] ]
       end
