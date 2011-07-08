@@ -12,10 +12,10 @@ module Octopress
 
     def call(env)
       path = env['REQUEST_PATH']
-      file = (@content_dir + path.sub('/', '')).expand_path
+      file_name = (@content_dir + path.sub('/', '')).expand_path
 
-      if file.file?
-        template = Tilt.new file
+      if file_name.file?
+        template = Tilt.new file_name
         body = template.render
         [ 200, {}, [ body ] ]
       else
