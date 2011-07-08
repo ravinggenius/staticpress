@@ -15,7 +15,7 @@ module Octopress
       file_name = (@content_dir + path.sub('/', '')).expand_path
 
       if file_name.file?
-        template = Tilt.new file_name
+        template = Tilt.new file_name.to_s
         body = template.render
         [ 200, {}, [ body ] ]
       else
