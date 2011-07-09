@@ -1,5 +1,6 @@
 require 'fileutils'
 require 'pathname'
+require 'rack'
 
 require 'octopress'
 require 'octopress/content_types'
@@ -112,6 +113,7 @@ version
     end
 
     def serve
+      Rack::Server.new(:config => (Octopress.blog_path + 'config.ru').to_s, :Port => config.port).start
     end
 
     def push
