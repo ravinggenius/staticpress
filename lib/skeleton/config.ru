@@ -1,3 +1,4 @@
+require 'octopress/booter'
 require 'octopress/server'
 
 use Rack::ShowStatus
