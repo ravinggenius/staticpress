@@ -113,7 +113,7 @@ version
     end
 
     def serve
-      Octopress::Plugin.activate
+      Octopress::Plugin.activate_enabled
       Rack::Server.new(:config => (Octopress.blog_path + 'config.ru').to_s, :Port => config.port).start
     end
 

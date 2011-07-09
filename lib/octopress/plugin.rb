@@ -6,7 +6,7 @@ module Octopress
   module Plugin
     extend Octopress::Helpers
 
-    def self.activate
+    def self.activate_enabled
       config.plugins.each do |plugin_name|
         require find(plugin_name).to_s
       end
