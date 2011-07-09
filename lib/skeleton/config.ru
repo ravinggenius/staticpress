@@ -1,7 +1,3 @@
-require 'bundler'
-
-Bundler.require
-
 require 'octopress/server'
 
 use Rack::ShowStatus
