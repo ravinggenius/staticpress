@@ -5,7 +5,6 @@ require 'octopress'
 
 module Octopress
   class Configuration < OpenStruct
-
     def save
       (Octopress.blog_path + 'config.yml').open('w') { |f| YAML.dump(@table, f) }
     end
