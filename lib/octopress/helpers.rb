@@ -1,3 +1,4 @@
+require 'octopress'
 require 'octopress/configuration'
 
 module Octopress
