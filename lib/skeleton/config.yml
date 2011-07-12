@@ -6,6 +6,10 @@
 :port: 4000
 :url: http://yoursite.com
 :title: My Octopress Blog
+:routes: {
+  page: '/%{title}',
+  post: '/%{year}/%{month}/%{day}/%{title}'
+}
 :subtitle: A blogging framework for hackers.
 :author: Your Name
 :subscribe_rss: /atom.xml
