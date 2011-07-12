@@ -1,23 +1,18 @@
-require 'tilt'
-
 require 'octopress'
-require 'octopress/configuration'
 require 'octopress/error'
+require 'octopress/site'
 
 module Octopress
   class Server
     def initialize
-      @content_dir = Octopress.blog_path + Octopress::Configuration.instance.source
+      @site = Octopress::Site.new
     end
 
     def call(env)
-      path = env['REQUEST_PATH']
-      file_name = (@content_dir + path.sub('/', '')).expand_path
+      page = @site.find_page_by_route env['REQUEST_PATH']
 
-      if file_name.file?
-        template = Tilt.new file_name.to_s
-        body = template.render
-        [ 200, { 'Content-Type' => 'text/html' }, [ body ] ]
+      if page
+        [ 200, { 'Content-Type' => 'text/html' }, [ page.render ] ]
       else
         [ 404, {}, [] ]
       end

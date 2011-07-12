@@ -7,6 +7,7 @@ require 'octopress/content_types'
 require 'octopress/error'
 require 'octopress/helpers'
 require 'octopress/plugin'
+require 'octopress/site'
 require 'octopress/version'
 
 module Octopress
@@ -78,10 +79,13 @@ version
       type = content_type.to_sym
 
       if content_types.include? type
-        filename = config.send("content_type_#{type}") % filename_options(title)
+        t = Time.now.utc
+        created_on = "#{t.year}-#{'%02d' % t.month}-#{'%02d' % t.day}",
+        name = title.gsub(/ /, '-').downcase
+        filename = "#{type}-#{created_on}-#{name}.markdown"
 
         source = Octopress.root + 'content_types' + type.to_s
-        destination = Octopress.blog_path + 'content' + "#{filename}.markdown"
+        destination = Octopress.blog_path + 'content' + filename
 
         FileUtils.mkdir_p destination.dirname
         FileUtils.cp(source, destination)
@@ -110,6 +114,8 @@ version
     end
 
     def build
+      Octopress::Plugin.activate_enabled
+      Octopress::Site.new.save
     end
 
     def serve
