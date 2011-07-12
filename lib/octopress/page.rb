@@ -8,37 +8,35 @@ module Octopress
   class Page
     include Octopress::Helpers
 
-    attr_reader :created_on, :path, :type
+    attr_reader :created_on, :path, :route_title, :type
 
-    # filename should be a string like type-created_on-title.extension(s)
     def initialize(path, theme)
-      filename = (@path = path).basename.to_s
-      parts = filename.split '-'
-      @created_on = Date.parse parts[1]
-      @type = parts[0].to_sym
-      @unprocessed_title = filename.sub "#{parts[0]}-#{parts[1]}-", ''
+      parts = (@path = path).basename.to_s.match /(?<type>\w*){1}-(?<created_on>\d{4}-\d{2}-\d{2})-(?<route_title>.*)\./
+
+      @created_on = Date.parse parts[:created_on]
+      @type = parts[:type]
+      @route_title = parts[:route_title]
       @theme = theme
     end
 
-    def layout
-      Tilt.new @theme.layout_for(meta[:layout])
+    def content
+      @content ||= path.read.match /^-{3}${1}(?<frontmatter>.*)^-{3}${1}(?<text>.*)/m
     end
 
-    # https://github.com/mojombo/jekyll/blob/v0.10.0/lib/jekyll/convertible.rb#L23
-    def meta
-      content = path.read
+    def layout
+      Tilt.new @theme.layout_for(meta['layout']).to_s
+    end
 
-      if content =~ /^(---\s*\n.*?\n?)^(---\s*$\n?)/m
-        YAML.load(content[($1.size + $2.size)..-1])
+    def meta
+      if content[:frontmatter]
+        YAML.load(content[:frontmatter])
       else
         {}
       end
     end
 
     def render
-      # NOTE may need to read file manually to remove yaml frontmatter
-      # NOTE grab layout from Octopress::Theme#layout
-      template = Tilt.new path.to_s
+      template = Tilt[path.to_s].new { content[:text] }
 
       if l = layout
         l.render template_locals do
@@ -55,10 +53,8 @@ module Octopress
       destination.open('w') { |f| f.write render }
     end
 
-    # route begins with /
     def route
-      @route = nil # calculate route based on type
-      pattern = config.routes[type]
+      config.routes[type] % route_options(route_title)
     end
 
     def template_locals
@@ -70,9 +66,13 @@ module Octopress
     end
 
     def title
-      meta.title || @unprocessed_title.split('-').map do |word|
-        word.upcase
-      end.join ' '
+      if meta.title
+        meta.title
+      else
+        route_title.split('-').map do |word|
+          word.upcase
+        end.join ' '
+      end
     end
   end
 end

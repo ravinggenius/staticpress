@@ -13,17 +13,20 @@ module Octopress
     end
 
     def layout_for(layout_name)
-      layouts.detect do |layout|
-        "#{layout.basename}." == "#{layout_name}."
-      end || layouts_dir + 'default'
+      keyed_layouts[layout_name]
+    end
+
+    def keyed_layouts
+      Hash[layouts.map { |layout| [ extensionless_basename(layout), layout ] }]
     end
 
     def layouts
-      layouts_dir.children
+      (root + '_layouts').children
     end
 
-    def layouts_dir
-      root + '_layouts'
+    def extensionless_basename(layout)
+      path = layout.basename.to_path
+      path[0...(path.length - layout.extname.length)]
     end
   end
 end
