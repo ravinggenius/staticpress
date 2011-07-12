@@ -10,8 +10,8 @@ module Octopress
 
     attr_reader :theme
 
-    def initialize(theme_name)
-      @theme = Octopress::Theme.new theme_name
+    def initialize
+      @theme = Octopress::Theme.new config.theme
     end
 
     def find_page_by_path(path)
