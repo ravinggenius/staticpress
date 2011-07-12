@@ -6,7 +6,6 @@
 :port: 4000
 :url: http://yoursite.com
 :title: My Octopress Blog
-:permalink: /blog/:year/:month/:day/:title
 :subtitle: A blogging framework for hackers.
 :author: Your Name
 :subscribe_rss: /atom.xml
@@ -18,8 +17,6 @@
 :simple_search: http://google.com/search
 :email:
 :theme: classic
-:content_type_page: %{name}
-:content_type_post: %{date}-%{name}
 :twitter_user:
 :twitter_tweet_count: 4
 :twitter_show_replies: false

@@ -73,7 +73,6 @@ version
     end
 
     # TODO allow custom content types
-    # each content type would require an entry in config.yml
     def create(content_type, title)
       content_types = Octopress::ContentTypes.all
       type = content_type.to_sym
