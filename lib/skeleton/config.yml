@@ -5,7 +5,7 @@
 :code_dir: downloads/code
 :port: 4000
 :url: http://yoursite.com
-title: My Octopress Blog
+:title: My Octopress Blog
 :permalink: /blog/:year/:month/:day/:title
 :subtitle: A blogging framework for hackers.
 :author: Your Name
