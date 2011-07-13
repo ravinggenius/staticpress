@@ -5,12 +5,12 @@ require 'octopress'
 
 module Octopress
   class Configuration < OpenStruct
-    def raw
+    def to_hash
       @table.clone
     end
 
     def save
-      (Octopress.blog_path + 'config.yml').open('w') { |f| YAML.dump(raw, f) }
+      (Octopress.blog_path + 'config.yml').open('w') { |f| YAML.dump(to_hash, f) }
     end
 
     def self.instance
