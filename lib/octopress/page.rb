@@ -34,11 +34,7 @@ module Octopress
     end
 
     def meta
-      if content[:frontmatter]
-        YAML.load(content[:frontmatter])
-      else
-        {}
-      end
+      content[:frontmatter] ? YAML.load(content[:frontmatter]) : {}
     end
 
     def render
