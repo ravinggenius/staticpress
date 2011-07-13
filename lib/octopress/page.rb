@@ -20,7 +20,13 @@ module Octopress
     end
 
     def content
-      @content ||= path.read.match /^-{3}${1}(?<frontmatter>.*)^-{3}${1}(?<text>.*)/m
+      return @content if @content
+
+      regex_frontmatter = /^-{3}${1}(?<frontmatter>.*)^-{3}${1}/m
+      regex_text = /(?<text>.*)/m
+      regex = /#{regex_frontmatter}#{regex_text}/
+
+      @content = (c = path.read).match(regex_frontmatter) ? c.match(regex) : c.match(regex_text)
     end
 
     def layout
