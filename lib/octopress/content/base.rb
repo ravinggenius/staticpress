@@ -4,17 +4,15 @@ require 'yaml'
 
 require 'octopress'
 
-module Octopress
-  class Page
+module Octopress::Content
+  class Base
     include Octopress::Helpers
 
-    attr_reader :created_on, :path, :route_title, :type
+    attr_reader :path, :route_title
 
     def initialize(path, theme)
-      parts = (@path = path).basename.to_s.match /(?<type>\w*){1}-(?<created_on>\d{4}-\d{2}-\d{2})-(?<route_title>.*)\./
+      parts = (@path = path).basename.to_s.match /(?<route_title>.*)\./
 
-      @created_on = Date.parse parts[:created_on]
-      @type = parts[:type]
       @route_title = parts[:route_title]
       @theme = theme
     end
@@ -34,7 +32,7 @@ module Octopress
     end
 
     def meta
-      content[:frontmatter] ? YAML.load(content[:frontmatter]) : {}
+      content.names.include?('frontmatter') ? YAML.load(content[:frontmatter]) : {}
     end
 
     def render
@@ -49,14 +47,14 @@ module Octopress
       end
     end
 
+    def route
+      config.routes[type] % route_options(route_title)
+    end
+
     def save
       destination = Octopress.blog_path + config.destination + route.sub('/', '')
       FileUtils.mkdir_p destination.dirname
       destination.open('w') { |f| f.write render }
-    end
-
-    def route
-      config.routes[type] % route_options(route_title)
     end
 
     def template_locals
@@ -75,6 +73,10 @@ module Octopress
           word.upcase
         end.join ' '
       end
+    end
+
+    def type
+      self.class.name.split('::').last.downcase
     end
   end
 end

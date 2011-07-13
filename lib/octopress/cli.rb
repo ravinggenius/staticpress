@@ -3,7 +3,6 @@ require 'pathname'
 require 'rack'
 
 require 'octopress'
-require 'octopress/content_types'
 require 'octopress/error'
 require 'octopress/helpers'
 require 'octopress/plugin'
@@ -28,8 +27,11 @@ new <path-to-blog> [name-of-blog]
   creates a new blog in <path-to-blog>. <path-to-blog> will be created if it
   does not exist, and files will be overwritten if they do exist
 
-create <content-type> <title>
-  create a new piece of content
+create <title>
+  create a new blog post
+
+create_page <title> [path-in-content]
+  create a new page in path-in-content
 
 fork_plugin <plugin-name> [new-plugin-name]
   copies <plugin-name> into <path-to-blog>/plugins/. if [new-plugin-name] is
@@ -72,24 +74,30 @@ version
       config.save
     end
 
-    # TODO allow custom content types
-    def create(content_type, title)
-      content_types = Octopress::ContentTypes.all
-      type = content_type.to_sym
-
-      if content_types.include? type
-        t = Time.now.utc
-        created_on = "#{t.year}-#{'%02d' % t.month}-#{'%02d' % t.day}",
+    # TODO get file extension from config
+    def create(title)
+      create_content do |now|
+        created_on = "#{now.year}-#{'%02d' % now.month}-#{'%02d' % now.day}"
         name = title.gsub(/ /, '-').downcase
-        filename = "#{type}-#{created_on}-#{name}.markdown"
+        filename = "#{created_on}-#{name}.markdown"
 
-        source = Octopress.root + 'content_types' + type.to_s
-        destination = Octopress.blog_path + 'content' + filename
+        [
+          Octopress.root + 'content_types' + 'post',
+          Octopress.blog_path + 'content' + '_posts' + filename
+        ]
+      end
+    end
 
-        FileUtils.mkdir_p destination.dirname
-        FileUtils.cp(source, destination)
-      else
-        raise Octopress::Error, 'Unknown content type'
+    # TODO get file extension from config
+    def create_page(title, path = nil)
+      create_content do |now|
+        name = title.gsub(/ /, '-').downcase
+        filename = "#{name}.markdown".sub /^\//, ''
+
+        [
+          Octopress.root + 'content_types' + 'page',
+          Octopress.blog_path + 'content' + (path ? path : '') + filename
+        ]
       end
     end
 
@@ -143,6 +151,16 @@ version
       else
         cli.help
       end
+    end
+
+    protected
+
+    # TODO write now to frontmatter as created_at
+    def create_content(&block)
+      now = Time.now.utc
+      source, destination = block.call now
+      FileUtils.mkdir_p destination.dirname
+      FileUtils.cp(source, destination)
     end
   end
 end
