@@ -6,6 +6,7 @@ require 'octopress'
 
 module Octopress::Content
   class Base
+    extend Octopress::Helpers
     include Octopress::Helpers
 
     attr_reader :path, :route_title

@@ -26,7 +26,7 @@ module Octopress::Content
       name = title.gsub(/ /, '-').downcase
 
       filename = "#{created_on}-#{name}.#{format}"
-      destination = Octopress.blog_path + 'content' + '_posts' + filename
+      destination = Octopress.blog_path + config.source + '_posts' + filename
 
       FileUtils.mkdir_p destination.dirname
       destination.open('w') { |f| f.write template }
