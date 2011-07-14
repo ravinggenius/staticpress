@@ -18,7 +18,7 @@ module Octopress
 
     # TODO handle special pages (home, pagination, taxonomy etc)
     def all_content
-      Octopress::Page.all + Octopress::Post.all
+      Octopress::Content::Page.all + Octopress::Content::Post.all
     end
 
     def find_page_by_route(route)
