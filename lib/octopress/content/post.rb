@@ -13,5 +13,14 @@ module Octopress::Content
       @created_on = Date.parse parts[:created_on]
       @route_title = parts[:route_title]
     end
+
+    def self.template
+      <<-TEMPLATE
+---
+layout: default
+---
+in post
+      TEMPLATE
+    end
   end
 end

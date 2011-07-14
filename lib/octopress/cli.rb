@@ -82,7 +82,7 @@ version
         filename = "#{created_on}-#{name}.#{config.preferred_format}"
 
         [
-          Octopress.root + 'content_types' + 'post',
+          Octopress::Content::Post.template,
           Octopress.blog_path + 'content' + '_posts' + filename
         ]
       end
@@ -95,7 +95,7 @@ version
         filename = "#{name}.#{config.preferred_format}".sub /^\//, ''
 
         [
-          Octopress.root + 'content_types' + 'page',
+          Octopress::Content::Page.template,
           Octopress.blog_path + 'content' + (path ? path : '') + filename
         ]
       end
@@ -160,7 +160,7 @@ version
       now = Time.now.utc
       source, destination = block.call now
       FileUtils.mkdir_p destination.dirname
-      FileUtils.cp(source, destination)
+      destination.open('w') { |f| f.write source }
     end
   end
 end
