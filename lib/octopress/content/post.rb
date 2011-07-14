@@ -14,6 +14,12 @@ module Octopress::Content
       @route_title = parts[:route_title]
     end
 
+    def self.all
+      spider_directory directory + '_posts' do |post|
+        new post, theme
+      end.flatten
+    end
+
     def self.create(format, title)
       now = Time.now.utc
       created_on = "#{now.year}-#{'%02d' % now.month}-#{'%02d' % now.day}"
