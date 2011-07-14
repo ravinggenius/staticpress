@@ -5,6 +5,7 @@
 :code_dir: downloads/code
 :port: 4000
 :url: http://yoursite.com
+:preferred_format: markdown
 :title: My Octopress Blog
 :routes: {
   page: '/%{title}',

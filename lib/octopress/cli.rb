@@ -79,7 +79,7 @@ version
       create_content do |now|
         created_on = "#{now.year}-#{'%02d' % now.month}-#{'%02d' % now.day}"
         name = title.gsub(/ /, '-').downcase
-        filename = "#{created_on}-#{name}.markdown"
+        filename = "#{created_on}-#{name}.#{config.preferred_format}"
 
         [
           Octopress.root + 'content_types' + 'post',
@@ -92,7 +92,7 @@ version
     def create_page(title, path = nil)
       create_content do |now|
         name = title.gsub(/ /, '-').downcase
-        filename = "#{name}.markdown".sub /^\//, ''
+        filename = "#{name}.#{config.preferred_format}".sub /^\//, ''
 
         [
           Octopress.root + 'content_types' + 'page',
