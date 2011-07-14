@@ -74,7 +74,6 @@ version
       config.save
     end
 
-    # TODO get file extension from config
     def create(title)
       create_content do |now|
         created_on = "#{now.year}-#{'%02d' % now.month}-#{'%02d' % now.day}"
@@ -88,7 +87,6 @@ version
       end
     end
 
-    # TODO get file extension from config
     def create_page(title, path = nil)
       create_content do |now|
         name = title.gsub(/ /, '-').downcase
