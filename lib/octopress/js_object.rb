@@ -6,7 +6,7 @@ module Octopress
   class JSObject < OpenStruct
     def to_hash
       handler = lambda do |v|
-        if v.is_an? Array
+        if v.is_a? Array
           v.map { |vv| handler.call vv }
         elsif v.is_a? JSObject
           v.to_hash
@@ -26,7 +26,7 @@ module Octopress
 
     def self.new(hash = {})
       handler = lambda do |v|
-        if v.is_an? Array
+        if v.is_a? Array
           v.map { |vv| handler.call vv }
         elsif v.is_a? Hash
           new v
