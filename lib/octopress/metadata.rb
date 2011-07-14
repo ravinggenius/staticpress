@@ -1,3 +1,5 @@
+require 'octopress'
+
 module Octopress
   class Metadata
     def <<(other)
