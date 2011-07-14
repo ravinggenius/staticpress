@@ -14,6 +14,18 @@ module Octopress::Content
       @route_title = parts[:route_title]
     end
 
+    def self.create(format, title)
+      now = Time.now.utc
+      created_on = "#{now.year}-#{'%02d' % now.month}-#{'%02d' % now.day}"
+      name = title.gsub(/ /, '-').downcase
+
+      filename = "#{created_on}-#{name}.#{format}"
+      destination = Octopress.blog_path + 'content' + '_posts' + filename
+
+      FileUtils.mkdir_p destination.dirname
+      destination.open('w') { |f| f.write template }
+    end
+
     def self.template
       <<-TEMPLATE
 ---

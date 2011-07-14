@@ -75,28 +75,11 @@ version
     end
 
     def create(title)
-      create_content do |now|
-        created_on = "#{now.year}-#{'%02d' % now.month}-#{'%02d' % now.day}"
-        name = title.gsub(/ /, '-').downcase
-        filename = "#{created_on}-#{name}.#{config.preferred_format}"
-
-        [
-          Octopress::Content::Post.template,
-          Octopress.blog_path + 'content' + '_posts' + filename
-        ]
-      end
+      Octopress::Content::Post.create config.preferred_format, title
     end
 
     def create_page(title, path = nil)
-      create_content do |now|
-        name = title.gsub(/ /, '-').downcase
-        filename = "#{name}.#{config.preferred_format}".sub /^\//, ''
-
-        [
-          Octopress::Content::Page.template,
-          Octopress.blog_path + 'content' + (path ? path : '') + filename
-        ]
-      end
+      Octopress::Content::Page.create config.preferred_format, title, path
     end
 
     def fork_plugin(name, new_name = nil)
@@ -149,16 +132,6 @@ version
       else
         cli.help
       end
-    end
-
-    protected
-
-    # TODO write now to frontmatter as created_at
-    def create_content(&block)
-      now = Time.now.utc
-      source, destination = block.call now
-      FileUtils.mkdir_p destination.dirname
-      destination.open('w') { |f| f.write source }
     end
   end
 end
