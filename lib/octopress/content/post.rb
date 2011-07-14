@@ -27,8 +27,11 @@ module Octopress::Content
     end
 
     def self.template
+      now = Time.now.utc
+
       <<-TEMPLATE
 ---
+created_at: #{now}
 layout: default
 ---
 
