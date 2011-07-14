@@ -31,6 +31,7 @@ module Octopress::Content
 ---
 layout: default
 ---
+
 in post
       TEMPLATE
     end

@@ -18,6 +18,7 @@ module Octopress::Content
 ---
 layout: default
 ---
+
 in page
       TEMPLATE
     end
