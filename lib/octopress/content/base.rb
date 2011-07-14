@@ -3,19 +3,20 @@ require 'tilt'
 require 'yaml'
 
 require 'octopress'
+require 'octopress/theme'
 
 module Octopress::Content
   class Base
     extend Octopress::Helpers
     include Octopress::Helpers
 
-    attr_reader :path, :route_title
+    attr_reader :path, :route_title, :theme
 
-    def initialize(path, theme)
+    def initialize(path)
       parts = (@path = path).basename.to_s.match /(?<route_title>.*)\./
 
       @route_title = parts[:route_title]
-      @theme = theme
+      @theme = Octopress::Theme.new config.theme
     end
 
     def content

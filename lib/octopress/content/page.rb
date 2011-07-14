@@ -9,10 +9,10 @@ module Octopress::Content
       all_but_posts.map do |child|
         if child.directory?
           spider_directory child do |page|
-            new page, theme
+            new page
           end
         else
-          new child, theme
+          new child
         end
       end.flatten
     end

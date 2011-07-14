@@ -5,7 +5,7 @@ module Octopress::Content
   class Post < Base
     attr_reader :created_on
 
-    def initialize(path, theme)
+    def initialize(path)
       super
 
       parts = path.basename.to_s.match /(?<created_on>\d{4}-\d{2}-\d{2})-(?<route_title>.*)\./
@@ -16,7 +16,7 @@ module Octopress::Content
 
     def self.all
       spider_directory directory + '_posts' do |post|
-        new post, theme
+        new post
       end.flatten
     end
 
