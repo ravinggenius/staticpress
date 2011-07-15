@@ -3,6 +3,7 @@ require 'tilt'
 require 'yaml'
 
 require 'octopress'
+require 'octopress/metadata'
 require 'octopress/theme'
 
 module Octopress::Content
@@ -34,7 +35,7 @@ module Octopress::Content
     end
 
     def meta
-      content.names.include?('frontmatter') ? YAML.load(content[:frontmatter]) : {}
+      Octopress::Metadata.new(content.names.include?('frontmatter') ? YAML.load(content[:frontmatter]) : {})
     end
 
     def render
