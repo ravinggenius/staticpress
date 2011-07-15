@@ -31,7 +31,7 @@ module Octopress::Content
     end
 
     def layout
-      Tilt.new @theme.layout_for(meta['layout']).to_s
+      Tilt.new theme.layout_for(meta.layout).to_s
     end
 
     def meta
