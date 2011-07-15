@@ -4,6 +4,10 @@ require 'octopress'
 
 module Octopress
   class JSObject < OpenStruct
+    def [](key)
+      method_missing key.to_s.to_sym
+    end
+
     def to_hash
       handler = lambda do |v|
         if v.is_a? Array
