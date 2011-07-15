@@ -15,9 +15,7 @@ module Octopress::Content
     end
 
     def self.all
-      spider_directory directory + '_posts' do |post|
-        new post
-      end.flatten
+      (Octopress.blog_path + config.source + '_posts').children.map { |post| new post }
     end
 
     def self.create(format, title)
