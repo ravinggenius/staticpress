@@ -1,6 +1,14 @@
-require_relative '../../test_helper'
+require_relative 'js_object_test'
 
-class MetadataTest < MiniTest::Unit::TestCase
+require 'octopress'
+require 'octopress/metadata'
+
+class MetadataTest < JSObjectTest
   def setup
+    super
+    @meta = Octopress::Metadata.new
+  end
+
+  def test__chevron
   end
 end
