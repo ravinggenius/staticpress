@@ -8,8 +8,8 @@ module Octopress
 
     def initialize(name)
       @name = name
-      custom = Octopress.blog_path + 'themes' + @name
-      @root = custom.directory? ? custom : Octopress.root + 'themes' + @name
+      custom = Octopress.blog_path + 'themes' + @name.to_s
+      @root = custom.directory? ? custom : Octopress.root + 'themes' + @name.to_s
     end
 
     def layout_for(layout_name)
