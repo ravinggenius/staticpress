@@ -16,6 +16,12 @@ class JSObjectTest < MiniTest::Unit::TestCase
     assert_nil @js_object.nested.other
   end
 
+  def test_assignment
+    assert_nil @js_object.hoopla
+    @js_object.hoopla = :hullabaloo
+    assert_equal @js_object.hoopla, :hullabaloo
+  end
+
   def test_to_hash
     assert_equal @js_object.to_hash, { :key => :value, :nested => { :a => :b } }
   end
