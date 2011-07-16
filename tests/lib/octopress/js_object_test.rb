@@ -7,7 +7,7 @@ class JSObjectTest < MiniTest::Unit::TestCase
     @js_object = Octopress::JSObject.new :key => :value, :nested => { :a => :b }
   end
 
-  def test_
+  def test__squares
     assert_nil @js_object[:some_random]
     assert_equal @js_object[:key], :value
     assert_equal @js_object['key'], :value
