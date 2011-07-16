@@ -11,6 +11,9 @@ class JSObjectTest < MiniTest::Unit::TestCase
     assert_nil @js_object[:some_random]
     assert_equal @js_object[:key], :value
     assert_equal @js_object['key'], :value
+  end
+
+  def test_regular_access
     assert_equal @js_object.key, :value
     assert_equal @js_object.nested.a, :b
     assert_nil @js_object.nested.other
