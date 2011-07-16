@@ -1,9 +1,12 @@
 require 'tilt'
 
 require 'octopress'
+require 'octopress/helpers'
 
 module Octopress
   class Theme
+    include Octopress::Helpers
+
     attr_reader :root
 
     def initialize(name)
@@ -22,11 +25,6 @@ module Octopress
 
     def layouts
       (root + '_layouts').children
-    end
-
-    def extensionless_basename(layout)
-      path = layout.basename.to_path
-      path[0...(path.length - layout.extname.length)]
     end
   end
 end

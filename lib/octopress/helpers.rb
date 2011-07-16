@@ -7,6 +7,11 @@ module Octopress
       Octopress::Configuration.instance
     end
 
+    def extensionless_basename(pathname)
+      path = pathname.basename.to_path
+      path[0...(path.length - pathname.extname.length)]
+    end
+
     def route_options(title)
       t = Time.now.utc
 
