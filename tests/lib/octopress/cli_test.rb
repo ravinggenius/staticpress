@@ -25,7 +25,7 @@ class CLITest < MiniTest::Unit::TestCase
   def test_help
   end
 
-  def test_new_with_defaults
+  def test_new
     FileUtils.mkdir_p TEST_BLOG
     assert_equal 0, TEST_BLOG.children.count
     @cli.new TEST_BLOG
