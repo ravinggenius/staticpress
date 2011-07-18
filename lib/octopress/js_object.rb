@@ -32,7 +32,7 @@ module Octopress
 
     def self.converter(value, from_class, &block)
       if value.is_a? Array
-        value.map { |vv| converter.call vv, from_class, block }
+        value.map { |vv| converter vv, from_class, &block }
       elsif value.is_a? from_class
         block.call value
       else
