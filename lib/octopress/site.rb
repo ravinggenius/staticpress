@@ -39,7 +39,7 @@ module Octopress
     protected
 
     def hashify_pages_by(key)
-      Hash[all_content.map { |page| [ page.send(key), page ] }]
+      hash_from_array(all_content) { |page| page.send key }
     end
   end
 end

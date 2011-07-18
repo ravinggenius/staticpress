@@ -20,7 +20,7 @@ module Octopress
     end
 
     def keyed_layouts
-      Hash[layouts.map { |layout| [ extensionless_basename(layout), layout ] }]
+      hash_from_array(layouts) { |layout| extensionless_basename layout }
     end
 
     def layouts
