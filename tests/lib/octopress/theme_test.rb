@@ -8,6 +8,7 @@ class ThemeTest < MiniTest::Unit::TestCase
   end
 
   def test_layout_for
+    assert_equal (@theme.root + '_layouts' + 'default.haml'), @theme.layout_for(:default)
   end
 
   def test_keyed_layouts

@@ -16,7 +16,7 @@ module Octopress
     end
 
     def layout_for(layout_name)
-      keyed_layouts[layout_name]
+      keyed_layouts[layout_name.to_s]
     end
 
     def keyed_layouts
