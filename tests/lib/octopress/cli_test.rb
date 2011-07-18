@@ -5,8 +5,11 @@ require 'pathname'
 
 require 'octopress'
 require 'octopress/cli'
+require 'octopress/helpers'
 
 class CLITest < MiniTest::Unit::TestCase
+  include Octopress::Helpers
+
   TEST_BLOG = (Octopress.root + '..' + 'tests' + 'blog').expand_path
 
   def setup
@@ -27,6 +30,7 @@ class CLITest < MiniTest::Unit::TestCase
     assert_equal 0, TEST_BLOG.children.count
     @cli.new TEST_BLOG
     assert_equal 5, TEST_BLOG.children.count
+    refute_empty config.title
   end
 
   def test_create
