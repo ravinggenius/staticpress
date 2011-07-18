@@ -33,6 +33,11 @@ class CLITest < MiniTest::Unit::TestCase
     refute_empty config.title
   end
 
+  def test_new_with_custom_title
+    @cli.new TEST_BLOG, 'This is my blog'
+    assert_equal 'This is my blog', config.title
+  end
+
   def test_create
   end
 
