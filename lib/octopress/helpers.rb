@@ -12,6 +12,14 @@ module Octopress
       path[0...(path.length - pathname.extname.length)]
     end
 
+    def hash_from_array(array, &block)
+      reply = array.map do |object|
+        [ block.call(object), object ]
+      end
+
+      Hash[reply]
+    end
+
     def route_options(title)
       t = Time.now.utc
 

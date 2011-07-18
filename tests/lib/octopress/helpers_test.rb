@@ -11,6 +11,27 @@ class HelpersTest < MiniTest::Unit::TestCase
     assert_equal 'extensionless', extensionless_basename(Pathname.new('extensionless'))
   end
 
+  def test_hash_from_empty_array
+    actual = hash_from_array [] {}
+    assert_equal({}, actual)
+  end
+
+  def test_hash_from_array
+    expected = {
+      1 => { :key => 1 },
+      2 => { :key => 2 },
+      3 => { :key => 3 }
+    }
+
+    actual = hash_from_array [
+      { :key => 1 },
+      { :key => 2 },
+      { :key => 3 }
+    ] { |hash| hash[:key] }
+
+    assert_equal expected, actual
+  end
+
   def test_route_options
   end
 end
