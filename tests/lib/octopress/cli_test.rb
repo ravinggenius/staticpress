@@ -26,8 +26,7 @@ class CLITest < MiniTest::Unit::TestCase
   end
 
   def test_new
-    FileUtils.mkdir_p TEST_BLOG
-    assert_equal 0, TEST_BLOG.children.count
+    refute TEST_BLOG.directory?
     @cli.new TEST_BLOG
     assert_equal 5, TEST_BLOG.children.count
     refute_empty config.title
