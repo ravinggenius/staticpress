@@ -29,7 +29,7 @@ class CLITest < MiniTest::Unit::TestCase
     refute TEST_BLOG.directory?
     @cli.new TEST_BLOG
     assert_equal 5, TEST_BLOG.children.count
-    refute_empty config.title
+    assert_equal 'Blog', config.title
   end
 
   def test_new_with_custom_title
