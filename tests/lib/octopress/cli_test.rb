@@ -10,7 +10,7 @@ require 'octopress/helpers'
 class CLITest < MiniTest::Unit::TestCase
   include Octopress::Helpers
 
-  TEST_BLOG = (Octopress.root + '..' + 'tests' + 'blog').expand_path
+  TEST_BLOG = SAMPLE_SITES + 'blog'
 
   def setup
     Octopress.blog_path = TEST_BLOG
