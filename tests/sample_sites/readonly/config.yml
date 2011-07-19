@@ -1,0 +1,37 @@
+---
+:source: content
+:plugins:
+- blockquote
+:plugins_path: plugins
+:destination: public
+:code_dir: downloads/code
+:port: 4000
+:url: http://yoursite.com
+:preferred_format: markdown
+:routes:
+  :page: /%{title}
+  :post: /%{year}/%{month}/%{day}/%{title}
+:title: Read-Only Test Blog
+:subtitle: A blogging framework for hackers.
+:author: Your Name
+:subscribe_rss: /atom.xml
+:subscribe_email: !!null 
+:markdown: rdiscount
+:pygments: true
+:paginate: 5
+:recent_posts: 5
+:simple_search: http://google.com/search
+:email: !!null 
+:theme: classic
+:twitter_user: !!null 
+:twitter_tweet_count: 4
+:twitter_show_replies: false
+:twitter_follow_button: true
+:twitter_show_follower_count: false
+:twitter_tweet_button: true
+:pinboard_user: !!null 
+:pinboard_count: 3
+:delicious_user: !!null 
+:delicious_count: 3
+:disqus_short_name: !!null 
+:google_analytics_tracking_id: !!null 

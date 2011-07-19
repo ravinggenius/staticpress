@@ -1,0 +1,10 @@
+source :rubygems
+
+gem 'octopress'
+
+gem 'compass'
+gem 'haml'
+gem 'rdiscount'
+gem 'rubypants'
+gem 'RedCloth'
+gem 'sass'
