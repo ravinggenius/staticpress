@@ -15,7 +15,11 @@ module Octopress::Content
     end
 
     def self.all
-      (Octopress.blog_path + config.source + '_posts').children.map { |post| new post }
+      if (posts_dir = Octopress.blog_path + config.source + '_posts').directory?
+        posts_dir.children.map { |post| new post }
+      else
+        []
+      end
     end
 
     def self.create(format, title)

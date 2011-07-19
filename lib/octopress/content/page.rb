@@ -4,7 +4,11 @@ require 'octopress/content/base'
 module Octopress::Content
   class Page < Base
     def self.all
-      all_but_posts = (Octopress.blog_path + config.source).children - ([Octopress.blog_path + config.source + '_posts'])
+      all_but_posts = if (posts_dir = Octopress.blog_path + config.source + '_posts').directory?
+        (Octopress.blog_path + config.source).children - [ posts_dir ]
+      else
+        (Octopress.blog_path + config.source).children
+      end
 
       all_but_posts.map do |child|
         if child.directory?
