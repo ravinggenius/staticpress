@@ -20,6 +20,10 @@ module Octopress::Content
       @theme = Octopress::Theme.new config.theme
     end
 
+    def ==(other)
+      route == other.route
+    end
+
     def content
       return @content if @content
 

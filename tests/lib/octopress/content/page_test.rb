@@ -4,6 +4,12 @@ require 'octopress/content/page'
 
 class ContentPageTest < ContentBaseTest
   def setup
-    @page = Octopress::Content::Page.new
+    super
+    @page = Octopress::Content::Page.new(READONLY + 'content' + 'about.markdown')
+  end
+
+  def test_equalsequals
+    assert_equal @page, Octopress::Content::Page.new(READONLY + 'content' + 'about.markdown')
+    refute_equal @page, Octopress::Content::Page.new(READONLY + 'content' + 'contact.markdown')
   end
 end
