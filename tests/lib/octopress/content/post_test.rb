@@ -1,7 +1,7 @@
-require_relative '../../../test_helper'
+require_relative 'base_test'
 
-class ContentPostTest < MiniTest::Unit::TestCase
+class ContentPostTest < ContentBaseTest
   def setup
-    @page = Octopress::Content::Post.new
+    @post = Octopress::Content::Post.new
   end
 end

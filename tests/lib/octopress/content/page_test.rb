@@ -1,6 +1,6 @@
-require_relative '../../../test_helper'
+require_relative 'base_test'
 
-class ContentPageTest < MiniTest::Unit::TestCase
+class ContentPageTest < ContentBaseTest
   def setup
     @page = Octopress::Content::Page.new
   end
