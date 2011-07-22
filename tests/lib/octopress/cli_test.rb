@@ -3,7 +3,6 @@ require_relative '../../test_helper'
 require 'fileutils'
 require 'pathname'
 
-require 'octopress'
 require 'octopress/cli'
 require 'octopress/helpers'
 

@@ -1,6 +1,5 @@
 require_relative 'js_object_test'
 
-require 'octopress'
 require 'octopress/metadata'
 
 class MetadataTest < JSObjectTest
