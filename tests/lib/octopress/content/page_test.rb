@@ -9,7 +9,7 @@ class ContentPageTest < ContentBaseTest
     @second_page = Octopress::Content::Page.new(READONLY + 'content' + 'contact.markdown')
   end
 
-  def test_equalsequals
+  def test__equalsequals
     assert @page.==(Octopress::Content::Page.new(READONLY + 'content' + 'about.markdown'))
     refute @page.==(Octopress::Content::Page.new(READONLY + 'content' + 'contact.markdown'))
   end

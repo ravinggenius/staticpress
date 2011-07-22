@@ -8,7 +8,7 @@ class ContentPostTest < ContentBaseTest
     @post = Octopress::Content::Post.new(READONLY + 'content' + '_posts' + '2011-07-20-hello.markdown')
   end
 
-  def test_equalsequals
+  def test__equalsequals
     assert @post.==(Octopress::Content::Post.new(READONLY + 'content' + '_posts' + '2011-07-20-hello.markdown'))
     refute @post.==(Octopress::Content::Post.new(READONLY + 'content' + '_posts' + '2011-07-20-goodbye.markdown'))
   end
