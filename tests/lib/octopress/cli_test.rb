@@ -7,7 +7,7 @@ require 'octopress'
 require 'octopress/cli'
 require 'octopress/helpers'
 
-class CLITest < MiniTest::Unit::TestCase
+class CLITest < TestHelper
   include Octopress::Helpers
 
   TEST_BLOG = SAMPLE_SITES + 'blog'
@@ -19,7 +19,7 @@ class CLITest < MiniTest::Unit::TestCase
 
   def teardown
     FileUtils.rm_rf TEST_BLOG if TEST_BLOG.directory?
-    Octopress.blog_path = '.'
+    super
   end
 
   def test_help

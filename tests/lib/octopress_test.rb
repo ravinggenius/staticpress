@@ -2,7 +2,7 @@ require_relative '../test_helper'
 
 require 'octopress'
 
-class OctopressTest < MiniTest::Unit::TestCase
+class OctopressTest < TestHelper
   def test_blog_path
     assert_equal Pathname.new('.').expand_path, Octopress.blog_path
     Octopress.blog_path = 'tests/test_blog'

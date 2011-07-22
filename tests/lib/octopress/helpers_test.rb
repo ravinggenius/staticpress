@@ -2,7 +2,7 @@ require_relative '../../test_helper'
 
 require 'octopress/helpers'
 
-class HelpersTest < MiniTest::Unit::TestCase
+class HelpersTest < TestHelper
   include Octopress::Helpers
 
   def test_extensionless_basename

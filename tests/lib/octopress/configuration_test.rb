@@ -1,6 +1,4 @@
 require_relative '../../test_helper'
 
-class ConfigurationTest < MiniTest::Unit::TestCase
-  def setup
-  end
+class ConfigurationTest < TestHelper
 end

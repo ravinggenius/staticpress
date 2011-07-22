@@ -2,7 +2,7 @@ require_relative '../../test_helper'
 
 require 'octopress/js_object'
 
-class JSObjectTest < MiniTest::Unit::TestCase
+class JSObjectTest < TestHelper
   def setup
     @js_object = Octopress::JSObject.new :key => :value, :nested => { :a => :b }
   end

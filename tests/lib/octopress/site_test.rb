@@ -2,9 +2,7 @@ require_relative '../../test_helper'
 
 require 'octopress/site'
 
-class SiteTest < MiniTest::Unit::TestCase
-  READONLY = SAMPLE_SITES + 'readonly'
-
+class SiteTest < TestHelper
   def setup
     Octopress.blog_path = READONLY
     @site = Octopress::Site.new
