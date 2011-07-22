@@ -1,5 +1,7 @@
 require_relative '../../test_helper'
 
+require 'pathname'
+
 require 'octopress/helpers'
 
 class HelpersTest < TestHelper

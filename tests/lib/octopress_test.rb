@@ -1,5 +1,7 @@
 require_relative '../test_helper'
 
+require 'pathname'
+
 class OctopressTest < TestHelper
   def test_blog_path
     assert_equal Pathname.new('.').expand_path, Octopress.blog_path
