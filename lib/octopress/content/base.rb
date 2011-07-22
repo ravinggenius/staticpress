@@ -42,8 +42,12 @@ module Octopress::Content
       Octopress::Metadata.new(content.names.include?('frontmatter') ? YAML.load(content[:frontmatter]) : {})
     end
 
+    def raw
+      content[:text].strip
+    end
+
     def render
-      template = Tilt[path.to_s].new { content[:text] }
+      template = Tilt[path.to_s].new { raw }
 
       if l = layout
         l.render template_locals do
