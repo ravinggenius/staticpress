@@ -6,10 +6,9 @@
 :port: 4000
 :url: http://yoursite.com
 :preferred_format: markdown
-:routes: {
-  page: '/%{title}',
-  post: '/%{year}/%{month}/%{day}/%{title}'
-}
+:routes:
+  :page: '/:title'
+  :post: '/:year/:month/:day/:title'
 :title: My Octopress Blog
 :subtitle: A blogging framework for hackers.
 :author: Your Name

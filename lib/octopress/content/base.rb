@@ -59,7 +59,9 @@ module Octopress::Content
     end
 
     def route
-      config.routes[type] % route_options(route_title)
+      route_options(route_title).inject(config.routes[type]) do |reply, (key, value)|
+        reply.gsub /:#{key}/, value.to_s
+      end
     end
 
     def save

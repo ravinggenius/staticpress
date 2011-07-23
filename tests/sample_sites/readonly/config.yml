@@ -9,8 +9,8 @@
 :url: http://yoursite.com
 :preferred_format: markdown
 :routes:
-  :page: /%{title}
-  :post: /%{year}/%{month}/%{day}/%{title}
+  :page: '/:title'
+  :post: '/:year/:month/:day/:title'
 :title: Read-Only Test Blog
 :subtitle: A blogging framework for hackers.
 :author: Your Name

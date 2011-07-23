@@ -18,4 +18,9 @@ class ContentPageTest < ContentBaseTest
     assert_equal 'in page', @page.raw
     assert_equal "in page\n\nin page", @second_page.raw
   end
+
+  def test_route
+    assert_equal '/about', @page.route
+    assert_equal '/contact', @second_page.route
+  end
 end
