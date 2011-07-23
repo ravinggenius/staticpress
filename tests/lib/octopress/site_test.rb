@@ -10,6 +10,6 @@ class SiteTest < TestHelper
 
   def test_find_page_by_route
     about = Octopress::Content::Page.new(@site.directory + 'about.markdown')
-    assert_equal about.route, @site.find_page_by_route('/about').route
+    assert_equal about, @site.find_page_by_route('/about')
   end
 end
