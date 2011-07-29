@@ -21,7 +21,7 @@ module Octopress::Content
     end
 
     def ==(other)
-      route == other.route
+      other.respond_to?(:route) && (route == other.route)
     end
 
     def content

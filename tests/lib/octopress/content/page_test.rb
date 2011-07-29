@@ -12,6 +12,7 @@ class ContentPageTest < ContentBaseTest
   def test__equalsequals
     assert_operator @page, :==, (Octopress::Content::Page.new(READONLY + 'content' + 'about.markdown'))
     refute_operator @page, :==, (Octopress::Content::Page.new(READONLY + 'content' + 'contact.markdown'))
+    refute_operator @page, :==, nil
   end
 
   def test_raw
