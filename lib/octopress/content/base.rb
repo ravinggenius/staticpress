@@ -96,6 +96,10 @@ module Octopress::Content
       self.class.name.split('::').last.downcase
     end
 
+    def self.supported_extensions
+      Tilt.mappings.keys.map &:to_sym
+    end
+
     def self.spider_directory(dir, &block)
       dir.children.map do |child|
         if child.directory?
