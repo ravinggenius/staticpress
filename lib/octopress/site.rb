@@ -29,7 +29,21 @@ module Octopress
     end
 
     def find_page_by_route(route)
-      hashify_pages_by(:route)[route]
+      catch :content do
+        all_content_types.each do |content_type|
+          route_hash = route_regex_stubs.inject({}) do |reply, regex|
+            match = route.match regex
+            if match
+              match.names.each { |match_key| reply[match_key.to_sym] = match[match_key] }
+            end
+            reply
+          end
+
+          content = content_type.find_by_route(route_hash)
+          throw :content, content if content
+        end
+        nil
+      end
     end
 
     def meta
@@ -39,14 +53,19 @@ module Octopress
       end
     end
 
-    def save
-      all_content.each &:save
+    def route_regex_stubs
+      [
+        /(?<date>\d{4}-\d{2}-\d{2})/,
+        /(?<year>\d{4})/,
+        /\d{4}\/(?<month>\d{2})/,
+        /(?<day>\d{2})/,
+        /^\/(?<slug>[0-9a-z\-_\/]*)$/,
+        /(?<title>[0-9a-z\-_]*)$/
+      ]
     end
 
-    protected
-
-    def hashify_pages_by(key)
-      hash_from_array(all_content) { |page| page.send key }
+    def save
+      all_content.each &:save
     end
   end
 end

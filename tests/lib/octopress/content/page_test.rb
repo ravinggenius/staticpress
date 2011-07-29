@@ -24,4 +24,9 @@ class ContentPageTest < ContentBaseTest
     assert_equal '/about', @page.route
     assert_equal '/contact', @second_page.route
   end
+
+  def test_find_by_route
+    assert_equal @page, Octopress::Content::Page.find_by_route(:slug => 'about')
+    assert_nil Octopress::Content::Page.find_by_route({})
+  end
 end

@@ -34,6 +34,23 @@ module Octopress::Content
       destination.open('w') { |f| f.write template }
     end
 
+    def self.find_by_route(route)
+      stub = [
+        route[:year],
+        route[:month],
+        route[:day],
+        route[:title]
+      ].join '-'
+
+      catch :path do
+        supported_extensions.detect do |extension|
+          path = Octopress.blog_path + config.posts_source + "#{stub}.#{extension}"
+          throw :path, new(path) if path.file?
+        end
+        nil
+      end
+    end
+
     def self.template
       now = Time.now.utc
 

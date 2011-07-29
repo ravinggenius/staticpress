@@ -31,6 +31,16 @@ module Octopress::Content
       destination.open('w') { |f| f.write template }
     end
 
+    def self.find_by_route(route)
+      catch :path do
+        supported_extensions.each do |extension|
+          path = Octopress.blog_path + config.source + "#{route[:slug]}.#{extension}"
+          throw :path, new(path) if path.file?
+        end
+        nil
+      end
+    end
+
     def self.template
       <<-TEMPLATE
 ---
