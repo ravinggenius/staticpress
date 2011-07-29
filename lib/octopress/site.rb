@@ -16,9 +16,16 @@ module Octopress
       @theme = Octopress::Theme.new config.theme
     end
 
-    # TODO handle special pages (home, pagination, taxonomy etc)
     def all_content
-      Octopress::Content::Page.all + Octopress::Content::Post.all
+      all_content_types.map(&:all).flatten
+    end
+
+    # TODO handle special pages (home, pagination, taxonomy etc)
+    def all_content_types
+      [
+        Octopress::Content::Page,
+        Octopress::Content::Post
+      ]
     end
 
     def find_page_by_route(route)
