@@ -15,7 +15,7 @@ module Octopress::Content
     end
 
     def self.all
-      if (posts_dir = Octopress.blog_path + config.source + '_posts').directory?
+      if (posts_dir = Octopress.blog_path + config.posts_source).directory?
         posts_dir.children.map { |post| new post }
       else
         []
@@ -28,7 +28,7 @@ module Octopress::Content
       name = title.gsub(/ /, '-').downcase
 
       filename = "#{created_on}-#{name}.#{format}"
-      destination = Octopress.blog_path + config.source + '_posts' + filename
+      destination = Octopress.blog_path + config.posts_source + filename
 
       FileUtils.mkdir_p destination.dirname
       destination.open('w') { |f| f.write template }

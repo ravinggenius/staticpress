@@ -1,5 +1,6 @@
 ---
 :source: content
+:posts_source: content/_posts
 :plugins_path: plugins
 :destination: public
 :code_dir: downloads/code
