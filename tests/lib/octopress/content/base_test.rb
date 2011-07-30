@@ -10,7 +10,9 @@ class ContentBaseTest < TestHelper
   end
 
   def test_content_types
-    assert_includes Octopress::Content::Base.content_types, Octopress::Content::Page
-    assert_includes Octopress::Content::Base.content_types, Octopress::Content::Post
+    content_types = Octopress::Content::Base.content_types
+    assert_equal 2, content_types.length
+    assert_includes content_types, Octopress::Content::Page
+    assert_includes content_types, Octopress::Content::Post
   end
 end
