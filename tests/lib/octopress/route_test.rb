@@ -17,4 +17,9 @@ class RouteTest < TestHelper
     assert_equal @post, @route_post.content
     assert_nil Octopress::Route.new('/i/dont/exist').content
   end
+
+  def test_to_file_path
+    assert_equal (Octopress.blog_path + 'public' + 'about' + 'index.html'), @route_page.to_file_path
+    assert_equal (Octopress.blog_path + 'public' + '2011' + '07' + '20' + 'hello' + 'index.html'), @route_post.to_file_path
+  end
 end

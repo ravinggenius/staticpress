@@ -40,5 +40,9 @@ module Octopress
         /(?<title>[0-9a-z\-_]*)$/
       ]
     end
+
+    def to_path
+      Octopress.blog_path + config.destination + route.sub(/^\//, '') + 'index.html'
+    end
   end
 end
