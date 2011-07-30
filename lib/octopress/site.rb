@@ -1,6 +1,7 @@
 require 'octopress'
 require 'octopress/helpers'
 require 'octopress/metadata'
+require 'octopress/content/base'
 require 'octopress/content/page'
 require 'octopress/content/post'
 require 'octopress/theme'
@@ -17,20 +18,12 @@ module Octopress
     end
 
     def all_content
-      all_content_types.map(&:all).flatten
-    end
-
-    # TODO handle special pages (home, pagination, taxonomy etc)
-    def all_content_types
-      [
-        Octopress::Content::Page,
-        Octopress::Content::Post
-      ]
+      Octopress::Content::Base.content_types.map(&:all).flatten
     end
 
     def find_page_by_route(route)
       catch :content do
-        all_content_types.each do |content_type|
+        Octopress::Content::Base.content_types.each do |content_type|
           route_hash = route_regex_stubs.inject({}) do |reply, regex|
             match = route.match regex
             if match

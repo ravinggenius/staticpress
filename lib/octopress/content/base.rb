@@ -96,6 +96,14 @@ module Octopress::Content
       self.class.name.split('::').last.downcase
     end
 
+    def self.content_types
+      @content_types || []
+    end
+
+    def self.inherited(klass)
+      (@content_types ||= [])  << klass
+    end
+
     def self.supported_extensions
       Tilt.mappings.keys.map &:to_sym
     end
