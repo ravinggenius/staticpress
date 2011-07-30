@@ -1,9 +1,9 @@
 require 'octopress'
-require 'octopress/helpers'
-require 'octopress/metadata'
 require 'octopress/content/base'
 require 'octopress/content/page'
 require 'octopress/content/post'
+require 'octopress/helpers'
+require 'octopress/metadata'
 require 'octopress/theme'
 
 module Octopress
