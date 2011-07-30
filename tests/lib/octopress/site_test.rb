@@ -1,5 +1,7 @@
 require_relative '../../test_helper'
 
+require 'octopress/content/page'
+require 'octopress/content/post'
 require 'octopress/site'
 
 class SiteTest < TestHelper
