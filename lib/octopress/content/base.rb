@@ -50,11 +50,11 @@ module Octopress::Content
       template = Tilt[path.to_s].new { raw }
 
       if l = layout
-        l.render template_locals do
-          template.render template_locals
+        l.render Object.new, template_locals do
+          template.render Object.new, template_locals
         end
       else
-        template.render template_locals
+        template.render Object.new, template_locals
       end
     end
 
