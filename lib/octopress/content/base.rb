@@ -87,7 +87,7 @@ module Octopress::Content
         meta.title
       else
         route_title.split('-').map do |word|
-          word.upcase
+          word.capitalize
         end.join ' '
       end
     end
