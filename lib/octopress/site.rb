@@ -1,3 +1,5 @@
+require 'fileutils'
+
 require 'octopress'
 require 'octopress/content/base'
 require 'octopress/content/page'
@@ -35,6 +37,7 @@ module Octopress
     end
 
     def save
+      FileUtils.rm_r(Octopress.blog_path + config.destination)
       all_content.each &:save
     end
   end
