@@ -22,8 +22,9 @@ module Octopress
       Octopress::Content::Base.content_types.map(&:all).flatten
     end
 
-    def find_page_by_route(route)
-      Octopress::Route.new(route).content
+    def find_content_by_url_path(url_path)
+      route = Octopress::Route.from_url_path url_path
+      route.content if route
     end
 
     def meta

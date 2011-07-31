@@ -1,17 +1,26 @@
 require 'octopress'
 require 'octopress/content/base'
+require 'octopress/content/physical_content'
 
 module Octopress::Content
   class Post < Base
-    attr_reader :created_on
+    include Octopress::Content::PhysicalContent
 
-    def initialize(path)
-      super
+    def created_on
+      filename_parts = template_path.basename.to_s.match /(?<created_on>\d{4}-\d{2}-\d{2})\./
+      Date.parse filename_parts[:created_on]
+    end
 
-      parts = path.basename.to_s.match /(?<created_on>\d{4}-\d{2}-\d{2})-(?<route_title>.*)\./
+    def template_path
+      params = route.params
+      stub = [
+        params[:year],
+        params[:month],
+        params[:day],
+        params[:title]
+      ].join '-'
 
-      @created_on = Date.parse parts[:created_on]
-      @route_title = parts[:route_title]
+      Octopress.blog_path + config.posts_source + "#{stub}.#{template_type}"
     end
 
     def self.all
@@ -35,18 +44,20 @@ module Octopress::Content
     end
 
     def self.find_by_route(route)
+      params = route.params
       stub = [
-        route[:year],
-        route[:month],
-        route[:day],
-        route[:title]
+        params[:year],
+        params[:month],
+        params[:day],
+        params[:title]
       ].join '-'
 
-      catch :path do
+      catch :post do
         supported_extensions.detect do |extension|
           path = Octopress.blog_path + config.posts_source + "#{stub}.#{extension}"
-          throw :path, new(path) if path.file?
+          throw :post, new(route, extension) if path.file?
         end
+
         nil
       end
     end

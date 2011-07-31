@@ -33,7 +33,4 @@ class HelpersTest < TestHelper
 
     assert_equal expected, actual
   end
-
-  def test_route_options
-  end
 end

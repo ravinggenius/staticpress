@@ -9,10 +9,10 @@ module Octopress
     end
 
     def call(env)
-      page = @site.find_page_by_route env['REQUEST_PATH']
+      content = @site.find_content_by_url_path env['REQUEST_PATH']
 
-      if page
-        [ 200, { 'Content-Type' => 'text/html' }, [ page.render ] ]
+      if content
+        [ 200, { 'Content-Type' => 'text/html' }, [ content.render ] ]
       else
         [ 404, {}, [] ]
       end

@@ -11,27 +11,22 @@ module Octopress::Content
     extend Octopress::Helpers
     include Octopress::Helpers
 
-    attr_reader :path, :route_title, :theme
+    attr_reader :route, :template_type, :theme
 
-    def initialize(path)
-      parts = (@path = path).basename.to_s.match /(?<route_title>.*)\./
-
-      @route_title = parts[:route_title]
+    def initialize(route, template_type)
+      @route = route
+      @template_type = template_type
       @theme = Octopress::Theme.new config.theme
     end
 
     def ==(other)
-      other.respond_to?(:route) && (route == other.route)
+      other.respond_to?(:content) && (content == other.content)
     end
 
-    def content
-      return @content if @content
+    def inspect
+      parts = [ "url_path=#{route.url_path}" ]
 
-      regex_frontmatter = /^-{3}${1}(?<frontmatter>.*)^-{3}${1}/m
-      regex_text = /(?<text>.*)/m
-      regex = /#{regex_frontmatter}#{regex_text}/
-
-      @content = (c = path.read).match(regex_frontmatter) ? c.match(regex) : c.match(regex_text)
+      "#<#{self.class} #{parts.join ', '}>"
     end
 
     def layout
@@ -46,8 +41,12 @@ module Octopress::Content
       content[:text].strip
     end
 
+    def render_path
+      route.file_path
+    end
+
     def render
-      template = Tilt[path.to_s].new { raw }
+      template = Tilt[render_path.to_s].new { raw }
 
       if l = layout
         l.render Object.new, template_locals do
@@ -56,16 +55,6 @@ module Octopress::Content
       else
         template.render Object.new, template_locals
       end
-    end
-
-    def route
-      route_options(route_title).inject(route_pattern) do |reply, (key, value)|
-        reply.gsub /:#{key}/, value.to_s
-      end
-    end
-
-    def route_pattern
-      config.routes[type]
     end
 
     def save
@@ -86,7 +75,7 @@ module Octopress::Content
       if meta.title
         meta.title
       else
-        route_title.split('-').map do |word|
+        route.url_path.split(/\/-/).map do |word|
           word.capitalize
         end.join ' '
       end

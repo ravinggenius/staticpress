@@ -1,8 +1,15 @@
 require 'octopress'
 require 'octopress/content/base'
+require 'octopress/content/physical_content'
 
 module Octopress::Content
   class Page < Base
+    include Octopress::Content::PhysicalContent
+
+    def template_path
+      Octopress.blog_path + config.source + "#{route.params[:slug]}.#{template_type}"
+    end
+
     def self.all
       all_but_posts = if (posts_dir = Octopress.blog_path + config.posts_source).directory?
         (Octopress.blog_path + config.source).children - [ posts_dir ]
@@ -32,11 +39,12 @@ module Octopress::Content
     end
 
     def self.find_by_route(route)
-      catch :path do
+      catch :page do
         supported_extensions.each do |extension|
-          path = Octopress.blog_path + config.source + "#{route[:slug]}.#{extension}"
-          throw :path, new(path) if path.file?
+          path = Octopress.blog_path + config.source + "#{route.params[:slug]}.#{extension}"
+          throw :page, new(route, extension) if path.file?
         end
+
         nil
       end
     end
