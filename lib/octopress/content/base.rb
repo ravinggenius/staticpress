@@ -41,10 +41,6 @@ module Octopress::Content
       content[:text].strip
     end
 
-    def render_path
-      route.file_path
-    end
-
     def render
       template = Tilt[template_type].new { raw }
 
