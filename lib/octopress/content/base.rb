@@ -46,7 +46,7 @@ module Octopress::Content
     end
 
     def render
-      template = Tilt[render_path.to_s].new { raw }
+      template = Tilt[template_type].new { raw }
 
       if l = layout
         l.render Object.new, template_locals do
