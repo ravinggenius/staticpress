@@ -58,7 +58,7 @@ module Octopress::Content
     end
 
     def save
-      destination = Octopress.blog_path + config.destination + route.sub(/^\//, '')
+      destination = route.file_path
       FileUtils.mkdir_p destination.dirname
       destination.open('w') { |f| f.write render }
     end
