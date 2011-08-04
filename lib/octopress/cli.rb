@@ -1,6 +1,7 @@
 require 'fileutils'
 require 'pathname'
 require 'rack'
+require 'thor'
 
 require 'octopress'
 require 'octopress/error'
@@ -10,55 +11,28 @@ require 'octopress/site'
 require 'octopress/version'
 
 module Octopress
-  class CLI
+  class CLI < Thor
+    include Thor::Actions
     include Octopress::Helpers
 
-    # TODO allow for more detailed help for each command
-    def help
-      puts <<-MESSAGE
-USAGE: octopress <command> <required-argument> [option-argument]
+    default_task :help
 
-COMMANDS:
+    desc 'help [task]', 'Describe available tasks or one specific task'
+    def help(*args)
+      general_usage = <<-USAGE
+Usage:
+  octopress <task> <required-argument> [option-argument]
 
-help
-  show this message
-
-new <path-to-blog> [name-of-blog]
-  creates a new blog in <path-to-blog>. <path-to-blog> will be created if it
-  does not exist, and files will be overwritten if they do exist
-
-create <title>
-  create a new blog post
-
-create_page <title> [path-in-content]
-  create a new page in path-in-content
-
-fork_plugin <plugin-name> [new-plugin-name]
-  copies <plugin-name> into <path-to-blog>/plugins/. if [new-plugin-name] is
-  given, rename plugin
-
-fork_theme [theme-name]
-  copies [theme-name]'s files into <path-to-blog>/themes/[theme-name] for
-  customizations. if [theme-name] is blank, copies the currently configured
-  theme
-
-build
-  prepare blog for deployment
-
-serve
-  turn on local server for development
-
-push
-  push blog to configured server
-
-deploy
-  build blog and push in one step
-
-version
-  display version
-      MESSAGE
+      USAGE
+      puts general_usage if args.empty?
+      super
     end
 
+    desc 'new <path-to-blog> [name-of-blog]', 'creates a new blog in <path-to-blog>'
+    long_desc <<-DESCRIPTION
+      <path-to-blog> will be created if it does not exist, and
+      files will be overwritten if they do exist
+    DESCRIPTION
     def new(destination, name = nil)
       Octopress.blog_path = destination
 
@@ -74,14 +48,20 @@ version
       config.save
     end
 
+    desc 'create <title>', 'create a new blog post'
     def create(title)
       Octopress::Content::Post.create config.preferred_format, title
     end
 
+    desc 'create_page <title> [path-in-content]', 'create a new page in path-in-content'
     def create_page(title, path = nil)
       Octopress::Content::Page.create config.preferred_format, title, path
     end
 
+    desc 'fork_plugin <plugin-name> [new-plugin-name]', 'copies <plugin-name> into <path-to-blog>/plugins/'
+    long_desc <<-DESCRIPTION
+      copies <plugin-name> into <path-to-blog>/plugins/. if [new-plugin-name] is given, rename plugin
+    DESCRIPTION
     def fork_plugin(name, new_name = nil)
       source = Octopress::Plugin.find name
 
@@ -92,6 +72,7 @@ version
       FileUtils.cp source, destination
     end
 
+    desc 'fork_theme [theme-name]', 'copies [theme-name]\'s files into <path-to-blog>/themes/[theme-name] for customizations. if [theme-name] is blank, copies the currently configured theme'
     def fork_theme(name = nil)
       theme_name = name ? name : config.theme
       source = Octopress.root + 'themes' + theme_name
@@ -101,37 +82,31 @@ version
       FileUtils.cp_r source.children, destination
     end
 
+    desc 'build', 'prepare blog for deployment'
     def build
       Octopress::Plugin.activate_enabled
       Octopress::Site.new.save
     end
 
+    desc 'serve', 'turn on local server for development'
     def serve
       Octopress::Plugin.activate_enabled
       Rack::Server.new(:config => (Octopress.blog_path + 'config.ru').to_s, :Port => config.port).start
     end
 
+    desc 'push', 'push blog to configured server'
     def push
     end
 
+    desc 'deploy', 'build blog and push in one step'
     def deploy
       build
       push
     end
 
+    desc 'version', 'display version'
     def version
       puts "Octopress #{Octopress::Version}"
-    end
-
-    def self.run
-      cli = new
-      command = (ARGV.first || :help).to_sym
-
-      if cli.respond_to? command
-        cli.send command, *ARGV[1..-1]
-      else
-        cli.help
-      end
     end
   end
 end

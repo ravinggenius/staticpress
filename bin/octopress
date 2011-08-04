@@ -3,4 +3,4 @@
 require 'octopress/booter'
 require 'octopress/cli'
 
-Octopress::CLI.run
+Octopress::CLI.start
