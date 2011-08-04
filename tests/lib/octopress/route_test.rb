@@ -6,7 +6,7 @@ class RouteTest < TestHelper
   def setup
     Octopress.blog_path = READONLY
 
-    @route_page = Octopress::Route.new :url_path => '/about', :content_type => Octopress::Content::Page, :slug => 'about', :title => 'about'
+    @route_page = Octopress::Route.new :url_path => '/about', :content_type => Octopress::Content::Page, :slug => 'about'
     @route_post = Octopress::Route.new :url_path => '/2011/07/20/hello', :content_type => Octopress::Content::Post, :year => '2011', :month => '07', :day => '20', :title => 'hello'
     @route_fake = Octopress::Route.new :url_path => '/i/dont/exist'
 
@@ -15,7 +15,7 @@ class RouteTest < TestHelper
   end
 
   def test__equalsequals
-    assert_operator @route_page, :==, Octopress::Route.new(:url_path => '/about', :content_type => Octopress::Content::Page, :slug => 'about', :title => 'about')
+    assert_operator @route_page, :==, Octopress::Route.new(:url_path => '/about', :content_type => Octopress::Content::Page, :slug => 'about')
     refute_operator @route_page, :==, @route_post
     refute_operator @route_page, :==, @route_fake
   end
@@ -27,13 +27,13 @@ class RouteTest < TestHelper
   end
 
   def test_inspect
-    assert_equal '#<Octopress::Route url_path=/about, content_type=Octopress::Content::Page, params={:slug=>"about", :title=>"about"}>', @route_page.inspect
+    assert_equal '#<Octopress::Route url_path=/about, content_type=Octopress::Content::Page, params={:slug=>"about"}>', @route_page.inspect
     assert_equal '#<Octopress::Route url_path=/2011/07/20/hello, content_type=Octopress::Content::Post, params={:day=>"20", :month=>"07", :title=>"hello", :year=>"2011"}>', @route_post.inspect
     assert_equal '#<Octopress::Route url_path=/i/dont/exist, params={}>', @route_fake.inspect
   end
 
   def test_params
-    assert_equal({ :url_path => '/about', :content_type => Octopress::Content::Page, :slug => 'about', :title => 'about' }, @route_page.params)
+    assert_equal({ :url_path => '/about', :content_type => Octopress::Content::Page, :slug => 'about' }, @route_page.params)
     assert_equal({ :url_path => '/2011/07/20/hello', :content_type => Octopress::Content::Post, :year => '2011', :month => '07', :day => '20', :title => 'hello' }, @route_post.params)
     assert_equal({ :url_path => '/i/dont/exist' }, @route_fake.params)
   end
@@ -54,5 +54,42 @@ class RouteTest < TestHelper
     assert_equal Octopress::Route.from_url_path('/about'), @route_page
     assert_equal Octopress::Route.from_url_path('/2011/07/20/hello'), @route_post, ':slug should not appear in Post route\'s params'
     assert_equal Octopress::Route.from_url_path('/i/dont/exist'), @route_fake
+  end
+
+  def test_regex_for_pattern
+    pattern_1 = '/:slug'
+    pattern_2 = '/static_text/:slug'
+    pattern_3 = '/:year/:month/:day/:title'
+    pattern_4 = '/blog/:year/:month/:day/:title'
+
+    assert_match Octopress::Route.regex_for_pattern(pattern_1), '/about'
+    refute_match Octopress::Route.regex_for_pattern(pattern_2), '/about'
+    refute_match Octopress::Route.regex_for_pattern(pattern_3), '/about'
+    refute_match Octopress::Route.regex_for_pattern(pattern_4), '/about'
+
+    assert_match Octopress::Route.regex_for_pattern(pattern_1), '/about/us'
+    refute_match Octopress::Route.regex_for_pattern(pattern_2), '/about/us'
+    refute_match Octopress::Route.regex_for_pattern(pattern_3), '/about/us'
+    refute_match Octopress::Route.regex_for_pattern(pattern_4), '/about/us'
+
+    assert_match Octopress::Route.regex_for_pattern(pattern_1), '/static_text/about'
+    assert_match Octopress::Route.regex_for_pattern(pattern_2), '/static_text/about'
+    refute_match Octopress::Route.regex_for_pattern(pattern_3), '/static_text/about'
+    refute_match Octopress::Route.regex_for_pattern(pattern_4), '/static_text/about'
+
+    assert_match Octopress::Route.regex_for_pattern(pattern_1), '/static_text/about/us'
+    assert_match Octopress::Route.regex_for_pattern(pattern_2), '/static_text/about/us'
+    refute_match Octopress::Route.regex_for_pattern(pattern_3), '/static_text/about/us'
+    refute_match Octopress::Route.regex_for_pattern(pattern_4), '/static_text/about/us'
+
+    assert_match Octopress::Route.regex_for_pattern(pattern_1), '/2011/07/20/hello-world'
+    refute_match Octopress::Route.regex_for_pattern(pattern_2), '/2011/07/20/hello-world'
+    assert_match Octopress::Route.regex_for_pattern(pattern_3), '/2011/07/20/hello-world'
+    refute_match Octopress::Route.regex_for_pattern(pattern_4), '/2011/07/20/hello-world'
+
+    assert_match Octopress::Route.regex_for_pattern(pattern_1), '/blog/2011/07/20/hello-world'
+    refute_match Octopress::Route.regex_for_pattern(pattern_2), '/blog/2011/07/20/hello-world'
+    refute_match Octopress::Route.regex_for_pattern(pattern_3), '/blog/2011/07/20/hello-world'
+    assert_match Octopress::Route.regex_for_pattern(pattern_4), '/blog/2011/07/20/hello-world'
   end
 end
