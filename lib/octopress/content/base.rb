@@ -89,10 +89,6 @@ module Octopress::Content
       (@content_types ||= [])  << klass
     end
 
-    def self.supported_extensions
-      Tilt.mappings.keys.map &:to_sym
-    end
-
     def self.spider_directory(dir, &block)
       dir.children.map do |child|
         if child.directory?
@@ -101,6 +97,10 @@ module Octopress::Content
           block.call child
         end
       end
+    end
+
+    def self.supported_extensions
+      Tilt.mappings.keys.map &:to_sym
     end
   end
 end
