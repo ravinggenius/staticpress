@@ -13,8 +13,12 @@ module Octopress::Content
       @content = c.match(regex_frontmatter) ? c.match(regex) : c.match(regex_text)
     end
 
+    def exist?
+      template_path.file?
+    end
+
     def template_path_content
-      template_path.file? ? template_path.read : ''
+      exist? ? template_path.read : ''
     end
   end
 end

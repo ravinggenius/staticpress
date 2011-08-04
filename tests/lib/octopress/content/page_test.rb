@@ -20,6 +20,11 @@ class ContentPageTest < ContentBaseTest
     refute_operator @page, :==, nil
   end
 
+  def test_exist?
+    assert @page.exist?, '@page does not exist'
+    assert @second_page.exist?, '@second_page does not exist'
+  end
+
   def test_find_by_route
     assert_equal @page, Octopress::Content::Page.find_by_route(@page_route)
     assert_nil Octopress::Content::Page.find_by_route(Octopress::Route.from_url_path('/i/dont/exist'))
