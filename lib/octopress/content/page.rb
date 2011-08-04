@@ -1,6 +1,7 @@
 require 'octopress'
 require 'octopress/content/base'
 require 'octopress/content/physical_content'
+require 'octopress/route'
 
 module Octopress::Content
   class Page < Base
@@ -20,10 +21,10 @@ module Octopress::Content
       all_but_posts.map do |child|
         if child.directory?
           spider_directory child do |page|
-            new page
+            find_by_path page
           end
         else
-          new child
+          find_by_path child
         end
       end.flatten
     end
@@ -36,6 +37,17 @@ module Octopress::Content
 
       FileUtils.mkdir_p destination.dirname
       destination.open('w') { |f| f.write template }
+    end
+
+    def self.find_by_path(path)
+      # FIXME this feels like cheating
+      url_path = path.to_s.sub((Octopress.blog_path + config.source).to_s, '').sub("#{path.extname}", '')
+      params = {
+        :url_path => url_path,
+        :content_type => self,
+        :slug => url_path.sub(/^\//, '')
+      }
+      new Octopress::Route.new(params), path.extname.sub(/^\./, '').to_sym
     end
 
     def self.find_by_route(route)
