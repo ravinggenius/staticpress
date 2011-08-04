@@ -10,7 +10,7 @@
 :url: http://yoursite.com
 :preferred_format: markdown
 :routes:
-  :page: '/:title'
+  :page: '/:slug'
   :post: '/:year/:month/:day/:title'
 :title: Read-Only Test Blog
 :subtitle: A blogging framework for hackers.
