@@ -30,8 +30,8 @@ Usage:
 
     desc 'new <path-to-blog> [name-of-blog]', 'Creates a new blog in <path-to-blog>'
     long_desc <<-DESCRIPTION
-<path-to-blog> will be created if it does not exist, and
-files will be overwritten if they do exist
+Creates a new blog in <path-to-blog>. <path-to-blog> will be created if it does
+not exist, and files will be overwritten if they do exist
     DESCRIPTION
     def new(destination, name = nil)
       Octopress.blog_path = destination
@@ -60,7 +60,9 @@ files will be overwritten if they do exist
 
     desc 'fork_plugin <plugin-name> [new-plugin-name]', 'Copies <plugin-name> into <path-to-blog>/plugins/'
     long_desc <<-DESCRIPTION
-Copies <plugin-name> into <path-to-blog>/plugins/. If [new-plugin-name] is given, rename plugin
+Copies <plugin-name> into <path-to-blog>/plugins/. If [new-plugin-name] is
+given, rename plugin in the destination. Be sure to activate the plugin
+in config.yml
     DESCRIPTION
     def fork_plugin(name, new_name = nil)
       source = Octopress::Plugin.find name
@@ -72,7 +74,11 @@ Copies <plugin-name> into <path-to-blog>/plugins/. If [new-plugin-name] is given
       FileUtils.cp source, destination
     end
 
-    desc 'fork_theme [theme-name]', 'Copies [theme-name]\'s files into <path-to-blog>/themes/[theme-name] for customizations. If [theme-name] is blank, copies the currently configured theme'
+    desc 'fork_theme [theme-name]', 'Copies [theme-name]\'s files into <path-to-blog>/themes/[theme-name]'
+    long_desc <<-DESCRIPTION
+Copies [theme-name]'s files into <path-to-blog>/themes/[theme-name] for
+customizations. If [theme-name] is blank, copies the currently configured theme
+    DESCRIPTION
     def fork_theme(name = nil)
       theme_name = name ? name : config.theme
       source = Octopress.root + 'themes' + theme_name
