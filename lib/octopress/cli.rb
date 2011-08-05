@@ -30,8 +30,8 @@ Usage:
 
     desc 'new <path-to-blog> [name-of-blog]', 'creates a new blog in <path-to-blog>'
     long_desc <<-DESCRIPTION
-      <path-to-blog> will be created if it does not exist, and
-      files will be overwritten if they do exist
+<path-to-blog> will be created if it does not exist, and
+files will be overwritten if they do exist
     DESCRIPTION
     def new(destination, name = nil)
       Octopress.blog_path = destination
@@ -60,7 +60,7 @@ Usage:
 
     desc 'fork_plugin <plugin-name> [new-plugin-name]', 'copies <plugin-name> into <path-to-blog>/plugins/'
     long_desc <<-DESCRIPTION
-      copies <plugin-name> into <path-to-blog>/plugins/. if [new-plugin-name] is given, rename plugin
+copies <plugin-name> into <path-to-blog>/plugins/. if [new-plugin-name] is given, rename plugin
     DESCRIPTION
     def fork_plugin(name, new_name = nil)
       source = Octopress::Plugin.find name
