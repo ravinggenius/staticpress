@@ -28,7 +28,7 @@ Usage:
       super
     end
 
-    desc 'new <path-to-blog> [name-of-blog]', 'creates a new blog in <path-to-blog>'
+    desc 'new <path-to-blog> [name-of-blog]', 'Creates a new blog in <path-to-blog>'
     long_desc <<-DESCRIPTION
 <path-to-blog> will be created if it does not exist, and
 files will be overwritten if they do exist
@@ -48,19 +48,19 @@ files will be overwritten if they do exist
       config.save
     end
 
-    desc 'create <title>', 'create a new blog post'
+    desc 'create <title>', 'Create a new blog post'
     def create(title)
       Octopress::Content::Post.create config.preferred_format, title
     end
 
-    desc 'create_page <title> [path-in-content]', 'create a new page in path-in-content'
+    desc 'create_page <title> [path-in-content]', 'Create a new page in path-in-content'
     def create_page(title, path = nil)
       Octopress::Content::Page.create config.preferred_format, title, path
     end
 
-    desc 'fork_plugin <plugin-name> [new-plugin-name]', 'copies <plugin-name> into <path-to-blog>/plugins/'
+    desc 'fork_plugin <plugin-name> [new-plugin-name]', 'Copies <plugin-name> into <path-to-blog>/plugins/'
     long_desc <<-DESCRIPTION
-copies <plugin-name> into <path-to-blog>/plugins/. if [new-plugin-name] is given, rename plugin
+Copies <plugin-name> into <path-to-blog>/plugins/. If [new-plugin-name] is given, rename plugin
     DESCRIPTION
     def fork_plugin(name, new_name = nil)
       source = Octopress::Plugin.find name
@@ -72,7 +72,7 @@ copies <plugin-name> into <path-to-blog>/plugins/. if [new-plugin-name] is given
       FileUtils.cp source, destination
     end
 
-    desc 'fork_theme [theme-name]', 'copies [theme-name]\'s files into <path-to-blog>/themes/[theme-name] for customizations. if [theme-name] is blank, copies the currently configured theme'
+    desc 'fork_theme [theme-name]', 'Copies [theme-name]\'s files into <path-to-blog>/themes/[theme-name] for customizations. If [theme-name] is blank, copies the currently configured theme'
     def fork_theme(name = nil)
       theme_name = name ? name : config.theme
       source = Octopress.root + 'themes' + theme_name
@@ -82,29 +82,29 @@ copies <plugin-name> into <path-to-blog>/plugins/. if [new-plugin-name] is given
       FileUtils.cp_r source.children, destination
     end
 
-    desc 'build', 'prepare blog for deployment'
+    desc 'build', 'Prepare blog for deployment'
     def build
       Octopress::Plugin.activate_enabled
       Octopress::Site.new.save
     end
 
-    desc 'serve', 'turn on local server for development'
+    desc 'serve', 'Turn on local server for development'
     def serve
       Octopress::Plugin.activate_enabled
       Rack::Server.new(:config => (Octopress.blog_path + 'config.ru').to_s, :Port => config.port).start
     end
 
-    desc 'push', 'push blog to configured server'
+    desc 'push', 'Push blog to configured server'
     def push
     end
 
-    desc 'deploy', 'build blog and push in one step'
+    desc 'deploy', 'Build blog and push in one step'
     def deploy
       build
       push
     end
 
-    desc 'version', 'display version'
+    desc 'version', 'Display version'
     def version
       puts "Octopress #{Octopress::Version}"
     end
