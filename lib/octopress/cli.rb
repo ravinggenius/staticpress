@@ -53,7 +53,7 @@ not exist, and files will be overwritten if they do exist
       Octopress::Content::Post.create config.preferred_format, title
     end
 
-    desc 'create_page <title> [path-in-content]', 'Create a new page in path-in-content'
+    desc 'create_page <title> [path-in-content]', 'Create a new page in [path-in-content]'
     def create_page(title, path = nil)
       Octopress::Content::Page.create config.preferred_format, title, path
     end
