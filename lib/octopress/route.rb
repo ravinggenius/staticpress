@@ -7,6 +7,15 @@ module Octopress
     extend Octopress::Helpers
     include Octopress::Helpers
 
+    REGEX_STUBS = {
+      :date => /(?<date>\d{4}-\d{2}-\d{2})/,
+      :year => /(?<year>\d{4})/,
+      :month => /(?<month>\d{2})/,
+      :day => /(?<day>\d{2})/,
+      :slug => /(?<slug>[0-9a-z\-_\/]*)$/,
+      :title => /(?<title>[0-9a-z\-_]*)/
+    }
+
     attr_reader :params, :url_path
 
     def initialize(params)
@@ -82,22 +91,11 @@ module Octopress
     end
 
     def self.regex_for_pattern(pattern)
-      regex = regex_stubs.inject('^' + pattern) do |snip, (key, value)|
+      regex = REGEX_STUBS.inject('^' + pattern) do |snip, (key, value)|
         snip.gsub /:#{key}/, value.source
       end
 
       Regexp.new regex
-    end
-
-    def self.regex_stubs
-      {
-        :date => /(?<date>\d{4}-\d{2}-\d{2})/,
-        :year => /(?<year>\d{4})/,
-        :month => /(?<month>\d{2})/,
-        :day => /(?<day>\d{2})/,
-        :slug => /(?<slug>[0-9a-z\-_\/]*)$/,
-        :title => /(?<title>[0-9a-z\-_]*)/
-      }
     end
   end
 end
