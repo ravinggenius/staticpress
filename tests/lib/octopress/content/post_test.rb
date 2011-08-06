@@ -33,4 +33,14 @@ class ContentPostTest < ContentBaseTest
   def test_inspect
     assert_equal '#<Octopress::Content::Post url_path=/2011/07/20/hello>', @post.inspect
   end
+
+  def test_raw
+    assert_equal 'in post', @post.raw
+    assert_equal '', @second_post.raw
+  end
+
+  def test_route
+    assert_equal '/2011/07/20/hello', @post.route.url_path
+    assert_equal '/2011/07/20/goodbye', @second_post.route.url_path
+  end
 end
