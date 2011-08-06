@@ -6,7 +6,7 @@ require 'octopress/content/post'
 
 class ContentBaseTest < TestHelper
   def setup
-    Octopress.blog_path = READONLY
+    Octopress.blog_path = TEST_BLOG
   end
 
   def test_content_types

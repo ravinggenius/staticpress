@@ -9,15 +9,15 @@ require 'octopress/helpers'
 class CLITest < TestHelper
   include Octopress::Helpers
 
-  TEST_BLOG = SAMPLE_SITES + 'blog'
+  TEMP_BLOG = SAMPLE_SITES + 'temp_blog'
 
   def setup
-    Octopress.blog_path = TEST_BLOG
+    Octopress.blog_path = TEMP_BLOG
     @cli = Octopress::CLI.new
   end
 
   def teardown
-    FileUtils.rm_rf TEST_BLOG if TEST_BLOG.directory?
+    FileUtils.rm_rf TEMP_BLOG if TEMP_BLOG.directory?
     super
   end
 
@@ -25,14 +25,14 @@ class CLITest < TestHelper
   end
 
   def test_new
-    refute TEST_BLOG.directory?
-    @cli.new TEST_BLOG
-    assert_equal 5, TEST_BLOG.children.count
-    assert_equal 'Blog', config.title
+    refute TEMP_BLOG.directory?
+    @cli.new TEMP_BLOG
+    assert_equal 5, TEMP_BLOG.children.count
+    assert_equal 'Temp Blog', config.title
   end
 
   def test_new_with_custom_title
-    @cli.new TEST_BLOG, 'This is my blog'
+    @cli.new TEMP_BLOG, 'This is my blog'
     assert_equal 'This is my blog', config.title
   end
 

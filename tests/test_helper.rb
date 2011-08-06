@@ -6,7 +6,7 @@ require 'octopress'
 
 class TestHelper < MiniTest::Unit::TestCase
   SAMPLE_SITES = (Octopress.root + '..' + 'tests' + 'sample_sites').expand_path
-  READONLY = SAMPLE_SITES + 'readonly'
+  TEST_BLOG = SAMPLE_SITES + 'test_blog'
 
   def teardown
     Octopress.blog_path = '.'

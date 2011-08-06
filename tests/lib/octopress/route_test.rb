@@ -4,7 +4,7 @@ require 'octopress/route'
 
 class RouteTest < TestHelper
   def setup
-    Octopress.blog_path = READONLY
+    Octopress.blog_path = TEST_BLOG
 
     @route_page = Octopress::Route.new :url_path => '/about', :content_type => Octopress::Content::Page, :slug => 'about'
     @route_post = Octopress::Route.new :url_path => '/2011/07/20/hello', :content_type => Octopress::Content::Post, :year => '2011', :month => '07', :day => '20', :title => 'hello'

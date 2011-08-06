@@ -12,7 +12,7 @@
 :routes:
   :page: '/:slug'
   :post: '/:year/:month/:day/:title'
-:title: Read-Only Test Blog
+:title: Test Blog
 :subtitle: A blogging framework for hackers.
 :author: Your Name
 :subscribe_rss: /atom.xml

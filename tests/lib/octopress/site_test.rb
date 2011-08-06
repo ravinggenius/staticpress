@@ -7,7 +7,7 @@ require 'octopress/site'
 
 class SiteTest < TestHelper
   def setup
-    Octopress.blog_path = READONLY
+    Octopress.blog_path = TEST_BLOG
     @site = Octopress::Site.new
 
     @page_route = Octopress::Route.from_url_path '/about'
