@@ -10,5 +10,7 @@ class TestHelper < MiniTest::Unit::TestCase
 
   def teardown
     Octopress.blog_path = '.'
+    test_blog_public = TEST_BLOG + 'public'
+    FileUtils.rm_rf test_blog_public if test_blog_public.directory?
   end
 end
