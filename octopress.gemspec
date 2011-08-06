@@ -22,7 +22,7 @@ Gem::Specification.new do |s|
     '/home/thomas/Code/___/certificates/gem-public_cert.pem'
   ]
 
-  s.add_dependency 'jekyll'
+  s.add_dependency 'minitest'
   s.add_dependency 'rack'
   s.add_dependency 'thor'
   s.add_dependency 'tilt'
