@@ -13,7 +13,9 @@ module Octopress
       :month => /(?<month>\d{2})/,
       :day => /(?<day>\d{2})/,
       :slug => /(?<slug>[0-9a-z\-_\/]*)$/,
-      :title => /(?<title>[0-9a-z\-_]*)/
+      :title => /(?<title>[0-9a-z\-_]*)/,
+      :name => /(?<name>[0-9a-z\-_]*)/,
+      :number => /(?<number>\d+)/
     }
 
     attr_reader :params, :url_path
