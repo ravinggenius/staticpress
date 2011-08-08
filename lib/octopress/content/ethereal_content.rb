@@ -4,6 +4,7 @@ require 'octopress/content/base'
 module Octopress::Content
   class EtherealContent < Base
     def exist?
+      # FIXME determine if content really exist
       true
     end
 
