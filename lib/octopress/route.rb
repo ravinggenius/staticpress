@@ -79,7 +79,7 @@ module Octopress
 
     def self.from_url_path(url_path)
       catch :route do
-        Octopress::Content::Base.content_types.each do |content_type|
+        Octopress::Site.content_types.each do |content_type|
           if match = regex_for_pattern(config.routes[content_type.type]).match(url_path)
             params = { :content_type => content_type, :url_path => url_path }
             match.names.each { |match_key| params[match_key.to_sym] = match[match_key] }

@@ -24,14 +24,7 @@ module Octopress
     end
 
     def all_content
-      [
-        Octopress::Content::Index,
-        Octopress::Content::Pagination,
-        Octopress::Content::Category,
-        Octopress::Content::Tag,
-        Octopress::Content::Page,
-        Octopress::Content::Post
-      ].map(&:all).flatten
+      self.class.content_types.map(&:all).flatten
     end
 
     def find_content_by_url_path(url_path)
@@ -49,6 +42,17 @@ module Octopress
     def save
       FileUtils.rm_r(Octopress.blog_path + config.destination)
       all_content.each &:save
+    end
+
+    def self.content_types
+      [
+        Octopress::Content::Index,
+        Octopress::Content::Pagination,
+        Octopress::Content::Category,
+        Octopress::Content::Tag,
+        Octopress::Content::Page,
+        Octopress::Content::Post
+      ]
     end
   end
 end
