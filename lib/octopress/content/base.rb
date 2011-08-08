@@ -77,14 +77,6 @@ module Octopress::Content
       end
     end
 
-    def self.content_types
-      @content_types || []
-    end
-
-    def self.inherited(klass)
-      (@content_types ||= [])  << klass
-    end
-
     def self.spider_directory(dir, &block)
       dir.children.map do |child|
         if child.directory?

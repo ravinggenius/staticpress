@@ -1,7 +1,10 @@
 require 'fileutils'
 
 require 'octopress'
-require 'octopress/content/base'
+require 'octopress/content/index'
+require 'octopress/content/pagination'
+require 'octopress/content/category'
+require 'octopress/content/tag'
 require 'octopress/content/page'
 require 'octopress/content/post'
 require 'octopress/helpers'
@@ -21,7 +24,14 @@ module Octopress
     end
 
     def all_content
-      Octopress::Content::Base.content_types.map(&:all).flatten
+      [
+        Octopress::Content::Index,
+        Octopress::Content::Pagination,
+        Octopress::Content::Category,
+        Octopress::Content::Tag,
+        Octopress::Content::Page,
+        Octopress::Content::Post
+      ].map(&:all).flatten
     end
 
     def find_content_by_url_path(url_path)
