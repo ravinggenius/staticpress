@@ -1,12 +1,9 @@
 require 'octopress'
-require 'octopress/content/base'
 require 'octopress/content/ethereal_content'
 require 'octopress/route'
 
 module Octopress::Content
-  class Category < Base
-    include Octopress::Content::EtherealContent
-
+  class Category < EtherealContent
     def content
       { :text => '' }
     end

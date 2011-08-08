@@ -1,7 +1,8 @@
 require 'octopress'
+require 'octopress/content/base'
 
 module Octopress::Content
-  module EtherealContent
+  class EtherealContent < Base
     def exist?
       true
     end

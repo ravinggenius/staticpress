@@ -1,12 +1,9 @@
 require 'octopress'
-require 'octopress/content/base'
 require 'octopress/content/ethereal_content'
 require 'octopress/route'
 
 module Octopress::Content
-  class Pagination < Base
-    include Octopress::Content::EtherealContent
-
+  class Pagination < EtherealContent
     def content
       { :text => '' }
     end

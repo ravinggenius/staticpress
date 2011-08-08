@@ -1,7 +1,8 @@
 require 'octopress'
+require 'octopress/content/base'
 
 module Octopress::Content
-  module PhysicalContent
+  class PhysicalContent < Base
     def content
       return @content if @content
 

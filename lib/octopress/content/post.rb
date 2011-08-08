@@ -1,12 +1,9 @@
 require 'octopress'
-require 'octopress/content/base'
 require 'octopress/content/physical_content'
 require 'octopress/route'
 
 module Octopress::Content
-  class Post < Base
-    include Octopress::Content::PhysicalContent
-
+  class Post < PhysicalContent
     def created_on
       filename_parts = template_path.basename.to_s.match /(?<created_on>\d{4}-\d{2}-\d{2})\./
       Date.parse filename_parts[:created_on]

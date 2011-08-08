@@ -1,12 +1,9 @@
 require 'octopress'
-require 'octopress/content/base'
 require 'octopress/content/physical_content'
 require 'octopress/route'
 
 module Octopress::Content
-  class Page < Base
-    include Octopress::Content::PhysicalContent
-
+  class Page < PhysicalContent
     def template_path
       Octopress.blog_path + config.source + "#{route.params[:slug]}.#{template_type}"
     end
