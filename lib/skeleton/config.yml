@@ -14,7 +14,7 @@
   :pagination: '/page/:number'
   :page: '/:slug'
   :post: '/:year/:month/:day/:title'
-:title: My Octopress Blog
+:title: My Staticpress Blog
 :subtitle: A blogging framework for hackers.
 :author: Your Name
 :subscribe_rss: /atom.xml

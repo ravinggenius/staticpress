@@ -1,6 +1,6 @@
 source :rubygems
 
-gem 'octopress'
+gem 'staticpress'
 
 gem 'compass'
 gem 'haml'

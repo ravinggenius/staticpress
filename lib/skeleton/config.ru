@@ -1,8 +1,8 @@
-require 'octopress/booter'
-require 'octopress/server'
+require 'staticpress/booter'
+require 'staticpress/server'
 
 use Rack::ShowStatus
 use Rack::ShowExceptions
 
 # TODO run on configured port
-run Octopress::Server.new
+run Staticpress::Server.new

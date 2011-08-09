@@ -2,7 +2,7 @@
 <path-to-blog>/
 |-content/
 | `-.gitnotice
-|-plugins/ # plugins in this directory override plugins with the same name in the octopress/lib/plugins/ directory
+|-plugins/ # plugins in this directory override plugins with the same name in the staticpress/lib/plugins/ directory
 | |-.gitnotice
 | `-custom_plugin.rb
 |-public/ # compiled files go here. this directory gets created automatically if not present
