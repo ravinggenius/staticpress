@@ -1,5 +1,6 @@
 require_relative '../../test_helper'
 
+require 'staticpress/site'
 require 'staticpress/route'
 
 class RouteTest < TestHelper
