@@ -19,7 +19,7 @@ module Staticpress::Content
     end
 
     def ==(other)
-      other.respond_to?(:content) && (content == other.content)
+      other.respond_to?(:route) && (route == other.route)
     end
 
     def inspect
