@@ -53,7 +53,7 @@ class RouteTest < TestHelper
 
   def test_from_url_path
     assert_equal Staticpress::Route.from_url_path('/about'), @route_page
-    assert_equal Staticpress::Route.from_url_path('/2011/07/20/hello'), @route_post, ':slug should not appear in Post route\'s params'
+    assert_equal Staticpress::Route.from_url_path('/2011/07/20/hello'), @route_post
     assert_equal Staticpress::Route.from_url_path('/i/dont/exist'), @route_fake
   end
 
