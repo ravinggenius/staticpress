@@ -8,6 +8,12 @@ module Staticpress::Content
       true
     end
 
+    def meta
+      reply = super
+      reply.layout = :post_index
+      reply
+    end
+
     def template_path
       self.class.template_path
     end
