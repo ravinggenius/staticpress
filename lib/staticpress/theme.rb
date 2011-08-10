@@ -32,6 +32,22 @@ module Staticpress
       (root + '_layouts').children
     end
 
+    def default_view
+      keyed_views['default']
+    end
+
+    def keyed_views
+      hash_from_array(views) { |view| extensionless_basename view }
+    end
+
+    def view_for(view_name)
+      keyed_views[view_name.to_s] || default_view
+    end
+
+    def views
+      (root + '_views').children
+    end
+
     def self.theme
       @theme ||= new config.theme
     end

@@ -5,7 +5,7 @@ require 'staticpress/route'
 module Staticpress::Content
   class Category < EtherealContent
     def content
-      { :text => '' }
+      { :text => template_path.read }
     end
 
     def self.all

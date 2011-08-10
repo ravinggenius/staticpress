@@ -29,6 +29,7 @@ class ContentCategoryTest < ContentBaseTest
   end
 
   def test_raw
+    assert_equal '= partial :list_posts, :posts => page.sub_content', @category_page.raw
   end
 
   def test_route

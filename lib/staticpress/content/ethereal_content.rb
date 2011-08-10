@@ -17,7 +17,7 @@ module Staticpress::Content
     end
 
     def self.template_path
-      theme.layout_for(type)
+      theme.view_for(type)
     end
   end
 end
