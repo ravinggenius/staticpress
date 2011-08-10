@@ -20,12 +20,12 @@ module Staticpress
       keyed_layouts['default']
     end
 
-    def layout_for(layout_name)
-      keyed_layouts[layout_name.to_s] || default_layout
-    end
-
     def keyed_layouts
       hash_from_array(layouts) { |layout| extensionless_basename layout }
+    end
+
+    def layout_for(layout_name)
+      keyed_layouts[layout_name.to_s] || default_layout
     end
 
     def layouts
