@@ -9,13 +9,15 @@ class ThemeTest < TestHelper
 
   def test_layout_for
     assert_equal (@theme.root + '_layouts' + 'default.haml'), @theme.layout_for(:default)
+    assert_equal (@theme.root + '_layouts' + 'post_index.haml'), @theme.layout_for(:post_index)
   end
 
   def test_keyed_layouts
-    assert_equal({ 'default' => (@theme.root + '_layouts' + 'default.haml') }, @theme.keyed_layouts)
+    assert_equal((@theme.root + '_layouts' + 'default.haml'), @theme.keyed_layouts['default'])
+    assert_equal((@theme.root + '_layouts' + 'post_index.haml'), @theme.keyed_layouts['post_index'])
   end
 
   def test_layouts
-    assert_equal 1, @theme.layouts.count
+    assert_equal 2, @theme.layouts.count
   end
 end
