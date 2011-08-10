@@ -41,15 +41,18 @@ module Staticpress::Content
     end
 
     def render
-      template = Tilt[template_type].new { raw }
-
       if l = layout
         l.render Object.new, template_locals do
-          template.render Object.new, template_locals
+          render_partial
         end
       else
-        template.render Object.new, template_locals
+        render_partial
       end
+    end
+
+    def render_partial
+      template = Tilt[template_type].new { raw }
+      template.render Object.new, template_locals
     end
 
     def save

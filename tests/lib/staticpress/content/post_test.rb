@@ -39,6 +39,11 @@ class ContentPostTest < ContentBaseTest
     assert_equal '', @second_post.raw
   end
 
+  def test_render_partial
+    assert_equal "<p>in post</p>\n", @post.render_partial
+    assert_equal "\n", @second_post.render_partial
+  end
+
   def test_route
     assert_equal '/2011/07/20/hello', @post.route.url_path
     assert_equal '/2011/07/20/goodbye', @second_post.route.url_path
