@@ -1,9 +1,12 @@
 require_relative 'base_test'
 
 require 'staticpress/content/post'
+require 'staticpress/helpers'
 require 'staticpress/route'
 
 class ContentPostTest < ContentBaseTest
+  include Staticpress::Helpers
+
   def setup
     super
 
@@ -23,6 +26,12 @@ class ContentPostTest < ContentBaseTest
   def test_exist?
     assert @post.exist?, '@post does not exist'
     refute @second_post.exist?, '@second_post does not exist'
+  end
+
+  def test_find_by_path
+    posts_dir = Staticpress.blog_path + config.posts_source
+    assert_equal @post, Staticpress::Content::Post.find_by_path(posts_dir + '2011-07-20-hello.markdown')
+    assert_nil Staticpress::Content::Post.find_by_path(posts_dir + '2011-07-20-goodbye.markdown')
   end
 
   def test_find_by_route
