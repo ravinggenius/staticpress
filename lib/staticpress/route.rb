@@ -18,7 +18,7 @@ module Staticpress
       :number => /(?<number>\d+)/
     }
 
-    attr_reader :params, :url_path
+    attr_reader :params
 
     def initialize(params)
       @params = params
