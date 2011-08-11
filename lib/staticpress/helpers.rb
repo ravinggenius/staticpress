@@ -12,6 +12,11 @@ module Staticpress
       path[0...(path.length - pathname.extname.length)]
     end
 
+    def extensionless_path(pathname)
+      path = pathname.to_path
+      Pathname.new path[0...(path.length - pathname.extname.length)]
+    end
+
     def hash_from_array(array, &block)
       reply = array.map do |object|
         [ block.call(object), object ]

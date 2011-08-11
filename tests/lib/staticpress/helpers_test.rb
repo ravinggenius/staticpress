@@ -15,6 +15,14 @@ class HelpersTest < TestHelper
     assert_equal 'stegosaurus', extensionless_basename(Pathname.new('/dinosaurs/stegosaurus.rb'))
   end
 
+  def test_extensionless_path
+    assert_equal Pathname.new('extensionless'), extensionless_path(Pathname.new('extensionless'))
+    assert_equal Pathname.new('.htaccess'), extensionless_path(Pathname.new('.htaccess'))
+    assert_equal Pathname.new('tyrannasaurus_rex'), extensionless_path(Pathname.new('tyrannasaurus_rex.rb'))
+    assert_equal Pathname.new('dinosaurs/stegosaurus'), extensionless_path(Pathname.new('dinosaurs/stegosaurus.rb'))
+    assert_equal Pathname.new('/dinosaurs/stegosaurus'), extensionless_path(Pathname.new('/dinosaurs/stegosaurus.rb'))
+  end
+
   def test_hash_from_empty_array
     actual = hash_from_array [] {}
     assert_equal({}, actual)
