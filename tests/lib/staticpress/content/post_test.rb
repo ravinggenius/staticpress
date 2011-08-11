@@ -55,6 +55,6 @@ class ContentPostTest < ContentBaseTest
 
   def test_route
     assert_equal '/2011/07/20/hello', @post.route.url_path
-    assert_equal '/2011/07/20/goodbye', @second_post.route.url_path
+    assert_nil @second_post.route.url_path
   end
 end

@@ -37,14 +37,12 @@ module Staticpress::Content
     end
 
     def self.find_by_path(path)
-      # FIXME this feels like cheating
-      url_path = path.to_s.sub((Staticpress.blog_path + config.source).to_s, '').sub("#{path.extname}", '')
+      slug = extensionless_path(path).to_s.sub((Staticpress.blog_path + config.source).to_s, '').sub(/^\//, '')
       params = {
-        :url_path => url_path,
         :content_type => self,
-        :slug => url_path.sub(/^\//, '')
+        :slug => slug
       }
-      new Staticpress::Route.new(params), path.extname.sub(/^\./, '').to_sym
+      new Staticpress::Route.new(params), path.extname.sub(/^\./, '').to_sym if path.file?
     end
 
     def self.find_by_route(route)

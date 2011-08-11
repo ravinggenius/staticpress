@@ -42,17 +42,15 @@ module Staticpress::Content
     end
 
     def self.find_by_path(path)
-      # FIXME parse path according to route pattern in config
-      #filename_parts = template_path.basename.to_s.match /(?<created_on>\d{4}-\d{2}-\d{2})\./
+      filename_parts = path.basename.to_s.match /(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})-(?<title>[0-9a-z\-_]*)\./
       params = {
-      #  :url_path => ,
         :content_type => self,
-      #  :year => ,
-      #  :month => ,
-      #  :day => ,
-      #  :title => 
+        :year => filename_parts[:year],
+        :month => filename_parts[:month],
+        :day => filename_parts[:day],
+        :title => filename_parts[:title]
       }
-      new Staticpress::Route.new(params), path.extname.sub('.', '').to_sym
+      new Staticpress::Route.new(params), path.extname.sub(/^\./, '').to_sym if path.file?
     end
 
     def self.find_by_route(route)

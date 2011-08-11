@@ -33,12 +33,12 @@ module Staticpress
     end
 
     def inspect
-      parts = [ "url_path=#{url_path}" ]
-
-      parts << "content_type=#{params[:content_type]}" if params.key? :content_type
+      parts = [
+        ("url_path=#{url_path}" if url_path),
+        ("content_type=#{params[:content_type]}" if params.key? :content_type)
+      ].compact
 
       p = Hash[self.params.clone.sort]
-      p.delete :url_path
       p.delete :content_type
       parts << "params=#{p}"
 
@@ -70,26 +70,29 @@ module Staticpress
 
     def file_path
       # TODO get index filename from config
+      return nil unless url_path
       Staticpress.blog_path + config.destination + url_path.sub(/^\//, '') + 'index.html'
     end
 
     def url_path
-      # TODO create url_path from parts in params according to pattern from content_type
-      params[:url_path] || '/'
+      return nil unless params[:content_type]
+      REGEX_STUBS.keys.inject(config.routes[params[:content_type].type].clone) do |pattern, key|
+        pattern.gsub /:#{key}/, params[key].to_s
+      end
     end
 
     def self.from_url_path(url_path)
       catch :route do
         Staticpress::Site.content_types.each do |content_type|
           if match = regex_for_pattern(config.routes[content_type.type]).match(url_path)
-            params = { :content_type => content_type, :url_path => url_path }
+            params = { :content_type => content_type }
             match.names.each { |match_key| params[match_key.to_sym] = match[match_key] }
             route = new params
             throw :route, route if route.content
           end
         end
         
-        new({ :url_path => url_path }) # if we don't find a route that matches anything, return an empty route
+        new # if we don't find a route that matches anything, return an empty route
       end
     end
 
