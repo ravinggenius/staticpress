@@ -88,6 +88,11 @@ customizations. If [theme-name] is blank, copies the currently configured theme
       FileUtils.cp_r source.children, destination
     end
 
+    desc 'list <method>', 'Send <method> to every content and output the result'
+    def list(method)
+      Staticpress::Site.new.all_content.each { |content| puts content.send(method) }
+    end
+
     desc 'build', 'Prepare blog for deployment'
     def build
       Staticpress::Plugin.activate_enabled
