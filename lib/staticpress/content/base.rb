@@ -27,6 +27,7 @@ module Staticpress::Content
 
       "#<#{self.class} #{parts.join ', '}>"
     end
+    alias to_s inspect
 
     def layout
       Tilt.new theme.layout_for(meta.layout).to_s

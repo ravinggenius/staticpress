@@ -19,5 +19,6 @@ module Staticpress
 
       "#<#{parts.join(' ')}>"
     end
+    alias :to_s :inspect
   end
 end
