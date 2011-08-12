@@ -21,7 +21,7 @@ module Staticpress::Content
     end
 
     def self.find_by_tag(tag)
-      new Staticpress::Route.new(:content_type => self, :name => tag), template_path.extname
+      find_by_route Staticpress::Route.new(:content_type => self, :name => tag)
     end
   end
 end

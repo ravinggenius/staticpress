@@ -50,7 +50,7 @@ module Staticpress::Content
         :day => filename_parts[:day],
         :title => filename_parts[:title]
       }
-      new Staticpress::Route.new(params), path.extname if path.file?
+      find_by_route Staticpress::Route.new(params) if path.file?
     end
 
     def self.find_by_route(route)

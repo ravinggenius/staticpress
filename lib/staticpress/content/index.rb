@@ -10,7 +10,7 @@ module Staticpress::Content
 
     def self.all
       [
-        (new Staticpress::Route.new(:content_type => self), template_path.extname)
+        (find_by_route Staticpress::Route.new(:content_type => self))
       ]
     end
   end
