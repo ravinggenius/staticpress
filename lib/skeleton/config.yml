@@ -3,6 +3,7 @@
 :posts_source: content/_posts
 :plugins_path: plugins
 :destination: public
+:index_file: index.html
 :code_dir: downloads/code
 :port: 4000
 :url: http://yoursite.com

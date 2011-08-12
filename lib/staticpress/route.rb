@@ -68,9 +68,8 @@ module Staticpress
     end
 
     def file_path
-      # TODO get index filename from config
       return nil unless url_path
-      Staticpress.blog_path + config.destination + url_path.sub(/^\//, '') + 'index.html'
+      Staticpress.blog_path + config.destination + url_path.sub(/^\//, '') + config.index_file
     end
 
     def url_path
