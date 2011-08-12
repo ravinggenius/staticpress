@@ -69,7 +69,7 @@ module Staticpress::Content
 
     def render_partial
       template = Tilt[template_type].new { raw }
-      template.render Staticpress::ViewHelpers.new, template_locals
+      template.render Staticpress::ViewHelpers.new(theme), template_locals
     end
 
     def save
