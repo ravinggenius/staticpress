@@ -44,7 +44,6 @@ module Staticpress
 
       "#<#{self.class} #{parts.join ', '}>"
     end
-    alias :to_s :inspect
 
     def route
       route_options(route_title).inject(route_pattern) do |reply, (key, value)|
@@ -80,6 +79,7 @@ module Staticpress
         pattern.gsub /:#{key}/, params[key].to_s
       end
     end
+    alias :to_s :url_path
 
     def self.from_url_path(url_path)
       catch :route do
