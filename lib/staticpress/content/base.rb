@@ -22,6 +22,21 @@ module Staticpress::Content
       other.respond_to?(:route) && (route == other.route)
     end
 
+    def content
+      return @content if @content
+
+      regex_frontmatter = /^-{3}${1}(?<frontmatter>.*)^-{3}${1}/m
+      regex_text = /(?<text>.*)/m
+      regex = /#{regex_frontmatter}#{regex_text}/
+
+      c = template_path_content
+      @content = c.match(regex_frontmatter) ? c.match(regex) : c.match(regex_text)
+    end
+
+    def exist?
+      template_path.file?
+    end
+
     def inspect
       parts = [ "url_path=#{route.url_path}" ]
 
@@ -68,6 +83,10 @@ module Staticpress::Content
         :meta => meta,
         :page => self
       }
+    end
+
+    def template_path_content
+      exist? ? template_path.read : ''
     end
 
     def theme

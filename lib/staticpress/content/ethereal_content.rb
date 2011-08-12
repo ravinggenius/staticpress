@@ -3,11 +3,6 @@ require 'staticpress/content/base'
 
 module Staticpress::Content
   class EtherealContent < Base
-    def exist?
-      # FIXME determine if content really exist
-      true
-    end
-
     def template_path
       self.class.template_path
     end

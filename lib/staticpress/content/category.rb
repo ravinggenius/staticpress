@@ -4,10 +4,6 @@ require 'staticpress/route'
 
 module Staticpress::Content
   class Category < EtherealContent
-    def content
-      { :text => template_path.read }
-    end
-
     def sub_content
       Staticpress::Content::Post.all.map do |post|
         post if post.meta.categories && post.meta.categories.include?(route.params[:name])
