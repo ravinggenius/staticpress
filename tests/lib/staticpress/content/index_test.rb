@@ -7,15 +7,17 @@ class ContentIndexTest < ContentBaseTest
   def setup
     super
 
+    @template_dir = Staticpress::Theme.theme.root + '_views'
+
     @home_route = Staticpress::Route.from_url_path '/'
-    @home = Staticpress::Content::Index.new @home_route, :markdown
+    @home = Staticpress::Content::Index.new @home_route, @template_dir + 'default.haml'
 
     @page_two_route = Staticpress::Route.from_url_path '/page/2'
-    @page_two = Staticpress::Content::Index.new @page_two_route, :markdown
+    @page_two = Staticpress::Content::Index.new @page_two_route, @template_dir + 'default.haml'
   end
 
   def test__equalsequals
-    assert_operator @home, :==, Staticpress::Content::Index.new(@home_route, :markdown)
+    assert_operator @home, :==, Staticpress::Content::Index.new(@home_route, @template_dir + 'default.haml')
     refute_operator @home, :==, @page_two
     refute_operator @home, :==, nil
   end

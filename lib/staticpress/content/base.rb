@@ -12,11 +12,11 @@ module Staticpress::Content
     extend Staticpress::Helpers
     include Staticpress::Helpers
 
-    attr_reader :route, :template_type
+    attr_reader :route, :template_path
 
-    def initialize(route, template_type)
+    def initialize(route, template_path)
       @route = route
-      @template_type = template_type.to_s.sub(/^\./, '').to_sym
+      @template_path = template_path
     end
 
     def ==(other)
@@ -68,7 +68,7 @@ module Staticpress::Content
     end
 
     def render_partial
-      template = Tilt[template_type].new { raw }
+      template = Tilt[template_path].new { raw }
       template.render Staticpress::ViewHelpers.new(theme), template_locals
     end
 

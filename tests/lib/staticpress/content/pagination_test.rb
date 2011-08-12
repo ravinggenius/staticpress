@@ -7,15 +7,17 @@ class ContentPaginationTest < ContentBaseTest
   def setup
     super
 
+    @template_dir = Staticpress::Theme.theme.root + '_views'
+
     @page_one_route = Staticpress::Route.from_url_path '/page/1'
-    @page_one = Staticpress::Content::Pagination.new @page_one_route, :markdown
+    @page_one = Staticpress::Content::Pagination.new @page_one_route, @template_dir + 'default.haml'
 
     @page_two_route = Staticpress::Route.from_url_path '/page/2'
-    @page_two = Staticpress::Content::Pagination.new @page_two_route, :markdown
+    @page_two = Staticpress::Content::Pagination.new @page_two_route, @template_dir + 'default.haml'
   end
 
   def test__equalsequals
-    assert_operator @page_one, :==, Staticpress::Content::Pagination.new(@page_one_route, :markdown)
+    assert_operator @page_one, :==, Staticpress::Content::Pagination.new(@page_one_route, @template_dir + 'default.haml')
     refute_operator @page_one, :==, @page_two
     refute_operator @page_one, :==, nil
   end

@@ -5,20 +5,9 @@ require 'staticpress/route'
 module Staticpress::Content
   class Post < PhysicalContent
     def created_on
+      # TODO pull parts out of route.params
       filename_parts = template_path.basename.to_s.match /(?<created_on>\d{4}-\d{2}-\d{2})\./
       Date.parse filename_parts[:created_on]
-    end
-
-    def template_path
-      params = route.params
-      stub = [
-        params[:year],
-        params[:month],
-        params[:day],
-        params[:title]
-      ].join '-'
-
-      Staticpress.blog_path + config.posts_source + "#{stub}.#{template_type}"
     end
 
     def self.all
@@ -65,7 +54,7 @@ module Staticpress::Content
       catch :post do
         supported_extensions.detect do |extension|
           path = Staticpress.blog_path + config.posts_source + "#{stub}.#{extension}"
-          throw :post, new(route, extension) if path.file?
+          throw :post, new(route, path) if path.file?
         end
 
         nil

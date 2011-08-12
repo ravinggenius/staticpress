@@ -10,15 +10,17 @@ class ContentPostTest < ContentBaseTest
   def setup
     super
 
+    @post_dir = Staticpress.blog_path + config.posts_source
+
     @post_route = Staticpress::Route.from_url_path '/2011/07/20/hello'
-    @post = Staticpress::Content::Post.new @post_route, :markdown
+    @post = Staticpress::Content::Post.new @post_route, @post_dir + '2011-07-20-hello.markdown'
 
     @second_post_route = Staticpress::Route.from_url_path '/2011/07/20/goodbye'
-    @second_post = Staticpress::Content::Post.new @second_post_route, :markdown
+    @second_post = Staticpress::Content::Post.new @second_post_route, @post_dir + '2011-07-20-goodbye.markdown'
   end
 
   def test__equalsequals
-    assert_operator @post, :==, Staticpress::Content::Post.new(@post_route, :markdown)
+    assert_operator @post, :==, Staticpress::Content::Post.new(@post_route, @post_dir + '2011-07-20-hello.markdown')
     refute_operator @post, :==, @second_post
     refute_operator @post, :==, nil
   end
@@ -29,9 +31,9 @@ class ContentPostTest < ContentBaseTest
   end
 
   def test_find_by_path
-    posts_dir = Staticpress.blog_path + config.posts_source
-    assert_equal @post, Staticpress::Content::Post.find_by_path(posts_dir + '2011-07-20-hello.markdown')
-    assert_nil Staticpress::Content::Post.find_by_path(posts_dir + '2011-07-20-goodbye.markdown')
+    @post_dir = Staticpress.blog_path + config.posts_source
+    assert_equal @post, Staticpress::Content::Post.find_by_path(@post_dir + '2011-07-20-hello.markdown')
+    assert_nil Staticpress::Content::Post.find_by_path(@post_dir + '2011-07-20-goodbye.markdown')
   end
 
   def test_find_by_route

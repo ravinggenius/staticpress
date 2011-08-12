@@ -4,10 +4,6 @@ require 'staticpress/route'
 
 module Staticpress::Content
   class Page < PhysicalContent
-    def template_path
-      Staticpress.blog_path + config.source + "#{route.params[:slug]}.#{template_type}"
-    end
-
     def self.all
       all_but_posts = if (posts_dir = Staticpress.blog_path + config.posts_source).directory?
         (Staticpress.blog_path + config.source).children - [ posts_dir ]
@@ -49,7 +45,7 @@ module Staticpress::Content
       catch :page do
         supported_extensions.each do |extension|
           path = Staticpress.blog_path + config.source + "#{route.params[:slug]}.#{extension}"
-          throw :page, new(route, extension) if path.file?
+          throw :page, new(route, path) if path.file?
         end
 
         nil

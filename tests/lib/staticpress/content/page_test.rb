@@ -10,15 +10,17 @@ class ContentPageTest < ContentBaseTest
   def setup
     super
 
+    @page_dir = Staticpress.blog_path + config.source
+
     @page_route = Staticpress::Route.from_url_path '/about'
-    @page = Staticpress::Content::Page.new @page_route, :markdown
+    @page = Staticpress::Content::Page.new @page_route, @page_dir + 'about.markdown'
 
     @second_page_route = Staticpress::Route.from_url_path '/contact'
-    @second_page = Staticpress::Content::Page.new @second_page_route, :markdown
+    @second_page = Staticpress::Content::Page.new @second_page_route, @page_dir + 'contact.markdown'
   end
 
   def test__equalsequals
-    assert_operator @page, :==, Staticpress::Content::Page.new(@page_route, :markdown)
+    assert_operator @page, :==, Staticpress::Content::Page.new(@page_route, @page_dir + 'about.markdown')
     refute_operator @page, :==, @second_page
     refute_operator @page, :==, nil
   end
@@ -29,9 +31,9 @@ class ContentPageTest < ContentBaseTest
   end
 
   def test_find_by_path
-    page_dir = Staticpress.blog_path + config.source
-    assert_equal @page, Staticpress::Content::Page.find_by_path(page_dir + 'about.markdown')
-    assert_nil Staticpress::Content::Page.find_by_path(page_dir + 'i' + 'dont' + 'exist.markdown')
+    @page_dir = Staticpress.blog_path + config.source
+    assert_equal @page, Staticpress::Content::Page.find_by_path(@page_dir + 'about.markdown')
+    assert_nil Staticpress::Content::Page.find_by_path(@page_dir + 'i' + 'dont' + 'exist.markdown')
   end
 
   def test_find_by_route

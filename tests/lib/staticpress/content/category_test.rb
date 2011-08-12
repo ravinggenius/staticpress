@@ -7,12 +7,14 @@ class ContentCategoryTest < ContentBaseTest
   def setup
     super
 
+    @template_dir = Staticpress::Theme.theme.root + '_views'
+
     @category_page_route = Staticpress::Route.from_url_path '/category/programming'
-    @category_page = Staticpress::Content::Category.new @category_page_route, :markdown
+    @category_page = Staticpress::Content::Category.new @category_page_route, @template_dir + 'default.haml'
   end
 
   def test__equalsequals
-    assert_operator @category_page, :==, Staticpress::Content::Category.new(@category_page_route, :markdown)
+    assert_operator @category_page, :==, Staticpress::Content::Category.new(@category_page_route, @template_dir + 'default.haml')
     refute_operator @category_page, :==, nil
   end
 

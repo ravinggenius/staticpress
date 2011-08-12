@@ -7,12 +7,14 @@ class ContentTagTest < ContentBaseTest
   def setup
     super
 
+    @template_dir = Staticpress::Theme.theme.root + '_views'
+
     @tag_page_route = Staticpress::Route.from_url_path '/tag/code'
-    @tag_page = Staticpress::Content::Tag.new @tag_page_route, :markdown
+    @tag_page = Staticpress::Content::Tag.new @tag_page_route, @template_dir + 'default.haml'
   end
 
   def test__equalsequals
-    assert_operator @tag_page, :==, Staticpress::Content::Tag.new(@tag_page_route, :markdown)
+    assert_operator @tag_page, :==, Staticpress::Content::Tag.new(@tag_page_route, @template_dir + 'default.haml')
     refute_operator @tag_page, :==, nil
   end
 

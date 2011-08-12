@@ -1,12 +1,15 @@
 require_relative '../../test_helper'
 
+require 'staticpress/helpers'
 require 'staticpress/view_helpers'
 
 class ViewHelpersTest < TestHelper
+  include Staticpress::Helpers
+
   def setup
     Staticpress.blog_path = TEST_BLOG
     @post_route = Staticpress::Route.from_url_path '/2011/07/20/hello'
-    @post = Staticpress::Content::Post.new @post_route, :markdown
+    @post = Staticpress::Content::Post.new @post_route, Staticpress.blog_path + config.posts_source + '2011-07-20-hello.markdown'
     @view_helpers = Staticpress::ViewHelpers.new @post.theme
   end
 
