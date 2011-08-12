@@ -16,36 +16,25 @@ module Staticpress
       @root = custom.directory? ? custom : Staticpress.root + 'themes' + @name.to_s
     end
 
-    def default_layout
-      keyed_layouts['default']
-    end
+    [
+      :layout,
+      :view
+    ].each do |method_name|
+      define_method "default_#{method_name}" do
+        send("keyed_#{method_name}s")['default']
+      end
 
-    def keyed_layouts
-      hash_from_array(layouts) { |layout| extensionless_basename layout }
-    end
+      define_method "keyed_#{method_name}s" do
+        hash_from_array(send("#{method_name}s")) { |name| extensionless_basename name }
+      end
 
-    def layout_for(layout_name)
-      keyed_layouts[layout_name.to_s] || default_layout
-    end
+      define_method "#{method_name}_for" do |name|
+        send("keyed_#{method_name}s")[name.to_s] || send("default_#{method_name}")
+      end
 
-    def layouts
-      (root + '_layouts').children
-    end
-
-    def default_view
-      keyed_views['default']
-    end
-
-    def keyed_views
-      hash_from_array(views) { |view| extensionless_basename view }
-    end
-
-    def view_for(view_name)
-      keyed_views[view_name.to_s] || default_view
-    end
-
-    def views
-      (root + '_views').children
+      define_method "#{method_name}s" do
+        (root + "_#{method_name}s").children
+      end
     end
 
     def self.theme
