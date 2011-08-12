@@ -26,4 +26,22 @@ class ThemeTest < TestHelper
   def test_layouts
     assert_equal 2, @theme.layouts.count
   end
+
+  def test_default_view
+    assert_equal (@theme.root + '_views' + 'default.haml'), @theme.default_view
+  end
+
+  def test_keyed_views
+    assert_equal((@theme.root + '_views' + 'default.haml'), @theme.keyed_views['default'])
+    assert_nil @theme.keyed_views['fake']
+  end
+
+  def test_view_for
+    assert_equal (@theme.root + '_views' + 'default.haml'), @theme.view_for(:default)
+    assert_equal (@theme.root + '_views' + 'default.haml'), @theme.view_for(:fake)
+  end
+
+  def test_views
+    assert_equal 1, @theme.views.count
+  end
 end
