@@ -5,6 +5,7 @@ require 'yaml'
 require 'staticpress'
 require 'staticpress/metadata'
 require 'staticpress/theme'
+require 'staticpress/view_helpers'
 
 module Staticpress::Content
   class Base
@@ -68,7 +69,7 @@ module Staticpress::Content
 
     def render_partial
       template = Tilt[template_type].new { raw }
-      template.render Object.new, template_locals
+      template.render Staticpress::ViewHelpers.new, template_locals
     end
 
     def save
