@@ -25,6 +25,10 @@ class ContentPostTest < ContentBaseTest
     refute_operator @post, :==, nil
   end
 
+  def test_created_on
+    assert_equal Date.new(2011, 07, 20), @post.created_on
+  end
+
   def test_exist?
     assert @post.exist?, '@post does not exist'
     refute @second_post.exist?, '@second_post does not exist'

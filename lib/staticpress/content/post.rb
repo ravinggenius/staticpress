@@ -5,9 +5,12 @@ require 'staticpress/route'
 module Staticpress::Content
   class Post < PhysicalContent
     def created_on
-      # TODO pull parts out of route.params
-      filename_parts = template_path.basename.to_s.match /(?<created_on>\d{4}-\d{2}-\d{2})\./
-      Date.parse filename_parts[:created_on]
+      date = route.params
+      Date.parse [
+        date[:year],
+        date[:month],
+        date[:day]
+      ].join('-')
     end
 
     def self.all
