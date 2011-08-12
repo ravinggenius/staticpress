@@ -5,4 +5,4 @@ categories:
   - programming
 ---
 
-in post
+Staticpress is a blog-centric static site builder. It was inspired by octopress and aims to re-imagine Octopress with a more-standard ruby approach.
