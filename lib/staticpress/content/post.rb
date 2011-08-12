@@ -78,7 +78,6 @@ module Staticpress::Content
       <<-TEMPLATE
 ---
 created_at: #{now}
-layout: default
 ---
 
 in post

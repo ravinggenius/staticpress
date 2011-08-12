@@ -1,5 +1,1 @@
----
-layout: default
----
-
 in page

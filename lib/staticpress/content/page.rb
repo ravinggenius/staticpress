@@ -58,10 +58,6 @@ module Staticpress::Content
 
     def self.template
       <<-TEMPLATE
----
-layout: default
----
-
 in page
       TEMPLATE
     end
