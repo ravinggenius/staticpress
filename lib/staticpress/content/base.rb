@@ -16,7 +16,7 @@ module Staticpress::Content
 
     def initialize(route, template_type)
       @route = route
-      @template_type = template_type
+      @template_type = template_type.to_s.sub(/^\./, '').to_sym
     end
 
     def ==(other)

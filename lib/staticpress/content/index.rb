@@ -10,7 +10,7 @@ module Staticpress::Content
 
     def self.all
       [
-        (new Staticpress::Route.new(:content_type => self), template_path.extname.sub('.', '').to_sym)
+        (new Staticpress::Route.new(:content_type => self), template_path.extname)
       ]
     end
   end

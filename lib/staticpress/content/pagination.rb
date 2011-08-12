@@ -19,7 +19,7 @@ module Staticpress::Content
     end
 
     def self.find_by_page_number(number)
-      new Staticpress::Route.new(:content_type => self, :number => number), template_path.extname.sub('.', '').to_sym
+      new Staticpress::Route.new(:content_type => self, :number => number), template_path.extname
     end
   end
 end

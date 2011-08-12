@@ -42,7 +42,7 @@ module Staticpress::Content
         :content_type => self,
         :slug => slug
       }
-      new Staticpress::Route.new(params), path.extname.sub(/^\./, '').to_sym if path.file?
+      new Staticpress::Route.new(params), path.extname if path.file?
     end
 
     def self.find_by_route(route)

@@ -21,7 +21,7 @@ module Staticpress::Content
     end
 
     def self.find_by_category(category)
-      new Staticpress::Route.new(:content_type => self, :name => category), template_path.extname.sub('.', '').to_sym
+      new Staticpress::Route.new(:content_type => self, :name => category), template_path.extname
     end
   end
 end
