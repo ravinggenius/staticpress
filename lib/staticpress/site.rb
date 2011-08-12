@@ -38,7 +38,8 @@ module Staticpress
     end
 
     def save
-      FileUtils.rm_r(Staticpress.blog_path + config.destination)
+      destination = Staticpress.blog_path + config.destination
+      FileUtils.rm_r destination if destination.directory?
       all_content.each &:save
     end
 
