@@ -7,6 +7,26 @@ class ThemeTest < TestHelper
     @theme = Staticpress::Theme.new :classic
   end
 
+
+  def test_default_include
+    refute_respond_to @theme, :default_include
+  end
+
+  def test_keyed_includes
+    assert_equal((@theme.root + '_includes' + 'list_posts.haml'), @theme.keyed_includes['list_posts'])
+    assert_nil @theme.keyed_includes['fake']
+  end
+
+  def test_include_for
+    assert_equal (@theme.root + '_includes' + 'list_posts.haml'), @theme.include_for(:list_posts)
+    assert_nil @theme.include_for(:fake)
+  end
+
+  def test_includes
+    assert_equal 1, @theme.includes.count
+  end
+
+
   def test_default_layout
     assert_equal (@theme.root + '_layouts' + 'default.haml'), @theme.default_layout
   end
@@ -26,6 +46,7 @@ class ThemeTest < TestHelper
   def test_layouts
     assert_equal 2, @theme.layouts.count
   end
+
 
   def test_default_view
     assert_equal (@theme.root + '_views' + 'default.haml'), @theme.default_view

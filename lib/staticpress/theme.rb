@@ -17,6 +17,7 @@ module Staticpress
     end
 
     [
+      :include,
       :layout,
       :view
     ].each do |method_name|
@@ -35,6 +36,12 @@ module Staticpress
       define_method "#{method_name}s" do
         (root + "_#{method_name}s").children
       end
+    end
+
+    remove_method :default_include
+
+    def include_for(name)
+      keyed_includes[name.to_s]
     end
 
     def self.theme
