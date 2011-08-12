@@ -4,12 +4,14 @@ require 'staticpress/route'
 
 module Staticpress::Content
   class Index < EtherealContent
-    def content
-      { :text => '' }
+    def sub_content
+      Staticpress::Content::Post.all
     end
 
     def self.all
-      []
+      [
+        (new Staticpress::Route.new(:content_type => self), template_path.extname.sub('.', '').to_sym)
+      ]
     end
   end
 end
