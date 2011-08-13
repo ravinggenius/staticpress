@@ -46,12 +46,12 @@ module Staticpress::Content
     end
 
     def self.find_by_route(route)
-      params = route.params
+      parts = route.params
       stub = [
-        params[:year],
-        params[:month],
-        params[:day],
-        params[:title]
+        parts[:year],
+        parts[:month],
+        parts[:day],
+        parts[:title]
       ].join '-'
 
       catch :post do
