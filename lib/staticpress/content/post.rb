@@ -46,6 +46,8 @@ module Staticpress::Content
     end
 
     def self.find_by_route(route)
+      return nil unless route
+
       parts = route.params
       stub = [
         parts[:year],

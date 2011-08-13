@@ -42,6 +42,8 @@ module Staticpress::Content
     end
 
     def self.find_by_route(route)
+      return nil unless route
+
       catch :page do
         supported_extensions.each do |extension|
           path = Staticpress.blog_path + config.source + "#{route.params[:slug]}.#{extension}"

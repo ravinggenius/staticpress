@@ -20,23 +20,23 @@ module Staticpress
 
     attr_reader :params
 
-    def initialize(params = {})
+    def initialize(params)
       @params = params
     end
 
     def ==(other)
-      params == other.params
+      other.respond_to?(:params) && (params == other.params)
     end
 
     def content
-      params[:content_type].find_by_route self if params.key? :content_type
+      params[:content_type].find_by_route self
     end
 
     def inspect
       parts = [
-        ("url_path=#{url_path}" if url_path),
-        ("content_type=#{params[:content_type]}" if params.key? :content_type)
-      ].compact
+        "url_path=#{url_path}",
+        "content_type=#{params[:content_type]}"
+      ]
 
       p = Hash[self.params.clone.sort]
       p.delete :content_type
@@ -90,8 +90,8 @@ module Staticpress
             throw :route, route if route.content
           end
         end
-        
-        new # if we don't find a route that matches anything, return an empty route
+
+        nil
       end
     end
 

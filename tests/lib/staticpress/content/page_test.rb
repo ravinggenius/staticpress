@@ -38,7 +38,7 @@ class ContentPageTest < ContentBaseTest
 
   def test_find_by_route
     assert_equal @page, Staticpress::Content::Page.find_by_route(@page_route)
-    assert_nil Staticpress::Content::Page.find_by_route(Staticpress::Route.from_url_path('/i/dont/exist'))
+    assert_nil Staticpress::Content::Page.find_by_route(nil)
   end
 
   def test_inspect
