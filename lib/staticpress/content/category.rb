@@ -1,9 +1,9 @@
 require 'staticpress'
-require 'staticpress/content/ethereal_content'
+require 'staticpress/content/collection_content'
 require 'staticpress/route'
 
 module Staticpress::Content
-  class Category < EtherealContent
+  class Category < CollectionContent
     def sub_content
       Staticpress::Content::Post.all.map do |post|
         post if post.meta.categories && post.meta.categories.include?(route.params[:name])

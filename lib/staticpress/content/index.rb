@@ -1,9 +1,9 @@
 require 'staticpress'
-require 'staticpress/content/ethereal_content'
+require 'staticpress/content/collection_content'
 require 'staticpress/route'
 
 module Staticpress::Content
-  class Index < EtherealContent
+  class Index < CollectionContent
     def sub_content
       Staticpress::Content::Post.all
     end

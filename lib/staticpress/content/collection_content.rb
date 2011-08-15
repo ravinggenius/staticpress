@@ -2,7 +2,7 @@ require 'staticpress'
 require 'staticpress/content/base'
 
 module Staticpress::Content
-  class EtherealContent < Base
+  class CollectionContent < Base
     def self.find_by_route(route)
       new(route, template_path)
     end

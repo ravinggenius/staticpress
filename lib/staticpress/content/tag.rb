@@ -1,9 +1,9 @@
 require 'staticpress'
-require 'staticpress/content/ethereal_content'
+require 'staticpress/content/collection_content'
 require 'staticpress/route'
 
 module Staticpress::Content
-  class Tag < EtherealContent
+  class Tag < CollectionContent
     def sub_content
       Staticpress::Content::Post.all.map do |post|
         post if post.meta.tags && post.meta.tags.include?(route.params[:name])
