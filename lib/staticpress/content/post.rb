@@ -1,9 +1,9 @@
 require 'staticpress'
-require 'staticpress/content/physical_content'
+require 'staticpress/content/base'
 require 'staticpress/route'
 
 module Staticpress::Content
-  class Post < PhysicalContent
+  class Post < Base
     def created_on
       date = route.params
       Date.parse [

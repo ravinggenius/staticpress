@@ -1,9 +1,9 @@
 require 'staticpress'
-require 'staticpress/content/physical_content'
+require 'staticpress/content/base'
 require 'staticpress/route'
 
 module Staticpress::Content
-  class Page < PhysicalContent
+  class Page < Base
     def self.all
       all_but_posts = if (posts_dir = Staticpress.blog_path + config.posts_source).directory?
         (Staticpress.blog_path + config.source).children - [ posts_dir ]
