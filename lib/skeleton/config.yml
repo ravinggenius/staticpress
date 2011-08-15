@@ -12,7 +12,6 @@
   :index: '/'
   :category: '/category/:name'
   :tag: '/tag/:name'
-  :pagination: '/page/:number'
   :page: '/:slug'
   :post: '/:year/:month/:day/:title'
 :title: My Staticpress Blog

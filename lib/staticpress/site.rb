@@ -2,7 +2,6 @@ require 'fileutils'
 
 require 'staticpress'
 require 'staticpress/content/index'
-require 'staticpress/content/pagination'
 require 'staticpress/content/category'
 require 'staticpress/content/tag'
 require 'staticpress/content/page'
@@ -46,7 +45,6 @@ module Staticpress
     def self.content_types
       [
         Staticpress::Content::Index,
-        Staticpress::Content::Pagination,
         Staticpress::Content::Category,
         Staticpress::Content::Tag,
         Staticpress::Content::Page,
