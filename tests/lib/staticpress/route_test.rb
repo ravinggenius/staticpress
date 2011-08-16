@@ -139,8 +139,10 @@ class RouteTest < TestHelper
     refute_match Staticpress::Route.regex_for_pattern(pattern), '/blog/2011/07/20/hello-world'
   end
 
-  def test_regex_for_pattern_tag
+  def test_regex_for_pattern_tag_1
     pattern = '/tag/:name'
+
+    assert_match Staticpress::Route.regex_for_pattern(pattern), '/tag/programming'
 
     refute_match Staticpress::Route.regex_for_pattern(pattern), '/'
     refute_match Staticpress::Route.regex_for_pattern(pattern), '/about'
@@ -151,8 +153,10 @@ class RouteTest < TestHelper
     refute_match Staticpress::Route.regex_for_pattern(pattern), '/blog/2011/07/20/hello-world'
   end
 
-  def test_regex_for_pattern_category
-    pattern = '/category/:name'
+  def test_regex_for_pattern_tag_2
+    pattern = '/something/tag/:name'
+
+    assert_match Staticpress::Route.regex_for_pattern(pattern), '/something/tag/programming'
 
     refute_match Staticpress::Route.regex_for_pattern(pattern), '/'
     refute_match Staticpress::Route.regex_for_pattern(pattern), '/about'
@@ -161,5 +165,35 @@ class RouteTest < TestHelper
     refute_match Staticpress::Route.regex_for_pattern(pattern), '/static_text/about/us'
     refute_match Staticpress::Route.regex_for_pattern(pattern), '/2011/07/20/hello-world'
     refute_match Staticpress::Route.regex_for_pattern(pattern), '/blog/2011/07/20/hello-world'
+    refute_match Staticpress::Route.regex_for_pattern(pattern), '/tag/programming'
+  end
+
+  def test_regex_for_pattern_category_1
+    pattern = '/category/:name'
+
+    assert_match Staticpress::Route.regex_for_pattern(pattern), '/category/programming'
+
+    refute_match Staticpress::Route.regex_for_pattern(pattern), '/'
+    refute_match Staticpress::Route.regex_for_pattern(pattern), '/about'
+    refute_match Staticpress::Route.regex_for_pattern(pattern), '/about/us'
+    refute_match Staticpress::Route.regex_for_pattern(pattern), '/static_text/about'
+    refute_match Staticpress::Route.regex_for_pattern(pattern), '/static_text/about/us'
+    refute_match Staticpress::Route.regex_for_pattern(pattern), '/2011/07/20/hello-world'
+    refute_match Staticpress::Route.regex_for_pattern(pattern), '/blog/2011/07/20/hello-world'
+  end
+
+  def test_regex_for_pattern_category_2
+    pattern = '/blog/category/:name'
+
+    assert_match Staticpress::Route.regex_for_pattern(pattern), '/blog/category/programming'
+
+    refute_match Staticpress::Route.regex_for_pattern(pattern), '/'
+    refute_match Staticpress::Route.regex_for_pattern(pattern), '/about'
+    refute_match Staticpress::Route.regex_for_pattern(pattern), '/about/us'
+    refute_match Staticpress::Route.regex_for_pattern(pattern), '/static_text/about'
+    refute_match Staticpress::Route.regex_for_pattern(pattern), '/static_text/about/us'
+    refute_match Staticpress::Route.regex_for_pattern(pattern), '/2011/07/20/hello-world'
+    refute_match Staticpress::Route.regex_for_pattern(pattern), '/blog/2011/07/20/hello-world'
+    refute_match Staticpress::Route.regex_for_pattern(pattern), '/category/programming'
   end
 end
