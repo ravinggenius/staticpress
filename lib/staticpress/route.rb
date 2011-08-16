@@ -7,15 +7,17 @@ module Staticpress
     extend Staticpress::Helpers
     include Staticpress::Helpers
 
+    RegexStub = Struct.new :regex, :default
+
     REGEX_STUBS = {
-      :date => /(?<date>\d{4}-\d{2}-\d{2})/,
-      :year => /(?<year>\d{4})/,
-      :month => /(?<month>\d{2})/,
-      :day => /(?<day>\d{2})/,
-      :slug => /(?<slug>[0-9a-z\-_\/]+)/,
-      :title => /(?<title>[0-9a-z\-_]*)/,
-      :name => /(?<name>[0-9a-z\-_]*)/,
-      :number => /(?<number>\d+)/
+      :date => RegexStub.new(/(?<date>\d{4}-\d{2}-\d{2})/),
+      :year => RegexStub.new(/(?<year>\d{4})/),
+      :month => RegexStub.new(/(?<month>\d{2})/),
+      :day => RegexStub.new(/(?<day>\d{2})/),
+      :slug => RegexStub.new(/(?<slug>[0-9a-z\-_\/]+)/),
+      :title => RegexStub.new(/(?<title>[0-9a-z\-_]*)/),
+      :name => RegexStub.new(/(?<name>[0-9a-z\-_]*)/),
+      :number => RegexStub.new(/(?<number>\d+)/, '1')
     }
 
     attr_reader :params
@@ -98,7 +100,7 @@ module Staticpress
 
     def self.regex_for_pattern(pattern)
       regex = REGEX_STUBS.inject("^#{pattern}$") do |snip, (key, value)|
-        snip.gsub /:#{key}/, value.source
+        snip.gsub /:#{key}/, value.regex.source
       end
 
       Regexp.new regex
