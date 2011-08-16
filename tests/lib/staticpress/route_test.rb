@@ -108,6 +108,30 @@ class RouteTest < TestHelper
     assert_match Staticpress::Route.regex_for_pattern(pattern), '/blog/2011/07/20/hello-world'
   end
 
+  def test_regex_for_pattern_post_3
+    pattern = '/:year/:title'
+
+    refute_match Staticpress::Route.regex_for_pattern(pattern), '/'
+    refute_match Staticpress::Route.regex_for_pattern(pattern), '/about'
+    refute_match Staticpress::Route.regex_for_pattern(pattern), '/about/us'
+    assert_match Staticpress::Route.regex_for_pattern(pattern), '/2011/hello-world'
+    refute_match Staticpress::Route.regex_for_pattern(pattern), '/blog/2011/hello-world'
+    refute_match Staticpress::Route.regex_for_pattern(pattern), '/2011/07/20/hello-world'
+    refute_match Staticpress::Route.regex_for_pattern(pattern), '/blog/2011/07/20/hello-world'
+  end
+
+  def test_regex_for_pattern_post_4
+    pattern = '/blog/:year/:title'
+
+    refute_match Staticpress::Route.regex_for_pattern(pattern), '/'
+    refute_match Staticpress::Route.regex_for_pattern(pattern), '/about'
+    refute_match Staticpress::Route.regex_for_pattern(pattern), '/about/us'
+    refute_match Staticpress::Route.regex_for_pattern(pattern), '/2011/hello-world'
+    assert_match Staticpress::Route.regex_for_pattern(pattern), '/blog/2011/hello-world'
+    refute_match Staticpress::Route.regex_for_pattern(pattern), '/2011/07/20/hello-world'
+    refute_match Staticpress::Route.regex_for_pattern(pattern), '/blog/2011/07/20/hello-world'
+  end
+
   def test_regex_for_pattern_tag
     pattern = '/tag/:name'
 
