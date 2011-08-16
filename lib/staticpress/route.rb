@@ -12,7 +12,7 @@ module Staticpress
       :year => /(?<year>\d{4})/,
       :month => /(?<month>\d{2})/,
       :day => /(?<day>\d{2})/,
-      :slug => /(?<slug>[0-9a-z\-_\/]*)/,
+      :slug => /(?<slug>[0-9a-z\-_\/]+)/,
       :title => /(?<title>[0-9a-z\-_]*)/,
       :name => /(?<name>[0-9a-z\-_]*)/,
       :number => /(?<number>\d+)/
