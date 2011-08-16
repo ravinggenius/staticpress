@@ -21,7 +21,7 @@ module Staticpress::Content
     end
 
     def self.find_by_category(category)
-      find_by_route Staticpress::Route.new(:content_type => self, :name => category)
+      find_by_route Staticpress::Route.new(:content_type => self, :name => category, :number => nil)
     end
   end
 end

@@ -23,7 +23,12 @@ module Staticpress
     attr_reader :params
 
     def initialize(params)
-      @params = params
+      # TODO apply default values to all params for which a default value exist
+      @params = if params.key?(:number)
+        params[:number] ? params : params.merge(:number => REGEX_STUBS[:number].default)
+      else
+        params
+      end
     end
 
     def ==(other)
@@ -76,7 +81,17 @@ module Staticpress
 
     def url_path
       return nil unless params[:content_type]
+
       pattern = config.routes[params[:content_type].type].clone
+
+      # http://www.rubular.com/r/UTV5dNDq6c
+      optional_segment_finder = /\((?<optional_segment>.+)\)\?/
+      pattern.gsub! optional_segment_finder do |match|
+        # http://www.rubular.com/r/LiOup53CI1
+        optional_key = /:(?<optional_key>[0-9a-z_]+)/.match(match)[:optional_key].to_sym
+        optional_segment_finder.match(match)[:optional_segment] unless params[optional_key] == REGEX_STUBS[optional_key].default
+      end
+
       REGEX_STUBS.keys.inject(pattern) do |p, key|
         p.gsub /:#{key}/, params[key].to_s
       end
