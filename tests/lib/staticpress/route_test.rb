@@ -9,9 +9,6 @@ class RouteTest < TestHelper
 
     @route_page = Staticpress::Route.new :content_type => Staticpress::Content::Page, :slug => 'about'
     @route_post = Staticpress::Route.new :content_type => Staticpress::Content::Post, :year => '2011', :month => '07', :day => '20', :title => 'hello'
-
-    @page = Staticpress::Content::Page.new @route_page, :markdown
-    @post = Staticpress::Content::Post.new @route_post, :markdown
   end
 
   def test__equalsequals
@@ -21,8 +18,8 @@ class RouteTest < TestHelper
   end
 
   def test_content
-    assert_equal @page, @route_page.content
-    assert_equal @post, @route_post.content
+    assert_equal Staticpress::Content::Page.new(@route_page, :markdown), @route_page.content
+    assert_equal Staticpress::Content::Post.new(@route_post, :markdown), @route_post.content
   end
 
   def test_inspect
