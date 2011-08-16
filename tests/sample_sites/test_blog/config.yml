@@ -11,9 +11,9 @@
 :url: http://yoursite.com
 :preferred_format: markdown
 :routes:
-  :index: '/'
-  :category: '/category/:name'
-  :tag: '/tag/:name'
+  :index: '/(page/:number)?'
+  :category: '/category/:name(/page/:number)?'
+  :tag: '/tag/:name(/page/:number)?'
   :page: '/:slug'
   :post: '/:year/:month/:day/:title'
 :title: Test Blog

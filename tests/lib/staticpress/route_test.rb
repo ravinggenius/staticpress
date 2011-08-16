@@ -52,18 +52,23 @@ class RouteTest < TestHelper
   end
 
   def test_regex_for_pattern_index
-    pattern = '/'
+    pattern = '/(page/:number)?'
 
     assert_match Staticpress::Route.regex_for_pattern(pattern), '/'
+    assert_match Staticpress::Route.regex_for_pattern(pattern), '/page/1'
+    assert_match Staticpress::Route.regex_for_pattern(pattern), '/page/2'
+    assert_match Staticpress::Route.regex_for_pattern(pattern), '/page/17'
 
     refute_match Staticpress::Route.regex_for_pattern(pattern), '/about'
     refute_match Staticpress::Route.regex_for_pattern(pattern), '/about/us'
+    refute_match Staticpress::Route.regex_for_pattern(pattern), '/contact/page/27'
     refute_match Staticpress::Route.regex_for_pattern(pattern), '/static_text/about'
   end
 
   def test_regex_for_pattern_page_1
     pattern = '/:slug'
 
+    assert_match Staticpress::Route.regex_for_pattern(pattern), '/page/1'
     assert_match Staticpress::Route.regex_for_pattern(pattern), '/about'
     assert_match Staticpress::Route.regex_for_pattern(pattern), '/about/us'
     assert_match Staticpress::Route.regex_for_pattern(pattern), '/static_text/about'
@@ -77,6 +82,8 @@ class RouteTest < TestHelper
   def test_regex_for_pattern_page_2
     pattern = '/static_text/:slug'
 
+    assert_match Staticpress::Route.regex_for_pattern(pattern), '/static_text/page/123'
+    assert_match Staticpress::Route.regex_for_pattern(pattern), '/static_text/page/xyz'
     assert_match Staticpress::Route.regex_for_pattern(pattern), '/static_text/about'
     assert_match Staticpress::Route.regex_for_pattern(pattern), '/static_text/about/us'
 
@@ -130,9 +137,10 @@ class RouteTest < TestHelper
   end
 
   def test_regex_for_pattern_tag_1
-    pattern = '/tag/:name'
+    pattern = '/tag/:name(/page/:number)?'
 
     assert_match Staticpress::Route.regex_for_pattern(pattern), '/tag/programming'
+    assert_match Staticpress::Route.regex_for_pattern(pattern), '/tag/programming/page/0'
 
     refute_match Staticpress::Route.regex_for_pattern(pattern), '/'
     refute_match Staticpress::Route.regex_for_pattern(pattern), '/about/us'
@@ -142,9 +150,10 @@ class RouteTest < TestHelper
   end
 
   def test_regex_for_pattern_tag_2
-    pattern = '/something/tag/:name'
+    pattern = '/something/tag/:name(/page/:number)?'
 
     assert_match Staticpress::Route.regex_for_pattern(pattern), '/something/tag/programming'
+    assert_match Staticpress::Route.regex_for_pattern(pattern), '/something/tag/programming/page/123456'
 
     refute_match Staticpress::Route.regex_for_pattern(pattern), '/about/us'
     refute_match Staticpress::Route.regex_for_pattern(pattern), '/static_text/about/us'
@@ -153,9 +162,10 @@ class RouteTest < TestHelper
   end
 
   def test_regex_for_pattern_category_1
-    pattern = '/category/:name'
+    pattern = '/category/:name(/page/:number)?'
 
     assert_match Staticpress::Route.regex_for_pattern(pattern), '/category/programming'
+    assert_match Staticpress::Route.regex_for_pattern(pattern), '/category/programming/page/5'
 
     refute_match Staticpress::Route.regex_for_pattern(pattern), '/about'
     refute_match Staticpress::Route.regex_for_pattern(pattern), '/static_text/about/us'
@@ -164,9 +174,10 @@ class RouteTest < TestHelper
   end
 
   def test_regex_for_pattern_category_2
-    pattern = '/blog/category/:name'
+    pattern = '/blog/category/:name(/page/:number)?'
 
     assert_match Staticpress::Route.regex_for_pattern(pattern), '/blog/category/programming'
+    assert_match Staticpress::Route.regex_for_pattern(pattern), '/blog/category/programming/page/20'
 
     refute_match Staticpress::Route.regex_for_pattern(pattern), '/about/us'
     refute_match Staticpress::Route.regex_for_pattern(pattern), '/static_text/about'
