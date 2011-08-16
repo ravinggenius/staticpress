@@ -74,8 +74,9 @@ module Staticpress
 
     def url_path
       return nil unless params[:content_type]
-      REGEX_STUBS.keys.inject(config.routes[params[:content_type].type].clone) do |pattern, key|
-        pattern.gsub /:#{key}/, params[key].to_s
+      pattern = config.routes[params[:content_type].type].clone
+      REGEX_STUBS.keys.inject(pattern) do |p, key|
+        p.gsub /:#{key}/, params[key].to_s
       end
     end
     alias :to_s :url_path
