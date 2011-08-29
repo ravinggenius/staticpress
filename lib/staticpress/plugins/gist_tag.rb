@@ -1,6 +1,4 @@
-require 'staticpress/plugins/base'
-
 module Staticpress::Plugins
-  class GistTag < Staticpress::Plugins::Base
+  class GistTag
   end
 end

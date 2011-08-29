@@ -1,6 +1,4 @@
-require 'staticpress/plugins/base'
-
 module Staticpress::Plugins
-  class Blockquote < Staticpress::Plugins::Base
+  class Blockquote
   end
 end
