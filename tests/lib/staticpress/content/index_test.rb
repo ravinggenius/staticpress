@@ -11,10 +11,14 @@ class ContentIndexTest < ContentBaseTest
 
     @home_route = Staticpress::Route.from_url_path '/'
     @home = Staticpress::Content::Index.new @home_route, @template_dir + 'default.haml'
+
+    @home_two_route = Staticpress::Route.from_url_path '/page/2'
+    @home_two = Staticpress::Content::Index.new @home_two_route, @template_dir + 'default.haml'
   end
 
   def test__equalsequals
     assert_operator @home, :==, Staticpress::Content::Index.new(@home_route, @template_dir + 'default.haml')
+    refute_operator @home, :==, @home_two
     refute_operator @home, :==, nil
   end
 
@@ -28,6 +32,7 @@ class ContentIndexTest < ContentBaseTest
 
   def test_inspect
     assert_equal '#<Staticpress::Content::Index url_path=/>', @home.inspect
+    assert_equal '#<Staticpress::Content::Index url_path=/page/2>', @home_two.inspect
   end
 
   def test_raw
@@ -35,5 +40,6 @@ class ContentIndexTest < ContentBaseTest
 
   def test_route
     assert_equal '/', @home.route.url_path
+    assert_equal '/page/2', @home_two.route.url_path
   end
 end
