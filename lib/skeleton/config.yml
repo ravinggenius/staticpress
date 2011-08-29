@@ -19,6 +19,7 @@
 :author: Your Name
 :subscribe_rss: /atom.xml
 :subscribe_email:
+:posts_per_page: 10
 :markdown: rdiscount
 :pygments: true
 :paginate: 5
