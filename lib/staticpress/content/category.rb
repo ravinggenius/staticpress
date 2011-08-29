@@ -20,7 +20,9 @@ module Staticpress::Content
       end.compact.flatten.uniq
     end
 
+    # FIXME needs to return an array
     def self.find_by_category(category)
+      # TODO find how many posts and return appropriate number of category pages
       find_by_route Staticpress::Route.new(:content_type => self, :name => category, :number => nil)
     end
   end
