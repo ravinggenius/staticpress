@@ -1,4 +1,4 @@
 module Staticpress::Plugins
-  class Gist
+  module Gist
   end
 end

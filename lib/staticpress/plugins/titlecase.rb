@@ -1,4 +1,4 @@
 module Staticpress::Plugins
-  class Titlecase
+  module Titlecase
   end
 end

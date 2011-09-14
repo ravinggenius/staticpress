@@ -1,4 +1,4 @@
 module Staticpress::Plugins
-  class Blockquote
+  module Blockquote
   end
 end
