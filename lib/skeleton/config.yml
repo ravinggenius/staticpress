@@ -1,6 +1,7 @@
 ---
 :source: content
 :posts_source: content/_posts
+:plugins: []
 :plugins_path: plugins
 :destination: public
 :index_file: index.html
