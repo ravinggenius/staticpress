@@ -3,8 +3,10 @@ require_relative '../../test_helper'
 require 'staticpress/js_object'
 
 class JSObjectTest < TestHelper
+  JSO = Staticpress::JSObject
+
   def setup
-    @js_object = Staticpress::JSObject.new :key => :value, :nested => { :a => :b }
+    @js_object = JSO.new :key => :value, :nested => { :a => :b }
   end
 
   def test__squares
