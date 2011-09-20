@@ -4,6 +4,14 @@ require 'staticpress'
 
 module Staticpress
   class JSObject < OpenStruct
+    def -(other)
+      other_hash = other.to_hash
+      difference = to_hash.select do |key, value|
+        value != other_hash[key]
+      end
+      self.class.new difference
+    end
+
     def [](key)
       method_missing key.to_s.to_sym
     end

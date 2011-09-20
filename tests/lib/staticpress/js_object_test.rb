@@ -9,6 +9,18 @@ class JSObjectTest < TestHelper
     @js_object = JSO.new :key => :value, :nested => { :a => :b }
   end
 
+  def test__minus
+    assert_equal(JSO.new({ :key => :value, :nested => { :a => :b } }), @js_object - {})
+    assert_equal(JSO.new({ :nested => { :a => :b } }), @js_object - { :key => :value })
+    assert_equal(JSO.new({ :key => :value }), @js_object - { :nested => { :a => :b } })
+    assert_equal(JSO.new({}), @js_object - { :key => :value, :nested => { :a => :b } })
+
+    assert_equal(JSO.new({ :key => :value, :nested => { :a => :b } }), @js_object - JSO.new({}))
+    assert_equal(JSO.new({ :nested => { :a => :b } }), @js_object - JSO.new({ :key => :value }))
+    assert_equal(JSO.new({ :key => :value }), @js_object - JSO.new({ :nested => { :a => :b } }))
+    assert_equal(JSO.new({}), @js_object - JSO.new({ :key => :value, :nested => { :a => :b } }))
+  end
+
   def test__squares
     assert_nil @js_object[:some_random]
     assert_equal :value, @js_object[:key]
