@@ -20,7 +20,7 @@ module Staticpress
         return file if file.file?
       end
 
-      raise Staticpress::Error, "Plugin not found: #{file.basename}"
+      raise Staticpress::Error, "Plugin not found: #{name}"
     end
 
     def self.plugin_locations
