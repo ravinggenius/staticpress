@@ -57,25 +57,29 @@ module Staticpress::Content
       content[:text].strip
     end
 
-    def render
+    def render(locals = {})
       if l = layout
-        l.render Object.new, template_locals do
-          render_partial
+        l.render template_context, template_locals.merge(locals) do
+          render_partial locals
         end
       else
-        render_partial
+        render_partial locals
       end
     end
 
-    def render_partial
+    def render_partial(locals = {})
       template = Tilt[template_path].new { raw }
-      template.render Staticpress::ViewHelpers.new(theme), template_locals
+      template.render template_context, template_locals.merge(locals)
     end
 
     def save
       destination = route.file_path
       FileUtils.mkdir_p destination.dirname
       destination.open('w') { |f| f.write render }
+    end
+
+    def template_context
+      Staticpress::ViewHelpers.new theme
     end
 
     def template_locals
