@@ -1,5 +1,6 @@
 require 'staticpress'
 require 'staticpress/plugin'
+require 'staticpress/plugins'
 
 module Staticpress
   class ViewHelpers
@@ -8,6 +9,7 @@ module Staticpress
     def initialize(theme)
       @theme = theme
       Staticpress::Plugin.activate_enabled
+      Staticpress::Plugins.constants.each { |plugin| include plugin }
     end
 
     def partial(name, locals = {})
