@@ -84,7 +84,6 @@ module Staticpress::Content
 
     def template_locals
       {
-        :config => config,
         :meta => meta,
         :page => self
       }
