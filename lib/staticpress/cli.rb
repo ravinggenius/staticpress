@@ -95,13 +95,11 @@ customizations. If [theme-name] is blank, copies the currently configured theme
 
     desc 'build', 'Prepare blog for deployment'
     def build
-      Staticpress::Plugin.activate_enabled
       Staticpress::Site.new.save
     end
 
     desc 'serve', 'Turn on local server for development'
     def serve
-      Staticpress::Plugin.activate_enabled
       Rack::Server.new(:config => (Staticpress.blog_path + 'config.ru').to_s, :Port => config.port).start
     end
 
