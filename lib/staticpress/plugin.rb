@@ -7,7 +7,7 @@ module Staticpress
     extend Staticpress::Helpers
 
     def self.activate_enabled
-      config.plugins.each do |plugin_name|
+      (config.plugins || []).each do |plugin_name|
         require find(plugin_name).to_s
       end
     end
