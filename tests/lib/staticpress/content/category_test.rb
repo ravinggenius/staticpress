@@ -48,6 +48,6 @@ class ContentCategoryTest < ContentBaseTest
 
   def test_all
     assert_equal 1, Staticpress::Content::Category.all.count
-    assert Staticpress::Content::Category.all.include?(@category_page)
+    assert Staticpress::Content::Category.all.include?(@category_page), "#{Staticpress::Content::Category.all.inspect} does not include #{@category_page.inspect}"
   end
 end
