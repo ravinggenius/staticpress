@@ -10,7 +10,7 @@ module Staticpress::Content
 
     def self.all
       categories.map do |category|
-        find_by_route Staticpress::Route.new(:content_type => self, :name => category, :number => 1)
+        find_by_route Staticpress::Route.new(:content_type => self, :name => category, :number => '1')
       end
     end
 
