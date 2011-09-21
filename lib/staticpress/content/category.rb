@@ -5,25 +5,27 @@ require 'staticpress/route'
 module Staticpress::Content
   class Category < CollectionContent
     def sub_content
-      Staticpress::Content::Post.all.map do |post|
-        post if post.meta.categories && post.meta.categories.include?(route.params[:name])
-      end.compact
+      paginate(self.class.content_by_category[route.params[:name]])[(Integer route.params[:number]) - 1]
     end
 
     def self.all
-      categories.map { |category| find_by_category category }
+      categories.map do |category|
+        find_by_route Staticpress::Route.new(:content_type => self, :name => category, :number => 1)
+      end
     end
 
     def self.categories
-      Staticpress::Content::Post.all.map do |post|
-        post.meta.categories
-      end.compact.flatten.uniq
+      content_by_category.keys
     end
 
-    # FIXME needs to return an array
-    def self.find_by_category(category)
-      # TODO find how many posts and return appropriate number of category pages
-      find_by_route Staticpress::Route.new(:content_type => self, :name => category, :number => nil)
+    def self.content_by_category
+      reply = {}
+      Staticpress::Content::Post.all.each do |post|
+        (post.meta.categories || []).each do |category|
+          (reply[category] ||= []) << post
+        end
+      end
+      reply
     end
   end
 end

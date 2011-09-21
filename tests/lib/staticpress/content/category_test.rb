@@ -26,10 +26,6 @@ class ContentCategoryTest < ContentBaseTest
     assert @category_page.exist?, '@category_page does not exist'
   end
 
-  def test_find_by_category
-    assert_equal @category_page, Staticpress::Content::Category.find_by_category('programming')
-  end
-
   def test_find_by_route
     assert_equal @category_page, Staticpress::Content::Category.find_by_route(@category_page_route)
   end
