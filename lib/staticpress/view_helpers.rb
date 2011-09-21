@@ -12,8 +12,8 @@ module Staticpress
     def initialize(theme)
       @theme = theme
       Staticpress::Plugin.activate_enabled
-      Staticpress::Plugins.constants.each do |plugin|
-        class << self
+      class << self
+        Staticpress::Plugins.constants.each do |plugin|
           include Staticpress::Plugins.const_get(plugin)
         end
       end
