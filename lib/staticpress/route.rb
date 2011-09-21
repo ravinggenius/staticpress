@@ -1,6 +1,7 @@
 require 'staticpress'
 require 'staticpress/error'
 require 'staticpress/helpers'
+require 'staticpress/site'
 
 module Staticpress
   class Route

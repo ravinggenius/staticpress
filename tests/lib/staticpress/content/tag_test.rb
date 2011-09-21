@@ -2,6 +2,7 @@ require_relative 'base_test'
 
 require 'staticpress/content/tag'
 require 'staticpress/route'
+require 'staticpress/theme'
 
 class ContentTagTest < ContentBaseTest
   def setup
