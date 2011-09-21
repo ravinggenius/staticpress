@@ -24,5 +24,19 @@ module Staticpress
 
       Hash[reply]
     end
+
+    def paginate(range)
+      reply = []
+      range_count = range.count
+      per_page = config.posts_per_page
+      array = range.to_a
+
+      total_pages_count = (range_count / per_page) + ((range_count % per_page) == 0 ? 0 : 1)
+      (0...total_pages_count).each do |number|
+        reply << array[number * per_page, per_page]
+      end
+
+      reply
+    end
   end
 end
