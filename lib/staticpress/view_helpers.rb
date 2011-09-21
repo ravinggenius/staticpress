@@ -12,7 +12,11 @@ module Staticpress
     def initialize(theme)
       @theme = theme
       Staticpress::Plugin.activate_enabled
-      Staticpress::Plugins.constants.each { |plugin| include plugin }
+      Staticpress::Plugins.constants.each do |plugin|
+        class << self
+          include Staticpress::Plugins.const_get(plugin)
+        end
+      end
     end
 
     def partial(name, locals = {})
