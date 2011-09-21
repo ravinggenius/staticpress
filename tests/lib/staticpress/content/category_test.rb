@@ -2,6 +2,7 @@ require_relative 'base_test'
 
 require 'staticpress/content/category'
 require 'staticpress/route'
+require 'staticpress/site'
 
 class ContentCategoryTest < ContentBaseTest
   def setup
