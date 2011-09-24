@@ -10,7 +10,7 @@ class ContentTagTest < ContentBaseTest
 
     @template_dir = Staticpress::Theme.theme.root + '_views'
 
-    @tag_page_route = Staticpress::Route.from_url_path '/tag/code'
+    @tag_page_route = Staticpress::Route.from_url_path '/tag/charlotte'
     @tag_page = Staticpress::Content::Tag.new @tag_page_route, @template_dir + 'default.haml'
   end
 
@@ -31,7 +31,7 @@ class ContentTagTest < ContentBaseTest
   end
 
   def test_inspect
-    assert_equal '#<Staticpress::Content::Tag url_path=/tag/code>', @tag_page.inspect
+    assert_equal '#<Staticpress::Content::Tag url_path=/tag/charlotte>', @tag_page.inspect
   end
 
   def test_sub_content
@@ -41,7 +41,7 @@ class ContentTagTest < ContentBaseTest
   end
 
   def test_route
-    assert_equal '/tag/code', @tag_page.route.url_path
+    assert_equal '/tag/charlotte', @tag_page.route.url_path
   end
 
   def test_all
