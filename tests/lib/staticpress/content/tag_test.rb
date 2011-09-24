@@ -20,6 +20,7 @@ class ContentTagTest < ContentBaseTest
   end
 
   def test_tags
+    assert_equal [ 'charlotte' ], Staticpress::Content::Tag.tags
   end
 
   def test_exist?
@@ -35,9 +36,11 @@ class ContentTagTest < ContentBaseTest
   end
 
   def test_sub_content
+    assert_equal 1, @tag_page.sub_content.count
   end
 
   def test_raw
+    assert_equal '= partial :list_posts, :posts => page.sub_content', @tag_page.raw
   end
 
   def test_route
@@ -45,5 +48,13 @@ class ContentTagTest < ContentBaseTest
   end
 
   def test_all
+    assert_equal 1, Staticpress::Content::Tag.all.count
+    assert Staticpress::Content::Tag.all.include?(@tag_page)
+  end
+
+  def test_content_by_tag
+    [
+      Staticpress::Route.new(:content_type => Staticpress::Content::Post, :year => '2011', :month => '08', :day => '06', :title => 'in-charlotte').content
+    ].each { |content| assert_includes Staticpress::Content::Tag.content_by_tag['charlotte'], content }
   end
 end

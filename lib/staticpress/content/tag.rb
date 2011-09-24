@@ -5,23 +5,27 @@ require 'staticpress/route'
 module Staticpress::Content
   class Tag < CollectionContent
     def sub_content
-      Staticpress::Content::Post.all.map do |post|
-        post if post.meta.tags && post.meta.tags.include?(route.params[:name])
-      end.compact
+      paginate(self.class.content_by_tag[route.params[:name]])[(Integer route.params[:number]) - 1]
     end
 
     def self.all
-      tags.map { |tag| find_by_tag tag }
+      tags.map do |tag|
+        find_by_route Staticpress::Route.new(:content_type => self, :name => tag, :number => '1')
+      end
     end
 
     def self.tags
-      Staticpress::Content::Post.all.map do |post|
-        post.meta.tags
-      end.compact.flatten.uniq
+      content_by_tag.keys
     end
 
-    def self.find_by_tag(tag)
-      find_by_route Staticpress::Route.new(:content_type => self, :name => tag)
+    def self.content_by_tag
+      reply = {}
+      Staticpress::Content::Post.all.each do |post|
+        (post.meta.tags || []).each do |tag|
+          (reply[tag] ||= []) << post
+        end
+      end
+      reply
     end
   end
 end
