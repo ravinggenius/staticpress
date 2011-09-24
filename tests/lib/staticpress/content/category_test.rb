@@ -20,7 +20,7 @@ class ContentCategoryTest < ContentBaseTest
   end
 
   def test_categories
-    assert_equal [ 'programming' ], Staticpress::Content::Category.categories
+    assert_equal [ 'programming', 'travel' ], Staticpress::Content::Category.categories
   end
 
   def test_exist?
@@ -48,7 +48,7 @@ class ContentCategoryTest < ContentBaseTest
   end
 
   def test_all
-    assert_equal 1, Staticpress::Content::Category.all.count
+    assert_equal 2, Staticpress::Content::Category.all.count
     assert Staticpress::Content::Category.all.include?(@category_page)
   end
 
