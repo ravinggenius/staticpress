@@ -19,6 +19,9 @@ class ContentTagTest < ContentBaseTest
     refute_operator @tag_page, :==, nil
   end
 
+  def test_tags
+  end
+
   def test_exist?
     assert @tag_page.exist?, '@tag_page does not exist'
   end
@@ -31,10 +34,16 @@ class ContentTagTest < ContentBaseTest
     assert_equal '#<Staticpress::Content::Tag url_path=/tag/code>', @tag_page.inspect
   end
 
+  def test_sub_content
+  end
+
   def test_raw
   end
 
   def test_route
     assert_equal '/tag/code', @tag_page.route.url_path
+  end
+
+  def test_all
   end
 end
