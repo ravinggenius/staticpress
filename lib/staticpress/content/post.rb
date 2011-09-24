@@ -4,13 +4,13 @@ require 'staticpress/route'
 
 module Staticpress::Content
   class Post < Base
+    def created_at
+      meta.created_at ? meta.created_at : created_on
+    end
+
     def created_on
       date = route.params
-      Date.parse [
-        date[:year],
-        date[:month],
-        date[:day]
-      ].join('-')
+      Time.utc date[:year], date[:month], date[:day]
     end
 
     def self.all

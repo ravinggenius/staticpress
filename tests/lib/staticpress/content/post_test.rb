@@ -14,6 +14,9 @@ class ContentPostTest < ContentBaseTest
 
     @post_route = Staticpress::Route.from_url_path '/2011/07/20/hello'
     @post = Staticpress::Content::Post.new @post_route, @post_dir + '2011-07-20-hello.markdown'
+
+    @another_post_route = Staticpress::Route.from_url_path '/2011/08/20/forever'
+    @another_post = Staticpress::Content::Post.new @another_post_route, @post_dir + '2011-08-20-forever.markdown'
   end
 
   def test__equalsequals
@@ -21,8 +24,14 @@ class ContentPostTest < ContentBaseTest
     refute_operator @post, :==, nil
   end
 
+  def test_created_at
+    assert_equal Time.utc(2011, 7, 20, 13, 9, 52), @post.created_at
+    assert_equal Time.utc(2011, 8, 20), @another_post.created_at
+  end
+
   def test_created_on
-    assert_equal Date.new(2011, 07, 20), @post.created_on
+    assert_equal Time.utc(2011, 7, 20), @post.created_on
+    assert_equal Time.utc(2011, 8, 20), @another_post.created_on
   end
 
   def test_exist?
