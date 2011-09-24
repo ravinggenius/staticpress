@@ -4,6 +4,10 @@ require 'staticpress/route'
 
 module Staticpress::Content
   class Post < Base
+    def <=>(other)
+      other.respond_to?(:created_at) ? (created_at <=> other.created_at) : super
+    end
+
     def created_at
       meta.created_at ? meta.created_at : created_on
     end

@@ -24,6 +24,13 @@ class ContentPostTest < ContentBaseTest
     refute_operator @post, :==, nil
   end
 
+  def test__spaceship
+    assert_operator @post, :<=>, @another_post
+    assert_operator @another_post, :<=>, @post
+    assert_equal [ @post, @another_post ], [ @post, @another_post ].sort
+    assert_equal [ @post, @another_post ], [ @another_post, @post ].sort
+  end
+
   def test_created_at
     assert_equal Time.utc(2011, 7, 20, 13, 9, 52), @post.created_at
     assert_equal Time.utc(2011, 8, 20), @another_post.created_at
