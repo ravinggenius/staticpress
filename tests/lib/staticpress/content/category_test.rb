@@ -51,4 +51,12 @@ class ContentCategoryTest < ContentBaseTest
     assert_equal 1, Staticpress::Content::Category.all.count
     assert Staticpress::Content::Category.all.include?(@category_page)
   end
+
+  def test_content_by_category
+    [
+      Staticpress::Route.new(:content_type => Staticpress::Content::Post, :year => '2011', :month => '08', :day => '01', :title => 'announcing-staticpress').content,
+      Staticpress::Route.new(:content_type => Staticpress::Content::Post, :year => '2011', :month => '08', :day => '02', :title => 'staticpress').content,
+      Staticpress::Route.new(:content_type => Staticpress::Content::Post, :year => '2011', :month => '08', :day => '06', :title => 'blogging-with-staticpress').content
+    ].each { |content| assert_includes Staticpress::Content::Category.content_by_category['programming'], content }
+  end
 end
