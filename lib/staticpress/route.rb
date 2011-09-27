@@ -25,6 +25,7 @@ module Staticpress
 
     def initialize(params)
       # TODO apply default values to all params for which a default value exist
+      # TODO ensure all param values are correct type (not always strings)
       @params = if params.key?(:number)
         params[:number] ? params : params.merge(:number => REGEX_STUBS[:number].default)
       else
