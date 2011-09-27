@@ -27,6 +27,11 @@ module Staticpress
 
     def paginate(range)
       reply = []
+
+      def reply.[](*args)
+        super || []
+      end
+
       range_count = range.count
       per_page = config.posts_per_page
       array = range.to_a
