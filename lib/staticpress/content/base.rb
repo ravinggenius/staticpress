@@ -59,7 +59,7 @@ module Staticpress::Content
 
     def render(locals = {})
       if l = layout
-        l.render template_context, template_locals.merge(locals) do
+        l.render template_context, locals do
           render_partial locals
         end
       else
@@ -69,7 +69,7 @@ module Staticpress::Content
 
     def render_partial(locals = {})
       template = Tilt[template_path].new { raw }
-      template.render template_context, template_locals.merge(locals)
+      template.render template_context, locals
     end
 
     def save
@@ -79,14 +79,7 @@ module Staticpress::Content
     end
 
     def template_context
-      Staticpress::ViewHelpers.new theme
-    end
-
-    def template_locals
-      {
-        :meta => meta,
-        :page => self
-      }
+      Staticpress::ViewHelpers.new self
     end
 
     def template_path_content
