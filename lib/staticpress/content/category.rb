@@ -5,7 +5,7 @@ require 'staticpress/route'
 module Staticpress::Content
   class Category < CollectionContent
     def sub_content
-      paginate(self.class.content_by_category[route.params[:name]])[(Integer route.params[:number]) - 1]
+      paginate(self.class.content_by_category[route.params[:name]].sort)[(Integer route.params[:number]) - 1]
     end
 
     def self.all
