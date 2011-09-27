@@ -5,13 +5,12 @@ require 'staticpress/route'
 module Staticpress::Content
   class Index < CollectionContent
     def sub_content
-      # FIXME return subset based on what page number we are on
-      Staticpress::Content::Post.all
+      paginate(Staticpress::Content::Post.all)[(Integer route.params[:number]) - 1]
     end
 
     def self.all
       [
-        (find_by_route Staticpress::Route.new(:content_type => self))
+        (find_by_route Staticpress::Route.new(:content_type => self, :number => '1'))
       ]
     end
   end
