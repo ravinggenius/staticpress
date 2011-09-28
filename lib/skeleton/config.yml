@@ -15,6 +15,7 @@
   :tag: '/tag/:name(/page/:number)?'
   :page: '/:slug'
   :post: '/:year/:month/:day/:title'
+  :static: '/:slug'
 :title: My Staticpress Blog
 :subtitle: A blogging framework for hackers.
 :author: Your Name
