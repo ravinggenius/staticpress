@@ -38,11 +38,6 @@ class RouteTest < TestHelper
     assert_equal({ :content_type => Staticpress::Content::Post, :year => '2011', :month => '07', :day => '20', :title => 'hello' }, @route_post.params)
   end
 
-  def test_file_path
-    assert_equal (Staticpress.blog_path + 'public' + 'about' + 'index.html'), @route_page.file_path
-    assert_equal (Staticpress.blog_path + 'public' + '2011' + '07' + '20' + 'hello' + 'index.html'), @route_post.file_path
-  end
-
   def test_url_path
     assert_equal '/category/programming', @route_category_0.url_path
     assert_equal '/category/programming', @route_category_1.url_path

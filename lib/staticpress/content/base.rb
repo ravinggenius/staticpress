@@ -53,6 +53,10 @@ module Staticpress::Content
       Staticpress::Metadata.new(content.names.include?('frontmatter') ? YAML.load(content[:frontmatter]) : {})
     end
 
+    def output_path
+      Staticpress.blog_path + config.destination + route.url_path.sub(/^\//, '') + config.index_file
+    end
+
     def raw
       content[:text].strip
     end
@@ -73,9 +77,8 @@ module Staticpress::Content
     end
 
     def save
-      destination = route.file_path
-      FileUtils.mkdir_p destination.dirname
-      destination.open('w') { |f| f.write render }
+      FileUtils.mkdir_p output_path.dirname
+      output_path.open('w') { |f| f.write render }
     end
 
     def template_context

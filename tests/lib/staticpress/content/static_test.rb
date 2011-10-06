@@ -68,9 +68,9 @@ class ContentStaticTest < ContentBaseTest
 
   def test_save
     @static_bin.save
-    assert_equal @static_bin.template_path.binread, @static_bin.route.file_path.binread
+    assert_equal @static_bin.template_path.binread, @static_bin.output_path.binread
 
     @static_txt.save
-    assert_equal @static_txt.template_path.read, @static_txt.route.file_path.read
+    assert_equal @static_txt.template_path.read, @static_txt.output_path.read
   end
 end

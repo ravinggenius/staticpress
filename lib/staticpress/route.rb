@@ -76,11 +76,6 @@ module Staticpress
       config.routes[type]
     end
 
-    def file_path
-      return nil unless url_path
-      Staticpress.blog_path + config.destination + url_path.sub(/^\//, '') + config.index_file
-    end
-
     def url_path
       return nil unless params[:content_type]
 

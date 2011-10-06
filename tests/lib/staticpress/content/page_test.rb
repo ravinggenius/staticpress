@@ -49,6 +49,10 @@ class ContentPageTest < ContentBaseTest
     assert_equal '#<Staticpress::Content::Page url_path=/about>', @page.inspect
   end
 
+  def test_output_path
+    assert_equal (Staticpress.blog_path + 'public' + 'about' + 'index.html'), @page.output_path
+  end
+
   def test_raw
     assert_equal 'in page', @page.raw
     assert_equal "in page\n\nin page", @second_page.raw

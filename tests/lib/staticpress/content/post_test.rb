@@ -60,6 +60,10 @@ class ContentPostTest < ContentBaseTest
     assert_equal '#<Staticpress::Content::Post url_path=/2011/07/20/hello>', @post.inspect
   end
 
+  def test_output_path
+    assert_equal (Staticpress.blog_path + 'public' + '2011' + '07' + '20' + 'hello' + 'index.html'), @post.output_path
+  end
+
   def test_raw
     assert_equal 'in post', @post.raw
   end
