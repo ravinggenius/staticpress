@@ -26,6 +26,10 @@ class ContentStaticTest < ContentBaseTest
     refute_operator @static_bin, :==, @static_txt
   end
 
+  def test_all
+    assert_equal 2, Staticpress::Content::Static.all.count
+  end
+
   def test_exist?
     assert @static_bin.exist?, '@static_bin does not exist'
     assert @static_txt.exist?, '@static_txt does not exist'

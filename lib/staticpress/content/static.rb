@@ -24,7 +24,7 @@ module Staticpress::Content
         else
           find_by_path child
         end
-      end.flatten
+      end.flatten.compact
     end
 
     def self.find_by_path(path)
@@ -33,7 +33,9 @@ module Staticpress::Content
         :content_type => self,
         :slug => slug
       }
-      find_by_route Staticpress::Route.new(params) if path.file?
+      if path.file? && supported_extensions.none? { |ext| path.to_s.end_with? ext.to_s }
+        find_by_route Staticpress::Route.new(params)
+      end
     end
 
     def self.find_by_route(route)
