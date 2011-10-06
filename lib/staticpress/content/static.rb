@@ -1,6 +1,5 @@
 require 'staticpress'
 require 'staticpress/content/base'
-require 'staticpress/error'
 require 'staticpress/route'
 
 module Staticpress::Content
