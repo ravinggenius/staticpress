@@ -103,16 +103,6 @@ module Staticpress::Content
       end
     end
 
-    def self.spider_directory(dir, &block)
-      dir.children.map do |child|
-        if child.directory?
-          spider_directory child, &block
-        else
-          block.call child
-        end
-      end
-    end
-
     def self.supported_extensions
       Tilt.mappings.keys.map &:to_sym
     end

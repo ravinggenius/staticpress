@@ -51,4 +51,7 @@ class HelpersTest < TestHelper
     assert_equal (:u..:z).to_a, paginate(:a..:z)[2]
     assert_equal [], paginate(:a..:z)[5], 'Accessing an invalid index on anything that has been paginated should return an empty array'
   end
+
+  def test_spider_directory
+  end
 end

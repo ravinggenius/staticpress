@@ -43,5 +43,15 @@ module Staticpress
 
       reply
     end
+
+    def spider_directory(dir, &block)
+      dir.children.map do |child|
+        if child.directory?
+          spider_directory child, &block
+        else
+          block.call child
+        end
+      end
+    end
   end
 end
