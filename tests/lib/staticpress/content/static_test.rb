@@ -14,9 +14,6 @@ class ContentStaticTest < ContentBaseTest
 
     @static_route = Staticpress::Route.from_url_path '/ruby.png'
     @static = Staticpress::Content::Static.new @static_route, @static_dir + 'ruby.png'
-
-    puts
-    puts @static_route.inspect
   end
 
   def test__equalsequals
