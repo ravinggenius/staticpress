@@ -6,7 +6,7 @@ require 'staticpress/route'
 module Staticpress::Content
   class Static < Base
     def render_partial(locals = {})
-      raise Staticpress::Error, 'Static content types should not use #render_partial'
+      template_path_content
     end
 
     def self.all

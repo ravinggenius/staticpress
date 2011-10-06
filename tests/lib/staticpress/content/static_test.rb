@@ -54,9 +54,7 @@ class ContentStaticTest < ContentBaseTest
   end
 
   def test_render_partial
-    assert_raises Staticpress::Error do
-      @static_txt.render_partial
-    end
+    assert_equal 'this file intentionally left blank', @static_txt.render_partial
   end
 
   def test_route
