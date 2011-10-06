@@ -44,11 +44,9 @@ class ContentStaticTest < ContentBaseTest
   end
 
   def test_raw
-    assert_equal 'in static', @static.raw
   end
 
   def test_render_partial
-    assert_equal "<p>in static</p>\n", @static.render_partial
   end
 
   def test_route
