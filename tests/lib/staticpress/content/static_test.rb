@@ -26,7 +26,6 @@ class ContentStaticTest < ContentBaseTest
   end
 
   def test_find_by_path
-    @static_dir = Staticpress.blog_path + config.source
     assert_equal @static, Staticpress::Content::Static.find_by_path(@static_dir + 'ruby.png')
     assert_nil Staticpress::Content::Static.find_by_path(@static_dir + 'i' + 'dont' + 'exist.jpg')
   end
