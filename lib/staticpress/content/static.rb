@@ -5,6 +5,10 @@ require 'staticpress/route'
 
 module Staticpress::Content
   class Static < Base
+    def layout
+      nil
+    end
+
     def render_partial(locals = {})
       template_path_content
     end

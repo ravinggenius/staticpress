@@ -53,6 +53,10 @@ class ContentStaticTest < ContentBaseTest
     assert_equal 'this file intentionally left blank', @static_txt.raw
   end
 
+  def test_render
+    assert_equal 'this file intentionally left blank', @static_txt.render
+  end
+
   def test_render_partial
     assert_equal 'this file intentionally left blank', @static_txt.render_partial
   end
