@@ -88,9 +88,10 @@ customizations. If [theme-name] is blank, copies the currently configured theme
       FileUtils.cp_r source.children, destination
     end
 
-    desc 'list <method>', 'Send <method> to every content and output the result'
-    def list(method)
-      puts Staticpress::Site.new.all_content.map(&method.to_sym)
+    desc 'list [method]', 'Send [method] to every content and output the result, or list all content if [method] is not present'
+    def list(method = nil)
+      all_content = Staticpress::Site.new.all_content
+      puts(method ? all_content.map(&method.to_sym) : all_content)
     end
 
     desc 'build', 'Prepare blog for deployment'
