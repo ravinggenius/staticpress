@@ -49,6 +49,11 @@ class ContentStaticTest < ContentBaseTest
     assert_equal '#<Staticpress::Content::Static url_path=/ruby.png>', @static_bin.inspect
   end
 
+  def test_output_path
+    assert_equal (Staticpress.blog_path + 'public' + 'ruby.png'), @static_bin.output_path
+    assert_equal (Staticpress.blog_path + 'public' + 'plain.txt'), @static_txt.output_path
+  end
+
   def test_raw
     assert_equal 'this file intentionally left blank', @static_txt.raw
   end
