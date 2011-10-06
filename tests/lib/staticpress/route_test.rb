@@ -69,6 +69,8 @@ class RouteTest < TestHelper
     refute_match Staticpress::Route.regex_for_pattern(pattern), '/about/us'
     refute_match Staticpress::Route.regex_for_pattern(pattern), '/contact/page/27'
     refute_match Staticpress::Route.regex_for_pattern(pattern), '/static_text/about'
+    refute_match Staticpress::Route.regex_for_pattern(pattern), '/plain.txt'
+    refute_match Staticpress::Route.regex_for_pattern(pattern), '/files/profile.jpg'
   end
 
   def test_regex_for_pattern_page_1
@@ -81,6 +83,8 @@ class RouteTest < TestHelper
     assert_match Staticpress::Route.regex_for_pattern(pattern), '/static_text/about/us'
     assert_match Staticpress::Route.regex_for_pattern(pattern), '/2011/07/20/hello-world'
     assert_match Staticpress::Route.regex_for_pattern(pattern), '/blog/2011/07/20/hello-world'
+    assert_match Staticpress::Route.regex_for_pattern(pattern), '/plain.txt'
+    assert_match Staticpress::Route.regex_for_pattern(pattern), '/files/profile.jpg'
 
     refute_match Staticpress::Route.regex_for_pattern(pattern), '/'
   end
@@ -92,6 +96,8 @@ class RouteTest < TestHelper
     assert_match Staticpress::Route.regex_for_pattern(pattern), '/static_text/page/xyz'
     assert_match Staticpress::Route.regex_for_pattern(pattern), '/static_text/about'
     assert_match Staticpress::Route.regex_for_pattern(pattern), '/static_text/about/us'
+    assert_match Staticpress::Route.regex_for_pattern(pattern), '/static_text/plain.txt'
+    assert_match Staticpress::Route.regex_for_pattern(pattern), '/static_text/files/profile.jpg'
 
     refute_match Staticpress::Route.regex_for_pattern(pattern), '/'
     refute_match Staticpress::Route.regex_for_pattern(pattern), '/about'
@@ -106,6 +112,8 @@ class RouteTest < TestHelper
     refute_match Staticpress::Route.regex_for_pattern(pattern), '/about'
     refute_match Staticpress::Route.regex_for_pattern(pattern), '/static_text/about/us'
     refute_match Staticpress::Route.regex_for_pattern(pattern), '/blog/2011/07/20/hello-world'
+    refute_match Staticpress::Route.regex_for_pattern(pattern), '/plain.txt'
+    refute_match Staticpress::Route.regex_for_pattern(pattern), '/files/profile.jpg'
   end
 
   def test_regex_for_pattern_post_2
@@ -117,6 +125,8 @@ class RouteTest < TestHelper
     refute_match Staticpress::Route.regex_for_pattern(pattern), '/about/us'
     refute_match Staticpress::Route.regex_for_pattern(pattern), '/blog/about'
     refute_match Staticpress::Route.regex_for_pattern(pattern), '/2011/07/20/hello-world'
+    refute_match Staticpress::Route.regex_for_pattern(pattern), '/plain.txt'
+    refute_match Staticpress::Route.regex_for_pattern(pattern), '/files/profile.jpg'
   end
 
   def test_regex_for_pattern_post_3
@@ -128,6 +138,8 @@ class RouteTest < TestHelper
     refute_match Staticpress::Route.regex_for_pattern(pattern), '/about/us'
     refute_match Staticpress::Route.regex_for_pattern(pattern), '/blog/2011/hello-world'
     refute_match Staticpress::Route.regex_for_pattern(pattern), '/2011/07/20/hello-world'
+    refute_match Staticpress::Route.regex_for_pattern(pattern), '/plain.txt'
+    refute_match Staticpress::Route.regex_for_pattern(pattern), '/files/profile.jpg'
   end
 
   def test_regex_for_pattern_post_4
@@ -140,6 +152,8 @@ class RouteTest < TestHelper
     refute_match Staticpress::Route.regex_for_pattern(pattern), '/2011/hello-world'
     refute_match Staticpress::Route.regex_for_pattern(pattern), '/2011/07/20/hello-world'
     refute_match Staticpress::Route.regex_for_pattern(pattern), '/blog/2011/07/20/hello-world'
+    refute_match Staticpress::Route.regex_for_pattern(pattern), '/plain.txt'
+    refute_match Staticpress::Route.regex_for_pattern(pattern), '/files/profile.jpg'
   end
 
   def test_regex_for_pattern_tag_1
@@ -153,6 +167,8 @@ class RouteTest < TestHelper
     refute_match Staticpress::Route.regex_for_pattern(pattern), '/static_text/about'
     refute_match Staticpress::Route.regex_for_pattern(pattern), '/2011/07/20/hello-world'
     refute_match Staticpress::Route.regex_for_pattern(pattern), '/something/tag/programming'
+    refute_match Staticpress::Route.regex_for_pattern(pattern), '/plain.txt'
+    refute_match Staticpress::Route.regex_for_pattern(pattern), '/files/profile.jpg'
   end
 
   def test_regex_for_pattern_tag_2
@@ -165,6 +181,8 @@ class RouteTest < TestHelper
     refute_match Staticpress::Route.regex_for_pattern(pattern), '/static_text/about/us'
     refute_match Staticpress::Route.regex_for_pattern(pattern), '/2011/07/20/hello-world'
     refute_match Staticpress::Route.regex_for_pattern(pattern), '/tag/programming'
+    refute_match Staticpress::Route.regex_for_pattern(pattern), '/plain.txt'
+    refute_match Staticpress::Route.regex_for_pattern(pattern), '/files/profile.jpg'
   end
 
   def test_regex_for_pattern_category_1
@@ -177,6 +195,8 @@ class RouteTest < TestHelper
     refute_match Staticpress::Route.regex_for_pattern(pattern), '/static_text/about/us'
     refute_match Staticpress::Route.regex_for_pattern(pattern), '/2011/07/20/hello-world'
     refute_match Staticpress::Route.regex_for_pattern(pattern), '/blog/2011/07/20/hello-world'
+    refute_match Staticpress::Route.regex_for_pattern(pattern), '/plain.txt'
+    refute_match Staticpress::Route.regex_for_pattern(pattern), '/files/profile.jpg'
   end
 
   def test_regex_for_pattern_category_2
@@ -189,5 +209,7 @@ class RouteTest < TestHelper
     refute_match Staticpress::Route.regex_for_pattern(pattern), '/static_text/about'
     refute_match Staticpress::Route.regex_for_pattern(pattern), '/blog/2011/07/20/hello-world'
     refute_match Staticpress::Route.regex_for_pattern(pattern), '/category/programming'
+    refute_match Staticpress::Route.regex_for_pattern(pattern), '/plain.txt'
+    refute_match Staticpress::Route.regex_for_pattern(pattern), '/files/profile.jpg'
   end
 end

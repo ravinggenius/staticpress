@@ -15,7 +15,7 @@ module Staticpress
       :year => RegexStub.new(/(?<year>\d{4})/),
       :month => RegexStub.new(/(?<month>\d{2})/),
       :day => RegexStub.new(/(?<day>\d{2})/),
-      :slug => RegexStub.new(/(?<slug>[0-9a-z\-_\/]+)/),
+      :slug => RegexStub.new(/(?<slug>[0-9a-z\-_\.\/]+)/),
       :title => RegexStub.new(/(?<title>[0-9a-z\-_]*)/),
       :name => RegexStub.new(/(?<name>[0-9a-z\-_]*)/),
       :number => RegexStub.new(/(?<number>\d+)/, '1')
