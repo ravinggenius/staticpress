@@ -65,4 +65,12 @@ class ContentStaticTest < ContentBaseTest
     assert_equal '/ruby.png', @static_bin.route.url_path
     assert_equal '/plain.txt', @static_txt.route.url_path
   end
+
+  def test_save
+    @static_bin.save
+    assert_equal @static_bin.template_path.binread, @static_bin.route.file_path.binread
+
+    @static_txt.save
+    assert_equal @static_txt.template_path.read, @static_txt.route.file_path.read
+  end
 end
