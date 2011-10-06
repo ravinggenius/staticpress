@@ -25,6 +25,10 @@ class ContentPageTest < ContentBaseTest
     refute_operator @page, :==, nil
   end
 
+  def test_all
+    assert_equal 2, Staticpress::Content::Page.all.count
+  end
+
   def test_exist?
     assert @page.exist?, '@page does not exist'
     assert @second_page.exist?, '@second_page does not exist'

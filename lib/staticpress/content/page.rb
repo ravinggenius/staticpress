@@ -19,7 +19,7 @@ module Staticpress::Content
         else
           find_by_path child
         end
-      end.flatten
+      end.flatten.compact
     end
 
     def self.create(format, title, path = nil)
