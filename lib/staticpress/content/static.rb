@@ -27,14 +27,6 @@ module Staticpress::Content
       end.flatten
     end
 
-    def self.all
-      if (posts_dir = Staticpress.blog_path + config.posts_source).directory?
-        posts_dir.children.map { |file| find_by_path file }
-      else
-        []
-      end
-    end
-
     def self.find_by_path(path)
       slug = path.to_s.sub((Staticpress.blog_path + config.source).to_s, '').sub(/^\//, '')
       params = {
