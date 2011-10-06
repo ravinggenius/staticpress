@@ -50,6 +50,9 @@ class ContentStaticTest < ContentBaseTest
   end
 
   def test_render_partial
+    assert_raises Staticpress::Error do
+      @static_txt.render_partial
+    end
   end
 
   def test_route

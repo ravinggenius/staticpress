@@ -1,9 +1,14 @@
 require 'staticpress'
 require 'staticpress/content/base'
+require 'staticpress/error'
 require 'staticpress/route'
 
 module Staticpress::Content
   class Static < Base
+    def render_partial(*args)
+      raise Staticpress::Error, 'Static content types should not use #render_partial'
+    end
+
     def self.all
       all_but_posts = if (posts_dir = Staticpress.blog_path + config.posts_source).directory?
         (Staticpress.blog_path + config.source).children - [ posts_dir ]
