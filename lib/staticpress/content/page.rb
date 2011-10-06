@@ -4,6 +4,7 @@ require 'staticpress/route'
 
 module Staticpress::Content
   class Page < Base
+    # TODO find a way to merge with Staticpress::Content::Static.all
     def self.all
       all_but_posts = if (posts_dir = Staticpress.blog_path + config.posts_source).directory?
         (Staticpress.blog_path + config.source).children - [ posts_dir ]

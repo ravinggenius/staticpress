@@ -16,6 +16,7 @@ module Staticpress::Content
       template_path_content
     end
 
+    # TODO find a way to merge with Staticpress::Content::Page.all
     def self.all
       all_but_posts = if (posts_dir = Staticpress.blog_path + config.posts_source).directory?
         (Staticpress.blog_path + config.source).children - [ posts_dir ]
