@@ -54,7 +54,8 @@ module Staticpress::Content
     end
 
     def output_path
-      Staticpress.blog_path + config.destination + route.url_path.sub(/^\//, '') + config.index_file
+      base = Staticpress.blog_path + config.destination + route.url_path.sub(/^\//, '')
+      (config.index_file && config.markup_templates.include?(template_path.extname[1..-1])) ? base + config.index_file : base
     end
 
     def raw

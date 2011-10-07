@@ -8,10 +8,6 @@ module Staticpress::Content
       nil
     end
 
-    def output_path
-      super.parent
-    end
-
     def render_partial(locals = {})
       template_path_content
     end
