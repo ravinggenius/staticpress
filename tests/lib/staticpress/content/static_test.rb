@@ -27,7 +27,7 @@ class ContentStaticTest < ContentBaseTest
   end
 
   def test_all
-    assert_equal 2, Staticpress::Content::Static.all.count
+    assert_equal 3, Staticpress::Content::Static.all.count
   end
 
   def test_exist?

@@ -17,6 +17,9 @@ class ContentPageTest < ContentBaseTest
 
     @second_page_route = Staticpress::Route.from_url_path '/contact'
     @second_page = Staticpress::Content::Page.new @second_page_route, @page_dir + 'contact.markdown'
+
+    @style2_route = Staticpress::Route.from_url_path '/style2.css'
+    @style2 = Staticpress::Content::Page.new @style2_route, @page_dir + 'style2.css.sass'
   end
 
   def test__equalsequals
@@ -26,7 +29,7 @@ class ContentPageTest < ContentBaseTest
   end
 
   def test_all
-    assert_equal 2, Staticpress::Content::Page.all.count
+    assert_equal 4, Staticpress::Content::Page.all.count
   end
 
   def test_exist?
@@ -51,6 +54,7 @@ class ContentPageTest < ContentBaseTest
 
   def test_output_path
     assert_equal (Staticpress.blog_path + 'public' + 'about' + 'index.html'), @page.output_path
+    assert_equal (Staticpress.blog_path + 'public' + 'style2.css'), @style2.output_path
   end
 
   def test_raw
@@ -70,11 +74,22 @@ class ContentPageTest < ContentBaseTest
 </html>
     HTML
     assert_equal expected_page, @page.render
+
+    expected_style2 = <<-CSS
+body {
+  color: green; }
+    CSS
+    assert_equal expected_style2, @style2.render
   end
 
   def test_render_partial
     assert_equal "<p>in page</p>\n", @page.render_partial
     assert_equal "<p>in page</p>\n\n<p>in page</p>\n", @second_page.render_partial
+    expected_style2 = <<-CSS
+body {
+  color: green; }
+    CSS
+    assert_equal expected_style2, @style2.render_partial
   end
 
   def test_route
