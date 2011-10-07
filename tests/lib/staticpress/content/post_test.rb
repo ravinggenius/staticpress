@@ -68,6 +68,9 @@ class ContentPostTest < ContentBaseTest
     assert_equal 'in post', @post.raw
   end
 
+  def test_render
+  end
+
   def test_render_partial
     assert_equal "<p>in post</p>\n", @post.render_partial
   end
