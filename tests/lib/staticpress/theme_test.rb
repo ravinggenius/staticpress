@@ -40,7 +40,7 @@ class ThemeTest < TestHelper
   def test_layout_for
     assert_equal (@theme.root + '_layouts' + 'default.haml'), @theme.layout_for(:default)
     assert_equal (@theme.root + '_layouts' + 'post_index.haml'), @theme.layout_for(:post_index)
-    assert_equal (@theme.root + '_layouts' + 'default.haml'), @theme.layout_for(:fake)
+    assert_nil @theme.layout_for(:fake)
   end
 
   def test_layouts
@@ -59,7 +59,7 @@ class ThemeTest < TestHelper
 
   def test_view_for
     assert_equal (@theme.root + '_views' + 'default.haml'), @theme.view_for(:default)
-    assert_equal (@theme.root + '_views' + 'default.haml'), @theme.view_for(:fake)
+    assert_nil @theme.view_for(:fake)
   end
 
   def test_views

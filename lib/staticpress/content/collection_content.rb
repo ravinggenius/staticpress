@@ -8,7 +8,7 @@ module Staticpress::Content
     end
 
     def self.template_path
-      theme.view_for(type)
+      theme.view_for(type) || theme.view_for(:default)
     end
   end
 end

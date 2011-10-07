@@ -46,7 +46,10 @@ module Staticpress::Content
     alias to_s inspect
 
     def layout
-      Tilt.new theme.layout_for(meta.layout).to_s
+      if meta.layout || config.markup_templates.include?(template_path.extname[1..-1])
+        layout_name = meta.layout || :default
+        Tilt.new theme.layout_for(layout_name).to_s
+      end
     end
 
     def meta

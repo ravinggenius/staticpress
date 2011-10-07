@@ -30,7 +30,7 @@ module Staticpress
       end
 
       define_method "#{method_name}_for" do |name|
-        send("keyed_#{method_name}s")[name.to_s] || send("default_#{method_name}")
+        send("keyed_#{method_name}s")[name.to_s]
       end
 
       define_method "#{method_name}s" do
@@ -39,10 +39,6 @@ module Staticpress
     end
 
     remove_method :default_include
-
-    def include_for(name)
-      keyed_includes[name.to_s]
-    end
 
     def self.theme
       @theme ||= new config.theme
