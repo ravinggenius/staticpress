@@ -58,6 +58,20 @@ class ContentPageTest < ContentBaseTest
     assert_equal "in page\n\nin page", @second_page.raw
   end
 
+  def test_render
+    expected_page = <<-HTML
+<html>
+  <head>
+    <title>/about</title>
+  </head>
+  <body>
+    <p>in page</p>
+  </body>
+</html>
+    HTML
+    assert_equal expected_page, @page.render
+  end
+
   def test_render_partial
     assert_equal "<p>in page</p>\n", @page.render_partial
     assert_equal "<p>in page</p>\n\n<p>in page</p>\n", @second_page.render_partial
