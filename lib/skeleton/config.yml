@@ -5,6 +5,26 @@
 :plugins_path: plugins
 :destination: public
 :index_file: index.html
+:markup_templates:
+  - builder
+  - creole
+  - erb
+  - erubis
+  - haml
+  - liquid
+  - mab
+  - markdown
+  - md
+  - mediawiki
+  - mkd
+  - mw
+  - nokogiri
+  - radius
+  - rdoc
+  - rhtml
+  - str
+  - textile
+  - wiki
 :code_dir: downloads/code
 :port: 4000
 :url: http://yoursite.com
