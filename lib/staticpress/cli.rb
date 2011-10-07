@@ -112,8 +112,7 @@ customizations. If [theme-name] is blank, copies the currently configured theme
 
     desc 'deploy', 'Build blog and push in one step'
     def deploy
-      build
-      push
+      build and push
     end
 
     desc 'version', 'Display version'
