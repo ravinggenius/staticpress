@@ -21,7 +21,7 @@ module Staticpress
     ].each do |method_name|
       define_method "default_#{method_name}" do
         send("keyed_#{method_name}s")['default']
-      end
+      end unless method_name == :include
 
       define_method "keyed_#{method_name}s" do
         hash_from_array(send("#{method_name}s")) { |name| extensionless_basename name }
@@ -35,8 +35,6 @@ module Staticpress
         (root + "#{method_name}s").children
       end
     end
-
-    remove_method :default_include
 
     def self.theme
       @theme ||= new config.theme
