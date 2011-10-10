@@ -8,7 +8,7 @@ class ContentCategoryTest < ContentBaseTest
   def setup
     super
 
-    @template_dir = Staticpress::Theme.theme.root + '_views'
+    @template_dir = Staticpress::Theme.theme.root + 'views'
 
     @category_page_route = Staticpress::Route.from_url_path '/category/programming'
     @category_page = Staticpress::Content::Category.new @category_page_route, @template_dir + 'default.haml'

@@ -7,7 +7,7 @@ class ContentIndexTest < ContentBaseTest
   def setup
     super
 
-    @template_dir = Staticpress::Theme.theme.root + '_views'
+    @template_dir = Staticpress::Theme.theme.root + 'views'
 
     @home_route = Staticpress::Route.from_url_path '/'
     @home = Staticpress::Content::Index.new @home_route, @template_dir + 'default.haml'

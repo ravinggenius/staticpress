@@ -8,7 +8,7 @@ class ContentTagTest < ContentBaseTest
   def setup
     super
 
-    @template_dir = Staticpress::Theme.theme.root + '_views'
+    @template_dir = Staticpress::Theme.theme.root + 'views'
 
     @tag_page_route = Staticpress::Route.from_url_path '/tag/charlotte'
     @tag_page = Staticpress::Content::Tag.new @tag_page_route, @template_dir + 'default.haml'

@@ -34,7 +34,7 @@ module Staticpress
       end
 
       define_method "#{method_name}s" do
-        (root + "_#{method_name}s").children
+        (root + "#{method_name}s").children
       end
     end
 
