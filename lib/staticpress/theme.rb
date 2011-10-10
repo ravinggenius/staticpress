@@ -1,5 +1,3 @@
-require 'tilt'
-
 require 'staticpress'
 require 'staticpress/helpers'
 
