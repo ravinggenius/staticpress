@@ -36,6 +36,7 @@
   :page: '/:slug'
   :post: '/:year/:month/:day/:title'
   :static: '/:slug'
+  :theme: '/assets/:theme/:asset_type/:slug'
 :title: My Staticpress Blog
 :subtitle: A blogging framework for hackers.
 :author: Your Name

@@ -7,6 +7,7 @@ require 'staticpress/content/tag'
 require 'staticpress/content/page'
 require 'staticpress/content/post'
 require 'staticpress/content/static'
+require 'staticpress/content/theme'
 require 'staticpress/helpers'
 require 'staticpress/metadata'
 require 'staticpress/route'
@@ -50,7 +51,8 @@ module Staticpress
         Staticpress::Content::Tag,
         Staticpress::Content::Page,
         Staticpress::Content::Post,
-        Staticpress::Content::Static
+        Staticpress::Content::Static,
+        Staticpress::Content::Theme
       ]
     end
   end

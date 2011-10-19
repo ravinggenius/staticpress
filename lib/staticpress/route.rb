@@ -11,6 +11,7 @@ module Staticpress
     RegexStub = Struct.new :regex, :default
 
     REGEX_STUBS = {
+      :asset_type => RegexStub.new(/(?<asset_type>fonts|images|scripts|styles)/),
       :date => RegexStub.new(/(?<date>\d{4}-\d{2}-\d{2})/),
       :year => RegexStub.new(/(?<year>\d{4})/),
       :month => RegexStub.new(/(?<month>\d{2})/),
@@ -18,7 +19,8 @@ module Staticpress
       :slug => RegexStub.new(/(?<slug>[0-9a-z\-_\.\/]+)/),
       :title => RegexStub.new(/(?<title>[0-9a-z\-_]*)/),
       :name => RegexStub.new(/(?<name>[0-9a-z\-_]*)/),
-      :number => RegexStub.new(/(?<number>\d+)/, '1')
+      :number => RegexStub.new(/(?<number>\d+)/, '1'),
+      :theme => RegexStub.new(/(?<theme>[0-9a-z\-_]*)/)
     }
 
     attr_reader :params
