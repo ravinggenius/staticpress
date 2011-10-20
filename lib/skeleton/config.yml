@@ -35,7 +35,6 @@
   :tag: '/tag/:name(/page/:number)?'
   :page: '/:slug'
   :post: '/:year/:month/:day/:title'
-  :static: '/:slug'
   :theme: '/assets/:theme/:asset_type/:slug'
 :title: My Staticpress Blog
 :subtitle: A blogging framework for hackers.

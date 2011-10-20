@@ -4,7 +4,18 @@ require 'staticpress/route'
 
 module Staticpress::Content
   class Page < Base
-    # TODO find a way to merge with Staticpress::Content::Static.all
+    def static?
+      self.class.static? route.params[:slug]
+    end
+
+    def layout
+      static? ? nil : super
+    end
+
+    def render_partial(locals = {})
+      static? ? template_path_content : super
+    end
+
     def self.all
       all_but_posts = if (posts_dir = Staticpress.blog_path + config.posts_source).directory?
         (Staticpress.blog_path + config.source).children - [ posts_dir ]
@@ -34,12 +45,22 @@ module Staticpress::Content
     end
 
     def self.find_by_path(path)
-      slug = extensionless_path(path).to_s.sub((Staticpress.blog_path + config.source).to_s, '').sub(/^\//, '')
-      params = {
-        :content_type => self,
-        :slug => slug
-      }
-      find_by_route Staticpress::Route.new(params) if path.file?
+      if path.file?
+        path_string = path.to_s
+
+        slug = if supported_extensions.any? { |ext| path_string.end_with? ext.to_s }
+          extensionless_path(path).to_s.sub((Staticpress.blog_path + config.source).to_s, '').sub(/^\//, '')
+        else
+          path_string.sub((Staticpress.blog_path + config.source).to_s, '').sub(/^\//, '')
+        end
+
+        params = {
+          :content_type => self,
+          :slug => slug
+        }
+
+        find_by_route Staticpress::Route.new(params)
+      end
     end
 
     def self.find_by_route(route)
@@ -51,8 +72,12 @@ module Staticpress::Content
           throw :page, new(route, path) if path.file?
         end
 
-        nil
+        static?(route.params[:slug]) ? new(route, (Staticpress.blog_path + config.source + route.params[:slug])) : nil
       end
+    end
+
+    def self.static?(slug)
+      (Staticpress.blog_path + config.source + slug).file?
     end
 
     def self.template
