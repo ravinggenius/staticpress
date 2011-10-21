@@ -49,10 +49,10 @@ module Staticpress::Content
         path_string = path.to_s
 
         slug = if supported_extensions.any? { |ext| path_string.end_with? ext.to_s }
-          extensionless_path(path).to_s.sub((Staticpress.blog_path + config.source).to_s, '').sub(/^\//, '')
+          extensionless_path(path).to_s
         else
-          path_string.sub((Staticpress.blog_path + config.source).to_s, '').sub(/^\//, '')
-        end
+          path_string
+        end.sub((Staticpress.blog_path + config.source).to_s, '').sub(/^\//, '')
 
         params = {
           :content_type => self,
