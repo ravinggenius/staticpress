@@ -15,7 +15,6 @@ class ContentThemeTest < ContentBaseTest
     @theme_dir = Staticpress::Theme.theme.root
 
     @asset_route = Staticpress::Route.from_url_path '/assets/classic/styles/all'
-    path = @theme_dir + 'assets' + 'styles' + 'all.sass'
     @asset = Staticpress::Content::Theme.new @asset_route, @theme_dir + 'assets' + 'styles' + 'all.sass'
   end
 
