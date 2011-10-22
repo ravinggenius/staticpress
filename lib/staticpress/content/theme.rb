@@ -1,20 +1,14 @@
 require 'staticpress'
 require 'staticpress/content/base'
+require 'staticpress/content/static_content'
 require 'staticpress/route'
 
 module Staticpress::Content
   class Theme < Base
+    include StaticContent
+
     def static?
       (Staticpress::Theme.new(route.params[:theme]).root + 'assets' + route.params[:asset_type] + route.params[:slug]).file?
-    end
-
-    # layout not needed for binary files
-    def layout
-      static? ? nil : super
-    end
-
-    def render_partial(locals = {})
-      static? ? template_path_content : super
     end
 
     def self.all
