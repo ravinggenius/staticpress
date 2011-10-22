@@ -42,14 +42,7 @@ module Staticpress::Content
       path = base + route.params[:slug]
       return new(route, path) if path.file?
 
-      catch :theme do
-        supported_extensions.each do |extension|
-          path = base + "#{route.params[:slug]}.#{extension}"
-          throw :theme, new(route, path) if path.file?
-        end
-
-        nil
-      end
+      load_resource route, base, route.params[:slug]
     end
   end
 end

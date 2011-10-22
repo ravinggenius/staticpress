@@ -13,5 +13,16 @@ module Staticpress::Content
         end
       end.flatten.compact
     end
+
+    def load_resource(route, base, stub)
+      catch :resource do
+        supported_extensions.detect do |extension|
+          path = base + "#{stub}.#{extension}"
+          throw :resource, new(route, path) if path.file?
+        end
+
+        nil
+      end
+    end
   end
 end
