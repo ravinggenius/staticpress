@@ -8,6 +8,7 @@ module Staticpress::Content
   class Page < Base
     include StaticContent
     extend ResourceContent
+    extend StaticContent
 
     def static?
       (Staticpress.blog_path + config.source + route.params[:slug]).file?
@@ -35,17 +36,9 @@ module Staticpress::Content
 
     def self.find_by_path(path)
       if path.file?
-        path_string = path.to_s
-
-        slug = if supported_extensions.any? { |ext| path_string.end_with? ext.to_s }
-          extensionless_path(path).to_s
-        else
-          path_string
-        end.sub((Staticpress.blog_path + config.source).to_s, '').sub(/^\//, '')
-
         params = {
           :content_type => self,
-          :slug => slug
+          :slug => parse_slug(path, (Staticpress.blog_path + config.source))
         }
 
         find_by_route Staticpress::Route.new(params)

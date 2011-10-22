@@ -8,6 +8,7 @@ module Staticpress::Content
   class Theme < Base
     include StaticContent
     extend ResourceContent
+    extend StaticContent
 
     def static?
       (Staticpress::Theme.new(route.params[:theme]).root + 'assets' + route.params[:asset_type] + route.params[:slug]).file?
@@ -21,15 +22,8 @@ module Staticpress::Content
       if path.file?
         stubs = Staticpress::Route::REGEX_STUBS
         regex = /#{stubs[:theme].regex}\/assets\/#{stubs[:asset_type].regex}\/#{stubs[:slug].regex}/
-        path_string = path.to_s
 
-        slug = if supported_extensions.any? { |ext| path_string.end_with? ext.to_s }
-          extensionless_path(path).to_s
-        else
-          path_string
-        end.sub((Staticpress.root + 'themes').to_s, '').sub(/^\//, '')
-
-        if filename_parts = slug.match(regex)
+        if filename_parts = parse_slug(path, (Staticpress.root + 'themes')).match(regex)
           params = {
             :content_type => self,
             :theme => filename_parts[:theme],
