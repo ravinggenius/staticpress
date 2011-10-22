@@ -1,26 +1,20 @@
 require 'staticpress'
 require 'staticpress/content/base'
+require 'staticpress/content/resource_content'
 require 'staticpress/content/static_content'
 require 'staticpress/route'
 
 module Staticpress::Content
   class Theme < Base
     include StaticContent
+    extend ResourceContent
 
     def static?
       (Staticpress::Theme.new(route.params[:theme]).root + 'assets' + route.params[:asset_type] + route.params[:slug]).file?
     end
 
     def self.all
-      (Staticpress::Theme.theme.root + 'assets').children.map do |child|
-        if child.directory?
-          spider_directory child do |asset|
-            find_by_path asset
-          end
-        else
-          find_by_path child
-        end
-      end.flatten.compact
+      gather_resources_from((Staticpress::Theme.theme.root + 'assets').children)
     end
 
     def self.find_by_path(path)

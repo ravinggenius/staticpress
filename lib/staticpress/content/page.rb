@@ -1,11 +1,13 @@
 require 'staticpress'
 require 'staticpress/content/base'
+require 'staticpress/content/resource_content'
 require 'staticpress/content/static_content'
 require 'staticpress/route'
 
 module Staticpress::Content
   class Page < Base
     include StaticContent
+    extend ResourceContent
 
     def static?
       (Staticpress.blog_path + config.source + route.params[:slug]).file?
@@ -18,15 +20,7 @@ module Staticpress::Content
         (Staticpress.blog_path + config.source).children
       end
 
-      all_but_posts.map do |child|
-        if child.directory?
-          spider_directory child do |page|
-            find_by_path page
-          end
-        else
-          find_by_path child
-        end
-      end.flatten.compact
+      gather_resources_from all_but_posts
     end
 
     def self.create(format, title, path = nil)
