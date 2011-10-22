@@ -8,6 +8,7 @@ module Staticpress::Content
       self.class.static? route.params[:slug]
     end
 
+    # layout not needed for binary files
     def layout
       static? ? nil : super
     end
