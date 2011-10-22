@@ -1,9 +1,12 @@
 require 'staticpress'
 require 'staticpress/content/base'
+require 'staticpress/content/resource_content'
 require 'staticpress/route'
 
 module Staticpress::Content
   class Post < Base
+    extend ResourceContent
+
     def <=>(other)
       other.respond_to?(:created_at) ? (created_at <=> other.created_at) : super
     end
@@ -52,6 +55,7 @@ module Staticpress::Content
     def self.find_by_route(route)
       return nil unless route
 
+      base = Staticpress.blog_path + config.posts_source
       parts = route.params
       stub = [
         parts[:year],
@@ -60,14 +64,7 @@ module Staticpress::Content
         parts[:title]
       ].join '-'
 
-      catch :post do
-        supported_extensions.detect do |extension|
-          path = Staticpress.blog_path + config.posts_source + "#{stub}.#{extension}"
-          throw :post, new(route, path) if path.file?
-        end
-
-        nil
-      end
+      load_resource route, base, stub
     end
 
     def self.template
