@@ -5,7 +5,7 @@ require 'staticpress/route'
 module Staticpress::Content
   class Page < Base
     def static?
-      self.class.static? route.params[:slug]
+      (Staticpress.blog_path + config.source + route.params[:slug]).file?
     end
 
     # layout not needed for binary files
@@ -67,18 +67,18 @@ module Staticpress::Content
     def self.find_by_route(route)
       return nil unless route
 
+      base = Staticpress.blog_path + config.source
+      path = base + route.params[:slug]
+      return new(route, path) if path.file?
+
       catch :page do
         supported_extensions.each do |extension|
-          path = Staticpress.blog_path + config.source + "#{route.params[:slug]}.#{extension}"
+          path = base + "#{route.params[:slug]}.#{extension}"
           throw :page, new(route, path) if path.file?
         end
 
-        static?(route.params[:slug]) ? new(route, (Staticpress.blog_path + config.source + route.params[:slug])) : nil
+        nil
       end
-    end
-
-    def self.static?(slug)
-      (Staticpress.blog_path + config.source + slug).file?
     end
 
     def self.template
