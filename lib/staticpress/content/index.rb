@@ -1,9 +1,12 @@
 require 'staticpress'
+require 'staticpress/content/base'
 require 'staticpress/content/collection_content'
 require 'staticpress/route'
 
 module Staticpress::Content
-  class Index < CollectionContent
+  class Index < Base
+    extend CollectionContent
+
     def sub_content
       paginate(Staticpress::Content::Post.all)[(Integer route.params[:number]) - 1]
     end
