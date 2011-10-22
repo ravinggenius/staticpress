@@ -42,7 +42,8 @@ module Staticpress::Content
 
     def self.find_by_path(path)
       if path.file?
-        regex = /(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})-(?<title>[0-9a-z\-_]*)\./
+        stubs = Staticpress::Route::REGEX_STUBS
+        regex = /#{stubs[:year].regex}-#{stubs[:month].regex}-#{stubs[:day].regex}-#{stubs[:title].regex}/
 
         if filename_parts = path.basename.to_s.match(regex)
           params = {
