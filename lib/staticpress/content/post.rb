@@ -41,15 +41,20 @@ module Staticpress::Content
     end
 
     def self.find_by_path(path)
-      filename_parts = path.basename.to_s.match /(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})-(?<title>[0-9a-z\-_]*)\./
-      params = {
-        :content_type => self,
-        :year => filename_parts[:year],
-        :month => filename_parts[:month],
-        :day => filename_parts[:day],
-        :title => filename_parts[:title]
-      }
-      find_by_route Staticpress::Route.new(params) if path.file?
+      if path.file?
+        regex = /(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})-(?<title>[0-9a-z\-_]*)\./
+
+        if filename_parts = path.basename.to_s.match(regex)
+          params = {
+            :content_type => self,
+            :year => filename_parts[:year],
+            :month => filename_parts[:month],
+            :day => filename_parts[:day],
+            :title => filename_parts[:title]
+          }
+          find_by_route Staticpress::Route.new(params)
+        end
+      end
     end
 
     def self.find_by_route(route)
