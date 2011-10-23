@@ -2,3 +2,4 @@
 :plugins:
 - blockquote
 :title: Test Blog
+:theme: test_theme
