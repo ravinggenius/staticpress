@@ -8,6 +8,9 @@ Gem::Specification.new do |s|
   s.authors     = ['Raving Genius']
   s.email       = ['rg+code@ravinggenius.com']
   s.summary     = 'Blog-centric static site builder'
+  s.description = <<-DESCRIPTION
+Staticpress is a blog-focused static site generator. It uses Tilt for rendering nearly any template you can think of and come with a built-in Rack server for easy development previews.
+  DESCRIPTION
   s.license     = 'MIT'
 
   s.rubyforge_project = 'staticpress'
