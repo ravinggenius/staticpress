@@ -14,6 +14,10 @@ module Staticpress
       @root = custom.directory? ? custom : Staticpress.root + 'themes' + @name.to_s
     end
 
+    def ==(other)
+      other.respond_to?(:root) ? (root == other.root) : super
+    end
+
     [
       :include,
       :layout,
@@ -37,7 +41,7 @@ module Staticpress
     end
 
     def self.theme
-      @theme ||= new config.theme
+      new config.theme
     end
   end
 end

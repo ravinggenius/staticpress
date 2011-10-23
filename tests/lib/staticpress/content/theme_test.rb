@@ -10,14 +10,14 @@ class ContentThemeTest < ContentBaseTest
   def setup
     super
 
-    Staticpress::Content::Theme.all
+    config.theme = :test_theme
 
     @theme_dir = Staticpress::Theme.theme.root
 
-    @asset_style_route = Staticpress::Route.from_url_path '/assets/basic/styles/all'
+    @asset_style_route = Staticpress::Route.from_url_path '/assets/test_theme/styles/all'
     @asset_style = Staticpress::Content::Theme.new @asset_style_route, @theme_dir + 'assets' + 'styles' + 'all.sass'
 
-    @asset_script_route = Staticpress::Route.from_url_path '/assets/basic/scripts/application.js'
+    @asset_script_route = Staticpress::Route.from_url_path '/assets/test_theme/scripts/application.js'
     @asset_script = Staticpress::Content::Theme.new @asset_script_route, @theme_dir + 'assets' + 'scripts' + 'application.js'
   end
 
@@ -50,12 +50,12 @@ class ContentThemeTest < ContentBaseTest
   end
 
   def test_inspect
-    assert_equal '#<Staticpress::Content::Theme url_path=/assets/basic/styles/all>', @asset_style.inspect
+    assert_equal '#<Staticpress::Content::Theme url_path=/assets/test_theme/styles/all>', @asset_style.inspect
   end
 
   def test_output_path
-    assert_equal (Staticpress.blog_path + 'public' + 'assets' + 'basic' + 'styles' + 'all'), @asset_style.output_path
-    assert_equal (Staticpress.blog_path + 'public' + 'assets' + 'basic' + 'scripts' + 'application.js'), @asset_script.output_path
+    assert_equal (Staticpress.blog_path + 'public' + 'assets' + 'test_theme' + 'styles' + 'all'), @asset_style.output_path
+    assert_equal (Staticpress.blog_path + 'public' + 'assets' + 'test_theme' + 'scripts' + 'application.js'), @asset_script.output_path
   end
 
   def test_raw
@@ -98,6 +98,6 @@ class ContentThemeTest < ContentBaseTest
   end
 
   def test_route
-    assert_equal '/assets/basic/styles/all', @asset_style.route.url_path
+    assert_equal '/assets/test_theme/styles/all', @asset_style.route.url_path
   end
 end

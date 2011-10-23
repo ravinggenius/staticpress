@@ -1,10 +1,27 @@
 require_relative '../../test_helper'
 
+require 'staticpress/helpers'
 require 'staticpress/theme'
 
 class ThemeTest < TestHelper
+  include Staticpress::Helpers
+
   def setup
-    @theme = Staticpress::Theme.new :basic
+    Staticpress.blog_path = TEST_BLOG
+    config.theme = :test_theme
+    @theme = Staticpress::Theme.new :test_theme
+  end
+
+  def test__equalsequals
+    assert_operator @theme, :==, Staticpress::Theme.new(:test_theme)
+  end
+
+  def test_root
+    assert_equal @theme.root, (Staticpress.blog_path + 'themes' + 'test_theme')
+  end
+
+  def test_theme
+    assert_equal @theme, Staticpress::Theme.theme
   end
 
 
