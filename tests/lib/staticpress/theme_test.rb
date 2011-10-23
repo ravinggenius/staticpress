@@ -4,7 +4,7 @@ require 'staticpress/theme'
 
 class ThemeTest < TestHelper
   def setup
-    @theme = Staticpress::Theme.new :classic
+    @theme = Staticpress::Theme.new :basic
   end
 
 
