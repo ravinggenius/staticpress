@@ -9,6 +9,7 @@ Gem::Specification.new do |s|
   s.authors     = ['Raving Genius']
   s.email       = ['rg+code@ravinggenius.com']
   s.summary     = %q{...}
+  s.license     = 'MIT'
 
   s.rubyforge_project = 'staticpress'
 
