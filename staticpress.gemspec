@@ -25,7 +25,9 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency 'minitest'
   s.add_development_dependency 'rack'
+  s.add_development_dependency 'ruby-debug19'
 
+  s.add_runtime_dependency 'rack'
   s.add_runtime_dependency 'thor'
   s.add_runtime_dependency 'tilt'
 end
