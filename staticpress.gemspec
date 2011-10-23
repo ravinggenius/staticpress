@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.version     = Staticpress::Version.to_s
   s.authors     = ['Raving Genius']
   s.email       = ['rg+code@ravinggenius.com']
-  s.summary     = %q{...}
+  s.summary     = 'Blog-centric static site builder'
   s.license     = 'MIT'
 
   s.rubyforge_project = 'staticpress'
