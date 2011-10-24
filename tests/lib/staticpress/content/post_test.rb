@@ -10,7 +10,7 @@ class ContentPostTest < ContentBaseTest
   def setup
     super
 
-    @post_dir = Staticpress.blog_path + config.posts_source
+    @post_dir = Staticpress.blog_path + config.posts_source_path
 
     @post_route = Staticpress::Route.from_url_path '/2011/07/20/hello'
     @post = Staticpress::Content::Post.new @post_route, @post_dir + '2011-07-20-hello.markdown'
@@ -46,7 +46,7 @@ class ContentPostTest < ContentBaseTest
   end
 
   def test_find_by_path
-    @post_dir = Staticpress.blog_path + config.posts_source
+    @post_dir = Staticpress.blog_path + config.posts_source_path
     assert_equal @post, Staticpress::Content::Post.find_by_path(@post_dir + '2011-07-20-hello.markdown')
     assert_nil Staticpress::Content::Post.find_by_path(@post_dir + '2011-07-20-goodbye.markdown')
   end

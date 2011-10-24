@@ -11,14 +11,14 @@ module Staticpress::Content
     extend StaticContent
 
     def static?
-      (Staticpress.blog_path + config.source + route.params[:slug]).file?
+      (Staticpress.blog_path + config.source_path + route.params[:slug]).file?
     end
 
     def self.all
-      all_but_posts = if (posts_dir = Staticpress.blog_path + config.posts_source).directory?
-        (Staticpress.blog_path + config.source).children - [ posts_dir ]
+      all_but_posts = if (posts_dir = Staticpress.blog_path + config.posts_source_path).directory?
+        (Staticpress.blog_path + config.source_path).children - [ posts_dir ]
       else
-        (Staticpress.blog_path + config.source).children
+        (Staticpress.blog_path + config.source_path).children
       end
 
       gather_resources_from all_but_posts
@@ -28,7 +28,7 @@ module Staticpress::Content
       name = title.gsub(/ /, '-').downcase
 
       filename = "#{name}.#{format}"
-      destination = Staticpress.blog_path + config.source + (path ? path : '').sub(/^\//, '') + filename
+      destination = Staticpress.blog_path + config.source_path + (path ? path : '').sub(/^\//, '') + filename
 
       FileUtils.mkdir_p destination.dirname
       destination.open('w') { |f| f.write template }
@@ -38,7 +38,7 @@ module Staticpress::Content
       if path.file?
         params = {
           :content_type => self,
-          :slug => parse_slug(path, (Staticpress.blog_path + config.source))
+          :slug => parse_slug(path, (Staticpress.blog_path + config.source_path))
         }
 
         find_by_route Staticpress::Route.new(params)
@@ -48,7 +48,7 @@ module Staticpress::Content
     def self.find_by_route(route)
       return nil unless route
 
-      base = Staticpress.blog_path + config.source
+      base = Staticpress.blog_path + config.source_path
       path = base + route.params[:slug]
       return new(route, path) if path.file?
 

@@ -10,7 +10,7 @@ class ContentPageTest < ContentBaseTest
   def setup
     super
 
-    @page_dir = Staticpress.blog_path + config.source
+    @page_dir = Staticpress.blog_path + config.source_path
 
     @page_route = Staticpress::Route.from_url_path '/about'
     @page = Staticpress::Content::Page.new @page_route, @page_dir + 'about.markdown'
@@ -52,7 +52,7 @@ class ContentPageTest < ContentBaseTest
   end
 
   def test_find_by_path
-    @page_dir = Staticpress.blog_path + config.source
+    @page_dir = Staticpress.blog_path + config.source_path
     assert_equal @page, Staticpress::Content::Page.find_by_path(@page_dir + 'about.markdown')
     assert_nil Staticpress::Content::Page.find_by_path(@page_dir + 'i' + 'dont' + 'exist.markdown')
     assert_equal @static_bin, Staticpress::Content::Page.find_by_path(@page_dir + 'ruby.png')

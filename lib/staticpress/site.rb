@@ -18,7 +18,7 @@ module Staticpress
     attr_reader :directory
 
     def initialize
-      @directory = Staticpress.blog_path + config.source
+      @directory = Staticpress.blog_path + config.source_path
     end
 
     def all_content
@@ -38,7 +38,7 @@ module Staticpress
     end
 
     def save
-      destination = Staticpress.blog_path + config.destination
+      destination = Staticpress.blog_path + config.destination_path
       FileUtils.rm_r destination if destination.directory?
       all_content.each &:save
     end

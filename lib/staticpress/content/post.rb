@@ -21,7 +21,7 @@ module Staticpress::Content
     end
 
     def self.all
-      if (posts_dir = Staticpress.blog_path + config.posts_source).directory?
+      if (posts_dir = Staticpress.blog_path + config.posts_source_path).directory?
         posts_dir.children.map { |post| find_by_path post }
       else
         []
@@ -34,7 +34,7 @@ module Staticpress::Content
       name = title.gsub(/ /, '-').downcase
 
       filename = "#{created_on}-#{name}.#{format}"
-      destination = Staticpress.blog_path + config.posts_source + filename
+      destination = Staticpress.blog_path + config.posts_source_path + filename
 
       FileUtils.mkdir_p destination.dirname
       destination.open('w') { |f| f.write template }
@@ -61,7 +61,7 @@ module Staticpress::Content
     def self.find_by_route(route)
       return nil unless route
 
-      base = Staticpress.blog_path + config.posts_source
+      base = Staticpress.blog_path + config.posts_source_path
       parts = route.params
       stub = [
         parts[:year],

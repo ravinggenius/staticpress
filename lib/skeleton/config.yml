@@ -1,10 +1,28 @@
 ---
-:source: content
-:posts_source: content/_posts
-:plugins: []
-:plugins_path: plugins
-:destination: public
+:title: My Staticpress Blog
+:subtitle: A blogging framework for hackers
+:author: Your Name
+:theme: basic
+:posts_per_page: 10
+:preferred_format: markdown
 :index_file: index.html
+:port: 4000
+:destination_path: public
+:plugins_path: plugins
+:source_path: content
+:posts_source_path: content/_posts
+:plugins: []
+:sass_options:
+  :line_comments: false
+  :output_style: compressed
+:subscribe_rss: /atom.xml
+:routes:
+  :index: '/(page/:number)?'
+  :category: '/category/:name(/page/:number)?'
+  :tag: '/tag/:name(/page/:number)?'
+  :page: '/:slug'
+  :post: '/:year/:month/:day/:title'
+  :theme: '/assets/:theme/:asset_type/:slug'
 :markup_templates:
   - builder
   - creole
@@ -25,21 +43,3 @@
   - str
   - textile
   - wiki
-:port: 4000
-:preferred_format: markdown
-:sass_options:
-  :line_comments: false
-  :output_style: compressed
-:routes:
-  :index: '/(page/:number)?'
-  :category: '/category/:name(/page/:number)?'
-  :tag: '/tag/:name(/page/:number)?'
-  :page: '/:slug'
-  :post: '/:year/:month/:day/:title'
-  :theme: '/assets/:theme/:asset_type/:slug'
-:title: My Staticpress Blog
-:subtitle: A blogging framework for hackers.
-:author: Your Name
-:subscribe_rss: /atom.xml
-:posts_per_page: 10
-:theme: basic
