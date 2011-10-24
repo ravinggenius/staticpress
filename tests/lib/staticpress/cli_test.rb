@@ -27,7 +27,7 @@ class CLITest < TestHelper
   def test_new
     refute TEMP_BLOG.directory?
     @cli.new TEMP_BLOG
-    assert_equal 5, TEMP_BLOG.children.count
+    assert_equal 4, TEMP_BLOG.children.count
     assert_equal 'Temp Blog', config.title
   end
 

@@ -29,6 +29,9 @@
 :port: 4000
 :url: http://yoursite.com
 :preferred_format: markdown
+:sass_options:
+  :line_comments: false
+  :output_style: compressed
 :routes:
   :index: '/(page/:number)?'
   :category: '/category/:name(/page/:number)?'
