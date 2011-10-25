@@ -17,4 +17,19 @@ class TestHelper < MiniTest::Unit::TestCase
     test_blog_public = TEST_BLOG + 'public'
     FileUtils.rm_rf test_blog_public if test_blog_public.directory?
   end
+
+  def assert_eql(expected, actual, message = nil)
+    assert actual.eql?(expected), (message || "Expected #{actual} to have same content as #{expected}")
+  end
+
+  def refute_raises(exception, &block)
+    begin
+      block.call
+      assert true
+    rescue Exception => e
+      # TODO improve error message
+      refute e.class == exception, "#{exception} expected not to be raised, but was"
+      raise e
+    end
+  end
 end
