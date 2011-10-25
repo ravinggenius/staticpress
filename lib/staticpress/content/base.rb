@@ -76,7 +76,7 @@ module Staticpress::Content
     end
 
     def render_partial(locals = {})
-      template = Tilt[template_path].new { raw }
+      template = Tilt.new(template_path.to_s, template_engine_options) { raw }
       template.render template_context, locals
     end
 
@@ -87,6 +87,10 @@ module Staticpress::Content
 
     def template_context
       Staticpress::ViewHelpers.new self
+    end
+
+    def template_engine_options
+      (config.template_engine_options[template_type] || {}).to_hash
     end
 
     def template_path_content

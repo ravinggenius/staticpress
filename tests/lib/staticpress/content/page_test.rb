@@ -98,8 +98,7 @@ class ContentPageTest < ContentBaseTest
     assert_equal expected_page, @page.render
 
     expected_style2 = <<-CSS
-body {
-  color: green; }
+body{color:green}
     CSS
     assert_equal expected_style2, @style2.render
     assert_equal 'this file intentionally left blank', @static_txt.render
@@ -109,8 +108,7 @@ body {
     assert_equal "<p>in page</p>\n", @page.render_partial
     assert_equal "<p>in page</p>\n\n<p>in page</p>\n", @second_page.render_partial
     expected_style2 = <<-CSS
-body {
-  color: green; }
+body{color:green}
     CSS
     assert_equal expected_style2, @style2.render_partial
     assert_equal 'this file intentionally left blank', @static_txt.render_partial

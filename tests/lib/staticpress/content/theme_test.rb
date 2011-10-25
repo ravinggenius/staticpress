@@ -59,9 +59,7 @@ class ContentThemeTest < ContentBaseTest
   end
 
   def test_raw
-    expected = <<-SASS
-    SASS
-    assert_equal expected, @asset_style.raw
+    assert_equal '@import "compass/reset/utilities"', @asset_style.raw
     expected = <<-JS
 (function ($) {
   $(document).ready(function () {
@@ -72,6 +70,7 @@ class ContentThemeTest < ContentBaseTest
   end
 
   def test_render
+    refute_raises(Sass::SyntaxError) { @asset_style.render }
     expected = <<-SASS
     SASS
     assert_equal expected, @asset_style.render
@@ -85,6 +84,7 @@ class ContentThemeTest < ContentBaseTest
   end
 
   def test_render_partial
+    refute_raises(Sass::SyntaxError) { @asset_style.render_partial }
     expected = <<-SASS
     SASS
     assert_equal expected, @asset_style.render_partial
@@ -99,6 +99,12 @@ class ContentThemeTest < ContentBaseTest
 
   def test_route
     assert_equal '/assets/test_theme/styles/all', @asset_style.route.url_path
+  end
+
+  def test_template_engine_options
+    expected = Compass.sass_engine_options.merge :line_comments => false, :style => :compressed
+    assert_eql expected, @asset_style.template_engine_options
+    assert_equal({}, @asset_script.template_engine_options)
   end
 
   def test_template_type
