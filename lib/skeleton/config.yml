@@ -12,9 +12,6 @@
 :source_path: content
 :posts_source_path: content/_posts
 :plugins: []
-:sass_options:
-  :line_comments: false
-  :output_style: compressed
 :subscribe_rss: /atom.xml
 :routes:
   :index: '/(page/:number)?'
@@ -23,6 +20,13 @@
   :page: '/:slug'
   :post: '/:year/:month/:day/:title'
   :theme: '/assets/:theme/:asset_type/:slug'
+:template_engine_options:
+  :sass:
+    :line_comments: false
+    :style: :compressed
+  :scss:
+    :line_comments: false
+    :style: :compressed
 :markup_templates:
   - builder
   - creole
