@@ -100,4 +100,9 @@ class ContentThemeTest < ContentBaseTest
   def test_route
     assert_equal '/assets/test_theme/styles/all', @asset_style.route.url_path
   end
+
+  def test_template_type
+    assert_equal :sass, @asset_style.template_type
+    assert_equal :js, @asset_script.template_type
+  end
 end

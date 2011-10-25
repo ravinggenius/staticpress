@@ -93,6 +93,10 @@ module Staticpress::Content
       exist? ? template_path.read : ''
     end
 
+    def template_type
+      template_path.extname.sub(/^\./, '').to_sym
+    end
+
     def theme
       self.class.theme
     end
