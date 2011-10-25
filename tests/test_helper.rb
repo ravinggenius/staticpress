@@ -1,7 +1,10 @@
 $:.unshift File.expand_path('../../lib', __FILE__)
 
+require 'compass'
+require 'haml'
 require 'minitest/autorun'
 require 'ruby-debug'
+require 'sass'
 
 require 'staticpress'
 
