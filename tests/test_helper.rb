@@ -3,7 +3,7 @@ $:.unshift File.expand_path('../../lib', __FILE__)
 require 'compass'
 require 'haml'
 require 'minitest/autorun'
-require 'ruby-debug'
+#require 'ruby-debug' # http://blog.wyeworks.com/2011/11/1/ruby-1-9-3-and-ruby-debug
 require 'sass'
 
 require 'staticpress'
