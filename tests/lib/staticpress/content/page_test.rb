@@ -86,6 +86,7 @@ class ContentPageTest < ContentBaseTest
 
   def test_render
     expected_page = <<-HTML
+<!DOCTYPE html>
 <html>
   <head>
     <title>/about</title>
