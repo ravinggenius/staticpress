@@ -1,6 +1,6 @@
 source :rubygems
 
-gem 'staticpress'
+gem 'staticpress', :path => '../../../'
 
 gem 'compass'
 gem 'haml'
