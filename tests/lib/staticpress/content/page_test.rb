@@ -89,7 +89,7 @@ class ContentPageTest < ContentBaseTest
 <!DOCTYPE html>
 <html>
   <head>
-    <title>/about</title>
+    <title>About | Test Blog</title>
   </head>
   <body>
     <p>in page</p>
@@ -128,5 +128,13 @@ body{color:green}
 
     @static_txt.save
     assert_equal @static_txt.template_path.read, @static_txt.output_path.read
+  end
+
+  def test_full_title
+    assert_equal 'Foo -> Bar -> Baz | Test Blog', @nested.full_title
+  end
+
+  def test_title
+    assert_equal 'Foo -> Bar -> Baz', @nested.title
   end
 end

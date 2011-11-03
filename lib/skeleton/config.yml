@@ -20,6 +20,10 @@
   :page: '/:slug'
   :post: '/:year/:month/:day/:title'
   :theme: '/assets/:theme/:asset_type/:slug'
+:title_separators:
+  :phrase: ' -> '
+  :site: ' | '
+  :word: ' '
 :template_engine_options:
   :sass:
     :line_comments: false

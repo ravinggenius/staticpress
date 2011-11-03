@@ -105,13 +105,22 @@ module Staticpress::Content
       self.class.theme
     end
 
+    def full_title
+      [
+        title,
+        config.title
+      ].join config.title_separators.site
+    end
+
     def title
       if meta.title
         meta.title
       else
-        route.url_path.split(/\/-/).map do |word|
-          word.capitalize
-        end.join ' '
+        route.url_path.sub(/^\//, '').split(/\//).map do |phrase|
+          phrase.split(/-/).map do |word|
+            word.capitalize
+          end.join config.title_separators.word
+        end.join config.title_separators.phrase
       end
     end
 
