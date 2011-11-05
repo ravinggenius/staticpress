@@ -9,6 +9,7 @@ require 'staticpress'
 require 'staticpress/error'
 require 'staticpress/helpers'
 require 'staticpress/plugin'
+require 'staticpress/pusher'
 require 'staticpress/site'
 require 'staticpress/version'
 
@@ -108,6 +109,7 @@ customizations. If [theme-name] is blank, copies the currently configured theme
 
     desc 'push', 'Push blog to configured server'
     def push
+      Staticpress::Pusher.push
     end
 
     desc 'deploy', 'Build blog and push in one step'

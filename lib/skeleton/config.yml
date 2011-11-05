@@ -13,6 +13,9 @@
 :posts_source_path: content/_posts
 :plugins: []
 :subscribe_rss: /atom.xml
+:deployment_strategy: :custom
+:deployment_strategies:
+  :custom: ''
 :routes:
   :index: '/(page/:number)?'
   :category: '/category/:name(/page/:number)?'
