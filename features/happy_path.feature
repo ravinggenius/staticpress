@@ -17,3 +17,10 @@ Feature: The happy path
       :title: This is my blog
 
       """
+
+  Scenario: Creating a new blog post
+    Given a blog exists
+    When I run `staticpress create 'Hello World'`
+    Then the exit status should be 0
+    And a directory named "content/_posts" should exist
+    And a post named "hello-world" should exist
