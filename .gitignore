@@ -7,3 +7,4 @@ _cache
 Gemfile.lock
 pkg/*
 public
+tmp/*
