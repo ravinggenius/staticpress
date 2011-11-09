@@ -1,5 +1,14 @@
 Feature: The happy path
 
+  Scenario: Some basic commands
+    Given I run `staticpress help`
+    Then the exit status should be 0
+    And the output should contain "Usage"
+
+    Given I run `staticpress version`
+    Then the exit status should be 0
+    And the output should contain "Staticpress"
+
   Scenario: Creating a new blog
     When I run `staticpress new my_new_blog`
     Then the following files should exist:
