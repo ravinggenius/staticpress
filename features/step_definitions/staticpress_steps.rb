@@ -6,6 +6,12 @@ Given /^a blog exists$/ do
   cd('temporary_blog')
 end
 
+Given /^a blog with content exists$/ do
+  step("a blog exists")
+  Staticpress::CLI.new.create_page('about')
+  Staticpress::CLI.new.create('hello-goodbye')
+end
+
 
 Then /^a post named "([^"]*)" should exist$/ do |post_title|
   now = Time.now.utc

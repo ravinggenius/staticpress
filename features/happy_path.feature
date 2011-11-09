@@ -56,3 +56,10 @@ Feature: The happy path
     When I run `staticpress fork_theme`
     Then a directory named "themes" should exist
     And a directory named "themes/basic" should exist
+
+  Scenario: Listing all routes
+    Given a blog with content exists
+    When I run `staticpress list route`
+    Then the output should contain "/"
+    And the output should contain "/about"
+    And the output should contain "/hello-goodbye"
