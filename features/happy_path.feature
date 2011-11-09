@@ -63,3 +63,12 @@ Feature: The happy path
     Then the output should contain "/"
     And the output should contain "/about"
     And the output should contain "/hello-goodbye"
+
+  Scenario: Building a site
+    Given a blog with content exists
+    Then a directory named "public" should not exist
+    When I run `staticpress build`
+    Then a directory named "public" should exist
+    And the following files should exist:
+      | public/index.html       |
+      | public/about/index.html |
