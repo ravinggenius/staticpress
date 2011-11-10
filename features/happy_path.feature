@@ -85,3 +85,22 @@ Feature: The happy path
     Then the following files should exist:
       | ../deployed/index.html       |
       | ../deployed/about/index.html |
+
+  Scenario: Deploying site (build and push in one step)
+    Given a blog with content exists
+    And I append to "config.yml" with:
+      """
+      :deployment_strategies:
+        :custom: 'cp -R public ../deployed'
+      """
+    Then the following files should not exist:
+      | public/index.html            |
+      | public/about/index.html      |
+      | ../deployed/index.html       |
+      | ../deployed/about/index.html |
+    When I run `staticpress deploy`
+    Then the following files should exist:
+      | public/index.html            |
+      | public/about/index.html      |
+      | ../deployed/index.html       |
+      | ../deployed/about/index.html |
