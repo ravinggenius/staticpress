@@ -7,7 +7,8 @@ require 'staticpress/site'
 
 class SiteTest < TestHelper
   def setup
-    Staticpress.blog_path = TEST_BLOG
+    super
+
     @site = Staticpress::Site.new
 
     @page_route = Staticpress::Route.from_url_path '/about'

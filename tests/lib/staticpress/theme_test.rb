@@ -7,7 +7,8 @@ class ThemeTest < TestHelper
   include Staticpress::Helpers
 
   def setup
-    Staticpress.blog_path = TEST_BLOG
+    super
+
     config.theme = :test_theme
     @theme = Staticpress::Theme.new :test_theme
   end

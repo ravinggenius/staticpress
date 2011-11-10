@@ -4,7 +4,7 @@ require 'staticpress/route'
 
 class RouteTest < TestHelper
   def setup
-    Staticpress.blog_path = TEST_BLOG
+    super
 
     @route_category_0 = Staticpress::Route.new :content_type => Staticpress::Content::Category, :name => 'programming', :number => nil
     @route_category_1 = Staticpress::Route.new :content_type => Staticpress::Content::Category, :name => 'programming', :number => '1'

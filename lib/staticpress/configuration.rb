@@ -33,7 +33,7 @@ module Staticpress
     end
 
     def self.instance
-      @config ||= new(default.to_hash.merge(YAML.load_file(Staticpress.blog_path + 'config.yml')))
+      new(default.to_hash.merge(YAML.load_file(Staticpress.blog_path + 'config.yml')))
     end
   end
 end

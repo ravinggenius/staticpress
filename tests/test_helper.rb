@@ -12,6 +12,10 @@ class TestHelper < MiniTest::Unit::TestCase
   SAMPLE_SITES = (Staticpress.root + '..' + 'tests' + 'sample_sites').expand_path
   TEST_BLOG = SAMPLE_SITES + 'test_blog'
 
+  def setup
+    Staticpress.blog_path = TEST_BLOG
+  end
+
   def teardown
     Staticpress.blog_path = '.'
     test_blog_public = TEST_BLOG + 'public'

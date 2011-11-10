@@ -42,6 +42,8 @@ not exist, and files will be overwritten if they do exist
       FileUtils.mkdir_p Staticpress.blog_path
       FileUtils.cp_r((Staticpress.root + 'skeleton').children, Staticpress.blog_path)
 
+      config = self.config.clone
+
       config.title = if name.to_s.empty?
         Staticpress.blog_path.basename.to_s.split('_').map(&:capitalize).join(' ')
       else
