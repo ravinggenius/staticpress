@@ -72,3 +72,16 @@ Feature: The happy path
     And the following files should exist:
       | public/index.html       |
       | public/about/index.html |
+
+  Scenario: Pushing a compiled site to a remote location
+    Given a blog with content exists
+    And the blog has been previously built
+    And I append to "config.yml" with:
+      """
+      :deployment_strategies:
+        :custom: 'cp -R public ../deployed'
+      """
+    When I run `staticpress push`
+    Then the following files should exist:
+      | ../deployed/index.html       |
+      | ../deployed/about/index.html |

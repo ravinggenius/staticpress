@@ -12,6 +12,10 @@ Given /^a blog with content exists$/ do
   Staticpress::CLI.new.create('hello-goodbye')
 end
 
+Given /^the blog has been previously built$/ do
+  Staticpress::CLI.new.build
+end
+
 
 Then /^a post named "([^"]*)" should exist$/ do |post_title|
   now = Time.now.utc
