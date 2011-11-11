@@ -44,6 +44,13 @@ class ContentPageTest < ContentBaseTest
     assert_equal 8, Staticpress::Content::Page.all.count
   end
 
+  def test_content_type
+    assert_equal 'text/html', @page.content_type
+    assert_equal 'text/css', @style2.content_type
+    assert_equal 'image/png', @static_bin.content_type
+    assert_equal 'text/plain', @static_txt.content_type
+  end
+
   def test_exist?
     assert @page.exist?, '@page does not exist'
     assert @second_page.exist?, '@second_page does not exist'

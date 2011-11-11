@@ -12,7 +12,7 @@ module Staticpress
       content = @site.find_content_by_url_path env['REQUEST_PATH']
 
       if content
-        [ 200, { 'Content-Type' => 'text/html' }, [ content.render ] ]
+        [ 200, { 'Content-Type' => content.content_type }, [ content.render ] ]
       else
         [ 404, {}, [] ]
       end

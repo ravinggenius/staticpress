@@ -1,4 +1,5 @@
 require 'fileutils'
+require 'rack/mime'
 require 'tilt'
 require 'yaml'
 
@@ -32,6 +33,10 @@ module Staticpress::Content
 
       c = template_path_content
       @content = c.match(regex_frontmatter) ? c.match(regex) : c.match(regex_text)
+    end
+
+    def content_type
+      Rack::Mime.mime_type output_path.extname
     end
 
     def exist?
