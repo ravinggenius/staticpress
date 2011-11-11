@@ -2,5 +2,8 @@
 %html
   %head
     %title= page.full_title
+    %link{ :rel => :stylesheet, :href => '/assets/basic/styles/all.css', :type => 'text/css' }/
+    %script{ :src => 'http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js' }
+    %script{ :src => '/assets/basic/scripts/application.js' }
   %body
     = yield
