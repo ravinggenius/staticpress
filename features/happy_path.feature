@@ -1,11 +1,23 @@
 Feature: The happy path
 
   Scenario: Some basic commands
+    Given I run `staticpress`
+    Then the exit status should be 0
+    And the output should contain "Usage"
+
     Given I run `staticpress help`
     Then the exit status should be 0
     And the output should contain "Usage"
 
+    Given I run `staticpress --help`
+    Then the exit status should be 0
+    And the output should contain "Usage"
+
     Given I run `staticpress version`
+    Then the exit status should be 0
+    And the output should contain "Staticpress"
+
+    Given I run `staticpress --version`
     Then the exit status should be 0
     And the output should contain "Staticpress"
 

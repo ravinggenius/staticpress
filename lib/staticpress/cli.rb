@@ -20,6 +20,9 @@ module Staticpress
 
     default_task :help
 
+    map '--help' => :help
+    map '--version' => :version
+
     desc 'help [task]', 'Describe available tasks or one specific task'
     def help(*args)
       general_usage = <<-USAGE
