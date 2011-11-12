@@ -54,4 +54,11 @@ class HelpersTest < TestHelper
 
   def test_spider_directory
   end
+
+  def test_titleize
+    assert_equal '', titleize('')
+    assert_equal '', titleize('/')
+    assert_equal 'Foo -> Bar -> Baz', titleize('/foo/bar/baz')
+    assert_equal 'Blogging With Staticpress', titleize('blogging-with-staticpress')
+  end
 end

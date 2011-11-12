@@ -121,11 +121,7 @@ module Staticpress::Content
       if meta.title
         meta.title
       else
-        route.url_path.sub(/^\//, '').split(/\//).map do |phrase|
-          phrase.split(/-/).map do |word|
-            word.capitalize
-          end.join config.title_separators.word
-        end.join config.title_separators.phrase
+        titleize(route.url_path)
       end
     end
 

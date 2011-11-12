@@ -17,6 +17,9 @@ class ContentPostTest < ContentBaseTest
 
     @another_post_route = Staticpress::Route.from_url_path '/2011/08/20/forever'
     @another_post = Staticpress::Content::Post.new @another_post_route, @post_dir + '2011-08-20-forever.markdown'
+
+    @long_title_post_route = Staticpress::Route.from_url_path '/2011/08/06/blogging-with-staticpress'
+    @long_title_post = Staticpress::Content::Post.new @long_title_post_route, @post_dir + '2011-08-06-blogging-with-staticpress.markdown'
   end
 
   def test__equalsequals
@@ -77,5 +80,10 @@ class ContentPostTest < ContentBaseTest
 
   def test_route
     assert_equal '/2011/07/20/hello', @post.route.url_path
+  end
+
+  def test_title
+    assert_equal 'Hello, World', @post.title
+    assert_equal 'Blogging With Staticpress', @long_title_post.title
   end
 end

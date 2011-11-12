@@ -53,5 +53,11 @@ module Staticpress
         end
       end
     end
+
+    def titleize(url_path)
+      url_path.sub(/^\//, '').split(/\//).map do |phrase|
+        phrase.split(/-/).map(&:capitalize).join(config.title_separators.word)
+      end.join(config.title_separators.phrase)
+    end
   end
 end

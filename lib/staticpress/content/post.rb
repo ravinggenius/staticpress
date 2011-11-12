@@ -20,6 +20,14 @@ module Staticpress::Content
       Time.utc date[:year], date[:month], date[:day]
     end
 
+    def title
+      if meta.title
+        meta.title
+      else
+        titleize(route.params[:title])
+      end
+    end
+
     def self.all
       if (posts_dir = Staticpress.blog_path + config.posts_source_path).directory?
         posts_dir.children.map { |post| find_by_path post }
