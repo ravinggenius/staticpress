@@ -7,7 +7,7 @@ Given /^a blog exists$/ do
 end
 
 Given /^a blog with content exists$/ do
-  step("a blog exists")
+  step('a blog exists')
   Staticpress::CLI.new.create_page('about')
   Staticpress::CLI.new.create('hello-goodbye')
 end
