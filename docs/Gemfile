@@ -1,0 +1,8 @@
+source :rubygems
+
+gem 'staticpress', :path => '..'
+
+gem 'compass'
+gem 'haml'
+gem 'rdiscount'
+gem 'sass'
