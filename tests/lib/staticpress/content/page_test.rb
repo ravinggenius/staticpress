@@ -41,7 +41,7 @@ class ContentPageTest < ContentBaseTest
   end
 
   def test_all
-    assert_equal 8, Staticpress::Content::Page.all.count
+    assert_equal 9, Staticpress::Content::Page.all.count
   end
 
   def test_content_type
