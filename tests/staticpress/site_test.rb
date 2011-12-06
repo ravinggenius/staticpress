@@ -1,4 +1,4 @@
-require_relative '../../test_helper'
+require_relative '../test_helper'
 
 require 'staticpress/content/page'
 require 'staticpress/content/post'
