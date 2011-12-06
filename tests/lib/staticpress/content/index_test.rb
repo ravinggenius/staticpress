@@ -9,15 +9,12 @@ class ContentIndexTest < ContentBaseTest
 
     @template_dir = Staticpress::Theme.theme.root + 'views'
 
-    @home_route = Staticpress::Route.from_url_path '/'
-    @home = Staticpress::Content::Index.new @home_route, @template_dir + 'default.haml'
-
-    @home_two_route = Staticpress::Route.from_url_path '/page/2'
-    @home_two = Staticpress::Content::Index.new @home_two_route, @template_dir + 'default.haml'
+    @home = Staticpress::Content::Index.new :number => 1
+    @home_two = Staticpress::Content::Index.new :number => 2
   end
 
   def test__equalsequals
-    assert_operator @home, :==, Staticpress::Content::Index.new(@home_route, @template_dir + 'default.haml')
+    assert_operator @home, :==, Staticpress::Content::Index.new(:number => 1)
     refute_operator @home, :==, @home_two
     refute_operator @home, :==, nil
   end
@@ -26,20 +23,20 @@ class ContentIndexTest < ContentBaseTest
     assert @home.exist?, '@home does not exist'
   end
 
-  def test_find_by_route
-    assert_equal @home, Staticpress::Content::Index.find_by_route(@home_route)
+  def test_find_by_url_path
+    assert_equal @home, Staticpress::Content::Index.find_by_url_path('/')
   end
 
   def test_inspect
-    assert_equal '#<Staticpress::Content::Index url_path=/>', @home.inspect
-    assert_equal '#<Staticpress::Content::Index url_path=/page/2>', @home_two.inspect
+    assert_equal '#<Staticpress::Content::Index url_path=/, params={:number=>1}>', @home.inspect
+    assert_equal '#<Staticpress::Content::Index url_path=/page/2, params={:number=>2}>', @home_two.inspect
   end
 
   def test_raw
   end
 
-  def test_route
-    assert_equal '/', @home.route.url_path
-    assert_equal '/page/2', @home_two.route.url_path
+  def test_url_path
+    assert_equal '/', @home.url_path
+    assert_equal '/page/2', @home_two.url_path
   end
 end

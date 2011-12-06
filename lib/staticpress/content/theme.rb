@@ -6,12 +6,25 @@ require 'staticpress/route'
 
 module Staticpress::Content
   class Theme < Base
+    include ResourceContent
     include StaticContent
     extend ResourceContent
     extend StaticContent
 
+    attr_reader :extension
+
+    def initialize(params)
+      super
+      @extension = find_supported_extension template_path
+    end
+
     def static?
-      (Staticpress::Theme.new(route.params[:theme]).root + 'assets' + route.params[:asset_type] + route.params[:slug]).file?
+      (Staticpress::Theme.new(params[:theme]).root + 'assets' + params[:asset_type] + params[:slug]).file?
+    end
+
+    def template_path
+      slug = extension ? "#{params[:slug]}.#{extension}" : params[:slug]
+      Staticpress::Theme.new(params[:theme]).root + 'assets' + params[:asset_type] + slug
     end
 
     def self.all
@@ -23,26 +36,11 @@ module Staticpress::Content
         stubs = Staticpress::Route::REGEX_STUBS
         regex = /#{stubs[:theme].regex}\/assets\/#{stubs[:asset_type].regex}\/#{stubs[:slug].regex}/
 
-        if filename_parts = parse_slug(path, (Staticpress.root + 'themes')).match(regex)
-          params = {
-            :content_type => self,
-            :theme => filename_parts[:theme],
-            :asset_type => filename_parts[:asset_type],
-            :slug => filename_parts[:slug]
-          }
-          find_by_route Staticpress::Route.new(params)
+        # FIXME send parse_slug something more intelligent as second parameter
+        if match = regex.match(parse_slug(path, Staticpress.root + 'themes').first)
+          new hash_from_match_data(match)
         end
       end
-    end
-
-    def self.find_by_route(route)
-      return nil unless route
-
-      base = Staticpress::Theme.new(route.params[:theme]).root + 'assets' + route.params[:asset_type]
-      path = base + route.params[:slug]
-      return new(route, path) if path.file?
-
-      load_resource route, base, route.params[:slug]
     end
   end
 end

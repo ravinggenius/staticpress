@@ -13,6 +13,16 @@ require 'staticpress/route'
 
 module Staticpress
   class Site
+    # ordered to allow custom pages to intercept more generic content types
+    CONTENT_TYPES = [
+      Staticpress::Content::Page,
+      Staticpress::Content::Post,
+      Staticpress::Content::Index,
+      Staticpress::Content::Category,
+      Staticpress::Content::Tag,
+      Staticpress::Content::Theme
+    ]
+
     include Staticpress::Helpers
 
     attr_reader :directory
@@ -22,12 +32,18 @@ module Staticpress
     end
 
     def all_content
-      self.class.content_types.map(&:all).flatten
+      CONTENT_TYPES.map(&:all).flatten
     end
 
-    def find_content_by_url_path(url_path)
-      route = Staticpress::Route.from_url_path url_path
-      route.content if route
+    def find_content_by_env(env)
+      catch :content do
+        CONTENT_TYPES.detect do |content_type|
+          content = content_type.find_by_url_path env['REQUEST_PATH']
+          throw :content, content if content && content.exist?
+        end
+
+        nil
+      end
     end
 
     def meta
@@ -41,17 +57,6 @@ module Staticpress
       destination = Staticpress.blog_path + config.destination_path
       FileUtils.rm_r destination if destination.directory?
       all_content.each &:save
-    end
-
-    def self.content_types
-      [
-        Staticpress::Content::Index,
-        Staticpress::Content::Category,
-        Staticpress::Content::Tag,
-        Staticpress::Content::Page,
-        Staticpress::Content::Post,
-        Staticpress::Content::Theme
-      ]
     end
   end
 end

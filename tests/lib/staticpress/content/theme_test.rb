@@ -14,15 +14,12 @@ class ContentThemeTest < ContentBaseTest
 
     @theme_dir = Staticpress::Theme.theme.root
 
-    @asset_style_route = Staticpress::Route.from_url_path '/assets/test_theme/styles/all'
-    @asset_style = Staticpress::Content::Theme.new @asset_style_route, @theme_dir + 'assets' + 'styles' + 'all.sass'
-
-    @asset_script_route = Staticpress::Route.from_url_path '/assets/test_theme/scripts/application.js'
-    @asset_script = Staticpress::Content::Theme.new @asset_script_route, @theme_dir + 'assets' + 'scripts' + 'application.js'
+    @asset_style = Staticpress::Content::Theme.new :theme => 'test_theme', :asset_type => 'styles', :slug => 'all'
+    @asset_script = Staticpress::Content::Theme.new :theme => 'test_theme', :asset_type => 'scripts', :slug => 'application.js'
   end
 
   def test__equalsequals
-    assert_operator @asset_style, :==, Staticpress::Content::Theme.new(@asset_style_route, @theme_dir + 'assets' + 'styles' + 'all.sass')
+    assert_operator @asset_style, :==, Staticpress::Content::Theme.new(:theme => 'test_theme', :asset_type => 'styles', :slug => 'all')
     refute_operator @asset_style, :==, nil
   end
 
@@ -38,19 +35,18 @@ class ContentThemeTest < ContentBaseTest
   def test_find_by_path
     assert_equal @asset_style, Staticpress::Content::Theme.find_by_path(@theme_dir + 'assets' + 'styles' + 'all.sass')
     assert_nil Staticpress::Content::Theme.find_by_path(@theme_dir + 'i' + 'dont' + 'exist.markdown')
-    path = (@theme_dir + 'assets' + 'scripts' + 'application.js')
     actual = Staticpress::Content::Theme.find_by_path(@theme_dir + 'assets' + 'scripts' + 'application.js')
-    assert_equal @asset_script, actual
+    assert_equal actual, @asset_script
   end
 
-  def test_find_by_route
-    assert_equal @asset_style, Staticpress::Content::Theme.find_by_route(@asset_style_route)
-    assert_nil Staticpress::Content::Theme.find_by_route(nil)
-    assert_equal @asset_script, Staticpress::Content::Theme.find_by_route(@asset_script_route)
+  def test_find_by_url_path
+    assert_equal @asset_style, Staticpress::Content::Theme.find_by_url_path('/assets/test_theme/styles/all')
+    assert_nil Staticpress::Content::Theme.find_by_url_path(nil)
+    assert_equal @asset_script, Staticpress::Content::Theme.find_by_url_path('/assets/test_theme/scripts/application.js')
   end
 
   def test_inspect
-    assert_equal '#<Staticpress::Content::Theme url_path=/assets/test_theme/styles/all>', @asset_style.inspect
+    assert_equal '#<Staticpress::Content::Theme url_path=/assets/test_theme/styles/all, params={:asset_type=>"styles", :slug=>"all", :theme=>"test_theme"}>', @asset_style.inspect
   end
 
   def test_output_path
@@ -97,8 +93,8 @@ class ContentThemeTest < ContentBaseTest
     assert_equal expected, @asset_script.render_partial
   end
 
-  def test_route
-    assert_equal '/assets/test_theme/styles/all', @asset_style.route.url_path
+  def test_url_path
+    assert_equal '/assets/test_theme/styles/all', @asset_style.url_path
   end
 
   def test_template_engine_options

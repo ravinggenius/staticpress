@@ -71,7 +71,7 @@ Feature: The happy path
 
   Scenario: Listing all routes
     Given a blog with content exists
-    When I run `staticpress list route`
+    When I run `staticpress list url_path`
     Then the output should contain "/"
     And the output should contain "/about"
     And the output should contain "/hello-goodbye"

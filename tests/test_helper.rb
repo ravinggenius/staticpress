@@ -22,6 +22,12 @@ class TestHelper < MiniTest::Unit::TestCase
     FileUtils.rm_rf test_blog_public if test_blog_public.directory?
   end
 
+  def env(path)
+    {
+      'REQUEST_PATH' => path
+    }
+  end
+
   def assert_eql(expected, actual, message = nil)
     assert actual.eql?(expected), (message || "Expected #{actual} to have same content as #{expected}")
   end

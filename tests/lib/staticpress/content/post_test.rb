@@ -12,18 +12,13 @@ class ContentPostTest < ContentBaseTest
 
     @post_dir = Staticpress.blog_path + config.posts_source_path
 
-    @post_route = Staticpress::Route.from_url_path '/2011/07/20/hello'
-    @post = Staticpress::Content::Post.new @post_route, @post_dir + '2011-07-20-hello.markdown'
-
-    @another_post_route = Staticpress::Route.from_url_path '/2011/08/20/forever'
-    @another_post = Staticpress::Content::Post.new @another_post_route, @post_dir + '2011-08-20-forever.markdown'
-
-    @long_title_post_route = Staticpress::Route.from_url_path '/2011/08/06/blogging-with-staticpress'
-    @long_title_post = Staticpress::Content::Post.new @long_title_post_route, @post_dir + '2011-08-06-blogging-with-staticpress.markdown'
+    @post = Staticpress::Content::Post.new(:year => '2011', :month => '07', :day => '20', :title => 'hello')
+    @another_post = Staticpress::Content::Post.new(:year => '2011', :month => '08', :day => '20', :title => 'forever')
+    @long_title_post = Staticpress::Content::Post.new(:year => '2011', :month => '08', :day => '06', :title => 'blogging-with-staticpress')
   end
 
   def test__equalsequals
-    assert_operator @post, :==, Staticpress::Content::Post.new(@post_route, @post_dir + '2011-07-20-hello.markdown')
+    assert_operator @post, :==, Staticpress::Content::Post.new(:year => '2011', :month => '07', :day => '20', :title => 'hello')
     refute_operator @post, :==, nil
   end
 
@@ -54,13 +49,13 @@ class ContentPostTest < ContentBaseTest
     assert_nil Staticpress::Content::Post.find_by_path(@post_dir + '2011-07-20-goodbye.markdown')
   end
 
-  def test_find_by_route
-    assert_equal @post, Staticpress::Content::Post.find_by_route(@post_route)
-    assert_nil Staticpress::Content::Post.find_by_route(nil)
+  def test_find_by_url_path
+    assert_equal @post, Staticpress::Content::Post.find_by_url_path('/2011/07/20/hello')
+    assert_nil Staticpress::Content::Post.find_by_url_path(nil)
   end
 
   def test_inspect
-    assert_equal '#<Staticpress::Content::Post url_path=/2011/07/20/hello>', @post.inspect
+    assert_equal '#<Staticpress::Content::Post url_path=/2011/07/20/hello, params={:day=>"20", :month=>"07", :title=>"hello", :year=>"2011"}>', @post.inspect
   end
 
   def test_output_path
@@ -78,8 +73,12 @@ class ContentPostTest < ContentBaseTest
     assert_equal "<p>in post</p>\n", @post.render_partial
   end
 
-  def test_route
-    assert_equal '/2011/07/20/hello', @post.route.url_path
+  def test_url_path
+    assert_equal '/2011/07/20/hello', @post.url_path
+  end
+
+  def test_template_path
+    assert_equal (Staticpress.blog_path + config.posts_source_path + '2011-07-20-hello.markdown'), @post.template_path
   end
 
   def test_title

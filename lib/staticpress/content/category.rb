@@ -1,19 +1,28 @@
 require 'staticpress'
 require 'staticpress/content/base'
 require 'staticpress/content/collection_content'
-require 'staticpress/route'
+require 'staticpress/content/resource_content'
 
 module Staticpress::Content
   class Category < Base
     extend CollectionContent
+    extend ResourceContent
+
+    def optional_param_defaults
+      { :number => 1 }
+    end
 
     def sub_content
-      paginate(self.class.content_by_category[route.params[:name]].sort)[(Integer route.params[:number]) - 1]
+      paginate(self.class.content_by_category[params[:name]].sort)[params[:number] - 1]
+    end
+
+    def template_path
+      self.class.template_path
     end
 
     def self.all
       categories.map do |category|
-        find_by_route Staticpress::Route.new(:content_type => self, :name => category, :number => '1')
+        new :name => category, :number => '1'
       end
     end
 

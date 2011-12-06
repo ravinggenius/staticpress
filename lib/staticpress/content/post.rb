@@ -1,11 +1,20 @@
 require 'staticpress'
 require 'staticpress/content/base'
 require 'staticpress/content/resource_content'
-require 'staticpress/route'
+# FIXME requiring 'staticpress/route' here gives an error when running tests
+#require 'staticpress/route'
 
 module Staticpress::Content
   class Post < Base
+    include ResourceContent
     extend ResourceContent
+
+    attr_reader :extension
+
+    def initialize(params)
+      super
+      @extension = find_supported_extension template_path
+    end
 
     def <=>(other)
       other.respond_to?(:created_at) ? (created_at <=> other.created_at) : super
@@ -16,15 +25,24 @@ module Staticpress::Content
     end
 
     def created_on
-      date = route.params
-      Time.utc date[:year], date[:month], date[:day]
+      Time.utc params[:year], params[:month], params[:day]
+    end
+
+    def template_path
+      name = [
+        params[:year],
+        params[:month],
+        params[:day],
+        (extension ? "#{params[:title]}.#{extension}" : params[:title])
+      ].join('-')
+      Staticpress.blog_path + config.posts_source_path + name
     end
 
     def title
       if meta.title
         meta.title
       else
-        titleize(route.params[:title])
+        titleize(params[:title])
       end
     end
 
@@ -51,34 +69,12 @@ module Staticpress::Content
     def self.find_by_path(path)
       if path.file?
         stubs = Staticpress::Route::REGEX_STUBS
-        regex = /#{stubs[:year].regex}-#{stubs[:month].regex}-#{stubs[:day].regex}-#{stubs[:title].regex}/
+        regex = /#{stubs[:year].regex}-#{stubs[:month].regex}-#{stubs[:day].regex}-#{stubs[:title].regex}\.(.+)/
 
         if filename_parts = path.basename.to_s.match(regex)
-          params = {
-            :content_type => self,
-            :year => filename_parts[:year],
-            :month => filename_parts[:month],
-            :day => filename_parts[:day],
-            :title => filename_parts[:title]
-          }
-          find_by_route Staticpress::Route.new(params)
+          new hash_from_match_data(filename_parts)
         end
       end
-    end
-
-    def self.find_by_route(route)
-      return nil unless route
-
-      base = Staticpress.blog_path + config.posts_source_path
-      parts = route.params
-      stub = [
-        parts[:year],
-        parts[:month],
-        parts[:day],
-        parts[:title]
-      ].join '-'
-
-      load_resource route, base, stub
     end
 
     def self.template

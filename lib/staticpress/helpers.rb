@@ -25,6 +25,10 @@ module Staticpress
       Hash[reply]
     end
 
+    def hash_from_match_data(match)
+      Hash[match.names.map { |match_key| [match_key.to_sym, match[match_key]] }]
+    end
+
     def paginate(range)
       reply = []
 

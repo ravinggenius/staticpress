@@ -9,9 +9,7 @@ module Staticpress
     end
 
     def call(env)
-      content = @site.find_content_by_url_path env['REQUEST_PATH']
-
-      if content
+      if content = @site.find_content_by_env(env)
         [ 200, { 'Content-Type' => content.content_type }, [ content.render ] ]
       else
         [ 404, {}, [] ]

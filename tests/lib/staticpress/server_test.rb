@@ -8,12 +8,6 @@ class ServerTest < TestHelper
     @server = Staticpress::Server.new
   end
 
-  def env(path)
-    {
-      'REQUEST_PATH' => path
-    }
-  end
-
   def test_call_root
     response = @server.call(env('/'))
     assert_equal 200, response.first

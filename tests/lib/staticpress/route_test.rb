@@ -3,53 +3,32 @@ require_relative '../../test_helper'
 require 'staticpress/route'
 
 class RouteTest < TestHelper
-  def setup
-    super
+  def test_extract_params_index
+    pattern = '/(page/:number)?'
 
-    @route_category_0 = Staticpress::Route.new :content_type => Staticpress::Content::Category, :name => 'programming', :number => nil
-    @route_category_1 = Staticpress::Route.new :content_type => Staticpress::Content::Category, :name => 'programming', :number => '1'
-    @route_category_2 = Staticpress::Route.new :content_type => Staticpress::Content::Category, :name => 'programming', :number => '2'
-    @route_page = Staticpress::Route.new :content_type => Staticpress::Content::Page, :slug => 'about'
-    @route_post = Staticpress::Route.new :content_type => Staticpress::Content::Post, :year => '2011', :month => '07', :day => '20', :title => 'hello'
+    assert_equal({ :number => nil }, Staticpress::Route.extract_params(pattern, '/'))
+    assert_equal({ :number => '2' }, Staticpress::Route.extract_params(pattern, '/page/2'))
+
+    assert_nil nil, Staticpress::Route.extract_params(pattern, '/plain.txt')
   end
 
-  def test__equalsequals
-    assert_operator @route_category_0, :==, @route_category_1
-    refute_operator @route_category_0, :==, @route_category_2
-    assert_operator @route_page, :==, Staticpress::Route.new(:content_type => Staticpress::Content::Page, :slug => 'about')
-    refute_operator @route_page, :==, @route_post
-    refute_operator @route_page, :==, nil
+  def test_extract_params_page
+    pattern = '/:slug'
+
+    assert_equal({ :slug => '' }, Staticpress::Route.extract_params(pattern, '/'))
+    assert_equal({ :slug => 'hello' }, Staticpress::Route.extract_params(pattern, '/hello'))
   end
 
-  def test_content
-    assert_equal Staticpress::Content::Page.new(@route_page, :markdown), @route_page.content
-    assert_equal Staticpress::Content::Post.new(@route_post, :markdown), @route_post.content
+  def test_extract_params_post
+    pattern = '/:year/:month/:day/:title'
+
+    assert_equal({ :year => '2011', :month => '11', :day => '11', :title => 'hello-world' }, Staticpress::Route.extract_params(pattern, '/2011/11/11/hello-world'))
   end
 
-  def test_inspect
-    assert_equal '#<Staticpress::Route url_path=/about, content_type=Staticpress::Content::Page, params={:slug=>"about"}>', @route_page.inspect
-    assert_equal '#<Staticpress::Route url_path=/2011/07/20/hello, content_type=Staticpress::Content::Post, params={:day=>"20", :month=>"07", :title=>"hello", :year=>"2011"}>', @route_post.inspect
-  end
+  def test_extract_params_theme
+    pattern = '/assets/:theme/:asset_type/:slug'
 
-  def test_params
-    assert_equal({ :content_type => Staticpress::Content::Category, :name => 'programming', :number => '1' }, @route_category_0.params)
-    assert_equal({ :content_type => Staticpress::Content::Category, :name => 'programming', :number => '1' }, @route_category_1.params)
-    assert_equal({ :content_type => Staticpress::Content::Page, :slug => 'about' }, @route_page.params)
-    assert_equal({ :content_type => Staticpress::Content::Post, :year => '2011', :month => '07', :day => '20', :title => 'hello' }, @route_post.params)
-  end
-
-  def test_url_path
-    assert_equal '/category/programming', @route_category_0.url_path
-    assert_equal '/category/programming', @route_category_1.url_path
-    assert_equal '/category/programming/page/2', @route_category_2.url_path
-    assert_equal '/about', @route_page.url_path
-    assert_equal '/2011/07/20/hello', @route_post.url_path
-  end
-
-  def test_from_url_path
-    assert_equal Staticpress::Route.from_url_path('/about'), @route_page
-    assert_equal Staticpress::Route.from_url_path('/2011/07/20/hello'), @route_post
-    assert_nil Staticpress::Route.from_url_path('/i/dont/exist')
+    assert_equal({ :theme => 'default', :asset_type => 'styles', :slug => 'screen.css' }, Staticpress::Route.extract_params(pattern, '/assets/default/styles/screen.css'))
   end
 
   def test_regex_for_pattern_index
@@ -71,6 +50,7 @@ class RouteTest < TestHelper
   def test_regex_for_pattern_page_1
     pattern = '/:slug'
 
+    assert_match Staticpress::Route.regex_for_pattern(pattern), '/'
     assert_match Staticpress::Route.regex_for_pattern(pattern), '/page/1'
     assert_match Staticpress::Route.regex_for_pattern(pattern), '/about'
     assert_match Staticpress::Route.regex_for_pattern(pattern), '/about/us'
@@ -80,8 +60,6 @@ class RouteTest < TestHelper
     assert_match Staticpress::Route.regex_for_pattern(pattern), '/blog/2011/07/20/hello-world'
     assert_match Staticpress::Route.regex_for_pattern(pattern), '/plain.txt'
     assert_match Staticpress::Route.regex_for_pattern(pattern), '/files/profile.jpg'
-
-    refute_match Staticpress::Route.regex_for_pattern(pattern), '/'
   end
 
   def test_regex_for_pattern_page_2

@@ -1,17 +1,43 @@
+require 'pathname'
+
 require 'staticpress'
 require 'staticpress/content/base'
 require 'staticpress/content/resource_content'
 require 'staticpress/content/static_content'
-require 'staticpress/route'
 
 module Staticpress::Content
   class Page < Base
     include StaticContent
+    include ResourceContent
     extend ResourceContent
     extend StaticContent
 
+    attr_reader :extension, :full_slug
+
+    def initialize(params)
+      super
+
+      index = extensionless_basename Pathname.new(config.index_file)
+
+      @full_slug = params[:slug]
+      @extension = find_supported_extension(Staticpress.blog_path + config.source_path + full_slug)
+
+      if @extension.nil? && !template_path.file?
+        @full_slug = [
+          params[:slug],
+          index
+        ].reject(&:empty?).join('/')
+        @extension = find_supported_extension(Staticpress.blog_path + config.source_path + full_slug)
+      end
+    end
+
     def static?
-      (Staticpress.blog_path + config.source_path + route.params[:slug]).file?
+      (Staticpress.blog_path + config.source_path + params[:slug]).file?
+    end
+
+    def template_path
+      slug = extension ? "#{full_slug}.#{extension}" : full_slug
+      Staticpress.blog_path + config.source_path + slug
     end
 
     def self.all
@@ -36,23 +62,9 @@ module Staticpress::Content
 
     def self.find_by_path(path)
       if path.file?
-        params = {
-          :content_type => self,
-          :slug => parse_slug(path, (Staticpress.blog_path + config.source_path))
-        }
-
-        find_by_route Staticpress::Route.new(params)
+        slug = parse_slug(path, (Staticpress.blog_path + config.source_path)).first
+        new :slug => slug
       end
-    end
-
-    def self.find_by_route(route)
-      return nil unless route
-
-      base = Staticpress.blog_path + config.source_path
-      path = base + route.params[:slug]
-      return new(route, path) if path.file?
-
-      load_resource route, base, route.params[:slug]
     end
 
     def self.template

@@ -9,8 +9,8 @@ class ViewHelpersTest < TestHelper
   def setup
     super
 
-    @post_route = Staticpress::Route.from_url_path '/2011/07/20/hello'
-    @post = Staticpress::Content::Post.new @post_route, Staticpress.blog_path + config.posts_source_path + '2011-07-20-hello.markdown'
+    @post = Staticpress::Content::Post.new :year => '2011', :month => '07', :day => '20', :title => 'hello'
+
     @view_helpers = Staticpress::ViewHelpers.new @post
   end
 

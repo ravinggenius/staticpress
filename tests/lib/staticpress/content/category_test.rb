@@ -10,12 +10,11 @@ class ContentCategoryTest < ContentBaseTest
 
     @template_dir = Staticpress::Theme.theme.root + 'views'
 
-    @category_page_route = Staticpress::Route.from_url_path '/category/programming'
-    @category_page = Staticpress::Content::Category.new @category_page_route, @template_dir + 'default.haml'
+    @category_page = Staticpress::Content::Category.new :name => 'programming'
   end
 
   def test__equalsequals
-    assert_operator @category_page, :==, Staticpress::Content::Category.new(@category_page_route, @template_dir + 'default.haml')
+    assert_operator @category_page, :==, Staticpress::Content::Category.new(:name => 'programming')
     refute_operator @category_page, :==, nil
   end
 
@@ -27,12 +26,13 @@ class ContentCategoryTest < ContentBaseTest
     assert @category_page.exist?, '@category_page does not exist'
   end
 
-  def test_find_by_route
-    assert_equal @category_page, Staticpress::Content::Category.find_by_route(@category_page_route)
+  def test_find_by_url_path
+    assert_equal @category_page, Staticpress::Content::Category.find_by_url_path('/category/programming')
   end
 
   def test_inspect
-    assert_equal '#<Staticpress::Content::Category url_path=/category/programming>', @category_page.inspect
+    assert_equal '#<Staticpress::Content::Category url_path=/category/programming, params={:name=>"programming", :number=>1}>', @category_page.inspect
+    assert_equal '#<Staticpress::Content::Category url_path=/category/programming, params={:name=>"programming", :number=>1}>', Staticpress::Content::Category.new(:name => 'programming', :number => nil).inspect
   end
 
   def test_sub_content
@@ -43,8 +43,8 @@ class ContentCategoryTest < ContentBaseTest
     assert_equal '= partial :list_posts, :posts => page.sub_content', @category_page.raw
   end
 
-  def test_route
-    assert_equal '/category/programming', @category_page.route.url_path
+  def test_url_path
+    assert_equal '/category/programming', @category_page.url_path
   end
 
   def test_all
@@ -54,9 +54,9 @@ class ContentCategoryTest < ContentBaseTest
 
   def test_content_by_category
     [
-      Staticpress::Route.new(:content_type => Staticpress::Content::Post, :year => '2011', :month => '08', :day => '01', :title => 'announcing-staticpress').content,
-      Staticpress::Route.new(:content_type => Staticpress::Content::Post, :year => '2011', :month => '08', :day => '02', :title => 'staticpress').content,
-      Staticpress::Route.new(:content_type => Staticpress::Content::Post, :year => '2011', :month => '08', :day => '06', :title => 'blogging-with-staticpress').content
+      Staticpress::Content::Post.new(:year => '2011', :month => '08', :day => '01', :title => 'announcing-staticpress'),
+      Staticpress::Content::Post.new(:year => '2011', :month => '08', :day => '02', :title => 'staticpress'),
+      Staticpress::Content::Post.new(:year => '2011', :month => '08', :day => '06', :title => 'blogging-with-staticpress')
     ].each { |content| assert_includes Staticpress::Content::Category.content_by_category['programming'], content }
   end
 end
