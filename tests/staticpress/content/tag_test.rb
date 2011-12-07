@@ -5,7 +5,6 @@ require 'staticpress/route'
 require 'staticpress/theme'
 
 class ContentTagTest < TestCase
-  let(:template_dir) { Staticpress::Theme.theme.root + 'views' }
   let(:tag_page) { Staticpress::Content::Tag.new :name => 'charlotte' }
 
   def test__equalsequals

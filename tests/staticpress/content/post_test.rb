@@ -40,7 +40,6 @@ class ContentPostTest < TestCase
   end
 
   def test_find_by_path
-    post_dir = Staticpress.blog_path + config.posts_source_path
     assert_equal post, Staticpress::Content::Post.find_by_path(post_dir + '2011-07-20-hello.markdown')
     assert_nil Staticpress::Content::Post.find_by_path(post_dir + '2011-07-20-goodbye.markdown')
   end

@@ -5,7 +5,6 @@ require 'staticpress/route'
 require 'staticpress/theme'
 
 class ContentCategoryTest < TestCase
-  let(:template_dir) { Staticpress::Theme.theme.root + 'views' }
   let(:category_page) { Staticpress::Content::Category.new :name => 'programming' }
 
   def test__equalsequals

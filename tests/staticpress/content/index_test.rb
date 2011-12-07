@@ -4,8 +4,6 @@ require 'staticpress/content/index'
 require 'staticpress/route'
 
 class ContentIndexTest < TestCase
-  let(:template_dir) { Staticpress::Theme.theme.root + 'views' }
-
   let(:home) { Staticpress::Content::Index.new :number => 1 }
   let(:home_two) { Staticpress::Content::Index.new :number => 2 }
 
