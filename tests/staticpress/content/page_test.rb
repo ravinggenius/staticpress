@@ -54,6 +54,7 @@ class ContentPageTest < ContentBaseTest
 
   def test_find_by_path
     assert_equal @page, Staticpress::Content::Page.find_by_path(@page_dir + 'about.markdown')
+    assert_equal @index_page, Staticpress::Content::Page.find_by_path(@page_dir + 'index.markdown')
     assert_nil Staticpress::Content::Page.find_by_path(@page_dir + 'i' + 'dont' + 'exist.markdown')
     assert_equal @static_bin, Staticpress::Content::Page.find_by_path(@page_dir + 'ruby.png')
     assert_nil Staticpress::Content::Page.find_by_path(@page_dir + 'i' + 'dont' + 'exist.jpg')

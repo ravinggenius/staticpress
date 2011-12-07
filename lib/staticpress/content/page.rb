@@ -62,7 +62,9 @@ module Staticpress::Content
 
     def self.find_by_path(path)
       if path.file?
-        slug = parse_slug(path, (Staticpress.blog_path + config.source_path)).first
+        raw_slug = parse_slug(path, (Staticpress.blog_path + config.source_path)).first
+        basename = extensionless_basename Pathname.new(config.index_file)
+        slug = raw_slug.sub(/.*(\/?#{basename})$/, '')
         new :slug => slug
       end
     end

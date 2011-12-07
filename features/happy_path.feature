@@ -85,6 +85,33 @@ Feature: The happy path
       | public/index.html       |
       | public/about/index.html |
 
+  Scenario: Building a site a custom homepage
+    Given a blog with content exists
+    And I write to "content/index.markdown" with:
+      """
+      ---
+      title: Custom Home Page
+      ---
+      in custom page
+      """
+    When I run `staticpress build`
+    Then the file "public/index.html" should contain exactly:
+      """
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <title>Custom Home Page | Transient Thoughts</title>
+          <link href='/assets/basic/styles/all.css' rel='stylesheet' type='text/css' />
+          <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js'></script>
+          <script src='/assets/basic/scripts/application.js'></script>
+        </head>
+        <body>
+          <p>in custom page</p>
+        </body>
+      </html>
+
+      """
+
   Scenario: Pushing a compiled site to a remote location
     Given a blog with content exists
     And the blog has been previously built

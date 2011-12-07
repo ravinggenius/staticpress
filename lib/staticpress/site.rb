@@ -13,7 +13,7 @@ require 'staticpress/route'
 
 module Staticpress
   class Site
-    # ordered to allow custom pages to intercept more generic content types
+    # ordered by priority
     CONTENT_TYPES = [
       Staticpress::Content::Page,
       Staticpress::Content::Post,
