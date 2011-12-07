@@ -54,8 +54,8 @@ class ContentPostTest < ContentBaseTest
     assert_nil Staticpress::Content::Post.find_by_url_path(nil)
   end
 
-  def test_inspect
-    assert_equal '#<Staticpress::Content::Post url_path=/2011/07/20/hello, params={:day=>"20", :month=>"07", :title=>"hello", :year=>"2011"}>', @post.inspect
+  def test_to_s
+    assert_equal '#<Staticpress::Content::Post url_path=/2011/07/20/hello, params={:day=>"20", :month=>"07", :title=>"hello", :year=>"2011"}>', @post.to_s
   end
 
   def test_output_path

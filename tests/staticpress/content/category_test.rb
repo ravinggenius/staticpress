@@ -30,9 +30,9 @@ class ContentCategoryTest < ContentBaseTest
     assert_equal @category_page, Staticpress::Content::Category.find_by_url_path('/category/programming')
   end
 
-  def test_inspect
-    assert_equal '#<Staticpress::Content::Category url_path=/category/programming, params={:name=>"programming", :number=>1}>', @category_page.inspect
-    assert_equal '#<Staticpress::Content::Category url_path=/category/programming, params={:name=>"programming", :number=>1}>', Staticpress::Content::Category.new(:name => 'programming', :number => nil).inspect
+  def test_to_s
+    assert_equal '#<Staticpress::Content::Category url_path=/category/programming, params={:name=>"programming", :number=>1}>', @category_page.to_s
+    assert_equal '#<Staticpress::Content::Category url_path=/category/programming, params={:name=>"programming", :number=>1}>', Staticpress::Content::Category.new(:name => 'programming', :number => nil).to_s
   end
 
   def test_sub_content

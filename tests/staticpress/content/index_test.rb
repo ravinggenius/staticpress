@@ -27,9 +27,9 @@ class ContentIndexTest < ContentBaseTest
     assert_equal @home, Staticpress::Content::Index.find_by_url_path('/')
   end
 
-  def test_inspect
-    assert_equal '#<Staticpress::Content::Index url_path=/, params={:number=>1}>', @home.inspect
-    assert_equal '#<Staticpress::Content::Index url_path=/page/2, params={:number=>2}>', @home_two.inspect
+  def test_to_s
+    assert_equal '#<Staticpress::Content::Index url_path=/, params={:number=>1}>', @home.to_s
+    assert_equal '#<Staticpress::Content::Index url_path=/page/2, params={:number=>2}>', @home_two.to_s
   end
 
   def test_raw

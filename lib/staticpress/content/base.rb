@@ -59,11 +59,9 @@ module Staticpress::Content
       {}
     end
 
-    # TODO rename to to_s
-    def inspect
+    def to_s
       "#<#{self.class} url_path=#{url_path}, params=#{Hash[params.sort]}>"
     end
-    alias to_s inspect
 
     def layout
       if meta.layout || config.markup_templates.include?(template_path.extname[1..-1])

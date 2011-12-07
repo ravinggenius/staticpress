@@ -43,8 +43,8 @@ class ContentTagTest < ContentBaseTest
     assert_equal @tag_page, Staticpress::Content::Tag.find_by_url_path('/tag/charlotte')
   end
 
-  def test_inspect
-    assert_equal '#<Staticpress::Content::Tag url_path=/tag/charlotte, params={:name=>"charlotte", :number=>1}>', @tag_page.inspect
+  def test_to_s
+    assert_equal '#<Staticpress::Content::Tag url_path=/tag/charlotte, params={:name=>"charlotte", :number=>1}>', @tag_page.to_s
   end
 
   def test_sub_content

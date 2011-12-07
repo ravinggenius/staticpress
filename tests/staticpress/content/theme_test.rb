@@ -45,8 +45,8 @@ class ContentThemeTest < ContentBaseTest
     assert_equal @asset_script, Staticpress::Content::Theme.find_by_url_path('/assets/test_theme/scripts/application.js')
   end
 
-  def test_inspect
-    assert_equal '#<Staticpress::Content::Theme url_path=/assets/test_theme/styles/all, params={:asset_type=>"styles", :slug=>"all", :theme=>"test_theme"}>', @asset_style.inspect
+  def test_to_s
+    assert_equal '#<Staticpress::Content::Theme url_path=/assets/test_theme/styles/all, params={:asset_type=>"styles", :slug=>"all", :theme=>"test_theme"}>', @asset_style.to_s
   end
 
   def test_output_path

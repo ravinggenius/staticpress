@@ -43,13 +43,13 @@ class ContentPageTest < ContentBaseTest
   end
 
   def test_exist?
-    assert @page.exist?, "#{@page.inspect} does not exist"
-    assert @second_page.exist?, "#{@second_page.inspect} does not exist"
-    assert @static_bin.exist?, "#{@static_bin.inspect} does not exist"
-    assert @static_txt.exist?, "#{@static_txt.inspect} does not exist"
-    assert @index_page.exist?, "#{@index_page.inspect} does not exist"
+    assert @page.exist?, "#{@page} does not exist"
+    assert @second_page.exist?, "#{@second_page} does not exist"
+    assert @static_bin.exist?, "#{@static_bin} does not exist"
+    assert @static_txt.exist?, "#{@static_txt} does not exist"
+    assert @index_page.exist?, "#{@index_page} does not exist"
 
-    refute @fake.exist?, "#{@fake.inspect} exists"
+    refute @fake.exist?, "#{@fake} exists"
   end
 
   def test_find_by_path
@@ -67,10 +67,10 @@ class ContentPageTest < ContentBaseTest
     assert_nil Staticpress::Content::Page.find_by_url_path(nil)
   end
 
-  def test_inspect
-    assert_equal '#<Staticpress::Content::Page url_path=/, params={:slug=>""}>', @index_page.inspect
-    assert_equal '#<Staticpress::Content::Page url_path=/about, params={:slug=>"about"}>', @page.inspect
-    assert_equal '#<Staticpress::Content::Page url_path=/ruby.png, params={:slug=>"ruby.png"}>', @static_bin.inspect
+  def test_to_s
+    assert_equal '#<Staticpress::Content::Page url_path=/, params={:slug=>""}>', @index_page.to_s
+    assert_equal '#<Staticpress::Content::Page url_path=/about, params={:slug=>"about"}>', @page.to_s
+    assert_equal '#<Staticpress::Content::Page url_path=/ruby.png, params={:slug=>"ruby.png"}>', @static_bin.to_s
   end
 
   def test_output_path
