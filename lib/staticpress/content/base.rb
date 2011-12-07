@@ -55,12 +55,11 @@ module Staticpress::Content
       template_path.file?
     end
 
-    def optional_param_defaults
-      {}
-    end
-
-    def to_s
-      "#<#{self.class} url_path=#{url_path}, params=#{Hash[params.sort]}>"
+    def full_title
+      [
+        title,
+        config.title
+      ].join config.title_separators.site
     end
 
     def layout
@@ -72,6 +71,10 @@ module Staticpress::Content
 
     def meta
       Staticpress::Metadata.new(content.names.include?('frontmatter') ? YAML.load(content[:frontmatter]) : {})
+    end
+
+    def optional_param_defaults
+      {}
     end
 
     def output_path
@@ -125,6 +128,18 @@ module Staticpress::Content
       self.class.theme
     end
 
+    def title
+      if meta.title
+        meta.title
+      else
+        titleize(url_path)
+      end
+    end
+
+    def to_s
+      "#<#{self.class} url_path=#{url_path}, params=#{Hash[params.sort]}>"
+    end
+
     def url_path
       # grab url pattern for content type
       pattern = config.routes[self.class.type].clone
@@ -150,21 +165,6 @@ module Staticpress::Content
       # actually do conversion from pattern to url path
       Staticpress::Route::REGEX_STUBS.keys.inject(pattern) do |p, key|
         p.gsub /:#{key}/, params[key].to_s
-      end
-    end
-
-    def full_title
-      [
-        title,
-        config.title
-      ].join config.title_separators.site
-    end
-
-    def title
-      if meta.title
-        meta.title
-      else
-        titleize(url_path)
       end
     end
 
