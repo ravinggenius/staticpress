@@ -5,17 +5,12 @@ require 'staticpress/route'
 require 'staticpress/theme'
 
 class ContentTagTest < TestCase
-  def setup
-    super
-
-    @template_dir = Staticpress::Theme.theme.root + 'views'
-
-    @tag_page = Staticpress::Content::Tag.new :name => 'charlotte'
-  end
+  let(:template_dir) { Staticpress::Theme.theme.root + 'views' }
+  let(:tag_page) { Staticpress::Content::Tag.new :name => 'charlotte' }
 
   def test__equalsequals
-    assert_operator @tag_page, :==, Staticpress::Content::Tag.new(:name => 'charlotte')
-    refute_operator @tag_page, :==, nil
+    assert_operator tag_page, :==, Staticpress::Content::Tag.new(:name => 'charlotte')
+    refute_operator tag_page, :==, nil
   end
 
   def test_tags
@@ -23,12 +18,12 @@ class ContentTagTest < TestCase
   end
 
   def test_exist?
-    assert @tag_page.exist?, '@tag_page does not exist'
+    assert tag_page.exist?, 'tag_page does not exist'
   end
 
   def test_params
     expected = { :name => 'charlotte', :number => 1 }
-    assert_equal expected, @tag_page.params
+    assert_equal expected, tag_page.params
     assert_equal expected, Staticpress::Content::Tag.new(:name => 'charlotte', :number => nil).params
     assert_equal expected, Staticpress::Content::Tag.new(:name => 'charlotte', :number => '1').params
   end
@@ -40,28 +35,28 @@ class ContentTagTest < TestCase
   end
 
   def test_find_by_url_path
-    assert_equal @tag_page, Staticpress::Content::Tag.find_by_url_path('/tag/charlotte')
+    assert_equal tag_page, Staticpress::Content::Tag.find_by_url_path('/tag/charlotte')
   end
 
   def test_to_s
-    assert_equal '#<Staticpress::Content::Tag url_path=/tag/charlotte, params={:name=>"charlotte", :number=>1}>', @tag_page.to_s
+    assert_equal '#<Staticpress::Content::Tag url_path=/tag/charlotte, params={:name=>"charlotte", :number=>1}>', tag_page.to_s
   end
 
   def test_sub_content
-    assert_equal 1, @tag_page.sub_content.count
+    assert_equal 1, tag_page.sub_content.count
   end
 
   def test_raw
-    assert_equal '= partial :list_posts, :posts => page.sub_content', @tag_page.raw
+    assert_equal '= partial :list_posts, :posts => page.sub_content', tag_page.raw
   end
 
   def test_url_path
-    assert_equal '/tag/charlotte', @tag_page.url_path
+    assert_equal '/tag/charlotte', tag_page.url_path
   end
 
   def test_all
     assert_equal 1, Staticpress::Content::Tag.all.count
-    assert Staticpress::Content::Tag.all.include?(@tag_page)
+    assert Staticpress::Content::Tag.all.include?(tag_page)
   end
 
   def test_content_by_tag
