@@ -1,9 +1,9 @@
-require_relative '../test_helper'
+require_relative '../test_case'
 
 require 'staticpress/helpers'
 require 'staticpress/theme'
 
-class ThemeTest < TestHelper
+class ThemeTest < TestCase
   include Staticpress::Helpers
 
   def setup

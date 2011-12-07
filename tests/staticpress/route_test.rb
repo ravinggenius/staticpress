@@ -1,8 +1,8 @@
-require_relative '../test_helper'
+require_relative '../test_case'
 
 require 'staticpress/route'
 
-class RouteTest < TestHelper
+class RouteTest < TestCase
   def test_extract_params_index
     pattern = '/(page/:number)?'
 

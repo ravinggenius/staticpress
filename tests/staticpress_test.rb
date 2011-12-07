@@ -1,8 +1,8 @@
-require_relative 'test_helper'
+require_relative 'test_case'
 
 require 'pathname'
 
-class StaticpressTest < TestHelper
+class StaticpressTest < TestCase
   def test_blog_path
     assert_equal Pathname.new('tests/sample_sites/test_blog').expand_path, Staticpress.blog_path
   end

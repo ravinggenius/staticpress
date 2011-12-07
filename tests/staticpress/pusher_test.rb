@@ -1,6 +1,6 @@
-require_relative '../test_helper'
+require_relative '../test_case'
 
-class PusherTest < TestHelper
+class PusherTest < TestCase
   def test_custom
   end
 

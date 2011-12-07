@@ -1,8 +1,8 @@
-require_relative '../test_helper'
+require_relative '../test_case'
 
 require 'staticpress/metadata'
 
-class MetadataTest < TestHelper
+class MetadataTest < TestCase
   def setup
     super
     @meta = Staticpress::Metadata.new

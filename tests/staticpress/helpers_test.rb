@@ -1,10 +1,10 @@
-require_relative '../test_helper'
+require_relative '../test_case'
 
 require 'pathname'
 
 require 'staticpress/helpers'
 
-class HelpersTest < TestHelper
+class HelpersTest < TestCase
   include Staticpress::Helpers
 
   def test_extensionless_basename

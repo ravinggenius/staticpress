@@ -1,11 +1,11 @@
-require_relative '../test_helper'
+require_relative '../test_case'
 
 require 'staticpress/content/page'
 require 'staticpress/content/post'
 require 'staticpress/route'
 require 'staticpress/site'
 
-class SiteTest < TestHelper
+class SiteTest < TestCase
   def setup
     super
 

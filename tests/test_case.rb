@@ -8,7 +8,7 @@ require 'sass'
 
 require 'staticpress'
 
-class TestHelper < MiniTest::Unit::TestCase
+class TestCase < MiniTest::Unit::TestCase
   SAMPLE_SITES = (Staticpress.root + '..' + 'tests' + 'sample_sites').expand_path
   TEST_BLOG = SAMPLE_SITES + 'test_blog'
 

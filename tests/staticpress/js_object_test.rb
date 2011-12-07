@@ -1,8 +1,8 @@
-require_relative '../test_helper'
+require_relative '../test_case'
 
 require 'staticpress/js_object'
 
-class JSObjectTest < TestHelper
+class JSObjectTest < TestCase
   JSO = Staticpress::JSObject
 
   def setup

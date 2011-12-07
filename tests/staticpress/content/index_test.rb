@@ -1,9 +1,9 @@
-require_relative '../../test_helper'
+require_relative '../../test_case'
 
 require 'staticpress/content/index'
 require 'staticpress/route'
 
-class ContentIndexTest < TestHelper
+class ContentIndexTest < TestCase
   def setup
     super
 

@@ -1,9 +1,9 @@
-require_relative '../test_helper'
+require_relative '../test_case'
 
 require 'staticpress/helpers'
 require 'staticpress/view_helpers'
 
-class ViewHelpersTest < TestHelper
+class ViewHelpersTest < TestCase
   include Staticpress::Helpers
 
   def setup

@@ -1,8 +1,8 @@
-require_relative '../test_helper'
+require_relative '../test_case'
 
 require 'staticpress/server'
 
-class ServerTest < TestHelper
+class ServerTest < TestCase
   def setup
     super
     @server = Staticpress::Server.new

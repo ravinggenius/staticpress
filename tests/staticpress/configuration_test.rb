@@ -1,4 +1,4 @@
-require_relative '../test_helper'
+require_relative '../test_case'
 
-class ConfigurationTest < TestHelper
+class ConfigurationTest < TestCase
 end
