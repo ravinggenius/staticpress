@@ -1,10 +1,10 @@
-require_relative 'base_test'
+require_relative '../../test_helper'
 
 require 'staticpress/content/tag'
 require 'staticpress/route'
 require 'staticpress/theme'
 
-class ContentTagTest < ContentBaseTest
+class ContentTagTest < TestHelper
   def setup
     super
 

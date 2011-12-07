@@ -1,9 +1,9 @@
-require_relative 'base_test'
+require_relative '../../test_helper'
 
 require 'staticpress/content/page'
 require 'staticpress/helpers'
 
-class ContentPageTest < ContentBaseTest
+class ContentPageTest < TestHelper
   include Staticpress::Helpers
 
   def setup

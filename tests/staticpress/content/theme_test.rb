@@ -1,10 +1,10 @@
-require_relative 'base_test'
+require_relative '../../test_helper'
 
 require 'staticpress/content/theme'
 require 'staticpress/helpers'
 require 'staticpress/route'
 
-class ContentThemeTest < ContentBaseTest
+class ContentThemeTest < TestHelper
   include Staticpress::Helpers
 
   def setup

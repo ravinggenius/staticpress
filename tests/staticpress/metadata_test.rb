@@ -1,8 +1,8 @@
-require_relative 'js_object_test'
+require_relative '../test_helper'
 
 require 'staticpress/metadata'
 
-class MetadataTest < JSObjectTest
+class MetadataTest < TestHelper
   def setup
     super
     @meta = Staticpress::Metadata.new
