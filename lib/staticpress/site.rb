@@ -9,7 +9,6 @@ require 'staticpress/content/post'
 require 'staticpress/content/theme'
 require 'staticpress/helpers'
 require 'staticpress/metadata'
-require 'staticpress/route'
 
 module Staticpress
   class Site

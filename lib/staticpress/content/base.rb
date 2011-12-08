@@ -5,8 +5,7 @@ require 'yaml'
 
 require 'staticpress'
 require 'staticpress/metadata'
-# FIXME requiring 'staticpress/route' here gives an error when running tests
-#require 'staticpress/route'
+require 'staticpress/route'
 require 'staticpress/theme'
 require 'staticpress/view_helpers'
 

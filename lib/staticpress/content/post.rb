@@ -1,8 +1,7 @@
 require 'staticpress'
 require 'staticpress/content/base'
 require 'staticpress/content/resource_content'
-# FIXME requiring 'staticpress/route' here gives an error when running tests
-#require 'staticpress/route'
+require 'staticpress/route'
 
 module Staticpress::Content
   class Post < Base
