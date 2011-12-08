@@ -1,61 +1,28 @@
 require_relative '../../test_case'
 
+require 'staticpress/content/post'
 require 'staticpress/content/tag'
-require 'staticpress/route'
-require 'staticpress/theme'
 
 class ContentTagTest < TestCase
-  let(:tag_page) { Staticpress::Content::Tag.new :name => 'charlotte' }
-
-  def test__equalsequals
-    assert_operator tag_page, :==, Staticpress::Content::Tag.new(:name => 'charlotte')
-    refute_operator tag_page, :==, nil
-  end
+  let(:tag) { Staticpress::Content::Tag.new :name => 'charlotte' }
 
   def test_tags
     assert_equal [ 'charlotte' ], Staticpress::Content::Tag.tags
   end
 
-  def test_exist?
-    assert tag_page.exist?, 'tag_page does not exist'
-  end
-
-  def test_params
-    expected = { :name => 'charlotte', :number => 1 }
-    assert_equal expected, tag_page.params
-    assert_equal expected, Staticpress::Content::Tag.new(:name => 'charlotte', :number => nil).params
-    assert_equal expected, Staticpress::Content::Tag.new(:name => 'charlotte', :number => '1').params
-  end
-
-  def test_param_default_for
+  def test_optional_param_defaults
     expected = { :number => 1 }
     assert_equal expected, Staticpress::Content::Tag.new(:name => 'charlotte').optional_param_defaults
     assert_equal expected, Staticpress::Content::Tag.new(:name => 'charlotte', :number => nil).optional_param_defaults
   end
 
-  def test_find_by_url_path
-    assert_equal tag_page, Staticpress::Content::Tag.find_by_url_path('/tag/charlotte')
-  end
-
-  def test_to_s
-    assert_equal '#<Staticpress::Content::Tag url_path=/tag/charlotte, params={:name=>"charlotte", :number=>1}>', tag_page.to_s
-  end
-
   def test_sub_content
-    assert_equal 1, tag_page.sub_content.count
-  end
-
-  def test_raw
-    assert_equal '= partial :list_posts, :posts => page.sub_content', tag_page.raw
-  end
-
-  def test_url_path
-    assert_equal '/tag/charlotte', tag_page.url_path
+    assert_equal 1, tag.sub_content.count
   end
 
   def test_all
     assert_equal 1, Staticpress::Content::Tag.all.count
-    assert Staticpress::Content::Tag.all.include?(tag_page)
+    assert Staticpress::Content::Tag.all.include?(tag)
   end
 
   def test_content_by_tag
