@@ -55,6 +55,8 @@ class ContentBaseTest < TestCase
 
     assert_operator asset_style, :==, Staticpress::Content::Theme.new(:theme => 'test_theme', :asset_type => 'styles', :slug => 'all')
     refute_operator asset_style, :==, nil
+
+    refute_operator Staticpress::Content::Category.new(:name => 'programming'), :==, Staticpress::Content::Tag.new(:name => 'programming')
   end
 
   def test_content_type

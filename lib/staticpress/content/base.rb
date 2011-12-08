@@ -31,8 +31,8 @@ module Staticpress::Content
     end
 
     def ==(other)
-      # TODO check url_route also
-      other.respond_to?(:params) && (params == other.params)
+      other.respond_to?(:params) && (params == other.params) &&
+      other.respond_to?(:url_path) && (url_path == other.url_path)
     end
 
     def content
