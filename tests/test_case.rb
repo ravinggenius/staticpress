@@ -37,8 +37,7 @@ class TestCase < MiniTest::Spec
       block.call
       assert true
     rescue Exception => e
-      # TODO improve error message
-      refute e.class == exception, "#{exception} expected not to be raised, but was"
+      refute e.is_an?(exception), exception_details(e, "Expected #{e} not to be raised")
       raise e
     end
   end
