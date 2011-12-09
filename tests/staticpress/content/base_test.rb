@@ -163,11 +163,14 @@ class ContentBaseTest < TestCase
 body{color:green}
     CSS
     assert_equal expected_style2, style_2.render
+
     assert_equal 'this file intentionally left blank', static_txt.render
     refute_raises(Sass::SyntaxError) { asset_style.render }
+
     expected = <<-SASS
     SASS
     assert_equal expected, asset_style.render
+
     expected = <<-JS
 (function ($) {
   $(document).ready(function () {
@@ -188,9 +191,11 @@ body{color:green}
 
     assert_equal 'this file intentionally left blank', static_txt.render_partial
     assert_equal "<p>in post</p>\n", post.render_partial
+
     refute_raises(Sass::SyntaxError) { asset_style.render_partial }
     expected = <<-SASS
     SASS
+
     assert_equal expected, asset_style.render_partial
     expected = <<-JS
 (function ($) {
