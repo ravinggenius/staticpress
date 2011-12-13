@@ -4,7 +4,7 @@ require 'pathname'
 
 class StaticpressTest < TestCase
   def test_blog_path
-    assert_equal Pathname.new('tests/sample_sites/test_blog').expand_path, Staticpress.blog_path
+    assert_equal Pathname.new('tests/test_blog').expand_path, Staticpress.blog_path
   end
 
   def test_blog_path=

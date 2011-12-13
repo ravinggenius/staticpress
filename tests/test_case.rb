@@ -9,8 +9,7 @@ require 'sass'
 require 'staticpress'
 
 class TestCase < MiniTest::Spec
-  SAMPLE_SITES = (Staticpress.root + '..' + 'tests' + 'sample_sites').expand_path
-  TEST_BLOG = SAMPLE_SITES + 'test_blog'
+  TEST_BLOG = (Staticpress.root + '..' + 'tests' + 'test_blog').expand_path
 
   def setup
     Staticpress.blog_path = TEST_BLOG
