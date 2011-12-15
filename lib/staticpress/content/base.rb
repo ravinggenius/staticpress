@@ -101,10 +101,12 @@ module Staticpress::Content
     end
 
     def save
-      unless output_path.file?
-        FileUtils.mkdir_p output_path.dirname
-        output_path.open('w') { |f| f.write render }
-      end
+      save! unless output_path.file?
+    end
+
+    def save!
+      FileUtils.mkdir_p output_path.dirname
+      output_path.open('w') { |f| f.write render }
     end
 
     def template_context

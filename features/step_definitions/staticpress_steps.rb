@@ -16,6 +16,10 @@ Given /^the blog has been previously built$/ do
   Staticpress::CLI.new.build
 end
 
+Given /^I require "([^"]*)"$/ do |library|
+  require library
+end
+
 
 Then /^a post named "([^"]*)" should exist$/ do |post_title|
   now = Time.now.utc

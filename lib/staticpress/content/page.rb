@@ -32,6 +32,10 @@ module Staticpress::Content
       end
     end
 
+    def save
+      save!
+    end
+
     def static?
       (Staticpress.blog_path + config.source_path + params[:slug]).file?
     end

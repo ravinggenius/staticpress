@@ -102,6 +102,11 @@ Feature: The happy path
       ---
       in custom page
       """
+    # FIXME hacky-hack to keep Tilt happy
+    # NOTE this does not seem to be an issue when running this command for real
+    And I require "haml"
+    And I require "redcarpet"
+    And I require "sass"
     When I run `staticpress build`
     Then the file "public/index.html" should contain exactly:
       """

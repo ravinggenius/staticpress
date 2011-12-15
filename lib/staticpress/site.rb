@@ -22,6 +22,7 @@ module Staticpress
       Staticpress::Content::Theme
     ]
 
+    include Enumerable
     include Staticpress::Helpers
 
     attr_reader :directory
@@ -30,8 +31,21 @@ module Staticpress
       @directory = Staticpress.blog_path + config.source_path
     end
 
-    def all_content
-      CONTENT_TYPES.map(&:all).flatten
+    def each(&block)
+      threads = []
+      semaphore = Mutex.new
+
+      CONTENT_TYPES.each do |content_type|
+        threads << Thread.new do
+          content_type.all.each do |content|
+            semaphore.synchronize do
+              block.call content
+            end
+          end
+        end
+      end
+
+      threads.each &:join
     end
 
     def find_content_by_env(env)
@@ -47,15 +61,13 @@ module Staticpress
 
     def meta
       # or something...
-      all_content.inject(Staticpress::Metadata.new) do |m, page|
-        m << page.meta
-      end
+      inject(Staticpress::Metadata.new) { |meta, content| meta << content.meta }
     end
 
     def save
       destination = Staticpress.blog_path + config.destination_path
       FileUtils.rm_r destination if destination.directory?
-      all_content.each &:save
+      each &:save
     end
   end
 end

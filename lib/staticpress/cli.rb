@@ -98,8 +98,9 @@ customizations. If [theme-name] is blank, copies the currently configured theme
 
     desc 'list [method]', 'Send [method] to every content and output the result, or list all content if [method] is not present'
     def list(method = :to_s)
-      all_content = Staticpress::Site.new.all_content
-      puts(method ? all_content.map(&method.to_sym) : all_content)
+      Staticpress::Site.new.each do |content|
+        puts(content.respond_to?(method) ? content.send(method) : content)
+      end
     end
 
     desc 'build', 'Prepare blog for deployment'
