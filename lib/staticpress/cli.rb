@@ -97,7 +97,7 @@ customizations. If [theme-name] is blank, copies the currently configured theme
     end
 
     desc 'list [method]', 'Send [method] to every content and output the result, or list all content if [method] is not present'
-    def list(method = nil)
+    def list(method = :to_s)
       all_content = Staticpress::Site.new.all_content
       puts(method ? all_content.map(&method.to_sym) : all_content)
     end
