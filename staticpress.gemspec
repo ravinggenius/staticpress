@@ -4,7 +4,7 @@ require File.expand_path('../lib/staticpress/version', __FILE__)
 
 Gem::Specification.new do |s|
   s.name        = 'staticpress'
-  s.version     = Staticpress::Version.to_s
+  s.version     = Staticpress::Version
   s.authors     = ['Raving Genius']
   s.email       = ['rg+code@ravinggenius.com']
   s.summary     = 'Blog-centric static site builder'

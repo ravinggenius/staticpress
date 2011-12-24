@@ -1,12 +1,16 @@
 module Staticpress
-  # TODO figure out how to implement Gem::Version properly
   class Version
-    MAJOR = 0
-    MINOR = 4
-    PATCH = 0
+    extend Comparable
+
+    SIGNATURE = [0, 4, 0]
+
+    def self.<=>(other)
+      other = other.split('.').map(&:to_i) if other.respond_to? :split
+      SIGNATURE <=> Array(other)
+    end
 
     def self.to_s
-      [ MAJOR, MINOR, PATCH ].join '.'
+      SIGNATURE.join('.')
     end
   end
 end
