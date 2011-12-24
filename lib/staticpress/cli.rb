@@ -10,6 +10,7 @@ require 'staticpress/error'
 require 'staticpress/helpers'
 require 'staticpress/plugin'
 require 'staticpress/pusher'
+require 'staticpress/settings'
 require 'staticpress/site'
 require 'staticpress/version'
 
@@ -23,11 +24,18 @@ module Staticpress
     map ['-h', '--help'] => :help
     map ['-v', '--version'] => :version
 
+    class_option '--verbose', :type => :boolean, :default => false, :required => false, :desc => 'Output information as the task is running'
+
+    def initialize(*args)
+      super
+      Staticpress::Settings.set! options
+    end
+
     desc 'help [task]', 'Describe available tasks or one specific task'
     def help(*args)
       general_usage = <<-USAGE
 Usage:
-  staticpress <task> <required-argument> [option-argument]
+  staticpress <task> <required-argument> [option-argument] [--options...]
 
       USAGE
       puts general_usage if args.empty?

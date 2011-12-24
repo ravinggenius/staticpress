@@ -105,6 +105,13 @@ module Staticpress::Content
     end
 
     def save!
+      if settings.verbose
+        width = config.routes.to_hash.keys.max_by { |sym| sym.to_s.length }.to_s.length
+        type = self.class.type.rjust width
+        path = output_path.to_s.sub Staticpress.blog_path.to_s + '/', ''
+        puts "#{type} #{path}"
+      end
+
       FileUtils.mkdir_p output_path.dirname
       output_path.open('w') { |f| f.write render }
     end

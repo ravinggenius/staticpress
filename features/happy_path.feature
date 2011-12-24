@@ -93,6 +93,11 @@ Feature: The happy path
       | public/index.html       |
       | public/about/index.html |
 
+  Scenario: Building a site (verbose)
+    Given a blog with content exists
+    When I run `staticpress build --verbose`
+    Then the output should contain "    page public/about/index.html"
+
   Scenario: Building a site a custom homepage
     Given a blog with content exists
     And I write to "content/index.markdown" with:

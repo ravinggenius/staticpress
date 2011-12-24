@@ -1,5 +1,6 @@
 require 'staticpress'
 require 'staticpress/configuration'
+require 'staticpress/settings'
 
 module Staticpress
   module Helpers
@@ -46,6 +47,10 @@ module Staticpress
       end
 
       reply
+    end
+
+    def settings
+      Staticpress::Settings.instance
     end
 
     def spider_directory(dir, &block)
