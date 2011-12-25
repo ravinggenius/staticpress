@@ -40,4 +40,11 @@ class TestCase < MiniTest::Spec
       raise e
     end
   end
+
+  def with_config(options, &block)
+    original = self.config
+    self.config.merge(options).save
+    block.call
+    original.save
+  end
 end
