@@ -16,6 +16,10 @@ module Staticpress
       method_missing key.to_s.to_sym
     end
 
+    def merge(other)
+      self.class.new to_hash.merge(other.to_hash)
+    end
+
     def to_hash
       converted = {}
 

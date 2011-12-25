@@ -37,6 +37,12 @@ class JSObjectTest < TestCase
     assert_equal :hullabaloo, js_object.hoopla
   end
 
+  def test_merge
+    assert_nil js_object.some_key
+    enhanced = js_object.merge :some_key => 42
+    assert_equal 42, enhanced.some_key
+  end
+
   def test_to_hash
     assert_equal({ :key => :value, :nested => { :a => :b } }, js_object.to_hash)
   end
