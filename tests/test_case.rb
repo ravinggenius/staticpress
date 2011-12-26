@@ -42,9 +42,12 @@ class TestCase < MiniTest::Spec
   end
 
   def with_config(options, &block)
-    original = self.config
-    self.config.merge(options).save
-    block.call
-    original.save
+    begin
+      original = self.config
+      self.config.merge(options).save
+      block.call
+    ensure
+      original.save
+    end
   end
 end
