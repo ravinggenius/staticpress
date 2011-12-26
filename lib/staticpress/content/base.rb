@@ -16,7 +16,7 @@ module Staticpress::Content
 
     attr_reader :params
 
-    def initialize(params)
+    def initialize(params = {})
       clean_params = params.select { |key, value| value }.map do |key, value|
         cast_value = case Staticpress::Route::REGEX_STUBS[key].klass
           when :integer then Integer value rescue value

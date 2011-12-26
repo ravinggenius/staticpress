@@ -13,7 +13,7 @@ class ContentBaseTest < TestCase
   let(:category_1) { Staticpress::Content::Category.new(:name => 'programming', :number => '1') }
   let(:category_2) { Staticpress::Content::Category.new(:name => 'programming', :number => '2') }
 
-  let(:index) { Staticpress::Content::Index.new :number => 1 }
+  let(:index) { Staticpress::Content::Index.new }
   let(:index_2) { Staticpress::Content::Index.new :number => 2 }
 
   let(:page) { Staticpress::Content::Page.new(:slug => 'about') }
