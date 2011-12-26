@@ -33,6 +33,7 @@ module Staticpress::Content
 
     def self.all
       tags.map do |tag|
+        # FIXME calculate number
         new :name => tag, :number => '1'
       end
     end

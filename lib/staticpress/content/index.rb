@@ -20,6 +20,7 @@ module Staticpress::Content
 
     def self.all
       [
+        # FIXME calculate number
         new(:number => '1')
       ]
     end

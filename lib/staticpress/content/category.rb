@@ -33,6 +33,7 @@ module Staticpress::Content
 
     def self.all
       categories.map do |category|
+        # FIXME calculate number
         new :name => category, :number => '1'
       end
     end
