@@ -10,6 +10,10 @@ class ContentTagTest < TestCase
     assert_equal [ 'charlotte' ], Staticpress::Content::Tag.tags
   end
 
+  def test_pages_count
+    assert_equal 1, tag.pages_count
+  end
+
   def test_optional_param_defaults
     expected = { :number => 1 }
     assert_equal expected, Staticpress::Content::Tag.new(:name => 'charlotte').optional_param_defaults
@@ -17,7 +21,10 @@ class ContentTagTest < TestCase
   end
 
   def test_sub_content
-    assert_equal 1, tag.sub_content.count
+    expected = [
+      Staticpress::Content::Post.new(:year => '2011', :month => '08', :day => '06', :title => 'in-charlotte')
+    ]
+    assert_equal expected, tag.sub_content
   end
 
   def test_all

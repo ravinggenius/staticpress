@@ -8,8 +8,19 @@ module Staticpress::Content
     extend CollectionContent
     extend ResourceContent
 
+    attr_reader :name
+
+    def initialize(params)
+      @name = params[:name]
+      super
+    end
+
     def optional_param_defaults
-      { :number => 1 }
+      { :number => pages_count }
+    end
+
+    def pages_count
+      (self.class.content_by_tag[name].count / config.posts_per_page.to_f).ceil
     end
 
     def sub_content
@@ -31,7 +42,7 @@ module Staticpress::Content
     end
 
     def self.content_by_tag
-      reply = {}
+      reply = Hash.new { |hash, key| hash[key] = [] }
       Staticpress::Content::Post.all.each do |post|
         (post.meta.tags || []).each do |tag|
           (reply[tag] ||= []) << post
