@@ -45,10 +45,11 @@ class HelpersTest < TestCase
   end
 
   def test_paginate
+    # a == oldest, z == newest
     assert_equal 3, paginate(:a..:z).count
-    assert_equal (:u..:z).to_a, paginate(:a..:z)[0]
+    assert_equal (:a..:j).to_a, paginate(:a..:z)[0] # page 1 lists oldest, with oldest at top
     assert_equal (:k..:t).to_a, paginate(:a..:z)[1]
-    assert_equal (:a..:j).to_a, paginate(:a..:z)[2]
+    assert_equal (:u..:z).to_a, paginate(:a..:z)[2] # page 3 lists newest, with newest at bottom (default page)
     assert_equal [], paginate(:a..:z)[5], 'Accessing an invalid index on anything that has been paginated should return an empty array'
   end
 
