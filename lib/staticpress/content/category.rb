@@ -32,10 +32,15 @@ module Staticpress::Content
     end
 
     def self.all
-      categories.map do |category|
-        # FIXME calculate number
-        new :name => category, :number => '1'
+      reply = []
+
+      content_by_category.each do |category, posts|
+        1.upto paginate(posts).count do |number|
+          reply << new(:name => category, :number => number)
+        end
       end
+
+      reply
     end
 
     def self.categories

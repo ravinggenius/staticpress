@@ -28,8 +28,10 @@ class ContentTagTest < TestCase
   end
 
   def test_all
-    assert_equal 1, Staticpress::Content::Tag.all.count
-    assert Staticpress::Content::Tag.all.include?(tag)
+    expected = [
+      Staticpress::Content::Tag.new(:name => 'charlotte', :number => 1)
+    ]
+    assert_equal expected, Staticpress::Content::Tag.all
   end
 
   def test_content_by_tag

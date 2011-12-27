@@ -32,10 +32,15 @@ module Staticpress::Content
     end
 
     def self.all
-      tags.map do |tag|
-        # FIXME calculate number
-        new :name => tag, :number => '1'
+      reply = []
+
+      content_by_tag.each do |tag, posts|
+        1.upto paginate(posts).count do |number|
+          reply << new(:name => tag, :number => number)
+        end
       end
+
+      reply
     end
 
     def self.tags

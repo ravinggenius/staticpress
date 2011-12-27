@@ -31,8 +31,15 @@ class ContentCategoryTest < TestCase
   end
 
   def test_all
-    assert_equal 2, Staticpress::Content::Category.all.count
-    assert Staticpress::Content::Category.all.include?(category)
+    with_config :posts_per_page => 1 do
+      expected = [
+        Staticpress::Content::Category.new(:name => 'programming', :number => 1),
+        Staticpress::Content::Category.new(:name => 'programming', :number => 2),
+        Staticpress::Content::Category.new(:name => 'programming', :number => 3),
+        Staticpress::Content::Category.new(:name => 'travel', :number => 1)
+      ]
+      assert_equal expected, Staticpress::Content::Category.all
+    end
   end
 
   def test_content_by_category
