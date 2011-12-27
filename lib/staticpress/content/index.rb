@@ -24,10 +24,13 @@ module Staticpress::Content
     end
 
     def self.all
-      [
-        # FIXME calculate number
-        new(:number => '1')
-      ]
+      reply = []
+
+      1.upto paginate(all_posts).count do |number|
+        reply << new(:number => number)
+      end
+
+      reply
     end
 
     def self.all_posts

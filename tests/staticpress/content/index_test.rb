@@ -28,4 +28,15 @@ class ContentIndexTest < TestCase
       assert_equal expected, index.sub_content
     end
   end
+
+  def test_all
+    with_config :posts_per_page => 3 do
+      expected = [
+        Staticpress::Content::Index.new(:number => 1),
+        Staticpress::Content::Index.new(:number => 2),
+        Staticpress::Content::Index.new(:number => 3)
+      ]
+      assert_equal expected, Staticpress::Content::Index.all
+    end
+  end
 end
