@@ -1,5 +1,6 @@
 require 'staticpress'
 require 'staticpress/content/base'
+require 'staticpress/content/post'
 require 'staticpress/content/collection_content'
 
 module Staticpress::Content
@@ -7,11 +8,15 @@ module Staticpress::Content
     extend CollectionContent
 
     def optional_param_defaults
-      { :number => 1 }
+      { :number => pages_count }
+    end
+
+    def pages_count
+      (self.class.all_posts.count / config.posts_per_page.to_f).ceil
     end
 
     def sub_content
-      paginate(Staticpress::Content::Post.all)[params[:number] - 1]
+      paginate(self.class.all_posts.sort)[params[:number] - 1]
     end
 
     def template_path
@@ -23,6 +28,10 @@ module Staticpress::Content
         # FIXME calculate number
         new(:number => '1')
       ]
+    end
+
+    def self.all_posts
+      Staticpress::Content::Post.all
     end
   end
 end
