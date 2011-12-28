@@ -8,7 +8,7 @@ Once you have Ruby, open a terminal and type `gem install staticpress`. This com
 
 ## Usage
 
-When you want to create a new Staticpress blog, simply run `staticpress new <path-to-blog> [name-of-blog]`. Staticpress will create the `<path-to-blog>` for you if it does not exist. `[name-of-blog]` is optional. If you leave it out, Staticpress will make up a blog name from `<path-to-blog>`. Either way, `cd` into `<path-to-blog>`; this will be the place you need to be for all the other commands to work. By the way Staticpress uses several conventions to keep things simple. For instance many commands you are asked to type on the terminal take parameters. Required parameters will `<look-like-this>`, while optional parameters will `[look-like-this]`.
+When you want to create a new Staticpress blog, simply run `staticpress new <path-to-blog> [name-of-blog]`. Staticpress will create the `<path-to-blog>` for you if it does not exist. `[name-of-blog]` is optional. If you leave it out, Staticpress will make up a blog name from `<path-to-blog>`. Either way, `cd` into `<path-to-blog>`; this will be the place you need to be for all the other commands to work. By the way Staticpress uses several conventions to keep things simple. For instance many commands you are asked to type on the terminal take parameters. Required parameters will `<look-like-this>`, while optional parameters will `[look-like-this]`. You should not type the `<>` or `[]` symbols.
 
 ## Hello, World
 
