@@ -11,13 +11,11 @@ module Staticpress
     end
 
     def extensionless_basename(pathname)
-      path = pathname.basename.to_path
-      path[0...(path.length - pathname.extname.length)]
+      extensionless_path(pathname).basename.to_s
     end
 
     def extensionless_path(pathname)
-      path = pathname.to_path
-      Pathname path[0...(path.length - pathname.extname.length)]
+      pathname.sub(pathname.extname, '')
     end
 
     def hash_from_array(array, &block)

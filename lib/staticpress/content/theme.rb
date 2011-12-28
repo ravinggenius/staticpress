@@ -11,11 +11,9 @@ module Staticpress::Content
     extend ResourceContent
     extend StaticContent
 
-    attr_reader :extension
-
     def initialize(params)
       super
-      @extension = find_supported_extension template_path
+      @template_types = find_supported_extensions template_path
     end
 
     def static?
@@ -23,8 +21,7 @@ module Staticpress::Content
     end
 
     def template_path
-      slug = extension ? "#{params[:slug]}.#{extension}" : params[:slug]
-      Staticpress::Theme.new(params[:theme]).root + 'assets' + params[:asset_type] + slug
+      Staticpress::Theme.new(params[:theme]).root + 'assets' + params[:asset_type] + "#{params[:slug]}#{template_extension}"
     end
 
     def self.all

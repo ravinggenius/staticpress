@@ -13,22 +13,22 @@ module Staticpress::Content
     extend ResourceContent
     extend StaticContent
 
-    attr_reader :extension, :full_slug
+    attr_reader :full_slug
 
-    def initialize(params)
+    def initialize(params = {})
       super
 
-      index = extensionless_basename Pathname(config.index_file)
+      source_path = Staticpress.blog_path + config.source_path
 
       @full_slug = params[:slug]
-      @extension = find_supported_extension(Staticpress.blog_path + config.source_path + full_slug)
+      @template_types = find_supported_extensions(source_path + full_slug)
 
-      if @extension.nil? && !template_path.file?
+      unless template_path.file?
         @full_slug = [
           params[:slug],
-          index
+          extensionless_basename(Pathname(config.index_file))
         ].reject(&:empty?).join('/')
-        @extension = find_supported_extension(Staticpress.blog_path + config.source_path + full_slug)
+        @template_types = find_supported_extensions(source_path + full_slug)
       end
     end
 
@@ -41,8 +41,7 @@ module Staticpress::Content
     end
 
     def template_path
-      slug = extension ? "#{full_slug}.#{extension}" : full_slug
-      Staticpress.blog_path + config.source_path + slug
+      Staticpress.blog_path + config.source_path + "#{full_slug}#{template_extension}"
     end
 
     def self.all
@@ -65,13 +64,19 @@ module Staticpress::Content
       destination.open('w') { |f| f.write template }
     end
 
-    def self.find_by_path(path)
-      if path.file?
-        raw_slug = parse_slug(path, (Staticpress.blog_path + config.source_path)).first
+    def self.extract_slug(path)
+      base_path = Staticpress.blog_path + config.source_path
+      supported = find_supported_extensions(path)
+      extension = supported.empty? ? '' : "\\.#{supported.reverse.join('\.')}"
+
+      if match = /^#{base_path}\/(?<slug>.+)#{extension}$/.match(path.to_s)
         basename = extensionless_basename Pathname(config.index_file)
-        slug = raw_slug.sub(/.*(\/?#{basename})$/, '')
-        new :slug => slug
+        match[:slug].sub(/.*(\/?#{basename})$/, '')
       end
+    end
+
+    def self.find_by_path(path)
+      new :slug => extract_slug(path) if path.file?
     end
 
     def self.template

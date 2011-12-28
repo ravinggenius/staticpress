@@ -14,7 +14,7 @@ module Staticpress::Content
     extend Staticpress::Helpers
     include Staticpress::Helpers
 
-    attr_reader :params
+    attr_reader :params, :template_types
 
     def initialize(params = {})
       clean_params = params.select { |key, value| value }.map do |key, value|
@@ -28,6 +28,7 @@ module Staticpress::Content
       end
 
       @params = optional_param_defaults.merge Hash[clean_params]
+      @template_types = []
     end
 
     def ==(other)
@@ -68,6 +69,10 @@ module Staticpress::Content
       end
     end
 
+    def markup_template?
+      config.markup_templates.include?(template_path.extname[1..-1])
+    end
+
     def meta
       Staticpress::Metadata.new(content.names.include?('frontmatter') ? YAML.load(content[:frontmatter]) : {})
     end
@@ -78,7 +83,13 @@ module Staticpress::Content
 
     def output_path
       base = Staticpress.blog_path + config.destination_path + url_path.sub(/^\//, '')
-      (config.index_file && config.markup_templates.include?(template_path.extname[1..-1])) ? base + config.index_file : base
+
+      # FIXME need a better check
+      if (markup_template? && config.index_file && (Pathname(config.index_file).extname != base.extname))
+        base + config.index_file
+      else
+        base
+      end
     end
 
     def raw
@@ -96,8 +107,10 @@ module Staticpress::Content
     end
 
     def render_partial(locals = {})
-      template = Tilt.new(template_path.to_s, template_engine_options) { raw }
-      template.render template_context, locals
+      template_types.inject(raw) do |result, template_type|
+        template = Tilt.new(template_type.to_s, template_engine_options(template_type)) { result }
+        template.render template_context, locals
+      end
     end
 
     def save
@@ -120,16 +133,16 @@ module Staticpress::Content
       Staticpress::ViewHelpers.new self
     end
 
-    def template_engine_options
+    def template_engine_options(template_type)
       (config.template_engine_options[template_type] || {}).to_hash
+    end
+
+    def template_extension
+      template_types.empty? ? '' : ".#{template_types.reverse.join('.')}"
     end
 
     def template_path_content
       exist? ? template_path.read : ''
-    end
-
-    def template_type
-      template_path.extname.sub(/^\./, '').to_sym
     end
 
     def theme

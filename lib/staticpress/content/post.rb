@@ -8,11 +8,10 @@ module Staticpress::Content
     include ResourceContent
     extend ResourceContent
 
-    attr_reader :extension
-
     def initialize(params)
       super
-      @extension = find_supported_extension template_path
+      # FIXME calculate template_path
+      @template_types = find_supported_extensions template_path
     end
 
     def <=>(other)
@@ -32,7 +31,7 @@ module Staticpress::Content
         params[:year],
         params[:month],
         params[:day],
-        (extension ? "#{params[:title]}.#{extension}" : params[:title])
+        "#{params[:title]}#{template_extension}"
       ].join('-')
       Staticpress.blog_path + config.posts_source_path + name
     end

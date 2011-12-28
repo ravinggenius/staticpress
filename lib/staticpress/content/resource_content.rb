@@ -5,11 +5,14 @@ require 'staticpress/content/static_content'
 
 module Staticpress::Content
   module ResourceContent
-    # FIXME add tests
-    def find_supported_extension(extensionless_path)
-      Staticpress::Content::StaticContent.supported_extensions.detect do |extension|
-        extension.to_sym if Pathname("#{extensionless_path}.#{extension}").file?
-      end
+    def find_supported_extensions(path)
+      file = path.file? ? path : Dir["#{path}.*"].first
+      return [] if file.nil?
+
+      # TODO stop looping when no more supported extensions
+      Pathname(file).sub("#{file.to_s}.", '').to_s.split('.').map(&:to_sym).select do |extension|
+        Staticpress::Content::StaticContent.supported_extensions.include? extension
+      end.reverse
     end
 
     def gather_resources_from(paths)

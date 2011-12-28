@@ -58,6 +58,37 @@ Feature: The happy path
     Then a directory named "content" should exist
     And a file named "content/about.markdown" should exist
 
+  Scenario: Creating a static page with multiple formats
+    Given a blog exists
+    When I write to "content/formats.markdown.erb" with:
+      """
+      hello world
+      """
+    And I run `staticpress build`
+    Then the file "public/formats/index.html" should contain exactly:
+      """
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <title>Formats | Transient Thoughts</title>
+          <link href='/assets/basic/styles/all.css' rel='stylesheet' type='text/css' />
+          <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js'></script>
+          <script src='/assets/basic/scripts/application.js'></script>
+        </head>
+        <body>
+          <header>
+            <span class='site-title'>Transient Thoughts</span>
+            <span class='site-subtitle'>A blogging framework for hackers</span>
+          </header>
+          <section>
+            <p>hello world</p>
+          </section>
+          <section></section>
+        </body>
+      </html>
+
+      """
+
   Scenario: Copying a built-in plugin
     Given a blog exists
     When I run `staticpress fork_plugin blockquote`
@@ -98,7 +129,7 @@ Feature: The happy path
     When I run `staticpress build --verbose`
     Then the output should contain "    page public/about/index.html"
 
-  Scenario: Building a site a custom homepage
+  Scenario: Building a site with a custom homepage
     Given a blog with content exists
     And I write to "content/index.markdown" with:
       """
@@ -124,7 +155,14 @@ Feature: The happy path
           <script src='/assets/basic/scripts/application.js'></script>
         </head>
         <body>
-          <p>in custom page</p>
+          <header>
+            <span class='site-title'>Transient Thoughts</span>
+            <span class='site-subtitle'>A blogging framework for hackers</span>
+          </header>
+          <section>
+            <p>in custom page</p>
+          </section>
+          <section></section>
         </body>
       </html>
 
