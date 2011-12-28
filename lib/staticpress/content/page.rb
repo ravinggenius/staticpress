@@ -18,7 +18,7 @@ module Staticpress::Content
     def initialize(params)
       super
 
-      index = extensionless_basename Pathname.new(config.index_file)
+      index = extensionless_basename Pathname(config.index_file)
 
       @full_slug = params[:slug]
       @extension = find_supported_extension(Staticpress.blog_path + config.source_path + full_slug)
@@ -68,7 +68,7 @@ module Staticpress::Content
     def self.find_by_path(path)
       if path.file?
         raw_slug = parse_slug(path, (Staticpress.blog_path + config.source_path)).first
-        basename = extensionless_basename Pathname.new(config.index_file)
+        basename = extensionless_basename Pathname(config.index_file)
         slug = raw_slug.sub(/.*(\/?#{basename})$/, '')
         new :slug => slug
       end

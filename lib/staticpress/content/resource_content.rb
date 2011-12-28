@@ -8,7 +8,7 @@ module Staticpress::Content
     # FIXME add tests
     def find_supported_extension(extensionless_path)
       Staticpress::Content::StaticContent.supported_extensions.detect do |extension|
-        extension.to_sym if Pathname.new("#{extensionless_path}.#{extension}").file?
+        extension.to_sym if Pathname("#{extensionless_path}.#{extension}").file?
       end
     end
 

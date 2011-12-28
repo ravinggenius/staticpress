@@ -8,7 +8,7 @@ task :tests, :path do |t, args|
   args.with_defaults(:path => 'tests')
 
   run_recursively = lambda do |dir|
-    Pathname.new(dir).expand_path.children.each do |dir_or_test|
+    Pathname(dir).expand_path.children.each do |dir_or_test|
       if dir_or_test.directory?
         run_recursively.call dir_or_test
       elsif dir_or_test.to_s.end_with? '_test.rb'

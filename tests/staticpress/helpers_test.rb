@@ -8,19 +8,19 @@ class HelpersTest < TestCase
   include Staticpress::Helpers
 
   def test_extensionless_basename
-    assert_equal 'extensionless', extensionless_basename(Pathname.new('extensionless'))
-    assert_equal '.htaccess', extensionless_basename(Pathname.new('.htaccess'))
-    assert_equal 'tyrannasaurus_rex', extensionless_basename(Pathname.new('tyrannasaurus_rex.rb'))
-    assert_equal 'stegosaurus', extensionless_basename(Pathname.new('dinosaurs/stegosaurus.rb'))
-    assert_equal 'stegosaurus', extensionless_basename(Pathname.new('/dinosaurs/stegosaurus.rb'))
+    assert_equal 'extensionless', extensionless_basename(Pathname('extensionless'))
+    assert_equal '.htaccess', extensionless_basename(Pathname('.htaccess'))
+    assert_equal 'tyrannasaurus_rex', extensionless_basename(Pathname('tyrannasaurus_rex.rb'))
+    assert_equal 'stegosaurus', extensionless_basename(Pathname('dinosaurs/stegosaurus.rb'))
+    assert_equal 'stegosaurus', extensionless_basename(Pathname('/dinosaurs/stegosaurus.rb'))
   end
 
   def test_extensionless_path
-    assert_equal Pathname.new('extensionless'), extensionless_path(Pathname.new('extensionless'))
-    assert_equal Pathname.new('.htaccess'), extensionless_path(Pathname.new('.htaccess'))
-    assert_equal Pathname.new('tyrannasaurus_rex'), extensionless_path(Pathname.new('tyrannasaurus_rex.rb'))
-    assert_equal Pathname.new('dinosaurs/stegosaurus'), extensionless_path(Pathname.new('dinosaurs/stegosaurus.rb'))
-    assert_equal Pathname.new('/dinosaurs/stegosaurus'), extensionless_path(Pathname.new('/dinosaurs/stegosaurus.rb'))
+    assert_equal Pathname('extensionless'), extensionless_path(Pathname('extensionless'))
+    assert_equal Pathname('.htaccess'), extensionless_path(Pathname('.htaccess'))
+    assert_equal Pathname('tyrannasaurus_rex'), extensionless_path(Pathname('tyrannasaurus_rex.rb'))
+    assert_equal Pathname('dinosaurs/stegosaurus'), extensionless_path(Pathname('dinosaurs/stegosaurus.rb'))
+    assert_equal Pathname('/dinosaurs/stegosaurus'), extensionless_path(Pathname('/dinosaurs/stegosaurus.rb'))
   end
 
   def test_hash_from_empty_array

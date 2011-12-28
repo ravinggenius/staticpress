@@ -2,7 +2,7 @@ require 'pathname'
 
 module Staticpress
   def self.blog_path
-    Pathname.new(@path || '.').expand_path
+    Pathname(@path || '.').expand_path
   end
 
   def self.blog_path=(path)
@@ -10,6 +10,6 @@ module Staticpress
   end
 
   def self.root
-    Pathname.new File.expand_path('..', __FILE__)
+    Pathname File.expand_path('..', __FILE__)
   end
 end
