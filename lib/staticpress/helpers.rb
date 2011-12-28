@@ -1,3 +1,5 @@
+require 'pathname'
+
 require 'staticpress'
 require 'staticpress/configuration'
 require 'staticpress/settings'
