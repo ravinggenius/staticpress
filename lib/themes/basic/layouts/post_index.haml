@@ -6,4 +6,9 @@
     %script{ :src => 'http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js' }
     %script{ :src => '/assets/basic/scripts/application.js' }
   %body
-    = yield
+    %header
+      %span.site-title= config.title
+      %span.site-subtitle= config.subtitle
+    %section
+      = yield
+    %section
