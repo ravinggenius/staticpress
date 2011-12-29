@@ -1,3 +1,5 @@
+require 'tilt'
+
 require 'staticpress'
 
 module Staticpress::Content
