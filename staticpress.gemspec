@@ -2,6 +2,7 @@
 
 require File.expand_path('../lib/staticpress/version', __FILE__)
 
+# http://timelessrepo.com/use-the-gemspec
 Gem::Specification.new do |s|
   s.name        = 'staticpress'
   s.version     = Staticpress::Version
