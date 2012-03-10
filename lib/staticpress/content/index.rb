@@ -5,6 +5,7 @@ require 'staticpress/content/collection_content'
 
 module Staticpress::Content
   class Index < Base
+    include CollectionContent
     extend CollectionContent
 
     def optional_param_defaults

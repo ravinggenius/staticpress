@@ -5,6 +5,7 @@ require 'staticpress/content/resource_content'
 
 module Staticpress::Content
   class Category < Base
+    include CollectionContent
     extend CollectionContent
     extend ResourceContent
 

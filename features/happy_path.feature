@@ -59,13 +59,14 @@ Feature: The happy path
     And a file named "content/about.markdown" should exist
 
   Scenario: Creating a static page with multiple formats
-    Given a blog exists
+    Given a blog with content exists
     When I write to "content/formats.markdown.erb" with:
       """
       hello world
       """
     And I run `staticpress build`
-    Then the file "public/formats/index.html" should contain exactly:
+    Then the file "public/index.html" should not contain "partial :list_posts"
+    And the file "public/formats/index.html" should contain exactly:
       """
       <!DOCTYPE html>
       <html>
