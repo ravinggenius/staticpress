@@ -13,3 +13,7 @@ When you want to create a new Staticpress blog, simply run `staticpress new <pat
 ## Hello, World
 
 After creating a new blog, you will probably want to create a new post. Type `staticpress create <title>` to create a new post. Staticpress will create a new empty post in `content/_posts/`. Open this file with your favorite text editor and start pontificating. When your are done, type `staticpress serve` to turn on the local development server. Open your favorite browser and navigate to [http://localhost:4000/](http://localhost:4000) to preview your post. Congratulations!
+
+## Diving Deeper
+
+In addition to blog posts, Staticpress can handle regular pages as well. Simply type `staticpress create_page <title> [path-in-content]` to get started.

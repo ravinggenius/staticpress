@@ -1,1 +1,3 @@
-[Read the documentation](/docs/setup).
+## [Read the documentation](/docs).
+
+## [Features](/features).
