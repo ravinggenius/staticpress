@@ -16,4 +16,4 @@ After creating a new blog, you will probably want to create a new post. Type `st
 
 ## Diving Deeper
 
-In addition to blog posts, Staticpress can handle regular pages as well. Simply type `staticpress create_page <title> [path-in-content]` to get started.
+In addition to blog posts, Staticpress can handle regular pages. Simply type `staticpress create_page <title> [path-in-content]` to get started.
