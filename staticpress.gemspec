@@ -27,11 +27,11 @@ Staticpress is a blog-focused static site generator. It uses Tilt for rendering 
   ]
 
   s.add_development_dependency 'aruba'
+  s.add_development_dependency 'debugger'
   s.add_development_dependency 'compass'
   s.add_development_dependency 'cucumber'
   s.add_development_dependency 'haml'
   s.add_development_dependency 'minitest'
-  s.add_development_dependency 'ruby-debug19'
   s.add_development_dependency 'sass'
 
   s.add_runtime_dependency 'bundler'
