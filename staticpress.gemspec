@@ -8,6 +8,7 @@ Gem::Specification.new do |s|
   s.version     = Staticpress::Version
   s.authors     = ['Raving Genius']
   s.email       = ['rg+code@ravinggenius.com']
+  s.homepage    = 'https://github.com/ravinggenius/staticpress'
   s.summary     = 'Blog-centric static site builder'
   s.description = <<-DESCRIPTION
 Staticpress is a blog-focused static site generator. It uses Tilt for rendering nearly any template you can think of and come with a built-in Rack server for easy development previews.
