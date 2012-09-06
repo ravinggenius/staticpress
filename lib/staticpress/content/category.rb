@@ -1,8 +1,3 @@
-require 'staticpress'
-require 'staticpress/content/base'
-require 'staticpress/content/collection_content'
-require 'staticpress/content/resource_content'
-
 module Staticpress::Content
   class Category < Base
     include CollectionContent

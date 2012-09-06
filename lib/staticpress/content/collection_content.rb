@@ -1,6 +1,3 @@
-require 'staticpress'
-require 'staticpress/content/resource_content'
-
 module Staticpress::Content
   module CollectionContent
     include ResourceContent

@@ -1,7 +1,5 @@
 require_relative '../test_case'
 
-require 'staticpress/metadata'
-
 class MetadataTest < TestCase
   let(:meta) { Staticpress::Metadata.new }
   let(:another_meta) { Staticpress::Metadata.new :layout => 'post_index', :categories => %w[programming], :tags => %w[code tutorial] }

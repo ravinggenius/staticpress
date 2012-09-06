@@ -1,9 +1,5 @@
 require 'pathname'
 
-require 'staticpress'
-require 'staticpress/configuration'
-require 'staticpress/settings'
-
 module Staticpress
   module Helpers
     def config

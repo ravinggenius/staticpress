@@ -1,8 +1,3 @@
-require 'staticpress'
-require 'staticpress/helpers'
-require 'staticpress/plugin'
-require 'staticpress/plugins'
-
 module Staticpress
   class ViewHelpers
     include Staticpress::Helpers

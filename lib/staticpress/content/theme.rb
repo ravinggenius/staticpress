@@ -1,9 +1,3 @@
-require 'staticpress'
-require 'staticpress/content/base'
-require 'staticpress/content/resource_content'
-require 'staticpress/content/static_content'
-require 'staticpress/route'
-
 module Staticpress::Content
   class Theme < Base
     include ResourceContent

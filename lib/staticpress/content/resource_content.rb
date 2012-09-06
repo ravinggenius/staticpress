@@ -1,8 +1,5 @@
 require 'pathname'
 
-require 'staticpress'
-require 'staticpress/content/static_content'
-
 module Staticpress::Content
   module ResourceContent
     def find_supported_extensions(path)

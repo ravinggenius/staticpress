@@ -1,10 +1,5 @@
 require_relative '../test_case'
 
-require 'staticpress/content/page'
-require 'staticpress/content/post'
-require 'staticpress/route'
-require 'staticpress/site'
-
 class SiteTest < TestCase
   let(:site) { Staticpress::Site.new }
 

@@ -1,7 +1,5 @@
 require_relative '../test_case'
 
-require 'staticpress/server'
-
 class ServerTest < TestCase
   let(:server) { Staticpress::Server.new }
 

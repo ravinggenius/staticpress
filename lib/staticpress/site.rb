@@ -1,15 +1,5 @@
 require 'fileutils'
 
-require 'staticpress'
-require 'staticpress/content/index'
-require 'staticpress/content/category'
-require 'staticpress/content/tag'
-require 'staticpress/content/page'
-require 'staticpress/content/post'
-require 'staticpress/content/theme'
-require 'staticpress/helpers'
-require 'staticpress/metadata'
-
 module Staticpress
   class Site
     # ordered by priority

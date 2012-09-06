@@ -1,8 +1,5 @@
 require_relative '../../test_case'
 
-require 'staticpress/content/post'
-require 'staticpress/content/tag'
-
 class ContentTagTest < TestCase
   let(:tag) { Staticpress::Content::Tag.new :name => 'charlotte' }
 

@@ -1,8 +1,5 @@
 require_relative '../test_case'
 
-require 'staticpress/helpers'
-require 'staticpress/view_helpers'
-
 class ViewHelpersTest < TestCase
   include Staticpress::Helpers
 

@@ -1,6 +1,3 @@
-require 'staticpress'
-require 'staticpress/helpers'
-
 module Staticpress
   class Theme
     extend Staticpress::Helpers

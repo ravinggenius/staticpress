@@ -1,9 +1,5 @@
 require_relative '../../test_case'
 
-require 'staticpress/content/index'
-require 'staticpress/content/post'
-require 'staticpress/helpers'
-
 class ContentIndexTest < TestCase
   include Staticpress::Helpers
 

@@ -1,7 +1,5 @@
 require_relative '../test_case'
 
-require 'staticpress/js_object'
-
 class JSObjectTest < TestCase
   JSO = Staticpress::JSObject
 

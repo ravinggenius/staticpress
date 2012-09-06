@@ -1,8 +1,3 @@
-require 'staticpress'
-require 'staticpress/content/base'
-require 'staticpress/content/post'
-require 'staticpress/content/collection_content'
-
 module Staticpress::Content
   class Index < Base
     include CollectionContent

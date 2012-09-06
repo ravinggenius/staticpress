@@ -3,12 +3,6 @@ require 'rack/mime'
 require 'tilt'
 require 'yaml'
 
-require 'staticpress'
-require 'staticpress/metadata'
-require 'staticpress/route'
-require 'staticpress/theme'
-require 'staticpress/view_helpers'
-
 module Staticpress::Content
   class Base
     extend Staticpress::Helpers

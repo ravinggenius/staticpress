@@ -1,7 +1,3 @@
-require 'staticpress'
-require 'staticpress/error'
-require 'staticpress/helpers'
-
 module Staticpress
   class Pusher
     extend Staticpress::Helpers

@@ -1,7 +1,3 @@
-require 'staticpress'
-require 'staticpress/error'
-require 'staticpress/site'
-
 module Staticpress
   class Server
     def initialize

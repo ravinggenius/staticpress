@@ -1,8 +1,5 @@
 require_relative '../../test_case'
 
-require 'staticpress/content/theme'
-require 'staticpress/helpers'
-
 class ContentThemeTest < TestCase
   include Staticpress::Helpers
 

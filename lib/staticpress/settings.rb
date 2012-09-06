@@ -1,6 +1,3 @@
-require 'staticpress'
-require 'staticpress/js_object'
-
 module Staticpress
   class Settings < JSObject
     def self.default

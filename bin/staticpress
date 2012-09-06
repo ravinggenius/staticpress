@@ -1,6 +1,5 @@
 #!/usr/bin/env ruby
 
-require 'staticpress/booter'
-require 'staticpress/cli'
+require 'staticpress'
 
 Staticpress::CLI.start

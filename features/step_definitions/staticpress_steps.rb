@@ -1,6 +1,3 @@
-require 'staticpress/cli'
-
-
 Given /^a blog exists$/ do
   Staticpress::CLI.new.new('tmp/aruba/temporary_blog', 'Transient Thoughts')
   cd('temporary_blog')

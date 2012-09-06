@@ -1,7 +1,5 @@
 require 'ostruct'
 
-require 'staticpress'
-
 module Staticpress
   class JSObject < OpenStruct
     def -(other)

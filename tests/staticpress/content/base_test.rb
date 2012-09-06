@@ -1,13 +1,5 @@
 require_relative '../../test_case'
 
-require 'staticpress/content/base'
-require 'staticpress/content/category'
-require 'staticpress/content/index'
-require 'staticpress/content/page'
-require 'staticpress/content/post'
-require 'staticpress/content/tag'
-require 'staticpress/content/theme'
-
 class ContentBaseTest < TestCase
   let(:category) { Staticpress::Content::Category.new :name => 'programming' }
   let(:category_1) { Staticpress::Content::Category.new(:name => 'programming', :number => '1') }

@@ -1,8 +1,5 @@
 require 'yaml'
 
-require 'staticpress'
-require 'staticpress/js_object'
-
 module Staticpress
   # IDEA look into configatron https://github.com/markbates/configatron
   # FIXME this class is hard to test

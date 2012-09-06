@@ -1,6 +1,3 @@
-require 'staticpress'
-require 'staticpress/helpers'
-
 module Staticpress
   module Route
     extend Staticpress::Helpers

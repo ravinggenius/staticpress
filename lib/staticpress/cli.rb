@@ -4,15 +4,6 @@ require 'fileutils'
 require 'rack'
 require 'thor'
 
-require 'staticpress'
-require 'staticpress/error'
-require 'staticpress/helpers'
-require 'staticpress/plugin'
-require 'staticpress/pusher'
-require 'staticpress/settings'
-require 'staticpress/site'
-require 'staticpress/version'
-
 module Staticpress
   class CLI < Thor
     include Thor::Actions

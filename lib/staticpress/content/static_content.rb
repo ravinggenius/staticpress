@@ -1,7 +1,5 @@
 require 'tilt'
 
-require 'staticpress'
-
 module Staticpress::Content
   module StaticContent
     # layout not needed for binary files

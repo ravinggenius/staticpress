@@ -2,8 +2,6 @@ require_relative '../test_case'
 
 require 'pathname'
 
-require 'staticpress/helpers'
-
 class HelpersTest < TestCase
   include Staticpress::Helpers
 
