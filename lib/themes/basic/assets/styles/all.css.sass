@@ -1,0 +1,65 @@
+@import normalize
+
+$foreground-color: rgb(15, 12, 60)
+$background-color: invert($foreground-color)
+
+@import compass/css3/border-radius
+@import compass/css3/box-shadow
+@import compass/css3/text-shadow
+@import compass/typography/lists
+
+html
+  background-color: lighten($background-color, 5%)
+
+body
+  @include border-bottom-left-radius
+  @include border-bottom-right-radius
+  @include box-shadow
+  background-color: $background-color
+  color: $foreground-color
+  margin: 0 auto
+    bottom: 1em
+  padding: 20px
+  width: 960px
+
+.site-title,
+.site-subtitle
+  display: block
+.site-title
+  @include single-text-shadow(lighten($foreground-color, 10%), 1px, 1px, 2px)
+  font-size: 3em
+.site-subtitle
+  @include single-text-shadow($foreground-color, 1px, 1px, 1px)
+  font-size: 2em
+
+@for $level from 1 through 6
+  h#{$level}
+    @include single-text-shadow($foreground-color, 0, 0, 1px)
+
+menu[type='toolbar']
+  background-color: darken($foreground-color, 5%)
+  color: darken($background-color, 5%)
+  li
+    margin: 0
+    padding: 0
+    a
+      margin: 0 0.25em
+      padding: 0.5em
+      text-decoration: none
+      &:active,
+      &:hover
+        background-color: lighten(darken($foreground-color, 5%), 10%)
+    &:first-child
+      a
+        margin-left: 0
+    &:last-child
+      a
+        margin-right: 0
+    &,
+    a
+      @include inline-block
+      color: darken($background-color, 5%)
+
+code
+  background-color: darken($background-color, 10%)
+  color: $foreground-color
