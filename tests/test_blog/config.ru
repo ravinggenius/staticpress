@@ -1,5 +1,4 @@
-require 'staticpress/booter'
-require 'staticpress/server'
+require 'staticpress'
 
 use Rack::ShowStatus
 use Rack::ShowExceptions
