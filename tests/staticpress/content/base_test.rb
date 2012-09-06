@@ -228,8 +228,8 @@ body{color:green}
   end
 
   def test_template_engine_options
-    expected = Compass.sass_engine_options.merge :line_comments => false, :style => :compressed
-    assert_eql expected, asset_style.template_engine_options(:sass)
+    refute asset_script.template_engine_options(:sass)[:line_comments]
+    assert_equal :compressed, asset_script.template_engine_options(:sass)[:style]
     assert_equal({}, asset_script.template_engine_options(:js))
   end
 
