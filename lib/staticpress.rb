@@ -40,6 +40,7 @@ require_relative 'staticpress/content/tag'
 require_relative 'staticpress/content/theme'
 
 require_relative 'staticpress/cli'
+require_relative 'staticpress/integrations'
 require_relative 'staticpress/metadata'
 require_relative 'staticpress/plugin'
 require_relative 'staticpress/plugins'

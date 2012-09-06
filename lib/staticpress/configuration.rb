@@ -12,21 +12,7 @@ module Staticpress
     end
 
     def self.default
-      @default ||= lambda do
-        reply = YAML.load_file(Staticpress.root + 'skeleton' + 'config.yml')
-
-        reply[:template_engine_options] ||= {}
-
-        if defined? Compass
-          [ :sass, :scss ].each do |template_engine|
-            (reply[:template_engine_options][template_engine] ||= {}).merge!(Compass.sass_engine_options) do |key, first_choice, second_choice|
-              reply[:template_engine_options][template_engine].key?(key) ? first_choice : second_choice
-            end
-          end
-        end
-
-        new reply
-      end.call
+      @default ||= new(YAML.load_file(Staticpress.root + 'skeleton' + 'config.yml'))
     end
 
     def self.instance
