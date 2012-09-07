@@ -14,6 +14,7 @@ module Staticpress::Content
       (Staticpress::Theme.new(params[:theme]).root + 'assets' + params[:asset_type] + params[:slug]).file?
     end
 
+    # https://github.com/sstephenson/hike
     def template_path
       Staticpress::Theme.new(params[:theme]).root + 'assets' + params[:asset_type] + "#{params[:slug]}#{template_extension}"
     end
