@@ -1,13 +1,12 @@
-$LOAD_PATH.unshift(File.expand_path(File.dirname(__FILE__) + '/../lib'))
+require 'minitest/autorun'
 
 require 'compass'
 require 'debugger'
 require 'haml'
-require 'minitest/autorun'
 require 'redcarpet'
 require 'sass'
 
-require 'staticpress'
+require_relative '../lib/staticpress'
 
 class TestCase < MiniTest::Spec
   TEST_BLOG = (Staticpress.root + '..' + 'tests' + 'test_blog').expand_path

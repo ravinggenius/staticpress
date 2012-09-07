@@ -28,16 +28,18 @@ Staticpress is a blog-focused static site generator. It uses Tilt for rendering 
   ]
 
   s.add_development_dependency 'aruba'
-  s.add_development_dependency 'debugger'
-  s.add_development_dependency 'compass'
   s.add_development_dependency 'cucumber'
-  s.add_development_dependency 'haml'
   s.add_development_dependency 'minitest'
+
+  # test dependencies (see Gemfile)
+  s.add_development_dependency 'compass'
+  s.add_development_dependency 'debugger'
+  s.add_development_dependency 'haml'
   s.add_development_dependency 'redcarpet'
   s.add_development_dependency 'sass'
 
   s.add_runtime_dependency 'bundler'
-  #s.add_runtime_dependency 'hike' # look into this for template inheritance https://github.com/sstephenson/hike
+  # s.add_runtime_dependency 'hike'
   s.add_runtime_dependency 'rack'
   s.add_runtime_dependency 'thor'
   s.add_runtime_dependency 'tilt'
