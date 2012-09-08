@@ -14,7 +14,7 @@ module Staticpress::Content
     end
 
     def created_at
-      meta.created_at ? meta.created_at : created_on
+      meta.created_at ? meta.created_at.utc : created_on
     end
 
     def created_on
