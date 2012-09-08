@@ -54,6 +54,7 @@ Then /^the formats page only contains markup$/ do
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset='utf-8' />
     <title>Formats | Transient Thoughts</title>
     <link href='/assets/basic/styles/all.css' rel='stylesheet' type='text/css' />
     <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js'></script>
@@ -61,12 +62,10 @@ Then /^the formats page only contains markup$/ do
   </head>
   <body>
     <header>
-      <span class='site-title'>Transient Thoughts</span>
-      <span class='site-subtitle'>A blogging framework for hackers</span>
+      <div class='site-title'>Transient Thoughts</div>
+      <div class='site-subtitle'>A blogging framework for hackers</div>
     </header>
-    <section>
-      <p>hello world</p>
-    </section>
+    <section><p>hello world</p></section>
     <section></section>
   </body>
 </html>
@@ -100,6 +99,7 @@ Then /^the build homepage looks good$/ do
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset='utf-8' />
     <title>Custom Home Page | Transient Thoughts</title>
     <link href='/assets/basic/styles/all.css' rel='stylesheet' type='text/css' />
     <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js'></script>
@@ -107,12 +107,10 @@ Then /^the build homepage looks good$/ do
   </head>
   <body>
     <header>
-      <span class='site-title'>Transient Thoughts</span>
-      <span class='site-subtitle'>A blogging framework for hackers</span>
+      <div class='site-title'>Transient Thoughts</div>
+      <div class='site-subtitle'>A blogging framework for hackers</div>
     </header>
-    <section>
-      <p>in custom page</p>
-    </section>
+    <section><p>in custom page</p></section>
     <section></section>
   </body>
 </html>
