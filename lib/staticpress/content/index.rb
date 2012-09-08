@@ -20,13 +20,9 @@ module Staticpress::Content
     end
 
     def self.all
-      reply = []
-
-      1.upto paginate(all_posts).count do |number|
-        reply << new(:number => number)
+      (1..paginate(all_posts).count).map do |number|
+        new(:number => number)
       end
-
-      reply
     end
 
     def self.all_posts
