@@ -116,16 +116,17 @@ class ContentBaseTest < TestCase
   end
 
   def test_output_path
-    assert_equal (Staticpress.blog_path + 'public' + 'chained' + 'index.html'), chained.output_path
-    assert_equal (Staticpress.blog_path + 'public' + 'chain.html'), chain.output_path
-    assert_equal (Staticpress.blog_path + 'public' + 'about' + 'index.html'), page.output_path
-    assert_equal (Staticpress.blog_path + 'public' + 'index.html'), page_root.output_path
-    assert_equal (Staticpress.blog_path + 'public' + 'style2.css'), style_2.output_path
-    assert_equal (Staticpress.blog_path + 'public' + 'ruby.png'), static_bin.output_path
-    assert_equal (Staticpress.blog_path + 'public' + 'plain.txt'), static_txt.output_path
-    assert_equal (Staticpress.blog_path + 'public' + '2011' + '07' + '20' + 'hello' + 'index.html'), post.output_path
-    assert_equal (Staticpress.blog_path + 'public' + 'assets' + 'test_theme' + 'styles' + 'all'), asset_style.output_path
-    assert_equal (Staticpress.blog_path + 'public' + 'assets' + 'test_theme' + 'scripts' + 'application.js'), asset_script.output_path
+    output_directory = Staticpress.blog_path + 'public'
+    assert_equal (output_directory + 'chained' + 'index.html'), chained.output_path
+    assert_equal (output_directory + 'chain.html'), chain.output_path
+    assert_equal (output_directory + 'about' + 'index.html'), page.output_path
+    assert_equal (output_directory + 'index.html'), page_root.output_path
+    assert_equal (output_directory + 'style2.css'), style_2.output_path
+    assert_equal (output_directory + 'ruby.png'), static_bin.output_path
+    assert_equal (output_directory + 'plain.txt'), static_txt.output_path
+    assert_equal (output_directory + '2011' + '07' + '20' + 'hello' + 'index.html'), post.output_path
+    assert_equal (output_directory + 'assets' + 'test_theme' + 'styles' + 'all'), asset_style.output_path
+    assert_equal (output_directory + 'assets' + 'test_theme' + 'scripts' + 'application.js'), asset_script.output_path
   end
 
   def test_params
