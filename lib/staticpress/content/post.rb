@@ -47,6 +47,10 @@ module Staticpress::Content
       end
     end
 
+    def self.published
+      all.select &:published?
+    end
+
     def self.create(format, title)
       now = Time.now.utc
       created_on = "#{now.year}-#{'%02d' % now.month}-#{'%02d' % now.day}"

@@ -23,6 +23,10 @@ module Staticpress::Content
       gather_resources_from((Staticpress::Theme.theme.root + 'assets').children)
     end
 
+    def self.published
+      all
+    end
+
     def self.find_by_path(path)
       if path.file?
         stubs = Staticpress::Route::REGEX_STUBS

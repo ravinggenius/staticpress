@@ -25,8 +25,12 @@ module Staticpress::Content
       end
     end
 
+    def self.published
+      all
+    end
+
     def self.all_posts
-      Staticpress::Content::Post.all
+      Staticpress::Content::Post.published
     end
   end
 end

@@ -27,7 +27,7 @@ module Staticpress
 
       CONTENT_TYPES.each do |content_type|
         threads << Thread.new do
-          content_type.all.each do |content|
+          content_type.published.each do |content|
             semaphore.synchronize do
               block.call content
             end

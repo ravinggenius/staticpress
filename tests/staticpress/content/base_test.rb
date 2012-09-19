@@ -20,6 +20,7 @@ class ContentBaseTest < TestCase
   let(:page_fake) { Staticpress::Content::Page.new :slug => 'i/dont/exist' }
 
   let(:post) { Staticpress::Content::Post.new(:year => '2011', :month => '07', :day => '20', :title => 'hello') }
+  let(:unpublished) { Staticpress::Content::Post.new(:year => '2012', :month => '09', :day => '19', :title => 'unpublished') }
 
   let(:tag) { Staticpress::Content::Tag.new :name => 'charlotte' }
 
@@ -75,6 +76,7 @@ class ContentBaseTest < TestCase
     assert page_root.exist?, "#{page_root} does not exist"
 
     assert post.exist?, "#{post} does not exist"
+    assert unpublished.exist?, "#{unpublished} does not exist"
     assert tag.exist?, "#{tag} does not exist"
 
     assert asset_style.exist?, "#{asset_style} does not exist"

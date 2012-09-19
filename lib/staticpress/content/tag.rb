@@ -39,13 +39,17 @@ module Staticpress::Content
       reply
     end
 
+    def self.published
+      all
+    end
+
     def self.tags
       content_by_tag.keys
     end
 
     def self.content_by_tag
       reply = Hash.new { |hash, key| hash[key] = [] }
-      Staticpress::Content::Post.all.each do |post|
+      Staticpress::Content::Post.published.each do |post|
         (post.meta.tags || []).each do |tag|
           (reply[tag] ||= []) << post
         end

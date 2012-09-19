@@ -48,6 +48,10 @@ module Staticpress::Content
       gather_resources_from all_but_posts
     end
 
+    def self.published
+      all.select &:published?
+    end
+
     def self.create(format, title, path = nil)
       name = title.gsub(/ /, '-').downcase
 

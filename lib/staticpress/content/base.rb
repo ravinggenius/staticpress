@@ -86,6 +86,15 @@ module Staticpress::Content
       end
     end
 
+    def published?
+      published = meta.published
+      if published.is_a? Time
+        published <= Time.utc
+      else
+        published.nil? ? true : published
+      end
+    end
+
     def raw
       content[:text].strip
     end

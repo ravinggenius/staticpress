@@ -4,6 +4,7 @@ class ContentIndexTest < TestCase
   include Staticpress::Helpers
 
   let(:index) { Staticpress::Content::Index.new }
+  let(:unpublished) { Staticpress::Content::Post.new(:year => '2012', :month => '09', :day => '19', :title => 'unpublished') }
 
   def test_pages_count
     assert_equal 1, index.pages_count
@@ -22,6 +23,7 @@ class ContentIndexTest < TestCase
         Staticpress::Content::Post.new(:year => '2011', :month => '08', :day => '20', :title => 'forever')
       ]
       assert_equal expected, index.sub_content
+      refute_includes index.sub_content, unpublished
     end
   end
 
