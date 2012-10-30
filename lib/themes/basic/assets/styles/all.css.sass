@@ -1,12 +1,16 @@
 @import normalize
 
-$foreground-color: rgb(15, 12, 60)
-$background-color: invert($foreground-color)
+// http://leaverou.github.com/contrast-ratio/#%23444459-on-%23F9F9F9
+$foreground-color: #444459
+$background-color: #F9F9F9
 
 @import compass/css3/border-radius
 @import compass/css3/box-shadow
 @import compass/css3/text-shadow
 @import compass/typography/lists
+
+@mixin shadow($color: $foreground-color, $offset: 0)
+  @include single-text-shadow($color, $offset, $offset, $offset + 1px)
 
 html
   background-color: lighten($background-color, 5%)
@@ -18,23 +22,28 @@ body
   background-color: $background-color
   color: $foreground-color
   margin: 0 auto
-    bottom: 1em
+    bottom: 1rem
   padding: 20px
-  width: 960px
+  max-width: 960px
 
 .site-title,
 .site-subtitle
   display: block
 .site-title
-  @include single-text-shadow(lighten($foreground-color, 10%), 1px, 1px, 2px)
-  font-size: 3em
+  @include shadow(lighten($foreground-color, 10%), 1px)
+  font-size: 3rem
 .site-subtitle
-  @include single-text-shadow($foreground-color, 1px, 1px, 1px)
-  font-size: 2em
+  @include shadow
+  font-size: 2rem
 
 @for $level from 1 through 6
   h#{$level}
-    @include single-text-shadow($foreground-color, 0, 0, 1px)
+    @include shadow
+
+h,
+.h
+  @include shadow
+  font-size: 1.8rem
 
 menu[type='toolbar']
   background-color: darken($foreground-color, 5%)
@@ -43,8 +52,8 @@ menu[type='toolbar']
     margin: 0
     padding: 0
     a
-      margin: 0 0.25em
-      padding: 0.5em
+      margin: 0 0.25rem
+      padding: 0.5rem
       text-decoration: none
       &:active,
       &:hover
@@ -59,6 +68,15 @@ menu[type='toolbar']
     a
       @include inline-block
       color: darken($background-color, 5%)
+
+.post
+  @include border-radius
+  @include box-shadow($foreground-color, 3px)
+  border: 0.1rem solid $foreground-color
+  margin: 1rem 0
+  padding: 0.5rem
+  &:hover
+    background-color: lighten($background-color, 5%)
 
 code
   background-color: darken($background-color, 10%)
