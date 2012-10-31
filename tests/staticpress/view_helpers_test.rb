@@ -22,4 +22,11 @@ class ViewHelpersTest < TestCase
     HTML
     assert_equal expected, view_helpers.partial(:list_posts, :posts => [ ])
   end
+
+  def test_tag
+    assert_equal '<t></t>', view_helpers.tag(:t)
+    assert_equal '<t one="1"></t>', view_helpers.tag(:t, :one => 1)
+    assert_equal '<t>content</t>', view_helpers.tag(:t) { 'content' }
+    assert_equal '<t><n></n></t>', view_helpers.tag(:t) { view_helpers.tag(:n) }
+  end
 end

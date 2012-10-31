@@ -26,5 +26,13 @@ module Staticpress
     # TODO site_meta should be an aggregate all metadata
     def site_meta
     end
+
+    def tag(name, attributes = {}, &block)
+      attribute_string = attributes.map do |key, value|
+        " #{key}=\"#{value}\""
+      end.join('')
+      content = block_given? ? block.call : ''
+      "<#{name}#{attribute_string}>#{content}</#{name}>"
+    end
   end
 end
