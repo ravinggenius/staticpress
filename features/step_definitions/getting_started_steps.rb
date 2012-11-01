@@ -44,7 +44,7 @@ Then /^the minimal files are present$/ do
 end
 
 Then /^Staticpress should remember my blog title$/ do
-  check_exact_file_content 'config.yml', <<-YAML
+  check_file_content 'config.yml', <<-YAML, true
 ---
 :title: This is my blog
   YAML

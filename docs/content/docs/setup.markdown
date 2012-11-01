@@ -1,3 +1,9 @@
+---
+menu:
+  position: 1.0
+  text: Setup
+---
+
 # Zero To Blogging
 
 ## Pre-requisites

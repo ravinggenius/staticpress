@@ -1,15 +1,6 @@
-%nav
-  %menu{ :type => :toolbar }
-    %li
-      %a{ :href => '/docs' } Documentation
-    %li
-      %a{ :href => '/features' } Features
+---
+menu:
+  position: 1
+---
 
-:markdown
-  * [Setup](/docs/setup)
-  * [Help](/docs/help)
-  * [Content Types](/docs/content-types)
-  * [Build](/docs/build)
-  * [Deploy](/docs/deploy)
-  * [Themes](/docs/themes)
-  * [Plugins](/docs/plugins)
+= menu -1, sub_menu_for(page), :type => :list

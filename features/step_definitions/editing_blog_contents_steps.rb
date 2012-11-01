@@ -65,6 +65,7 @@ Then /^the formats page only contains markup$/ do
       <div class='site-title'>Transient Thoughts</div>
       <div class='site-subtitle'>A blogging framework for hackers</div>
     </header>
+    <nav></nav>
     <section><p>hello world</p></section>
     <section></section>
   </body>
@@ -110,6 +111,7 @@ Then /^the build homepage looks good$/ do
       <div class='site-title'>Transient Thoughts</div>
       <div class='site-subtitle'>A blogging framework for hackers</div>
     </header>
+    <nav></nav>
     <section><p>in custom page</p></section>
     <section></section>
   </body>

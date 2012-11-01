@@ -11,7 +11,8 @@
 :plugins_path: plugins
 :source_path: content
 :posts_source_path: content/_posts
-:plugins: []
+:plugins:
+  - menu
 :subscribe_rss: /atom.xml
 :deployment_strategy: :custom
 :deployment_strategies:
