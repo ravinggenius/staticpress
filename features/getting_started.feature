@@ -1,11 +1,9 @@
 Feature: Getting started
 
-  @focus
   Scenario: Getting help
     Given I ask for help
     Then I am pointed in the right direction
 
-  @focus
   Scenario: Finding the version
     Given I want Staticpress' version
     Then I see the version

@@ -13,6 +13,9 @@ module IntegrationHelpers
     blog_title = title ? "'#{title}'" : nil
     run_simple "staticpress new temporary_blog #{blog_title}"
     cd('temporary_blog')
+    append_to_file 'Gemfile', <<-RUBY
+gem 'staticpress', :path => '../../..'
+    RUBY
   end
 
   def run_one_of(*commands)
