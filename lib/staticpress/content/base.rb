@@ -35,18 +35,14 @@ module Staticpress::Content
 
       regex_frontmatter = /^-{3}${1}(?<frontmatter>.*)^-{3}${1}/m
       regex_text = /(?<text>.*)/m
-      regex = /#{regex_frontmatter}#{regex_text}/
+      regex = /(#{regex_frontmatter})?#{regex_text}/
 
       c = template_path_content
 
       @content = if Tilt.mappings.include?(template_path.extname[1..-1])
-        c.match(regex_frontmatter) ? c.match(regex) : c.match(regex_text)
+        c.match regex
       else
-        reply = { :text => c }
-        def reply.names
-          keys.map &:to_s
-        end
-        reply
+        { :text => c }
       end
     end
 
@@ -77,7 +73,7 @@ module Staticpress::Content
     end
 
     def meta
-      Staticpress::Metadata.new(content.names.include?('frontmatter') ? YAML.load(content[:frontmatter]) : {})
+      Staticpress::Metadata.new(content[:frontmatter] ? YAML.load(content[:frontmatter]) : {})
     end
 
     def optional_param_defaults
