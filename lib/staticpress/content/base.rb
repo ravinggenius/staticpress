@@ -38,7 +38,16 @@ module Staticpress::Content
       regex = /#{regex_frontmatter}#{regex_text}/
 
       c = template_path_content
-      @content = c.match(regex_frontmatter) ? c.match(regex) : c.match(regex_text)
+
+      @content = if Tilt.mappings.include?(template_path.extname[1..-1])
+        c.match(regex_frontmatter) ? c.match(regex) : c.match(regex_text)
+      else
+        reply = { :text => c }
+        def reply.names
+          keys.map &:to_s
+        end
+        reply
+      end
     end
 
     def content_type

@@ -13,4 +13,8 @@ class SiteTest < TestCase
     assert_equal post, site.find_content_by_env(env('/2011/07/20/hello'))
     assert_nil site.find_content_by_env(env('/i/dont/exist'))
   end
+
+  def test_save
+    refute_raises(ArgumentError) { site.save }
+  end
 end
