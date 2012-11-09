@@ -74,6 +74,9 @@ module Staticpress::Content
 
     def meta
       Staticpress::Metadata.new(content[:frontmatter] ? YAML.load(content[:frontmatter]) : {})
+    rescue Psych::SyntaxError => e
+      warn "Could not parse frontmatter for #{template_path}", content[:frontmatter]
+      raise e
     end
 
     def optional_param_defaults
