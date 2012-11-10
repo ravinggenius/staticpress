@@ -68,6 +68,9 @@ Then /^the formats page only contains markup$/ do
     <nav></nav>
     <section><p>hello world</p></section>
     <section></section>
+    <a class='github-ribbon' href='https://github.com/ravinggenius/staticpress' style='position: absolute; top: 0; right: 0;'>
+  <img alt='Fork me on GitHub' src='https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png' />
+</a>
   </body>
 </html>
   HTML
@@ -114,6 +117,9 @@ Then /^the build homepage looks good$/ do
     <nav></nav>
     <section><p>in custom page</p></section>
     <section></section>
+    <a class='github-ribbon' href='https://github.com/ravinggenius/staticpress' style='position: absolute; top: 0; right: 0;'>
+  <img alt='Fork me on GitHub' src='https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png' />
+</a>
   </body>
 </html>
   HTML
