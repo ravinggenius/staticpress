@@ -1,7 +1,7 @@
 require 'compass'
-require 'debugger'
 require 'haml'
 require 'pathname'
+require 'pry'
 require 'redcarpet'
 require 'sass'
 
