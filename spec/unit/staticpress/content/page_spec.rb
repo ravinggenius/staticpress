@@ -3,6 +3,8 @@ require 'spec_helper'
 describe Staticpress::Content::Page do
   include Staticpress::Helpers
 
+  set_temporary_blog_path
+
   let(:page_dir) { Staticpress.blog_path + config.source_path }
 
   let(:chained) { Staticpress::Content::Page.new(:slug => 'chained') }

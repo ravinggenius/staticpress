@@ -3,6 +3,8 @@ require 'spec_helper'
 describe Staticpress::Helpers do
   include Staticpress::Helpers
 
+  set_temporary_blog_path
+
   describe '#extensionless_basename' do
     it '...' do
       expect(extensionless_basename(Pathname('extensionless'))).to eq('extensionless')

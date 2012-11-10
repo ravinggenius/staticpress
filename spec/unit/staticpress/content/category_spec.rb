@@ -3,6 +3,8 @@ require 'spec_helper'
 describe Staticpress::Content::Category do
   include Staticpress::Helpers
 
+  set_temporary_blog_path
+
   let(:category) { Staticpress::Content::Category.new :name => 'programming' }
 
   describe '.categories' do

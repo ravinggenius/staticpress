@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe Staticpress::Settings do
+  set_temporary_blog_path
+
   describe '.default' do
     it '...' do
       expect(Staticpress::Settings.instance.verbose).to be_false

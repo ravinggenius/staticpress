@@ -2,6 +2,8 @@ require 'spec_helper'
 
 # TODO add contexts
 describe Staticpress::Route do
+  set_temporary_blog_path
+
   describe '.extract_params_index' do
     it '...' do
       pattern = '/(page/:number)?'

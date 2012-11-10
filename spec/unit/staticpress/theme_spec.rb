@@ -3,6 +3,8 @@ require 'spec_helper'
 describe Staticpress::Theme do
   include Staticpress::Helpers
 
+  set_temporary_blog_path
+
   let(:theme) { Staticpress::Theme.new :test_theme }
 
   before :each do

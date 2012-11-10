@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe Staticpress::Server do
+  set_temporary_blog_path
+
   let(:server) { Staticpress::Server.new }
 
   describe 'GET /' do

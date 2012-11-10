@@ -3,6 +3,8 @@ require 'spec_helper'
 describe Staticpress::Content::Theme do
   include Staticpress::Helpers
 
+  set_temporary_blog_path
+
   let(:theme_dir) { Staticpress::Theme.theme.root }
 
   let(:asset_style) { Staticpress::Content::Theme.new :theme => 'test_theme', :asset_type => 'styles', :slug => 'all' }

@@ -3,6 +3,8 @@ require 'spec_helper'
 describe Staticpress::Content::Index do
   include Staticpress::Helpers
 
+  set_temporary_blog_path
+
   let(:index) { Staticpress::Content::Index.new }
   let(:unpublished) { Staticpress::Content::Post.new(:year => '2012', :month => '09', :day => '19', :title => 'unpublished') }
 

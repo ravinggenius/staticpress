@@ -4,6 +4,8 @@ describe Staticpress::Content::ResourceContent do
   include Staticpress::Helpers
   include Staticpress::Content::ResourceContent
 
+  set_temporary_blog_path
+
   let(:page_dir) { Staticpress.blog_path + config.source_path }
 
   describe '.find_supported_extensions' do

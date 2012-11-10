@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe Staticpress::Site do
+  set_temporary_blog_path
+
   let(:site) { Staticpress::Site.new }
 
   let(:index) { Staticpress::Content::Page.new :slug => '' }

@@ -28,16 +28,5 @@ RSpec.configure do |config|
   config.include CustomMatchers
   config.include UnitSupport
   config.include IntegrationSupport
-
-  TEST_BLOG = (Staticpress.root + '..' + 'tests' + 'test_blog').expand_path
-
-  config.before :each do
-    Staticpress.blog_path = TEST_BLOG
-  end
-
-  config.after :each do
-    Staticpress.blog_path = '.'
-    test_blog_public = TEST_BLOG + 'public'
-    FileUtils.rm_rf test_blog_public if test_blog_public.directory?
-  end
+  config.extend BlogPathSetup
 end
