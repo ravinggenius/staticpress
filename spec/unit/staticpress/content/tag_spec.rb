@@ -5,21 +5,21 @@ describe Staticpress::Content::Tag do
 
   describe '.tags' do
     it '...' do
-      assert_equal [ 'charlotte' ], Staticpress::Content::Tag.tags
+      expect(Staticpress::Content::Tag.tags).to eq([ 'charlotte' ])
     end
   end
 
   describe '#pages_count' do
     it '...' do
-      assert_equal 1, tag.pages_count
+      expect(tag.pages_count).to eq(1)
     end
   end
 
   describe '#optional_param_defaults' do
     it '...' do
       expected = { :number => 1 }
-      assert_equal expected, Staticpress::Content::Tag.new(:name => 'charlotte').optional_param_defaults
-      assert_equal expected, Staticpress::Content::Tag.new(:name => 'charlotte', :number => nil).optional_param_defaults
+      expect(Staticpress::Content::Tag.new(:name => 'charlotte').optional_param_defaults).to eq(expected)
+      expect(Staticpress::Content::Tag.new(:name => 'charlotte', :number => nil).optional_param_defaults).to eq(expected)
     end
   end
 
@@ -28,7 +28,7 @@ describe Staticpress::Content::Tag do
       expected = [
         Staticpress::Content::Post.new(:year => '2011', :month => '08', :day => '06', :title => 'in-charlotte')
       ]
-      assert_equal expected, tag.sub_content
+      expect(tag.sub_content).to eq(expected)
     end
   end
 
@@ -37,7 +37,7 @@ describe Staticpress::Content::Tag do
       expected = [
         Staticpress::Content::Tag.new(:name => 'charlotte', :number => 1)
       ]
-      assert_equal expected, Staticpress::Content::Tag.all
+      expect(Staticpress::Content::Tag.all).to eq(expected)
     end
   end
 
@@ -45,7 +45,7 @@ describe Staticpress::Content::Tag do
     it '...' do
       [
         Staticpress::Content::Post.new(:year => '2011', :month => '08', :day => '06', :title => 'in-charlotte')
-      ].each { |content| assert_includes Staticpress::Content::Tag.content_by_tag['charlotte'], content }
+      ].each { |content| expect(Staticpress::Content::Tag.content_by_tag['charlotte']).to include(content) }
     end
   end
 end

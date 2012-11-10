@@ -29,144 +29,144 @@ describe Staticpress::Content::Base do
 
   describe '#==' do
     it '...' do
-      assert_operator category, :==, Staticpress::Content::Category.new(:name => 'programming')
-      refute_operator category, :==, nil
+      expect(category).to be == Staticpress::Content::Category.new(:name => 'programming')
+      expect(category).to_not be == nil
 
-      assert_operator index, :==, Staticpress::Content::Index.new(:number => 1)
-      refute_operator index, :==, index_2
-      refute_operator index, :==, nil
+      expect(index).to be == Staticpress::Content::Index.new(:number => 1)
+      expect(index).to_not be == index_2
+      expect(index).to_not be == nil
 
-      assert_operator page, :==, Staticpress::Content::Page.new(:slug => 'about')
-      refute_operator page, :==, second_page
-      refute_operator page, :==, nil
-      assert_operator static_bin, :==, Staticpress::Content::Page.new(:slug => 'ruby.png')
-      refute_operator static_bin, :==, nil
-      refute_operator static_bin, :==, static_txt
+      expect(page).to be == Staticpress::Content::Page.new(:slug => 'about')
+      expect(page).to_not be == second_page
+      expect(page).to_not be == nil
+      expect(static_bin).to be == Staticpress::Content::Page.new(:slug => 'ruby.png')
+      expect(static_bin).to_not be == nil
+      expect(static_bin).to_not be == static_txt
 
-      assert_operator post, :==, Staticpress::Content::Post.new(:year => '2011', :month => '07', :day => '20', :title => 'hello')
-      refute_operator post, :==, nil
+      expect(post).to be == Staticpress::Content::Post.new(:year => '2011', :month => '07', :day => '20', :title => 'hello')
+      expect(post).to_not be == nil
 
-      assert_operator tag, :==, Staticpress::Content::Tag.new(:name => 'charlotte')
-      refute_operator tag, :==, nil
+      expect(tag).to be == Staticpress::Content::Tag.new(:name => 'charlotte')
+      expect(tag).to_not be == nil
 
-      assert_operator asset_style, :==, Staticpress::Content::Theme.new(:theme => 'test_theme', :asset_type => 'styles', :slug => 'all')
-      refute_operator asset_style, :==, nil
+      expect(asset_style).to be == Staticpress::Content::Theme.new(:theme => 'test_theme', :asset_type => 'styles', :slug => 'all')
+      expect(asset_style).to_not be == nil
 
-      refute_operator Staticpress::Content::Category.new(:name => 'programming'), :==, Staticpress::Content::Tag.new(:name => 'programming')
-      refute_operator Staticpress::Content::Tag.new(:name => 'charlotte'), :==, Staticpress::Content::Category.new(:name => 'charlotte')
+      expect(Staticpress::Content::Category.new(:name => 'programming')).to_not be == Staticpress::Content::Tag.new(:name => 'programming')
+      expect(Staticpress::Content::Tag.new(:name => 'charlotte')).to_not be == Staticpress::Content::Category.new(:name => 'charlotte')
     end
   end
 
   describe '#content_type' do
     it '...' do
-      assert_equal 'text/html', chained.content_type
-      assert_equal 'text/html', page.content_type
-      assert_equal 'text/css', style_2.content_type
-      assert_equal 'image/png', static_bin.content_type
-      assert_equal 'text/plain', static_txt.content_type
+      expect(chained.content_type).to eq('text/html')
+      expect(page.content_type).to eq('text/html')
+      expect(style_2.content_type).to eq('text/css')
+      expect(static_bin.content_type).to eq('image/png')
+      expect(static_txt.content_type).to eq('text/plain')
     end
   end
 
   describe '#exist?' do
     it '...' do
-      assert category.exist?, "#{category} does not exist"
-      assert index.exist?, "#{index} does not exist"
+      expect(category.exist?).to be_true
+      expect(index.exist?).to be_true
 
-      assert chained.exist?, "#{chained} does not exist"
-      assert chain.exist?, "#{chain} does not exist"
-      assert page.exist?, "#{page} does not exist"
-      assert second_page.exist?, "#{second_page} does not exist"
-      assert static_bin.exist?, "#{static_bin} does not exist"
-      assert static_txt.exist?, "#{static_txt} does not exist"
-      assert page_root.exist?, "#{page_root} does not exist"
+      expect(chained.exist?).to be_true
+      expect(chain.exist?).to be_true
+      expect(page.exist?).to be_true
+      expect(second_page.exist?).to be_true
+      expect(static_bin.exist?).to be_true
+      expect(static_txt.exist?).to be_true
+      expect(page_root.exist?).to be_true
 
-      assert post.exist?, "#{post} does not exist"
-      assert unpublished.exist?, "#{unpublished} does not exist"
-      assert tag.exist?, "#{tag} does not exist"
+      expect(post.exist?).to be_true
+      expect(unpublished.exist?).to be_true
+      expect(tag.exist?).to be_true
 
-      assert asset_style.exist?, "#{asset_style} does not exist"
-      assert asset_script.exist?, "#{asset_script} does not exist"
+      expect(asset_style.exist?).to be_true
+      expect(asset_script.exist?).to be_true
 
-      refute page_fake.exist?, "#{page_fake} exists"
+      expect(page_fake.exist?).to be_false
     end
   end
 
   describe '.find_by_url_path' do
     it '...' do
-      assert_equal category, Staticpress::Content::Category.find_by_url_path('/category/programming')
-      assert_equal index, Staticpress::Content::Index.find_by_url_path('/')
+      expect(Staticpress::Content::Category.find_by_url_path('/category/programming')).to eq(category)
+      expect(Staticpress::Content::Index.find_by_url_path('/')).to eq(index)
 
-      assert_equal page_root, Staticpress::Content::Page.find_by_url_path('/')
-      assert_equal chained, Staticpress::Content::Page.find_by_url_path('/chained')
-      assert_equal page, Staticpress::Content::Page.find_by_url_path('/about')
-      assert_equal static_bin, Staticpress::Content::Page.find_by_url_path('/ruby.png')
+      expect(Staticpress::Content::Page.find_by_url_path('/')).to eq(page_root)
+      expect(Staticpress::Content::Page.find_by_url_path('/chained')).to eq(chained)
+      expect(Staticpress::Content::Page.find_by_url_path('/about')).to eq(page)
+      expect(Staticpress::Content::Page.find_by_url_path('/ruby.png')).to eq(static_bin)
 
-      assert_equal post, Staticpress::Content::Post.find_by_url_path('/2011/07/20/hello')
-      assert_equal tag, Staticpress::Content::Tag.find_by_url_path('/tag/charlotte')
+      expect(Staticpress::Content::Post.find_by_url_path('/2011/07/20/hello')).to eq(post)
+      expect(Staticpress::Content::Tag.find_by_url_path('/tag/charlotte')).to eq(tag)
 
-      assert_equal asset_style, Staticpress::Content::Theme.find_by_url_path('/assets/test_theme/styles/all')
-      assert_equal asset_script, Staticpress::Content::Theme.find_by_url_path('/assets/test_theme/scripts/application.js')
+      expect(Staticpress::Content::Theme.find_by_url_path('/assets/test_theme/styles/all')).to eq(asset_style)
+      expect(Staticpress::Content::Theme.find_by_url_path('/assets/test_theme/scripts/application.js')).to eq(asset_script)
 
-      assert_nil Staticpress::Content::Theme.find_by_url_path(nil)
+      expect(Staticpress::Content::Theme.find_by_url_path(nil)).to be_nil
     end
   end
 
   describe '#full_title' do
     it '...' do
-      assert_equal 'Foo -> Bar -> Baz | Test Blog', page_nested.full_title
+      expect(page_nested.full_title).to eq('Foo -> Bar -> Baz | Test Blog')
     end
   end
 
   describe '#markup_template?' do
     it '...' do
-      assert chained.markup_template?, "#{chained} is not markup"
-      assert chain.markup_template?, "#{chain} is not markup"
-      assert page.markup_template?, "#{page} is not markup"
+      expect(chained.markup_template?).to be_true
+      expect(chain.markup_template?).to be_true
+      expect(page.markup_template?).to be_true
 
-      refute style_2.markup_template?, "#{chained} is markup"
+      expect(style_2.markup_template?).to be_false
     end
   end
 
   describe '#output_path' do
     it '...' do
       output_directory = Staticpress.blog_path + 'public'
-      assert_equal (output_directory + 'chained' + 'index.html'), chained.output_path
-      assert_equal (output_directory + 'chain.html'), chain.output_path
-      assert_equal (output_directory + 'about' + 'index.html'), page.output_path
-      assert_equal (output_directory + 'index.html'), page_root.output_path
-      assert_equal (output_directory + 'style2.css'), style_2.output_path
-      assert_equal (output_directory + 'ruby.png'), static_bin.output_path
-      assert_equal (output_directory + 'plain.txt'), static_txt.output_path
-      assert_equal (output_directory + '2011' + '07' + '20' + 'hello' + 'index.html'), post.output_path
-      assert_equal (output_directory + 'assets' + 'test_theme' + 'styles' + 'all'), asset_style.output_path
-      assert_equal (output_directory + 'assets' + 'test_theme' + 'scripts' + 'application.js'), asset_script.output_path
+      expect(chained.output_path).to eq(output_directory + 'chained' + 'index.html')
+      expect(chain.output_path).to eq(output_directory + 'chain.html')
+      expect(page.output_path).to eq(output_directory + 'about' + 'index.html')
+      expect(page_root.output_path).to eq(output_directory + 'index.html')
+      expect(style_2.output_path).to eq(output_directory + 'style2.css')
+      expect(static_bin.output_path).to eq(output_directory + 'ruby.png')
+      expect(static_txt.output_path).to eq(output_directory + 'plain.txt')
+      expect(post.output_path).to eq(output_directory + '2011' + '07' + '20' + 'hello' + 'index.html')
+      expect(asset_style.output_path).to eq(output_directory + 'assets' + 'test_theme' + 'styles' + 'all')
+      expect(asset_script.output_path).to eq(output_directory + 'assets' + 'test_theme' + 'scripts' + 'application.js')
     end
   end
 
   describe '#params' do
     it '...' do
       expected = { :name => 'charlotte', :number => 1 }
-      assert_equal expected, tag.params
-      assert_equal expected, Staticpress::Content::Tag.new(:name => 'charlotte', :number => nil).params
-      assert_equal expected, Staticpress::Content::Tag.new(:name => 'charlotte', :number => 1).params
-      assert_equal expected, Staticpress::Content::Tag.new(:name => 'charlotte', :number => '1').params
+      expect(tag.params).to eq(expected)
+      expect(Staticpress::Content::Tag.new(:name => 'charlotte', :number => nil).params).to eq(expected)
+      expect(Staticpress::Content::Tag.new(:name => 'charlotte', :number => 1).params).to eq(expected)
+      expect(Staticpress::Content::Tag.new(:name => 'charlotte', :number => '1').params).to eq(expected)
 
-      assert_equal({ :slug => 'chain.html' }, Staticpress::Content::Page.new(:slug => 'chain.html').params)
+      expect(Staticpress::Content::Page.new(:slug => 'chain.html').params).to eq(:slug => 'chain.html')
     end
   end
 
   describe '#raw' do
     it '...' do
-      assert_equal '= partial :list_posts, :posts => page.sub_content', category.raw
+      expect(category.raw).to eq('= partial :list_posts, :posts => page.sub_content')
 
-      assert_equal "<%= 'Processed with ERB' %>, then Markdown.", chained.raw
-      assert_equal 'in page', page.raw
-      assert_equal "in page\n\nin page", second_page.raw
-      assert_equal 'this file intentionally left blank', static_txt.raw
+      expect(chained.raw).to eq("<%= 'Processed with ERB' %>, then Markdown.")
+      expect(page.raw).to eq('in page')
+      expect(second_page.raw).to eq("in page\n\nin page")
+      expect(static_txt.raw).to eq('this file intentionally left blank')
 
-      assert_equal 'in post', post.raw
-      assert_equal '= partial :list_posts, :posts => page.sub_content', tag.raw
-      assert_equal '@import "compass/reset/utilities"', asset_style.raw
+      expect(post.raw).to eq('in post')
+      expect(tag.raw).to eq('= partial :list_posts, :posts => page.sub_content')
+      expect(asset_style.raw).to eq('@import "compass/reset/utilities"')
 
       expected = <<-JS
 (function ($) {
@@ -174,7 +174,7 @@ describe Staticpress::Content::Base do
   });
 })(jQuery);
       JS
-      assert_equal expected.strip, asset_script.raw
+      expect(asset_script.raw).to eq(expected.strip)
     end
   end
 
@@ -191,19 +191,19 @@ describe Staticpress::Content::Base do
   </body>
 </html>
       HTML
-      assert_equal expected_page, page.render
+      expect(page.render).to eq(expected_page)
 
       expected_style2 = <<-CSS
 body{color:green}
       CSS
-      assert_equal expected_style2, style_2.render
+      expect(style_2.render).to eq(expected_style2)
 
-      assert_equal 'this file intentionally left blank', static_txt.render
+      expect(static_txt.render).to eq('this file intentionally left blank')
       refute_raises(Sass::SyntaxError) { asset_style.render }
 
       expected = <<-SASS
       SASS
-      assert_equal expected, asset_style.render
+      expect(asset_style.render).to eq(expected)
 
       expected = <<-JS
 (function ($) {
@@ -211,115 +211,115 @@ body{color:green}
   });
 })(jQuery);
       JS
-      assert_equal expected, asset_script.render
+      expect(asset_script.render).to eq(expected)
     end
   end
 
   describe '#render_partial' do
     it '...' do
-      assert_equal "<p>Processed with ERB, then Markdown.</p>\n", chained.render_partial
-      assert_equal "<p>in page</p>\n", page.render_partial
-      assert_equal "<p>in page</p>\n\n<p>in page</p>\n", second_page.render_partial
+      expect(chained.render_partial).to eq("<p>Processed with ERB, then Markdown.</p>\n")
+      expect(page.render_partial).to eq("<p>in page</p>\n")
+      expect(second_page.render_partial).to eq("<p>in page</p>\n\n<p>in page</p>\n")
 
       expected_style2 = <<-CSS
 body{color:green}
       CSS
-      assert_equal expected_style2, style_2.render_partial
+      expect(style_2.render_partial).to eq(expected_style2)
 
-      assert_equal 'this file intentionally left blank', static_txt.render_partial
-      assert_equal "<p>in post</p>\n", post.render_partial
+      expect(static_txt.render_partial).to eq('this file intentionally left blank')
+      expect(post.render_partial).to eq("<p>in post</p>\n")
 
       refute_raises(Sass::SyntaxError) { asset_style.render_partial }
       expected = <<-SASS
       SASS
 
-      assert_equal expected, asset_style.render_partial
+      expect(asset_style.render_partial).to eq(expected)
       expected = <<-JS
 (function ($) {
   $(document).ready(function () {
   });
 })(jQuery);
       JS
-      assert_equal expected, asset_script.render_partial
+      expect(asset_script.render_partial).to eq(expected)
     end
   end
 
   describe '#save' do
     it '...' do
       static_bin.save
-      assert_equal static_bin.template_path.binread, static_bin.output_path.binread
+      expect(static_bin.output_path.binread).to eq(static_bin.template_path.binread)
 
       static_txt.save
-      assert_equal static_txt.template_path.read, static_txt.output_path.read
+      expect(static_txt.output_path.read).to eq(static_txt.template_path.read)
     end
   end
 
   describe '#template_engine_options' do
     it '...' do
-      refute asset_script.template_engine_options(:sass)[:line_comments]
-      assert_equal :compressed, asset_script.template_engine_options(:sass)[:style]
-      assert_equal({}, asset_script.template_engine_options(:js))
+      expect(asset_script.template_engine_options(:sass)[:line_comments]).to be_false
+      expect(asset_script.template_engine_options(:sass)[:style]).to eq(:compressed)
+      expect(asset_script.template_engine_options(:js)).to eq({})
     end
   end
 
   describe '#template_types' do
     it '...' do
-      assert_equal [:erb, :markdown], chained.template_types
-      assert_equal [:erb, :markdown], chain.template_types
-      assert_equal [:markdown], page.template_types
-      assert_equal [:sass], asset_style.template_types
-      assert_equal [], asset_script.template_types
+      expect(chained.template_types).to eq([:erb, :markdown])
+      expect(chain.template_types).to eq([:erb, :markdown])
+      expect(page.template_types).to eq([:markdown])
+      expect(asset_style.template_types).to eq([:sass])
+      expect(asset_script.template_types).to eq([])
     end
   end
 
   describe '#title' do
     it '...' do
-      assert_equal 'Foo -> Bar -> Baz', page_nested.title
+      expect(page_nested.title).to eq('Foo -> Bar -> Baz')
     end
   end
 
   describe '#to_s' do
     it '...' do
-      assert_equal '#<Staticpress::Content::Category url_path=/category/programming, params={:name=>"programming", :number=>1}>', category.to_s
-      assert_equal '#<Staticpress::Content::Category url_path=/category/programming, params={:name=>"programming", :number=>1}>', Staticpress::Content::Category.new(:name => 'programming', :number => nil).to_s
+      expect(category.to_s).to eq('#<Staticpress::Content::Category url_path=/category/programming, params={:name=>"programming", :number=>1}>')
+      expect(Staticpress::Content::Category.new(:name => 'programming', :number => nil).to_s).to eq('#<Staticpress::Content::Category url_path=/category/programming, params={:name=>"programming", :number=>1}>')
 
-      assert_equal '#<Staticpress::Content::Index url_path=/, params={:number=>1}>', index.to_s
-      assert_equal '#<Staticpress::Content::Index url_path=/page/2, params={:number=>2}>', index_2.to_s
+      expect(index.to_s).to eq('#<Staticpress::Content::Index url_path=/, params={:number=>1}>')
+      expect(index_2.to_s).to eq('#<Staticpress::Content::Index url_path=/page/2, params={:number=>2}>')
 
-      assert_equal '#<Staticpress::Content::Page url_path=/, params={:slug=>""}>', page_root.to_s
-      assert_equal '#<Staticpress::Content::Page url_path=/about, params={:slug=>"about"}>', page.to_s
-      assert_equal '#<Staticpress::Content::Page url_path=/ruby.png, params={:slug=>"ruby.png"}>', static_bin.to_s
+      expect(page_root.to_s).to eq('#<Staticpress::Content::Page url_path=/, params={:slug=>""}>')
+      expect(page.to_s).to eq('#<Staticpress::Content::Page url_path=/about, params={:slug=>"about"}>')
+      expect(static_bin.to_s).to eq('#<Staticpress::Content::Page url_path=/ruby.png, params={:slug=>"ruby.png"}>')
 
-      assert_equal '#<Staticpress::Content::Post url_path=/2011/07/20/hello, params={:day=>"20", :month=>"07", :title=>"hello", :year=>"2011"}>', post.to_s
+      expect(post.to_s).to eq('#<Staticpress::Content::Post url_path=/2011/07/20/hello, params={:day=>"20", :month=>"07", :title=>"hello", :year=>"2011"}>')
 
-      assert_equal '#<Staticpress::Content::Tag url_path=/tag/charlotte, params={:name=>"charlotte", :number=>1}>', tag.to_s
+      expect(tag.to_s).to eq('#<Staticpress::Content::Tag url_path=/tag/charlotte, params={:name=>"charlotte", :number=>1}>')
 
-      assert_equal '#<Staticpress::Content::Theme url_path=/assets/test_theme/styles/all, params={:asset_type=>"styles", :slug=>"all", :theme=>"test_theme"}>', asset_style.to_s
+      expect(asset_style.to_s).to eq('#<Staticpress::Content::Theme url_path=/assets/test_theme/styles/all, params={:asset_type=>"styles", :slug=>"all", :theme=>"test_theme"}>')
     end
   end
 
   describe '#url_path' do
     it '...' do
-      assert_equal '/category/programming', category.url_path
-      assert_equal '/category/programming', category_1.url_path
-      assert_equal '/category/programming/page/2', category_2.url_path
+      expect(category.url_path).to eq('/category/programming')
+      expect(category_1.url_path).to eq('/category/programming')
+      expect(category_2.url_path).to eq('/category/programming/page/2')
 
-      assert_equal '/', index.url_path
-      assert_equal '/page/2', index_2.url_path
+      expect(index.url_path).to eq('/')
+      expect(index_2.url_path).to eq('/page/2')
 
-      assert_equal '/', page_root.url_path
-      assert_equal '/chained', chained.url_path
-      assert_equal '/chain.html', chain.url_path
-      assert_equal '/about', page.url_path
-      assert_equal '/contact', second_page.url_path
-      assert_equal '/ruby.png', static_bin.url_path
-      assert_equal '/plain.txt', static_txt.url_path
+      expect(page_root.url_path).to eq('/')
+      expect(chained.url_path).to eq('/chained')
+      expect(chain.url_path).to eq('/chain.html')
+      expect(page.url_path).to eq('/about')
+      expect(second_page.url_path).to eq('/contact')
+      expect(static_bin.url_path).to eq('/ruby.png')
+      expect(static_txt.url_path).to eq('/plain.txt')
 
-      assert_equal '/2011/07/20/hello', post.url_path
+      expect(post.url_path).to eq('/2011/07/20/hello')
 
-      assert_equal '/2011/07/20/hello', post.url_path
-      assert_equal '/tag/charlotte', tag.url_path
-      assert_equal '/assets/test_theme/styles/all', asset_style.url_path
+      expect(post.url_path).to eq('/2011/07/20/hello')
+      expect(tag.url_path).to eq('/tag/charlotte')
+      expect(asset_style.url_path).to eq('/assets/test_theme/styles/all')
     end
   end
 end

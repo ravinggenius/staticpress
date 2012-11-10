@@ -11,102 +11,102 @@ describe Staticpress::Theme do
 
   describe '#==' do
     it '...' do
-      assert_operator theme, :==, Staticpress::Theme.new(:test_theme)
+      expect(Staticpress::Theme.new(:test_theme)).to be == theme
     end
   end
 
   describe '#root' do
     it '...' do
-      assert_equal theme.root, (Staticpress.blog_path + 'themes' + 'test_theme')
+      expect(Staticpress.blog_path + 'themes' + 'test_theme').to eq(theme.root)
     end
   end
 
   describe '#theme' do
     it '...' do
-      assert_equal theme, Staticpress::Theme.theme
+      expect(Staticpress::Theme.theme).to eq(theme)
     end
   end
 
 
   describe '#default_include' do
     it '...' do
-      refute_respond_to theme, :default_include
+      expect(theme).to_not respond_to(:default_include)
     end
   end
 
   describe '#keyed_includes' do
     it '...' do
-      assert_equal((theme.root + 'includes' + 'list_posts.haml'), theme.keyed_includes['list_posts'])
-      assert_nil theme.keyed_includes['fake']
+      expect(theme.keyed_includes['list_posts']).to eq(theme.root + 'includes' + 'list_posts.haml')
+      expect(theme.keyed_includes['fake']).to be_nil
     end
   end
 
   describe '#include_for' do
     it '...' do
-      assert_equal (theme.root + 'includes' + 'list_posts.haml'), theme.include_for(:list_posts)
-      assert_nil theme.include_for(:fake)
+      expect(theme.include_for(:list_posts)).to eq(theme.root + 'includes' + 'list_posts.haml')
+      expect(theme.include_for(:fake)).to be_nil
     end
   end
 
   describe '#includes' do
     it '...' do
-      assert_equal 1, theme.includes.count
+      expect(theme.includes.count).to eq(1)
     end
   end
 
 
   describe '#default_layout' do
     it '...' do
-      assert_equal (theme.root + 'layouts' + 'default.haml'), theme.default_layout
+      expect(theme.default_layout).to eq(theme.root + 'layouts' + 'default.haml')
     end
   end
 
   describe '#keyed_layouts' do
     it '...' do
-      assert_equal((theme.root + 'layouts' + 'default.haml'), theme.keyed_layouts['default'])
-      assert_equal((theme.root + 'layouts' + 'post_index.haml'), theme.keyed_layouts['post_index'])
-      assert_nil theme.keyed_layouts['fake']
+      expect(theme.keyed_layouts['default']).to eq(theme.root + 'layouts' + 'default.haml')
+      expect(theme.keyed_layouts['post_index']).to eq(theme.root + 'layouts' + 'post_index.haml')
+      expect(theme.keyed_layouts['fake']).to be_nil
     end
   end
 
   describe '#layout_for' do
     it '...' do
-      assert_equal (theme.root + 'layouts' + 'default.haml'), theme.layout_for(:default)
-      assert_equal (theme.root + 'layouts' + 'post_index.haml'), theme.layout_for(:post_index)
-      assert_nil theme.layout_for(:fake)
+      expect(theme.layout_for(:default)).to eq(theme.root + 'layouts' + 'default.haml')
+      expect(theme.layout_for(:post_index)).to eq(theme.root + 'layouts' + 'post_index.haml')
+      expect(theme.layout_for(:fake)).to be_nil
     end
   end
 
   describe '#layouts' do
     it '...' do
-      assert_equal 5, theme.layouts.count
+      expect(theme.layouts.count).to eq(5)
     end
   end
 
 
   describe '#default_view' do
     it '...' do
-      assert_equal (theme.root + 'views' + 'default.haml'), theme.default_view
+      expect(theme.default_view).to eq(theme.root + 'views' + 'default.haml')
     end
   end
 
   describe '#keyed_views' do
     it '...' do
-      assert_equal((theme.root + 'views' + 'default.haml'), theme.keyed_views['default'])
-      assert_nil theme.keyed_views['fake']
+      expect(theme.keyed_views['default']).to eq(theme.root + 'views' + 'default.haml')
+      expect(theme.keyed_views['fake']).to be_nil
     end
   end
 
   describe '#view_for' do
     it '...' do
-      assert_equal (theme.root + 'views' + 'default.haml'), theme.view_for(:default)
-      assert_nil theme.view_for(:fake)
+      expect(theme.view_for(:default)).to eq(theme.root + 'views' + 'default.haml')
+      expect(theme.view_for(:fake)).to be_nil
     end
   end
 
   describe '#views' do
     it '...' do
-      assert_equal 1, theme.views.count
+      expect(theme.views.count).to eq(1)
     end
   end
 end

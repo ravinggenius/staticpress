@@ -11,44 +11,44 @@ describe Staticpress::Content::Post do
 
   describe '#<=>' do
     it '...' do
-      assert_operator post, :<=>, another_post
-      assert_operator another_post, :<=>, post
-      assert_equal [ post, another_post ], [ post, another_post ].sort
-      assert_equal [ post, another_post ], [ another_post, post ].sort
+      expect(post).to be == another_post
+      expect(another_post).to be == post
+      expect([ post, another_post ].sort).to eq([ post, another_post ])
+      expect([ another_post, post ].sort).to eq([ post, another_post ])
     end
   end
 
   describe '#created_at' do
     it '...' do
-      assert_equal Time.utc(2011, 7, 20, 13, 9, 52), post.created_at
-      assert_equal Time.utc(2011, 8, 20), another_post.created_at
+      expect(post.created_at).to eq(Time.utc(2011, 7, 20, 13, 9, 52))
+      expect(another_post.created_at).to eq(Time.utc(2011, 8, 20))
     end
   end
 
   describe '#created_on' do
     it '...' do
-      assert_equal Time.utc(2011, 7, 20), post.created_on
-      assert_equal Time.utc(2011, 8, 20), another_post.created_on
+      expect(post.created_on).to eq(Time.utc(2011, 7, 20))
+      expect(another_post.created_on).to eq(Time.utc(2011, 8, 20))
     end
   end
 
   describe '.find_by_path' do
     it '...' do
-      assert_equal post, Staticpress::Content::Post.find_by_path(post_dir + '2011-07-20-hello.markdown')
-      assert_nil Staticpress::Content::Post.find_by_path(post_dir + '2011-07-20-goodbye.markdown')
+      expect(Staticpress::Content::Post.find_by_path(post_dir + '2011-07-20-hello.markdown')).to eq(post)
+      expect(Staticpress::Content::Post.find_by_path(post_dir + '2011-07-20-goodbye.markdown')).to be_nil
     end
   end
 
   describe '#template_path' do
     it '...' do
-      assert_equal (Staticpress.blog_path + config.posts_source_path + '2011-07-20-hello.markdown'), post.template_path
+      expect(post.template_path).to eq(Staticpress.blog_path + config.posts_source_path + '2011-07-20-hello.markdown')
     end
   end
 
   describe '#title' do
     it '...' do
-      assert_equal 'Hello, World', post.title
-      assert_equal 'Blogging With Staticpress', long_title_post.title
+      expect(post.title).to eq('Hello, World')
+      expect(long_title_post.title).to eq('Blogging With Staticpress')
     end
   end
 end

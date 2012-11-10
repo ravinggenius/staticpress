@@ -7,53 +7,53 @@ describe Staticpress::JSObject do
 
   describe '#-' do
     it '...' do
-      assert_equal(JSO.new({ :key => :value, :nested => { :a => :b } }), js_object - {})
-      assert_equal(JSO.new({ :nested => { :a => :b } }), js_object - { :key => :value })
-      assert_equal(JSO.new({ :key => :value }), js_object - { :nested => { :a => :b } })
-      assert_equal(JSO.new({}), js_object - { :key => :value, :nested => { :a => :b } })
+      expect(js_object - {}).to eq(JSO.new(:key => :value, :nested => { :a => :b }))
+      expect(js_object - { :key => :value }).to eq(JSO.new(:nested => { :a => :b }))
+      expect(js_object - { :nested => { :a => :b } }).to eq(JSO.new(:key => :value))
+      expect(js_object - { :key => :value, :nested => { :a => :b } }).to eq(JSO.new({}))
 
-      assert_equal(JSO.new({ :key => :value, :nested => { :a => :b } }), js_object - JSO.new({}))
-      assert_equal(JSO.new({ :nested => { :a => :b } }), js_object - JSO.new({ :key => :value }))
-      assert_equal(JSO.new({ :key => :value }), js_object - JSO.new({ :nested => { :a => :b } }))
-      assert_equal(JSO.new({}), js_object - JSO.new({ :key => :value, :nested => { :a => :b } }))
+      expect().to eq(JSO.new({ :key => :value, :nested => { :a => :b } }), js_object - JSO.new({}))
+      expect().to eq(JSO.new({ :nested => { :a => :b } }), js_object - JSO.new({ :key => :value }))
+      expect().to eq(JSO.new({ :key => :value }), js_object - JSO.new({ :nested => { :a => :b } }))
+      expect().to eq(JSO.new({}), js_object - JSO.new({ :key => :value, :nested => { :a => :b } }))
     end
   end
 
   describe '#[]' do
     it '...' do
-      assert_nil js_object[:some_random]
-      assert_equal :value, js_object[:key]
-      assert_equal :value,  js_object['key']
+      expect(js_object[:some_random]).to be_nil
+      expect(js_object[:key]).to eq(:value)
+      expect(js_object['key']).to eq(:value)
     end
   end
 
   describe 'regular access' do
     it '...' do
-      assert_equal :value, js_object.key
-      assert_equal :b, js_object.nested.a
-      assert_nil js_object.nested.other
+      expect(js_object.key).to eq(:value)
+      expect(js_object.nested.a).to eq(:b)
+      expect(js_object.nested.other).to be_nil
     end
   end
 
   describe 'assignment' do
     it '...' do
-      assert_nil js_object.hoopla
+      expect(js_object.hoopla).to be_nil
       js_object.hoopla = :hullabaloo
-      assert_equal :hullabaloo, js_object.hoopla
+      expect(js_object.hoopla).to eq(:hullabaloo)
     end
   end
 
   describe '#merge' do
     it '...' do
-      assert_nil js_object.some_key
+      expect(js_object.some_key).to be_nil
       enhanced = js_object.merge :some_key => 42
-      assert_equal 42, enhanced.some_key
+      expect(enhanced.some_key).to eq(42)
     end
   end
 
   describe '#to_hash' do
     it '...' do
-      assert_equal({ :key => :value, :nested => { :a => :b } }, js_object.to_hash)
+      expect(js_object.to_hash).to eq(:key => :value, :nested => { :a => :b })
     end
   end
 end

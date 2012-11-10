@@ -13,7 +13,7 @@ describe Staticpress::ViewHelpers do
   <article>#{post.render_partial.strip}</article>
 </section>
       HTML
-      assert_equal expected, view_helpers.partial(:list_posts, :posts => [ post ])
+      expect(view_helpers.partial(:list_posts, :posts => [ post ])).to eq(expected)
     end
   end
 
@@ -23,16 +23,16 @@ describe Staticpress::ViewHelpers do
 <section>
 </section>
       HTML
-      assert_equal expected, view_helpers.partial(:list_posts, :posts => [ ])
+      expect(view_helpers.partial(:list_posts, :posts => [ ])).to eq(expected)
     end
   end
 
   describe '#tag' do
     it '...' do
-      assert_equal '<t></t>', view_helpers.tag(:t)
-      assert_equal '<t one="1"></t>', view_helpers.tag(:t, :one => 1)
-      assert_equal '<t>content</t>', view_helpers.tag(:t) { 'content' }
-      assert_equal '<t><n></n></t>', view_helpers.tag(:t) { view_helpers.tag(:n) }
+      expect(view_helpers.tag(:t)).to eq('<t></t>')
+      expect(view_helpers.tag(:t, :one => 1)).to eq('<t one="1"></t>')
+      expect(view_helpers.tag(:t) { 'content' }).to eq('<t>content</t>')
+      expect(view_helpers.tag(:t) { view_helpers.tag(:n) }).to eq('<t><n></n></t>')
     end
   end
 end

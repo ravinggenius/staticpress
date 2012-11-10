@@ -3,15 +3,15 @@ require 'spec_helper'
 describe Staticpress::Settings do
   describe '.default' do
     it '...' do
-      refute Staticpress::Settings.instance.verbose
+      expect(Staticpress::Settings.instance.verbose).to be_false
     end
   end
 
   describe '.set!' do
     it '...' do
-      assert_equal nil, Staticpress::Settings.instance.favorite_number
+      expect(Staticpress::Settings.instance.favorite_number).to be_nil
       Staticpress::Settings.set! :favorite_number => 42
-      assert_equal 42, Staticpress::Settings.instance.favorite_number
+      expect(Staticpress::Settings.instance.favorite_number).to eq(42)
     end
   end
 end

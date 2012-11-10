@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Staticpress do
   describe '.blog_path' do
     it 'correctly guesses where the blog is' do
-      assert_equal Pathname('tests/test_blog').expand_path, Staticpress.blog_path
+      expect(Staticpress.blog_path).to eq(Pathname('tests/test_blog').expand_path)
     end
   end
 
@@ -13,13 +13,13 @@ describe Staticpress do
     end
 
     it 'can set the blog path explicitly' do
-      assert_equal Pathname('some/other/directory').expand_path, Staticpress.blog_path
+      expect(Staticpress.blog_path).to eq(Pathname('some/other/directory').expand_path)
     end
   end
 
   describe '.root' do
     it 'knows where it is installed to' do
-      assert_equal Pathname('lib/').expand_path, Staticpress.root
+      expect(Staticpress.root).to eq(Pathname('lib/').expand_path)
     end
   end
 end

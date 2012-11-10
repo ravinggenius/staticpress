@@ -9,10 +9,10 @@ describe Staticpress::Site do
 
   describe '.find_content_by_env' do
     it '...' do
-      assert_equal index, site.find_content_by_env(env('/'))
-      assert_equal page, site.find_content_by_env(env('/about'))
-      assert_equal post, site.find_content_by_env(env('/2011/07/20/hello'))
-      assert_nil site.find_content_by_env(env('/i/dont/exist'))
+      expect(site.find_content_by_env(env('/'))).to eq(index)
+      expect(site.find_content_by_env(env('/about'))).to eq(page)
+      expect(site.find_content_by_env(env('/2011/07/20/hello'))).to eq(post)
+      expect(site.find_content_by_env(env('/i/dont/exist'))).to be_nil
     end
   end
 

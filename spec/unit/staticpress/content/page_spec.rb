@@ -19,50 +19,50 @@ describe Staticpress::Content::Page do
 
   describe '.all' do
     it '...' do
-      assert_equal 11, Staticpress::Content::Page.all.count
+      expect(Staticpress::Content::Page.all.count).to eq(11)
     end
   end
 
   describe '#extension' do
     it '...' do
-      assert_equal '.markdown.erb', chained.template_extension
-      assert_equal '.markdown.erb', chain.template_extension
-      assert_equal '.markdown', page.template_extension
+      expect(chained.template_extension).to eq('.markdown.erb')
+      expect(chain.template_extension).to eq('.markdown.erb')
+      expect(page.template_extension).to eq('.markdown')
     end
   end
 
   describe '#full_slug' do
     it '...' do
-      assert_equal 'chained', chained.full_slug
-      assert_equal 'chain.html', chain.full_slug
-      assert_equal 'about', page.full_slug
+      expect(chained.full_slug).to eq('chained')
+      expect(chain.full_slug).to eq('chain.html')
+      expect(page.full_slug).to eq('about')
     end
   end
 
   describe '.extract_slug' do
     it '...' do
-      assert_equal 'chained', Staticpress::Content::Page.extract_slug(page_dir + 'chained.markdown.erb')
-      assert_equal 'about', Staticpress::Content::Page.extract_slug(page_dir + 'about.markdown')
-      assert_equal 'plain.txt', Staticpress::Content::Page.extract_slug(page_dir + 'plain.txt')
+      expect(Staticpress::Content::Page.extract_slug(page_dir + 'chained.markdown.erb')).to eq('chained')
+      expect(Staticpress::Content::Page.extract_slug(page_dir + 'about.markdown')).to eq('about')
+      expect(Staticpress::Content::Page.extract_slug(page_dir + 'plain.txt')).to eq('plain.txt')
     end
   end
 
   describe '.find_by_path' do
     it '...' do
-      assert_equal chained, Staticpress::Content::Page.find_by_path(page_dir + 'chained.markdown.erb')
-      assert_equal chain, Staticpress::Content::Page.find_by_path(page_dir + 'chain.html.markdown.erb')
-      assert_equal page, Staticpress::Content::Page.find_by_path(page_dir + 'about.markdown')
-      assert_equal index_page, Staticpress::Content::Page.find_by_path(page_dir + 'index.markdown')
-      assert_nil Staticpress::Content::Page.find_by_path(page_dir + 'i' + 'dont' + 'exist.markdown')
-      assert_equal static_bin, Staticpress::Content::Page.find_by_path(page_dir + 'ruby.png')
-      assert_nil Staticpress::Content::Page.find_by_path(page_dir + 'i' + 'dont' + 'exist.jpg')
+      expect(Staticpress::Content::Page.find_by_path(page_dir + 'chained.markdown.erb')).to eq(chained)
+      expect(Staticpress::Content::Page.find_by_path(page_dir + 'chain.html.markdown.erb')).to eq(chain)
+      expect(Staticpress::Content::Page.find_by_path(page_dir + 'about.markdown')).to eq(page)
+      expect(Staticpress::Content::Page.find_by_path(page_dir + 'index.markdown')).to eq(index_page)
+      expect(Staticpress::Content::Page.find_by_path(page_dir + 'i' + 'dont' + 'exist.markdown')).to be_nil
+      expect(Staticpress::Content::Page.find_by_path(page_dir + 'ruby.png')).to eq(static_bin)
+      expect(Staticpress::Content::Page.find_by_path(page_dir + 'i' + 'dont' + 'exist.jpg')).to be_nil
     end
   end
 
   describe '#template_path' do
     it '...' do
-      assert_equal page_dir + 'index.markdown', index_page.template_path
-      assert_equal page_dir + 'about.markdown', page.template_path
+      expect(index_page.template_path).to eq(page_dir + 'index.markdown')
+      expect(page.template_path).to eq(page_dir + 'about.markdown')
     end
   end
 end

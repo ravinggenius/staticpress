@@ -8,10 +8,10 @@ describe Staticpress::Content::Index do
 
   describe '#pages_count' do
     it '...' do
-      assert_equal 1, index.pages_count
+      expect(index.pages_count).to eq(1)
 
       with_config :posts_per_page => 2 do
-        assert_equal 4, index.pages_count
+        expect(index.pages_count).to eq(4)
       end
     end
   end
@@ -25,7 +25,7 @@ describe Staticpress::Content::Index do
           Staticpress::Content::Post.new(:year => '2011', :month => '08', :day => '06', :title => 'blogging-with-staticpress'),
           Staticpress::Content::Post.new(:year => '2011', :month => '08', :day => '20', :title => 'forever')
         ]
-        assert_equal expected, index.sub_content
+        expect(index.sub_content).to eq(expected)
         refute_includes index.sub_content, unpublished
       end
     end
@@ -39,7 +39,7 @@ describe Staticpress::Content::Index do
           Staticpress::Content::Index.new(:number => 2),
           Staticpress::Content::Index.new(:number => 3)
         ]
-        assert_equal expected, Staticpress::Content::Index.all
+        expect(Staticpress::Content::Index.all).to eq(expected)
       end
     end
   end

@@ -8,12 +8,12 @@ describe Staticpress::Content::ResourceContent do
 
   describe '.find_supported_extensions' do
     it '...' do
-      assert_equal [:erb, :markdown], find_supported_extensions(page_dir + 'chained.markdown.erb')
-      assert_equal [:erb, :markdown], find_supported_extensions(page_dir + 'chained.markdown')
-      assert_equal [:erb, :markdown], find_supported_extensions(page_dir + 'chained')
-      assert_equal [:markdown], find_supported_extensions(page_dir + 'about')
-      assert_equal [], find_supported_extensions(page_dir + 'plain.txt')
-      assert_equal [], find_supported_extensions(page_dir + 'i/dont/exist')
+      expect(find_supported_extensions(page_dir + 'chained.markdown.erb')).to eq([:erb, :mardown])
+      expect(find_supported_extensions(page_dir + 'chained.markdown')).to eq([:erb, :mardown])
+      expect(find_supported_extensions(page_dir + 'chained')).to eq([:erb, :mardown])
+      expect(find_supported_extensions(page_dir + 'about')).to eq([:markdown])
+      expect(find_supported_extensions(page_dir + 'plain.txt')).to eq([])
+      expect(find_supported_extensions(page_dir + 'i/dont/exist')).to eq([])
     end
   end
 end

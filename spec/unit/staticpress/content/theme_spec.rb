@@ -14,16 +14,16 @@ describe Staticpress::Content::Theme do
 
   describe '.all' do
     it 'finds all the theme content' do
-      assert_equal 2, Staticpress::Content::Theme.all.count
+      expect(Staticpress::Content::Theme.all.count).to eq(2)
     end
   end
 
   describe '.find_by_path' do
     it 'finds content when given a path' do
-      assert_equal asset_style, Staticpress::Content::Theme.find_by_path(theme_dir + 'assets' + 'styles' + 'all.sass')
-      assert_nil Staticpress::Content::Theme.find_by_path(theme_dir + 'i' + 'dont' + 'exist.markdown')
+      expect(Staticpress::Content::Theme.find_by_path(theme_dir + 'assets' + 'styles' + 'all.sass')).to eq(asset_style)
+      expect(Staticpress::Content::Theme.find_by_path(theme_dir + 'i' + 'dont' + 'exist.markdown')).to be_nil
       actual = Staticpress::Content::Theme.find_by_path(theme_dir + 'assets' + 'scripts' + 'application.js')
-      assert_equal actual, asset_script
+      expect(asset_script).to eq(actual)
     end
   end
 end

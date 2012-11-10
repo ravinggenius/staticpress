@@ -6,8 +6,8 @@ describe Staticpress::Metadata do
 
   describe '#inspect' do
     it '...' do
-      assert_equal '#<Staticpress::Metadata>', meta.inspect
-      assert_equal '#<Staticpress::Metadata categories=["programming"], layout="post_index", tags=["code", "tutorial"]>', another_meta.inspect
+      expect(meta.inspect).to eq('#<Staticpress::Metadata>')
+      expect(another_meta.inspect).to eq('#<Staticpress::Metadata categories=["programming"], layout="post_index", tags=["code", "tutorial"]>')
     end
   end
 end
