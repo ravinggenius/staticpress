@@ -5,11 +5,11 @@ describe Staticpress::Content::Category do
 
   let(:category) { Staticpress::Content::Category.new :name => 'programming' }
 
-  def test_categories
+  describe '.categories' do
     assert_equal [ 'programming', 'travel' ], Staticpress::Content::Category.categories
   end
 
-  def test_pages_count
+  describe '#pages_count' do
     assert_equal 1, category.pages_count
 
     with_config :posts_per_page => 2 do
@@ -17,7 +17,7 @@ describe Staticpress::Content::Category do
     end
   end
 
-  def test_sub_content
+  describe '#sub_content' do
     expected = [
       Staticpress::Content::Post.new(:year => '2011', :month => '08', :day => '01', :title => 'announcing-staticpress'),
       Staticpress::Content::Post.new(:year => '2011', :month => '08', :day => '02', :title => 'staticpress'),
@@ -26,7 +26,7 @@ describe Staticpress::Content::Category do
     assert_equal expected, category.sub_content
   end
 
-  def test_all
+  describe '.all' do
     with_config :posts_per_page => 1 do
       expected = [
         Staticpress::Content::Category.new(:name => 'programming', :number => 1),
@@ -38,7 +38,7 @@ describe Staticpress::Content::Category do
     end
   end
 
-  def test_content_by_category
+  describe '.content_by_category' do
     [
       Staticpress::Content::Post.new(:year => '2011', :month => '08', :day => '01', :title => 'announcing-staticpress'),
       Staticpress::Content::Post.new(:year => '2011', :month => '08', :day => '02', :title => 'staticpress'),

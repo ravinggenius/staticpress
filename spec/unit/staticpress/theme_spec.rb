@@ -10,74 +10,74 @@ describe Staticpress::Theme do
     config.theme = :test_theme
   end
 
-  def test__equalsequals
+  describe '#==' do
     assert_operator theme, :==, Staticpress::Theme.new(:test_theme)
   end
 
-  def test_root
+  describe '#root' do
     assert_equal theme.root, (Staticpress.blog_path + 'themes' + 'test_theme')
   end
 
-  def test_theme
+  describe '#theme' do
     assert_equal theme, Staticpress::Theme.theme
   end
 
 
-  def test_default_include
+  describe '#default_include' do
     refute_respond_to theme, :default_include
   end
 
-  def test_keyed_includes
+  describe '#keyed_includes' do
     assert_equal((theme.root + 'includes' + 'list_posts.haml'), theme.keyed_includes['list_posts'])
     assert_nil theme.keyed_includes['fake']
   end
 
-  def test_include_for
+  describe '#include_for' do
     assert_equal (theme.root + 'includes' + 'list_posts.haml'), theme.include_for(:list_posts)
     assert_nil theme.include_for(:fake)
   end
 
-  def test_includes
+  describe '#includes' do
     assert_equal 1, theme.includes.count
   end
 
 
-  def test_default_layout
+  describe '#default_layout' do
     assert_equal (theme.root + 'layouts' + 'default.haml'), theme.default_layout
   end
 
-  def test_keyed_layouts
+  describe '#keyed_layouts' do
     assert_equal((theme.root + 'layouts' + 'default.haml'), theme.keyed_layouts['default'])
     assert_equal((theme.root + 'layouts' + 'post_index.haml'), theme.keyed_layouts['post_index'])
     assert_nil theme.keyed_layouts['fake']
   end
 
-  def test_layout_for
+  describe '#layout_for' do
     assert_equal (theme.root + 'layouts' + 'default.haml'), theme.layout_for(:default)
     assert_equal (theme.root + 'layouts' + 'post_index.haml'), theme.layout_for(:post_index)
     assert_nil theme.layout_for(:fake)
   end
 
-  def test_layouts
+  describe '#layouts' do
     assert_equal 5, theme.layouts.count
   end
 
 
-  def test_default_view
+  describe '#default_view' do
     assert_equal (theme.root + 'views' + 'default.haml'), theme.default_view
   end
 
-  def test_keyed_views
+  describe '#keyed_views' do
     assert_equal((theme.root + 'views' + 'default.haml'), theme.keyed_views['default'])
     assert_nil theme.keyed_views['fake']
   end
 
-  def test_view_for
+  describe '#view_for' do
     assert_equal (theme.root + 'views' + 'default.haml'), theme.view_for(:default)
     assert_nil theme.view_for(:fake)
   end
 
-  def test_views
+  describe '#views' do
     assert_equal 1, theme.views.count
   end
 end

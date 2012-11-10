@@ -6,7 +6,7 @@ describe Staticpress::Content::ResourceContent do
 
   let(:page_dir) { Staticpress.blog_path + config.source_path }
 
-  def test_find_supported_extensions
+  describe '.find_supported_extensions' do
     assert_equal [:erb, :markdown], find_supported_extensions(page_dir + 'chained.markdown.erb')
     assert_equal [:erb, :markdown], find_supported_extensions(page_dir + 'chained.markdown')
     assert_equal [:erb, :markdown], find_supported_extensions(page_dir + 'chained')

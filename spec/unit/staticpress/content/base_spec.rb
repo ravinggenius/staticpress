@@ -27,7 +27,7 @@ describe Staticpress::Content::Base do
   let(:asset_style) { Staticpress::Content::Theme.new :theme => 'test_theme', :asset_type => 'styles', :slug => 'all' }
   let(:asset_script) { Staticpress::Content::Theme.new :theme => 'test_theme', :asset_type => 'scripts', :slug => 'application.js' }
 
-  def test__equalsequals
+  describe '#==' do
     assert_operator category, :==, Staticpress::Content::Category.new(:name => 'programming')
     refute_operator category, :==, nil
 
@@ -55,7 +55,7 @@ describe Staticpress::Content::Base do
     refute_operator Staticpress::Content::Tag.new(:name => 'charlotte'), :==, Staticpress::Content::Category.new(:name => 'charlotte')
   end
 
-  def test_content_type
+  describe '#content_type' do
     assert_equal 'text/html', chained.content_type
     assert_equal 'text/html', page.content_type
     assert_equal 'text/css', style_2.content_type
@@ -63,7 +63,7 @@ describe Staticpress::Content::Base do
     assert_equal 'text/plain', static_txt.content_type
   end
 
-  def test_exist?
+  describe '#exist?' do
     assert category.exist?, "#{category} does not exist"
     assert index.exist?, "#{index} does not exist"
 
@@ -85,7 +85,7 @@ describe Staticpress::Content::Base do
     refute page_fake.exist?, "#{page_fake} exists"
   end
 
-  def test_find_by_url_path
+  describe '.find_by_url_path' do
     assert_equal category, Staticpress::Content::Category.find_by_url_path('/category/programming')
     assert_equal index, Staticpress::Content::Index.find_by_url_path('/')
 
@@ -103,11 +103,11 @@ describe Staticpress::Content::Base do
     assert_nil Staticpress::Content::Theme.find_by_url_path(nil)
   end
 
-  def test_full_title
+  describe '#full_title' do
     assert_equal 'Foo -> Bar -> Baz | Test Blog', page_nested.full_title
   end
 
-  def test_markup_template?
+  describe '#markup_template?' do
     assert chained.markup_template?, "#{chained} is not markup"
     assert chain.markup_template?, "#{chain} is not markup"
     assert page.markup_template?, "#{page} is not markup"
@@ -115,7 +115,7 @@ describe Staticpress::Content::Base do
     refute style_2.markup_template?, "#{chained} is markup"
   end
 
-  def test_output_path
+  describe '#output_path' do
     output_directory = Staticpress.blog_path + 'public'
     assert_equal (output_directory + 'chained' + 'index.html'), chained.output_path
     assert_equal (output_directory + 'chain.html'), chain.output_path
@@ -129,7 +129,7 @@ describe Staticpress::Content::Base do
     assert_equal (output_directory + 'assets' + 'test_theme' + 'scripts' + 'application.js'), asset_script.output_path
   end
 
-  def test_params
+  describe '#params' do
     expected = { :name => 'charlotte', :number => 1 }
     assert_equal expected, tag.params
     assert_equal expected, Staticpress::Content::Tag.new(:name => 'charlotte', :number => nil).params
@@ -139,7 +139,7 @@ describe Staticpress::Content::Base do
     assert_equal({ :slug => 'chain.html' }, Staticpress::Content::Page.new(:slug => 'chain.html').params)
   end
 
-  def test_raw
+  describe '#raw' do
     assert_equal '= partial :list_posts, :posts => page.sub_content', category.raw
 
     assert_equal "<%= 'Processed with ERB' %>, then Markdown.", chained.raw
@@ -160,7 +160,7 @@ describe Staticpress::Content::Base do
     assert_equal expected.strip, asset_script.raw
   end
 
-  def test_render
+  describe '#render' do
     expected_page = <<-HTML
 <!DOCTYPE html>
 <html>
@@ -195,7 +195,7 @@ body{color:green}
     assert_equal expected, asset_script.render
   end
 
-  def test_render_partial
+  describe '#render_partial' do
     assert_equal "<p>Processed with ERB, then Markdown.</p>\n", chained.render_partial
     assert_equal "<p>in page</p>\n", page.render_partial
     assert_equal "<p>in page</p>\n\n<p>in page</p>\n", second_page.render_partial
@@ -222,7 +222,7 @@ body{color:green}
     assert_equal expected, asset_script.render_partial
   end
 
-  def test_save
+  describe '#save' do
     static_bin.save
     assert_equal static_bin.template_path.binread, static_bin.output_path.binread
 
@@ -230,13 +230,13 @@ body{color:green}
     assert_equal static_txt.template_path.read, static_txt.output_path.read
   end
 
-  def test_template_engine_options
+  describe '#template_engine_options' do
     refute asset_script.template_engine_options(:sass)[:line_comments]
     assert_equal :compressed, asset_script.template_engine_options(:sass)[:style]
     assert_equal({}, asset_script.template_engine_options(:js))
   end
 
-  def test_template_types
+  describe '#template_types' do
     assert_equal [:erb, :markdown], chained.template_types
     assert_equal [:erb, :markdown], chain.template_types
     assert_equal [:markdown], page.template_types
@@ -244,11 +244,11 @@ body{color:green}
     assert_equal [], asset_script.template_types
   end
 
-  def test_title
+  describe '#title' do
     assert_equal 'Foo -> Bar -> Baz', page_nested.title
   end
 
-  def test_to_s
+  describe '#to_s' do
     assert_equal '#<Staticpress::Content::Category url_path=/category/programming, params={:name=>"programming", :number=>1}>', category.to_s
     assert_equal '#<Staticpress::Content::Category url_path=/category/programming, params={:name=>"programming", :number=>1}>', Staticpress::Content::Category.new(:name => 'programming', :number => nil).to_s
 
@@ -266,7 +266,7 @@ body{color:green}
     assert_equal '#<Staticpress::Content::Theme url_path=/assets/test_theme/styles/all, params={:asset_type=>"styles", :slug=>"all", :theme=>"test_theme"}>', asset_style.to_s
   end
 
-  def test_url_path
+  describe '#url_path' do
     assert_equal '/category/programming', category.url_path
     assert_equal '/category/programming', category_1.url_path
     assert_equal '/category/programming/page/2', category_2.url_path

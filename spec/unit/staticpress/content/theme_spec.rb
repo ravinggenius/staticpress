@@ -13,11 +13,11 @@ describe Staticpress::Content::Theme do
     config.theme = :test_theme
   end
 
-  def test_all
+  describe '.all' do
     assert_equal 2, Staticpress::Content::Theme.all.count
   end
 
-  def test_find_by_path
+  describe '.find_by_path' do
     assert_equal asset_style, Staticpress::Content::Theme.find_by_path(theme_dir + 'assets' + 'styles' + 'all.sass')
     assert_nil Staticpress::Content::Theme.find_by_path(theme_dir + 'i' + 'dont' + 'exist.markdown')
     actual = Staticpress::Content::Theme.find_by_path(theme_dir + 'assets' + 'scripts' + 'application.js')

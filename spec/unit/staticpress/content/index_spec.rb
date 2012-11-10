@@ -6,7 +6,7 @@ describe Staticpress::Content::Index do
   let(:index) { Staticpress::Content::Index.new }
   let(:unpublished) { Staticpress::Content::Post.new(:year => '2012', :month => '09', :day => '19', :title => 'unpublished') }
 
-  def test_pages_count
+  describe '#pages_count' do
     assert_equal 1, index.pages_count
 
     with_config :posts_per_page => 2 do
@@ -14,7 +14,7 @@ describe Staticpress::Content::Index do
     end
   end
 
-  def test_sub_content
+  describe '#sub_content' do
     with_config :posts_per_page => 4 do
       # expect three most recent posts with oldest on top (index is lazy-evaluated)
       expected = [
@@ -27,7 +27,7 @@ describe Staticpress::Content::Index do
     end
   end
 
-  def test_all
+  describe '.all' do
     with_config :posts_per_page => 3 do
       expected = [
         Staticpress::Content::Index.new(:number => 1),

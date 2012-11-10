@@ -1,16 +1,16 @@
 require 'spec_helper'
 
 describe Staticpress do
-  def test_blog_path
+  describe '.blog_path' do
     assert_equal Pathname('tests/test_blog').expand_path, Staticpress.blog_path
   end
 
-  def test_blog_path=
+  describe '.blog_path=' do
     Staticpress.blog_path = 'some/other/directory'
     assert_equal Pathname('some/other/directory').expand_path, Staticpress.blog_path
   end
 
-  def test_root
+  describe '.root' do
     assert_equal Pathname('lib/').expand_path, Staticpress.root
   end
 end
