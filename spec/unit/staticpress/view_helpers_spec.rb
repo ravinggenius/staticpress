@@ -7,26 +7,32 @@ describe Staticpress::ViewHelpers do
   let(:view_helpers) { Staticpress::ViewHelpers.new post }
 
   describe '#partial_with_one_post' do
-    expected = <<-HTML
+    it '...' do
+      expected = <<-HTML
 <section>
   <article>#{post.render_partial.strip}</article>
 </section>
-    HTML
-    assert_equal expected, view_helpers.partial(:list_posts, :posts => [ post ])
+      HTML
+      assert_equal expected, view_helpers.partial(:list_posts, :posts => [ post ])
+    end
   end
 
   describe '#partial_with_no_posts' do
-    expected = <<-HTML
+    it '...' do
+      expected = <<-HTML
 <section>
 </section>
-    HTML
-    assert_equal expected, view_helpers.partial(:list_posts, :posts => [ ])
+      HTML
+      assert_equal expected, view_helpers.partial(:list_posts, :posts => [ ])
+    end
   end
 
   describe '#tag' do
-    assert_equal '<t></t>', view_helpers.tag(:t)
-    assert_equal '<t one="1"></t>', view_helpers.tag(:t, :one => 1)
-    assert_equal '<t>content</t>', view_helpers.tag(:t) { 'content' }
-    assert_equal '<t><n></n></t>', view_helpers.tag(:t) { view_helpers.tag(:n) }
+    it '...' do
+      assert_equal '<t></t>', view_helpers.tag(:t)
+      assert_equal '<t one="1"></t>', view_helpers.tag(:t, :one => 1)
+      assert_equal '<t>content</t>', view_helpers.tag(:t) { 'content' }
+      assert_equal '<t><n></n></t>', view_helpers.tag(:t) { view_helpers.tag(:n) }
+    end
   end
 end

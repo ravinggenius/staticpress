@@ -3,185 +3,215 @@ require 'spec_helper'
 # TODO add contexts
 describe Staticpress::Route do
   describe '.extract_params_index' do
-    pattern = '/(page/:number)?'
+    it '...' do
+      pattern = '/(page/:number)?'
 
-    assert_equal({ :number => nil }, Staticpress::Route.extract_params(pattern, '/'))
-    assert_equal({ :number => '2' }, Staticpress::Route.extract_params(pattern, '/page/2'))
+      assert_equal({ :number => nil }, Staticpress::Route.extract_params(pattern, '/'))
+      assert_equal({ :number => '2' }, Staticpress::Route.extract_params(pattern, '/page/2'))
 
-    assert_nil nil, Staticpress::Route.extract_params(pattern, '/plain.txt')
+      assert_nil nil, Staticpress::Route.extract_params(pattern, '/plain.txt')
+    end
   end
 
   describe '.extract_params_page' do
-    pattern = '/:slug'
+    it '...' do
+      pattern = '/:slug'
 
-    assert_equal({ :slug => '' }, Staticpress::Route.extract_params(pattern, '/'))
-    assert_equal({ :slug => 'hello' }, Staticpress::Route.extract_params(pattern, '/hello'))
+      assert_equal({ :slug => '' }, Staticpress::Route.extract_params(pattern, '/'))
+      assert_equal({ :slug => 'hello' }, Staticpress::Route.extract_params(pattern, '/hello'))
+    end
   end
 
   describe '.extract_params_post' do
-    pattern = '/:year/:month/:day/:title'
+    it '...' do
+      pattern = '/:year/:month/:day/:title'
 
-    assert_equal({ :year => '2011', :month => '11', :day => '11', :title => 'hello-world' }, Staticpress::Route.extract_params(pattern, '/2011/11/11/hello-world'))
+      assert_equal({ :year => '2011', :month => '11', :day => '11', :title => 'hello-world' }, Staticpress::Route.extract_params(pattern, '/2011/11/11/hello-world'))
+    end
   end
 
   describe '.extract_params_theme' do
-    pattern = '/assets/:theme/:asset_type/:slug'
+    it '...' do
+      pattern = '/assets/:theme/:asset_type/:slug'
 
-    assert_equal({ :theme => 'default', :asset_type => 'styles', :slug => 'screen.css' }, Staticpress::Route.extract_params(pattern, '/assets/default/styles/screen.css'))
+      assert_equal({ :theme => 'default', :asset_type => 'styles', :slug => 'screen.css' }, Staticpress::Route.extract_params(pattern, '/assets/default/styles/screen.css'))
+    end
   end
 
   describe '.regex_for_pattern_index' do
-    pattern = '/(page/:number)?'
+    it '...' do
+      pattern = '/(page/:number)?'
 
-    assert_match Staticpress::Route.regex_for_pattern(pattern), '/'
-    assert_match Staticpress::Route.regex_for_pattern(pattern), '/page/1'
-    assert_match Staticpress::Route.regex_for_pattern(pattern), '/page/2'
-    assert_match Staticpress::Route.regex_for_pattern(pattern), '/page/17'
+      assert_match Staticpress::Route.regex_for_pattern(pattern), '/'
+      assert_match Staticpress::Route.regex_for_pattern(pattern), '/page/1'
+      assert_match Staticpress::Route.regex_for_pattern(pattern), '/page/2'
+      assert_match Staticpress::Route.regex_for_pattern(pattern), '/page/17'
 
-    refute_match Staticpress::Route.regex_for_pattern(pattern), '/about'
-    refute_match Staticpress::Route.regex_for_pattern(pattern), '/about/us'
-    refute_match Staticpress::Route.regex_for_pattern(pattern), '/contact/page/27'
-    refute_match Staticpress::Route.regex_for_pattern(pattern), '/static_text/about'
-    refute_match Staticpress::Route.regex_for_pattern(pattern), '/plain.txt'
-    refute_match Staticpress::Route.regex_for_pattern(pattern), '/files/profile.jpg'
+      refute_match Staticpress::Route.regex_for_pattern(pattern), '/about'
+      refute_match Staticpress::Route.regex_for_pattern(pattern), '/about/us'
+      refute_match Staticpress::Route.regex_for_pattern(pattern), '/contact/page/27'
+      refute_match Staticpress::Route.regex_for_pattern(pattern), '/static_text/about'
+      refute_match Staticpress::Route.regex_for_pattern(pattern), '/plain.txt'
+      refute_match Staticpress::Route.regex_for_pattern(pattern), '/files/profile.jpg'
+    end
   end
 
   describe '.regex_for_pattern_page_1' do
-    pattern = '/:slug'
+    it '...' do
+      pattern = '/:slug'
 
-    assert_match Staticpress::Route.regex_for_pattern(pattern), '/'
-    assert_match Staticpress::Route.regex_for_pattern(pattern), '/page/1'
-    assert_match Staticpress::Route.regex_for_pattern(pattern), '/about'
-    assert_match Staticpress::Route.regex_for_pattern(pattern), '/about/us'
-    assert_match Staticpress::Route.regex_for_pattern(pattern), '/static_text/about'
-    assert_match Staticpress::Route.regex_for_pattern(pattern), '/static_text/about/us'
-    assert_match Staticpress::Route.regex_for_pattern(pattern), '/2011/07/20/hello-world'
-    assert_match Staticpress::Route.regex_for_pattern(pattern), '/blog/2011/07/20/hello-world'
-    assert_match Staticpress::Route.regex_for_pattern(pattern), '/plain.txt'
-    assert_match Staticpress::Route.regex_for_pattern(pattern), '/files/profile.jpg'
+      assert_match Staticpress::Route.regex_for_pattern(pattern), '/'
+      assert_match Staticpress::Route.regex_for_pattern(pattern), '/page/1'
+      assert_match Staticpress::Route.regex_for_pattern(pattern), '/about'
+      assert_match Staticpress::Route.regex_for_pattern(pattern), '/about/us'
+      assert_match Staticpress::Route.regex_for_pattern(pattern), '/static_text/about'
+      assert_match Staticpress::Route.regex_for_pattern(pattern), '/static_text/about/us'
+      assert_match Staticpress::Route.regex_for_pattern(pattern), '/2011/07/20/hello-world'
+      assert_match Staticpress::Route.regex_for_pattern(pattern), '/blog/2011/07/20/hello-world'
+      assert_match Staticpress::Route.regex_for_pattern(pattern), '/plain.txt'
+      assert_match Staticpress::Route.regex_for_pattern(pattern), '/files/profile.jpg'
+    end
   end
 
   describe '.regex_for_pattern_page_2' do
-    pattern = '/static_text/:slug'
+    it '...' do
+      pattern = '/static_text/:slug'
 
-    assert_match Staticpress::Route.regex_for_pattern(pattern), '/static_text/page/123'
-    assert_match Staticpress::Route.regex_for_pattern(pattern), '/static_text/page/xyz'
-    assert_match Staticpress::Route.regex_for_pattern(pattern), '/static_text/about'
-    assert_match Staticpress::Route.regex_for_pattern(pattern), '/static_text/about/us'
-    assert_match Staticpress::Route.regex_for_pattern(pattern), '/static_text/plain.txt'
-    assert_match Staticpress::Route.regex_for_pattern(pattern), '/static_text/files/profile.jpg'
+      assert_match Staticpress::Route.regex_for_pattern(pattern), '/static_text/page/123'
+      assert_match Staticpress::Route.regex_for_pattern(pattern), '/static_text/page/xyz'
+      assert_match Staticpress::Route.regex_for_pattern(pattern), '/static_text/about'
+      assert_match Staticpress::Route.regex_for_pattern(pattern), '/static_text/about/us'
+      assert_match Staticpress::Route.regex_for_pattern(pattern), '/static_text/plain.txt'
+      assert_match Staticpress::Route.regex_for_pattern(pattern), '/static_text/files/profile.jpg'
 
-    refute_match Staticpress::Route.regex_for_pattern(pattern), '/'
-    refute_match Staticpress::Route.regex_for_pattern(pattern), '/about'
-    refute_match Staticpress::Route.regex_for_pattern(pattern), '/blog/2011/07/20/hello-world'
+      refute_match Staticpress::Route.regex_for_pattern(pattern), '/'
+      refute_match Staticpress::Route.regex_for_pattern(pattern), '/about'
+      refute_match Staticpress::Route.regex_for_pattern(pattern), '/blog/2011/07/20/hello-world'
+    end
   end
 
   describe '.regex_for_pattern_post_1' do
-    pattern = '/:year/:month/:day/:title'
+    it '...' do
+      pattern = '/:year/:month/:day/:title'
 
-    assert_match Staticpress::Route.regex_for_pattern(pattern), '/2011/07/20/hello-world'
+      assert_match Staticpress::Route.regex_for_pattern(pattern), '/2011/07/20/hello-world'
 
-    refute_match Staticpress::Route.regex_for_pattern(pattern), '/about'
-    refute_match Staticpress::Route.regex_for_pattern(pattern), '/static_text/about/us'
-    refute_match Staticpress::Route.regex_for_pattern(pattern), '/blog/2011/07/20/hello-world'
-    refute_match Staticpress::Route.regex_for_pattern(pattern), '/plain.txt'
-    refute_match Staticpress::Route.regex_for_pattern(pattern), '/files/profile.jpg'
+      refute_match Staticpress::Route.regex_for_pattern(pattern), '/about'
+      refute_match Staticpress::Route.regex_for_pattern(pattern), '/static_text/about/us'
+      refute_match Staticpress::Route.regex_for_pattern(pattern), '/blog/2011/07/20/hello-world'
+      refute_match Staticpress::Route.regex_for_pattern(pattern), '/plain.txt'
+      refute_match Staticpress::Route.regex_for_pattern(pattern), '/files/profile.jpg'
+    end
   end
 
   describe '.regex_for_pattern_post_2' do
-    pattern = '/blog/:year/:month/:day/:title'
+    it '...' do
+      pattern = '/blog/:year/:month/:day/:title'
 
-    assert_match Staticpress::Route.regex_for_pattern(pattern), '/blog/2011/07/20/hello-world'
+      assert_match Staticpress::Route.regex_for_pattern(pattern), '/blog/2011/07/20/hello-world'
 
-    refute_match Staticpress::Route.regex_for_pattern(pattern), '/'
-    refute_match Staticpress::Route.regex_for_pattern(pattern), '/about/us'
-    refute_match Staticpress::Route.regex_for_pattern(pattern), '/blog/about'
-    refute_match Staticpress::Route.regex_for_pattern(pattern), '/2011/07/20/hello-world'
-    refute_match Staticpress::Route.regex_for_pattern(pattern), '/plain.txt'
-    refute_match Staticpress::Route.regex_for_pattern(pattern), '/files/profile.jpg'
+      refute_match Staticpress::Route.regex_for_pattern(pattern), '/'
+      refute_match Staticpress::Route.regex_for_pattern(pattern), '/about/us'
+      refute_match Staticpress::Route.regex_for_pattern(pattern), '/blog/about'
+      refute_match Staticpress::Route.regex_for_pattern(pattern), '/2011/07/20/hello-world'
+      refute_match Staticpress::Route.regex_for_pattern(pattern), '/plain.txt'
+      refute_match Staticpress::Route.regex_for_pattern(pattern), '/files/profile.jpg'
+    end
   end
 
   describe '.regex_for_pattern_post_3' do
-    pattern = '/:year/:title'
+    it '...' do
+      pattern = '/:year/:title'
 
-    assert_match Staticpress::Route.regex_for_pattern(pattern), '/2011/hello-world'
+      assert_match Staticpress::Route.regex_for_pattern(pattern), '/2011/hello-world'
 
-    refute_match Staticpress::Route.regex_for_pattern(pattern), '/'
-    refute_match Staticpress::Route.regex_for_pattern(pattern), '/about/us'
-    refute_match Staticpress::Route.regex_for_pattern(pattern), '/blog/2011/hello-world'
-    refute_match Staticpress::Route.regex_for_pattern(pattern), '/2011/07/20/hello-world'
-    refute_match Staticpress::Route.regex_for_pattern(pattern), '/plain.txt'
-    refute_match Staticpress::Route.regex_for_pattern(pattern), '/files/profile.jpg'
+      refute_match Staticpress::Route.regex_for_pattern(pattern), '/'
+      refute_match Staticpress::Route.regex_for_pattern(pattern), '/about/us'
+      refute_match Staticpress::Route.regex_for_pattern(pattern), '/blog/2011/hello-world'
+      refute_match Staticpress::Route.regex_for_pattern(pattern), '/2011/07/20/hello-world'
+      refute_match Staticpress::Route.regex_for_pattern(pattern), '/plain.txt'
+      refute_match Staticpress::Route.regex_for_pattern(pattern), '/files/profile.jpg'
+    end
   end
 
   describe '.regex_for_pattern_post_4' do
-    pattern = '/blog/:year/:title'
+    it '...' do
+      pattern = '/blog/:year/:title'
 
-    assert_match Staticpress::Route.regex_for_pattern(pattern), '/blog/2011/hello-world'
+      assert_match Staticpress::Route.regex_for_pattern(pattern), '/blog/2011/hello-world'
 
-    refute_match Staticpress::Route.regex_for_pattern(pattern), '/'
-    refute_match Staticpress::Route.regex_for_pattern(pattern), '/about/us'
-    refute_match Staticpress::Route.regex_for_pattern(pattern), '/2011/hello-world'
-    refute_match Staticpress::Route.regex_for_pattern(pattern), '/2011/07/20/hello-world'
-    refute_match Staticpress::Route.regex_for_pattern(pattern), '/blog/2011/07/20/hello-world'
-    refute_match Staticpress::Route.regex_for_pattern(pattern), '/plain.txt'
-    refute_match Staticpress::Route.regex_for_pattern(pattern), '/files/profile.jpg'
+      refute_match Staticpress::Route.regex_for_pattern(pattern), '/'
+      refute_match Staticpress::Route.regex_for_pattern(pattern), '/about/us'
+      refute_match Staticpress::Route.regex_for_pattern(pattern), '/2011/hello-world'
+      refute_match Staticpress::Route.regex_for_pattern(pattern), '/2011/07/20/hello-world'
+      refute_match Staticpress::Route.regex_for_pattern(pattern), '/blog/2011/07/20/hello-world'
+      refute_match Staticpress::Route.regex_for_pattern(pattern), '/plain.txt'
+      refute_match Staticpress::Route.regex_for_pattern(pattern), '/files/profile.jpg'
+    end
   end
 
   describe '.regex_for_pattern_tag_1' do
-    pattern = '/tag/:name(/page/:number)?'
+    it '...' do
+      pattern = '/tag/:name(/page/:number)?'
 
-    assert_match Staticpress::Route.regex_for_pattern(pattern), '/tag/programming'
-    assert_match Staticpress::Route.regex_for_pattern(pattern), '/tag/programming/page/0'
+      assert_match Staticpress::Route.regex_for_pattern(pattern), '/tag/programming'
+      assert_match Staticpress::Route.regex_for_pattern(pattern), '/tag/programming/page/0'
 
-    refute_match Staticpress::Route.regex_for_pattern(pattern), '/'
-    refute_match Staticpress::Route.regex_for_pattern(pattern), '/about/us'
-    refute_match Staticpress::Route.regex_for_pattern(pattern), '/static_text/about'
-    refute_match Staticpress::Route.regex_for_pattern(pattern), '/2011/07/20/hello-world'
-    refute_match Staticpress::Route.regex_for_pattern(pattern), '/something/tag/programming'
-    refute_match Staticpress::Route.regex_for_pattern(pattern), '/plain.txt'
-    refute_match Staticpress::Route.regex_for_pattern(pattern), '/files/profile.jpg'
+      refute_match Staticpress::Route.regex_for_pattern(pattern), '/'
+      refute_match Staticpress::Route.regex_for_pattern(pattern), '/about/us'
+      refute_match Staticpress::Route.regex_for_pattern(pattern), '/static_text/about'
+      refute_match Staticpress::Route.regex_for_pattern(pattern), '/2011/07/20/hello-world'
+      refute_match Staticpress::Route.regex_for_pattern(pattern), '/something/tag/programming'
+      refute_match Staticpress::Route.regex_for_pattern(pattern), '/plain.txt'
+      refute_match Staticpress::Route.regex_for_pattern(pattern), '/files/profile.jpg'
+    end
   end
 
   describe '.regex_for_pattern_tag_2' do
-    pattern = '/something/tag/:name(/page/:number)?'
+    it '...' do
+      pattern = '/something/tag/:name(/page/:number)?'
 
-    assert_match Staticpress::Route.regex_for_pattern(pattern), '/something/tag/programming'
-    assert_match Staticpress::Route.regex_for_pattern(pattern), '/something/tag/programming/page/123456'
+      assert_match Staticpress::Route.regex_for_pattern(pattern), '/something/tag/programming'
+      assert_match Staticpress::Route.regex_for_pattern(pattern), '/something/tag/programming/page/123456'
 
-    refute_match Staticpress::Route.regex_for_pattern(pattern), '/about/us'
-    refute_match Staticpress::Route.regex_for_pattern(pattern), '/static_text/about/us'
-    refute_match Staticpress::Route.regex_for_pattern(pattern), '/2011/07/20/hello-world'
-    refute_match Staticpress::Route.regex_for_pattern(pattern), '/tag/programming'
-    refute_match Staticpress::Route.regex_for_pattern(pattern), '/plain.txt'
-    refute_match Staticpress::Route.regex_for_pattern(pattern), '/files/profile.jpg'
+      refute_match Staticpress::Route.regex_for_pattern(pattern), '/about/us'
+      refute_match Staticpress::Route.regex_for_pattern(pattern), '/static_text/about/us'
+      refute_match Staticpress::Route.regex_for_pattern(pattern), '/2011/07/20/hello-world'
+      refute_match Staticpress::Route.regex_for_pattern(pattern), '/tag/programming'
+      refute_match Staticpress::Route.regex_for_pattern(pattern), '/plain.txt'
+      refute_match Staticpress::Route.regex_for_pattern(pattern), '/files/profile.jpg'
+    end
   end
 
   describe '.regex_for_pattern_category_1' do
-    pattern = '/category/:name(/page/:number)?'
+    it '...' do
+      pattern = '/category/:name(/page/:number)?'
 
-    assert_match Staticpress::Route.regex_for_pattern(pattern), '/category/programming'
-    assert_match Staticpress::Route.regex_for_pattern(pattern), '/category/programming/page/5'
+      assert_match Staticpress::Route.regex_for_pattern(pattern), '/category/programming'
+      assert_match Staticpress::Route.regex_for_pattern(pattern), '/category/programming/page/5'
 
-    refute_match Staticpress::Route.regex_for_pattern(pattern), '/about'
-    refute_match Staticpress::Route.regex_for_pattern(pattern), '/static_text/about/us'
-    refute_match Staticpress::Route.regex_for_pattern(pattern), '/2011/07/20/hello-world'
-    refute_match Staticpress::Route.regex_for_pattern(pattern), '/blog/2011/07/20/hello-world'
-    refute_match Staticpress::Route.regex_for_pattern(pattern), '/plain.txt'
-    refute_match Staticpress::Route.regex_for_pattern(pattern), '/files/profile.jpg'
+      refute_match Staticpress::Route.regex_for_pattern(pattern), '/about'
+      refute_match Staticpress::Route.regex_for_pattern(pattern), '/static_text/about/us'
+      refute_match Staticpress::Route.regex_for_pattern(pattern), '/2011/07/20/hello-world'
+      refute_match Staticpress::Route.regex_for_pattern(pattern), '/blog/2011/07/20/hello-world'
+      refute_match Staticpress::Route.regex_for_pattern(pattern), '/plain.txt'
+      refute_match Staticpress::Route.regex_for_pattern(pattern), '/files/profile.jpg'
+    end
   end
 
   describe '.regex_for_pattern_category_2' do
-    pattern = '/blog/category/:name(/page/:number)?'
+    it '...' do
+      pattern = '/blog/category/:name(/page/:number)?'
 
-    assert_match Staticpress::Route.regex_for_pattern(pattern), '/blog/category/programming'
-    assert_match Staticpress::Route.regex_for_pattern(pattern), '/blog/category/programming/page/20'
+      assert_match Staticpress::Route.regex_for_pattern(pattern), '/blog/category/programming'
+      assert_match Staticpress::Route.regex_for_pattern(pattern), '/blog/category/programming/page/20'
 
-    refute_match Staticpress::Route.regex_for_pattern(pattern), '/about/us'
-    refute_match Staticpress::Route.regex_for_pattern(pattern), '/static_text/about'
-    refute_match Staticpress::Route.regex_for_pattern(pattern), '/blog/2011/07/20/hello-world'
-    refute_match Staticpress::Route.regex_for_pattern(pattern), '/category/programming'
-    refute_match Staticpress::Route.regex_for_pattern(pattern), '/plain.txt'
-    refute_match Staticpress::Route.regex_for_pattern(pattern), '/files/profile.jpg'
+      refute_match Staticpress::Route.regex_for_pattern(pattern), '/about/us'
+      refute_match Staticpress::Route.regex_for_pattern(pattern), '/static_text/about'
+      refute_match Staticpress::Route.regex_for_pattern(pattern), '/blog/2011/07/20/hello-world'
+      refute_match Staticpress::Route.regex_for_pattern(pattern), '/category/programming'
+      refute_match Staticpress::Route.regex_for_pattern(pattern), '/plain.txt'
+      refute_match Staticpress::Route.regex_for_pattern(pattern), '/files/profile.jpg'
+    end
   end
 end
