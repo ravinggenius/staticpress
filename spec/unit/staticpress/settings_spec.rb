@@ -1,6 +1,6 @@
-require_relative '../test_case'
+require 'spec_helper'
 
-class SettingsTest < TestCase
+describe Staticpress::Settings do
   def test_default
     refute Staticpress::Settings.instance.verbose
   end

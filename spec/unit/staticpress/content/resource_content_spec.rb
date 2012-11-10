@@ -1,6 +1,6 @@
-require_relative '../../test_case'
+require 'spec_helper'
 
-class ResourceContentTest < TestCase
+describe Staticpress::Content::ResourceContent do
   include Staticpress::Helpers
   include Staticpress::Content::ResourceContent
 

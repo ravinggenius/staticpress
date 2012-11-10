@@ -1,6 +1,6 @@
-require_relative '../test_case'
+require 'spec_helper'
 
-class RouteTest < TestCase
+describe Staticpress::Route do
   def test_extract_params_index
     pattern = '/(page/:number)?'
 

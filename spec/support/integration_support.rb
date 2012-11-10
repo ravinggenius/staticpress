@@ -1,14 +1,4 @@
-require 'aruba/cucumber'
-
-require 'compass'
-require 'debugger'
-require 'haml'
-require 'redcarpet'
-require 'sass'
-
-require_relative '../../lib/staticpress'
-
-module IntegrationHelpers
+module IntegrationSupport
   def create_sample_blog(title = 'Transient Thoughts')
     blog_title = title ? "'#{title}'" : nil
     run_simple "staticpress new temporary_blog #{blog_title}"
@@ -26,5 +16,8 @@ gem 'staticpress', :path => '../../..'
     check_directory_presence [directory], true
     check_file_presence ["#{directory}/#{file}"], true
   end
+
+  def samples_path
+    Pathname("#{__FILE__}/../fixtures").expand_path
+  end
 end
-World IntegrationHelpers

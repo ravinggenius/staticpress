@@ -1,6 +1,6 @@
-require_relative '../test_case'
+require 'spec_helper'
 
-class ViewHelpersTest < TestCase
+describe Staticpress::ViewHelpers do
   include Staticpress::Helpers
 
   let(:post) { Staticpress::Content::Post.new :year => '2011', :month => '07', :day => '20', :title => 'hello' }

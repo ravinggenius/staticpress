@@ -1,6 +1,6 @@
-require_relative '../../test_case'
+require 'spec_helper'
 
-class ContentBaseTest < TestCase
+describe Staticpress::Content::Base do
   let(:category) { Staticpress::Content::Category.new :name => 'programming' }
   let(:category_1) { Staticpress::Content::Category.new(:name => 'programming', :number => '1') }
   let(:category_2) { Staticpress::Content::Category.new(:name => 'programming', :number => '2') }

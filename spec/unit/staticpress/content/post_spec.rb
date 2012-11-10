@@ -1,6 +1,6 @@
-require_relative '../../test_case'
+require 'spec_helper'
 
-class ContentPostTest < TestCase
+describe Staticpress::Content::Post do
   include Staticpress::Helpers
 
   let(:post_dir) { Staticpress.blog_path + config.posts_source_path }

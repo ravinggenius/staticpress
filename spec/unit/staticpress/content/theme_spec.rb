@@ -1,6 +1,6 @@
-require_relative '../../test_case'
+require 'spec_helper'
 
-class ContentThemeTest < TestCase
+describe Staticpress::Content::Theme do
   include Staticpress::Helpers
 
   let(:theme_dir) { Staticpress::Theme.theme.root }

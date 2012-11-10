@@ -1,6 +1,6 @@
-require_relative '../test_case'
+require 'spec_helper'
 
-class JSObjectTest < TestCase
+describe Staticpress::JSObject do
   JSO = Staticpress::JSObject
 
   let(:js_object) { JSO.new :key => :value, :nested => { :a => :b } }

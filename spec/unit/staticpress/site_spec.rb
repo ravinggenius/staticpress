@@ -1,6 +1,6 @@
-require_relative '../test_case'
+require 'spec_helper'
 
-class SiteTest < TestCase
+describe Staticpress::Site do
   let(:site) { Staticpress::Site.new }
 
   let(:index) { Staticpress::Content::Page.new :slug => '' }

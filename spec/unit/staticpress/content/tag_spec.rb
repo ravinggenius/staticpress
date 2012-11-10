@@ -1,6 +1,6 @@
-require_relative '../../test_case'
+require 'spec_helper'
 
-class ContentTagTest < TestCase
+describe Staticpress::Content::Tag do
   let(:tag) { Staticpress::Content::Tag.new :name => 'charlotte' }
 
   def test_tags

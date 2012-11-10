@@ -1,6 +1,6 @@
-require_relative '../../test_case'
+require 'spec_helper'
 
-class ContentIndexTest < TestCase
+describe Staticpress::Content::Index do
   include Staticpress::Helpers
 
   let(:index) { Staticpress::Content::Index.new }

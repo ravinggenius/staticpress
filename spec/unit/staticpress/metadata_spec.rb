@@ -1,6 +1,6 @@
-require_relative '../test_case'
+require 'spec_helper'
 
-class MetadataTest < TestCase
+describe Staticpress::Metadata do
   let(:meta) { Staticpress::Metadata.new }
   let(:another_meta) { Staticpress::Metadata.new :layout => 'post_index', :categories => %w[programming], :tags => %w[code tutorial] }
 

@@ -1,6 +1,6 @@
-require_relative '../test_case'
+require 'spec_helper'
 
-class ThemeTest < TestCase
+describe Staticpress::Theme do
   include Staticpress::Helpers
 
   let(:theme) { Staticpress::Theme.new :test_theme }

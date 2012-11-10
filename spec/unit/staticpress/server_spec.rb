@@ -1,6 +1,6 @@
-require_relative '../test_case'
+require 'spec_helper'
 
-class ServerTest < TestCase
+describe Staticpress::Server do
   let(:server) { Staticpress::Server.new }
 
   def test_call_root

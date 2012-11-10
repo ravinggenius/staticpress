@@ -1,8 +1,6 @@
-require_relative '../test_case'
+require 'spec_helper'
 
-require 'pathname'
-
-class HelpersTest < TestCase
+describe Staticpress::Helpers do
   include Staticpress::Helpers
 
   def test_extensionless_basename
