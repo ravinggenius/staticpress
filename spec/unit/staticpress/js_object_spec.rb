@@ -14,10 +14,10 @@ describe Staticpress::JSObject do
       expect(js_object - { :nested => { :a => :b } }).to eq(JSO.new(:key => :value))
       expect(js_object - { :key => :value, :nested => { :a => :b } }).to eq(JSO.new({}))
 
-      expect().to eq(JSO.new({ :key => :value, :nested => { :a => :b } }), js_object - JSO.new({}))
-      expect().to eq(JSO.new({ :nested => { :a => :b } }), js_object - JSO.new({ :key => :value }))
-      expect().to eq(JSO.new({ :key => :value }), js_object - JSO.new({ :nested => { :a => :b } }))
-      expect().to eq(JSO.new({}), js_object - JSO.new({ :key => :value, :nested => { :a => :b } }))
+      expect(JSO.new(:key => :value, :nested => { :a => :b })).to eq(js_object - JSO.new({}))
+      expect(JSO.new(:nested => { :a => :b })).to eq(js_object - JSO.new({ :key => :value }))
+      expect(JSO.new(:key => :value)).to eq(js_object - JSO.new({ :nested => { :a => :b } }))
+      expect(JSO.new({})).to eq(js_object - JSO.new({ :key => :value, :nested => { :a => :b } }))
     end
   end
 

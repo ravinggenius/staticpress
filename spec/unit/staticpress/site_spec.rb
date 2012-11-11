@@ -20,7 +20,7 @@ describe Staticpress::Site do
 
   describe '#save' do
     it '...' do
-      refute_raises(ArgumentError) { site.save }
+      expect { site.save }.to_not raise_error(ArgumentError)
     end
   end
 end

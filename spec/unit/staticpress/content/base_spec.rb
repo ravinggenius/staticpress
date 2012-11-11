@@ -71,25 +71,25 @@ describe Staticpress::Content::Base do
 
   describe '#exist?' do
     it '...' do
-      expect(category.exist?).to be_true
-      expect(index.exist?).to be_true
+      expect(category).to exist
+      expect(index).to exist
 
-      expect(chained.exist?).to be_true
-      expect(chain.exist?).to be_true
-      expect(page.exist?).to be_true
-      expect(second_page.exist?).to be_true
-      expect(static_bin.exist?).to be_true
-      expect(static_txt.exist?).to be_true
-      expect(page_root.exist?).to be_true
+      expect(chained).to exist
+      expect(chain).to exist
+      expect(page).to exist
+      expect(second_page).to exist
+      expect(static_bin).to exist
+      expect(static_txt).to exist
+      expect(page_root).to exist
 
-      expect(post.exist?).to be_true
-      expect(unpublished.exist?).to be_true
-      expect(tag.exist?).to be_true
+      expect(post).to exist
+      expect(unpublished).to exist
+      expect(tag).to exist
 
-      expect(asset_style.exist?).to be_true
-      expect(asset_script.exist?).to be_true
+      expect(asset_style).to exist
+      expect(asset_script).to exist
 
-      expect(page_fake.exist?).to be_false
+      expect(page_fake).to_not exist
     end
   end
 
@@ -201,7 +201,7 @@ body{color:green}
       expect(style_2.render).to eq(expected_style2)
 
       expect(static_txt.render).to eq('this file intentionally left blank')
-      refute_raises(Sass::SyntaxError) { asset_style.render }
+      expect { asset_style.render }.to_not raise_error(Sass::SyntaxError)
 
       expected = <<-SASS
       SASS
@@ -231,7 +231,7 @@ body{color:green}
       expect(static_txt.render_partial).to eq('this file intentionally left blank')
       expect(post.render_partial).to eq("<p>in post</p>\n")
 
-      refute_raises(Sass::SyntaxError) { asset_style.render_partial }
+      expect { asset_style.render_partial }.to_not raise_error(Sass::SyntaxError)
       expected = <<-SASS
       SASS
 

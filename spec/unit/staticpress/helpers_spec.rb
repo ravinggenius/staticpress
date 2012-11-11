@@ -57,7 +57,7 @@ describe Staticpress::Helpers do
       expect(paginate(:a..:z)[0]).to eq((:a..:j).to_a) # page 1 lists oldest, with oldest at top
       expect(paginate(:a..:z)[1]).to eq((:k..:t).to_a)
       expect(paginate(:a..:z)[2]).to eq((:u..:z).to_a) # page 3 lists newest, with newest at bottom (default page)
-      expect(paginate(:a..:z)[5]).to eq([], 'Accessing an invalid index on anything that has been paginated should return an empty array')
+      expect(paginate(:a..:z)[5]).to eq([]), 'Accessing an invalid index on anything that has been paginated should return an empty array'
     end
   end
 

@@ -13,8 +13,6 @@ describe Staticpress::Content::Post do
 
   describe '#<=>' do
     it '...' do
-      expect(post).to be == another_post
-      expect(another_post).to be == post
       expect([ post, another_post ].sort).to eq([ post, another_post ])
       expect([ another_post, post ].sort).to eq([ post, another_post ])
     end

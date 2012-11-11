@@ -28,7 +28,7 @@ describe Staticpress::Content::Index do
           Staticpress::Content::Post.new(:year => '2011', :month => '08', :day => '20', :title => 'forever')
         ]
         expect(index.sub_content).to eq(expected)
-        refute_includes index.sub_content, unpublished
+        expect(index.sub_content).to_not include(unpublished)
       end
     end
   end
