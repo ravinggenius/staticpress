@@ -1,4 +1,5 @@
 require 'compass'
+require 'fileutils'
 require 'haml'
 require 'pathname'
 require 'pry'
