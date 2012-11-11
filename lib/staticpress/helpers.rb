@@ -49,6 +49,8 @@ module Staticpress
       Staticpress::Settings.instance
     end
 
+    # TODO use Pathname#descend instead
+    # http://ruby-doc.org/stdlib-1.9.3/libdoc/pathname/rdoc/Pathname.html#method-i-descend
     def spider_directory(dir, &block)
       dir.children.map do |child|
         if child.directory?
