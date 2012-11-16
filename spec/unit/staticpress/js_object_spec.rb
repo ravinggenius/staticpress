@@ -15,9 +15,9 @@ describe Staticpress::JSObject do
       expect(js_object - { :key => :value, :nested => { :a => :b } }).to eq(JSO.new({}))
 
       expect(JSO.new(:key => :value, :nested => { :a => :b })).to eq(js_object - JSO.new({}))
-      expect(JSO.new(:nested => { :a => :b })).to eq(js_object - JSO.new({ :key => :value }))
-      expect(JSO.new(:key => :value)).to eq(js_object - JSO.new({ :nested => { :a => :b } }))
-      expect(JSO.new({})).to eq(js_object - JSO.new({ :key => :value, :nested => { :a => :b } }))
+      expect(JSO.new(:nested => { :a => :b })).to eq(js_object - JSO.new(:key => :value))
+      expect(JSO.new(:key => :value)).to eq(js_object - JSO.new(:nested => { :a => :b }))
+      expect(JSO.new({})).to eq(js_object - JSO.new(:key => :value, :nested => { :a => :b }))
     end
   end
 
