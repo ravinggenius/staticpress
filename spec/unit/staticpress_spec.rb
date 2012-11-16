@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Staticpress do
-  set_temporary_blog_path 'test_blog'
+  basic_blog
 
   describe '.blog_path' do
     it 'correctly guesses where the blog is' do

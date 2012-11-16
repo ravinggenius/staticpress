@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Staticpress::Content::Page do
   include Staticpress::Helpers
 
-  set_temporary_blog_path
+  basic_blog
 
   let(:page_dir) { Staticpress.blog_path + config.source_path }
 

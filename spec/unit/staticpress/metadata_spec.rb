@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Staticpress::Metadata do
-  set_temporary_blog_path
+  basic_blog
 
   let(:meta) { Staticpress::Metadata.new }
   let(:another_meta) { Staticpress::Metadata.new :layout => 'post_index', :categories => %w[programming], :tags => %w[code tutorial] }

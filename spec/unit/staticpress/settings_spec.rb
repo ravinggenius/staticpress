@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Staticpress::Settings do
-  set_temporary_blog_path
+  basic_blog
 
   describe '.default' do
     it '...' do

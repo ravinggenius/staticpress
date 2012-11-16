@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Staticpress::Helpers do
   include Staticpress::Helpers
 
-  set_temporary_blog_path
+  basic_blog
 
   describe '#extensionless_basename' do
     it '...' do

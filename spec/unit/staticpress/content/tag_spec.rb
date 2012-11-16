@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Staticpress::Content::Tag do
   let(:tag) { Staticpress::Content::Tag.new :name => 'charlotte' }
 
-  set_temporary_blog_path
+  basic_blog
 
   describe '.tags' do
     it '...' do

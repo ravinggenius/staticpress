@@ -2,7 +2,7 @@ require 'spec_helper'
 
 # TODO add contexts
 describe Staticpress::Route do
-  set_temporary_blog_path
+  basic_blog
 
   describe '.extract_params_index' do
     it '...' do

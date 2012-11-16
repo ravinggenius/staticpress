@@ -29,5 +29,5 @@ RSpec.configure do |config|
   config.include CustomMatchers
   config.include UnitSupport
   config.include IntegrationSupport
-  config.extend BlogPathSetup
+  config.extend Fixtures
 end

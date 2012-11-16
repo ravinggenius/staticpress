@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Staticpress::ViewHelpers do
   include Staticpress::Helpers
 
-  set_temporary_blog_path
+  basic_blog
 
   let(:post) { Staticpress::Content::Post.new :year => '2011', :month => '07', :day => '20', :title => 'hello' }
   let(:view_helpers) { Staticpress::ViewHelpers.new post }

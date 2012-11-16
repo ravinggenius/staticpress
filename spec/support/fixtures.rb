@@ -1,10 +1,14 @@
-module BlogPathSetup
+module Fixtures
   FIXTURES_PATH = (Staticpress.root + '..' + 'spec' + 'fixtures').expand_path
   TEMP_PATH = (Staticpress.root + '..' + 'tmp').expand_path
 
-  def set_temporary_blog_path(path = 'test_blog')
-    source_path = FIXTURES_PATH + path
-    temp_path = TEMP_PATH + path
+  def basic_blog
+    setup_blog 'test_blog'
+  end
+
+  def setup_blog(name)
+    source_path = FIXTURES_PATH + name
+    temp_path = TEMP_PATH + name
 
     before :each do
       FileUtils.rm_rf temp_path if temp_path.directory?

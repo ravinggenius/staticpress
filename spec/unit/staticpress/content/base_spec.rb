@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Staticpress::Content::Base do
-  set_temporary_blog_path
+  basic_blog
 
   let(:category) { Staticpress::Content::Category.new :name => 'programming' }
   let(:category_1) { Staticpress::Content::Category.new(:name => 'programming', :number => '1') }

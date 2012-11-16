@@ -4,7 +4,7 @@ describe Staticpress::Content::ResourceContent do
   include Staticpress::Helpers
   include Staticpress::Content::ResourceContent
 
-  set_temporary_blog_path
+  basic_blog
 
   let(:page_dir) { Staticpress.blog_path + config.source_path }
 

@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Staticpress::Site do
-  set_temporary_blog_path
+  basic_blog
 
   let(:site) { Staticpress::Site.new }
 

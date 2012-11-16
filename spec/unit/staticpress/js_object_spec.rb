@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Staticpress::JSObject do
   JSO = Staticpress::JSObject
 
-  set_temporary_blog_path
+  basic_blog
 
   let(:js_object) { JSO.new :key => :value, :nested => { :a => :b } }
 
