@@ -21,4 +21,15 @@ module Fixtures
       Staticpress.blog_path = '.'
     end
   end
+
+  def create_sample_blog(title = 'Transient Thoughts')
+    before :each do
+      blog_title = title ? "'#{title}'" : nil
+      run_simple "staticpress new temporary_blog #{blog_title}"
+      cd('temporary_blog')
+      append_to_file 'Gemfile', <<-RUBY
+gem 'staticpress', :path => '../../..'
+      RUBY
+    end
+  end
 end

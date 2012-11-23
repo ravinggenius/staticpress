@@ -1,4 +1,5 @@
 require 'compass'
+require 'aruba/api'
 require 'fileutils'
 require 'haml'
 require 'pathname'
@@ -16,9 +17,9 @@ RSpec.configure do |config|
   config.filter_run :focus
   config.filter_run_excluding :blur => true
 
-  config.expect_with :rspec do |c|
-    c.syntax = :expect
-  end
+  # config.expect_with :rspec do |c|
+  #   c.syntax = :expect
+  # end
 
   # Run specs in random order to surface order dependencies. If you find an
   # order dependency and want to debug it, you can fix the order by providing
@@ -26,6 +27,7 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = 'random'
 
+  config.include Aruba::Api
   config.include CustomMatchers
   config.include UnitSupport
   config.include IntegrationSupport
