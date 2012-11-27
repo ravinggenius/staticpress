@@ -16,7 +16,7 @@ module Staticpress::Plugins
               sub = menu(remaining_depth, item.sub_items, menu_options) || ''
               a + sub
             end
-          end.join("\n")
+          end.join
         end
       end
     end
