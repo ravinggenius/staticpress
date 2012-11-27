@@ -1,0 +1,30 @@
+---
+menu:
+  position: 1.6.0
+  text: Pagination
+---
+
+%h1 Pagination
+
+%table{ :style => 'border-collapse: separate; border-spacing: 0.5rem 0;' }
+  %caption / is the default page and is the same as /page/3. Post 1 is the oldest, Post 9 is the newest.
+  %thead
+    %tr
+      - ['/page/3', '/page/2', '/'].each do |th|
+        %th= th
+  %tfoot
+    %tr
+      %td past...
+      %td 1 2 3
+      %td ...future
+  %tbody
+    :ruby
+      pages = [
+        [1, 4, 7],
+        [2, 5, 8],
+        [3, 6, 9]
+      ]
+    - pages.each do |tr|
+      %tr
+        - tr.each do |td|
+          %td Post #{td}
