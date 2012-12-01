@@ -17,6 +17,15 @@ describe Staticpress::Theme do
     end
   end
 
+  describe '#assets' do
+    it 'finds all files in the asset directory, top-level or nested' do
+      assets = theme.assets
+      expect(assets.count).to be(2)
+      expect(assets).to include(theme.root + 'assets' + 'scripts' + 'application.js')
+      expect(assets).to include(theme.root + 'assets' + 'styles' + 'all.sass')
+    end
+  end
+
   describe '#root' do
     it '...' do
       expect(Staticpress.blog_path + 'themes' + 'test_theme').to eq(theme.root)

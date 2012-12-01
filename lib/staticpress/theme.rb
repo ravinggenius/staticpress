@@ -21,6 +21,12 @@ module Staticpress
       other.respond_to?(:name) ? (name == other.name) : super
     end
 
+    def assets
+      spider_map (root + 'assets').children do |file|
+        file
+      end.flatten
+    end
+
     [
       :include,
       :layout,

@@ -20,7 +20,7 @@ module Staticpress::Content
     end
 
     def self.all
-      gather_resources_from((Staticpress::Theme.theme.root + 'assets').children)
+      gather_resources_from Staticpress::Theme.theme.assets
     end
 
     def self.published
