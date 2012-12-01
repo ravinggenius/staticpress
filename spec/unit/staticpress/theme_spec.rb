@@ -23,12 +23,6 @@ describe Staticpress::Theme do
     end
   end
 
-  describe '#theme' do
-    it '...' do
-      expect(Staticpress::Theme.theme).to eq(theme)
-    end
-  end
-
   describe '#include_for' do
     it '...' do
       expect(theme.include_for(:list_posts)).to eq(theme.root + 'includes' + 'list_posts.haml')
@@ -48,6 +42,12 @@ describe Staticpress::Theme do
     it '...' do
       expect(theme.view_for(:default)).to eq(theme.root + 'views' + 'default.haml')
       expect(theme.view_for(:fake)).to eq(theme.root + 'views' + 'default.haml')
+    end
+  end
+
+  describe '.theme' do
+    it '...' do
+      expect(Staticpress::Theme.theme).to eq(theme)
     end
   end
 end
