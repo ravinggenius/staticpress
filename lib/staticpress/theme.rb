@@ -5,10 +5,10 @@ module Staticpress
     extend Staticpress::Helpers
     include Staticpress::Helpers
 
-    attr_reader :root, :trail
+    attr_reader :name, :root, :trail
 
     def initialize(name)
-      @name = name
+      @name = name.to_sym
       custom = Staticpress.blog_path + 'themes' + @name.to_s
       @root = custom.directory? ? custom : Staticpress.root + 'themes' + @name.to_s
 
@@ -18,7 +18,7 @@ module Staticpress
     end
 
     def ==(other)
-      other.respond_to?(:root) ? (root == other.root) : super
+      other.respond_to?(:name) ? (name == other.name) : super
     end
 
     [
