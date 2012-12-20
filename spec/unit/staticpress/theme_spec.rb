@@ -5,6 +5,7 @@ describe Staticpress::Theme do
 
   basic_blog
 
+  let(:parent) { Staticpress::Theme.new :test_theme_parent }
   let(:theme) { Staticpress::Theme.new :test_theme }
 
   before :each do
@@ -20,9 +21,26 @@ describe Staticpress::Theme do
   describe '#assets' do
     it 'finds all files in the asset directory, top-level or nested' do
       assets = theme.assets
-      expect(assets.count).to be(2)
+      expect(assets.count).to eq(2)
       expect(assets).to include(theme.root + 'assets' + 'scripts' + 'application.js')
       expect(assets).to include(theme.root + 'assets' + 'styles' + 'all.sass')
+    end
+
+    context 'inherit from another theme' do
+      before :each do
+        theme.copy_to :test_theme_parent
+        (theme.root + 'assets' + 'scripts' + 'application.js').delete
+      end
+
+      it 'finds all files in parent theme along with own files' do
+        with_config :theme_parent => :test_theme_parent do
+          assets = theme.assets
+          expect(assets.count).to eq(3)
+          expect(assets).to include(parent.root + 'assets' + 'scripts' + 'application.js')
+          expect(assets).to include(parent.root + 'assets' + 'styles' + 'all.sass')
+          expect(assets).to include(theme.root + 'assets' + 'styles' + 'all.sass')
+        end
+      end
     end
   end
 

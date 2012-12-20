@@ -22,9 +22,11 @@ module Staticpress
     end
 
     def assets
-      spider_map (root + 'assets').children do |file|
+      reply = spider_map (root + 'assets').children do |file|
         file
       end.flatten
+      parent ? (parent.assets + reply) : reply
+    end
 
     def copy_to(name)
       destination = Staticpress.blog_path + 'themes' + name.to_s
@@ -36,6 +38,14 @@ module Staticpress
         FileUtils.cp_r root.children, destination
       end
     end
+
+    def parent
+      @parent ||= lambda do
+        if config.theme_parent
+          reply = self.class.new(config.theme_parent)
+          @parent = reply unless self == reply
+        end
+      end.call
     end
 
     [
