@@ -13,14 +13,20 @@ describe 'Editing blog' do
     edit_page
   end
 
-  it 'Copying a built-in plugin', :blur do
-    fork_plugin
-    confirm_plugin_editable 'blockquote'
-  end
+  context 'without any custom plugins' do
+    before :each do
+      run_simple 'rm -fR plugins'
+    end
 
-  it 'Copying and \'renaming a built-in plugin' do
-    fork_plugin 'pullquote'
-    confirm_plugin_editable 'pullquote'
+    it 'Copying a built-in plugin' do
+      fork_plugin
+      confirm_plugin_editable 'blockquote'
+    end
+
+    it 'Copying and \'renaming a built-in plugin' do
+      fork_plugin 'pullquote'
+      confirm_plugin_editable 'pullquote'
+    end
   end
 
   it 'Copying the default theme' do

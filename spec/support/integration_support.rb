@@ -115,6 +115,10 @@ module IntegrationSupport
     run_simple 'staticpress build'
   end
 
+  def deploy_site
+    run_simple 'staticpress deploy'
+  end
+
   def push_site
     run_simple 'staticpress build'
   end
