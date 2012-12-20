@@ -80,18 +80,14 @@ in config.yml
       FileUtils.cp source, destination
     end
 
-    desc 'fork_theme [theme-name]', 'Copies [theme-name]\'s files into <path-to-blog>/themes/[theme-name]'
+    desc 'fork_theme [theme-name] [new-theme-name]', 'Copies [theme-name]\'s files into <path-to-blog>/themes/[theme-name]'
     long_desc <<-DESCRIPTION
 Copies [theme-name]'s files into <path-to-blog>/themes/[theme-name] for
-customizations. If [theme-name] is blank, copies the currently configured theme
+customizations. If [theme-name] is blank, copies the currently configured theme. Specify a new name to copy to by passing both [theme-name] and [new-theme-name]
     DESCRIPTION
-    def fork_theme(name = nil)
-      theme_name = name ? name : config.theme
-      source = Staticpress.root + 'themes' + theme_name
-      destination = Staticpress.blog_path + 'themes' + theme_name
-
-      FileUtils.mkdir_p destination
-      FileUtils.cp_r source.children, destination
+    def fork_theme(name = config.theme, new_name = name)
+      theme = Staticpress::Theme.new name
+      theme.copy_to new_name
     end
 
     desc 'list [method]', 'Send [method] to every content and output the result, or list all content if [method] is not present'

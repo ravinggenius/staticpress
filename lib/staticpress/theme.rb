@@ -25,6 +25,17 @@ module Staticpress
       spider_map (root + 'assets').children do |file|
         file
       end.flatten
+
+    def copy_to(name)
+      destination = Staticpress.blog_path + 'themes' + name.to_s
+
+      if destination.directory?
+        raise Staticpress::Error, "Cannot copy theme. Destination (#{destination}) already exists."
+      else
+        FileUtils.mkdir_p destination
+        FileUtils.cp_r root.children, destination
+      end
+    end
     end
 
     [
