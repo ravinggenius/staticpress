@@ -23,7 +23,7 @@ describe 'Editing blog' do
       confirm_plugin_editable 'blockquote'
     end
 
-    it 'Copying and \'renaming a built-in plugin' do
+    it 'Copying and renaming a built-in plugin' do
       fork_plugin 'pullquote'
       confirm_plugin_editable 'pullquote'
     end
