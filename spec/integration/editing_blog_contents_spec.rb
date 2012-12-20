@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Editing blog contents' do
+describe 'Editing blog contents', :blur do
   create_sample_blog
 
   before :each do
@@ -24,7 +24,7 @@ describe 'Editing blog contents' do
     confirm_output_directory_contains_expected_files
   end
 
-  it 'Building a site (verbose)', :blur do
+  it 'Building a site (verbose)' do
     build_site_verbosely
     confirm_filenames_output
   end
@@ -35,14 +35,14 @@ describe 'Editing blog contents' do
     confirm_built_home_page
   end
 
-  it 'Pushing a compiled site to a remote location', :blur do
+  it 'Pushing a compiled site to a remote location' do
     build_site
     add_custom_deploy_strategy
     push_site
     confirm_site_deployed
   end
 
-  it 'Deploying site (build and push in one step)', :blur do
+  it 'Deploying site (build and push in one step)' do
     add_custom_deploy_strategy
     confirm_site_not_built_or_deployed
     deploy_site
