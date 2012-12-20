@@ -63,8 +63,7 @@ module Staticpress::Content
 
     def layout
       if meta.layout || config.markup_templates.include?(template_path.extname[1..-1])
-        layout_name = meta.layout || :default
-        Tilt.new theme.layout_for(layout_name).to_s
+        Tilt.new theme.layout_for(*preferred_layout_names).to_s
       end
     end
 

@@ -13,14 +13,8 @@ module Staticpress::Content
     end
 
     def gather_resources_from(paths)
-      paths.map do |child|
-        if child.directory?
-          spider_directory child do |resource|
-            find_by_path resource
-          end
-        else
-          find_by_path child
-        end
+      spider_map paths do |resource|
+        find_by_path resource
       end.flatten.compact
     end
 

@@ -1,7 +1,7 @@
 module Staticpress::Content
   class Index < Base
     include CollectionContent
-    extend CollectionContent
+    include ResourceContent
 
     def optional_param_defaults
       { :number => pages_count }
@@ -15,8 +15,11 @@ module Staticpress::Content
       paginate(self.class.all_posts.sort)[params[:number] - 1]
     end
 
-    def template_path
-      self.class.template_path
+    def preferred_layout_names
+      reply = []
+      reply << :post_index if params[:number].nil?
+      reply << :post_paged
+      reply
     end
 
     def self.all

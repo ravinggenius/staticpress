@@ -34,6 +34,10 @@ module Staticpress::Content
       (Staticpress.blog_path + config.source_path + params[:slug]).file?
     end
 
+    def preferred_layout_names
+      [meta.layout, :page]
+    end
+
     def template_path
       Staticpress.blog_path + config.source_path + "#{full_slug}#{template_extension}"
     end
