@@ -23,8 +23,14 @@ describe 'Editing blog' do
     confirm_plugin_editable 'pullquote'
   end
 
-  it 'Copying the default theme' do
-    fork_theme
-    confirm_theme_is_local 'basic'
+  context 'without a custom theme' do
+    before :each do
+      run_simple 'rm -fR themes'
+    end
+
+    it 'Copying the default theme' do
+      fork_theme
+      confirm_theme_is_local 'basic'
+    end
   end
 end
