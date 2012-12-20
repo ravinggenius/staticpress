@@ -1,8 +1,7 @@
 module Staticpress::Content
   class Category < Base
     include CollectionContent
-    extend CollectionContent
-    extend ResourceContent
+    include ResourceContent
 
     attr_reader :name
 
@@ -23,8 +22,22 @@ module Staticpress::Content
       paginate(self.class.content_by_category[params[:name]].sort)[params[:number] - 1]
     end
 
-    def template_path
-      self.class.template_path
+    def preferred_layout_names
+      reply = []
+
+      if params[:name].nil?
+        reply << :category
+      else
+        if params[:number].nil?
+          reply << :category_index
+          reply << :post_index
+        end
+
+        reply << :category_paged
+        reply << :post_paged
+      end
+
+      reply
     end
 
     def self.all

@@ -1,7 +1,6 @@
 module Staticpress::Content
   class Post < Base
     include ResourceContent
-    extend ResourceContent
 
     def initialize(params)
       super
@@ -19,6 +18,10 @@ module Staticpress::Content
 
     def created_on
       Time.utc params[:year], params[:month], params[:day]
+    end
+
+    def preferred_layout_names
+      [meta.layout, :post]
     end
 
     def template_path
