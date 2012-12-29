@@ -22,20 +22,17 @@ module Staticpress
     end
 
     def each(&block)
-      threads = []
       semaphore = Mutex.new
 
-      CONTENT_TYPES.each do |content_type|
-        threads << Thread.new do
+      CONTENT_TYPES.map do |content_type|
+        Thread.new do
           content_type.published.each do |content|
             semaphore.synchronize do
               block.call content
             end
           end
         end
-      end
-
-      threads.each &:join
+      end.each(&:join)
     end
 
     def find_content_by_env(env)
