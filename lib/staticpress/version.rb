@@ -2,7 +2,7 @@ module Staticpress
   class Version
     extend Comparable
 
-    SIGNATURE = [0, 7, 0]
+    SIGNATURE = [0, 7, 1]
 
     def self.<=>(other)
       other = other.split('.').map(&:to_i) if other.respond_to? :split
